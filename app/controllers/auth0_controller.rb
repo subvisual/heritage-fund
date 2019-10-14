@@ -1,7 +1,7 @@
 class Auth0Controller < ApplicationController
     def callback
+        session[:user_id] = auth_hash.uid
         @user = User.find_or_create_from_auth_hash(auth_hash)
-        puts(@user)
         redirect_to '/dashboard'
     end
 
