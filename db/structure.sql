@@ -81,7 +81,21 @@ CREATE TABLE public.organisations (
     postcode character varying,
     company_number integer,
     charity_number integer,
-    charity_number_ni integer
+    charity_number_ni integer,
+    name character varying
+);
+
+
+--
+-- Name: projects; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.projects (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    project_title character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    user_id bigint NOT NULL
 );
 
 
@@ -104,7 +118,7 @@ CREATE TABLE public.users (
     email character varying,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    organisations_id uuid
+    organisation_id uuid
 );
 
 
@@ -151,6 +165,14 @@ ALTER TABLE ONLY public.organisations
 
 
 --
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -167,10 +189,17 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: index_users_on_organisations_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_projects_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_users_on_organisations_id ON public.users USING btree (organisations_id);
+CREATE INDEX index_projects_on_user_id ON public.projects USING btree (user_id);
+
+
+--
+-- Name: index_users_on_organisation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_organisation_id ON public.users USING btree (organisation_id);
 
 
 --
@@ -178,7 +207,15 @@ CREATE INDEX index_users_on_organisations_id ON public.users USING btree (organi
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_484502ac7c FOREIGN KEY (organisations_id) REFERENCES public.organisations(id);
+    ADD CONSTRAINT fk_rails_484502ac7c FOREIGN KEY (organisation_id) REFERENCES public.organisations(id);
+
+
+--
+-- Name: projects fk_rails_b872a6760a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT fk_rails_b872a6760a FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -195,6 +232,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191014091616'),
 ('20191014115619'),
 ('20191014125402'),
-('20191014131515');
+('20191014131515'),
+('20191015082139'),
+('20191015104414'),
+('20191015105456'),
+('20191015121011');
 
 

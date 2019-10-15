@@ -1,0 +1,9 @@
+<h1>organisation details</h1>
+
+<%= form_with model: @organisation, local: true do |o| %>
+  <%= label_tag(:name, "Organisation name") %>
+  <%= text_field(:organisation, :name) %>
+  <%= o.submit "Create" %>
+<% end %>
+
+
