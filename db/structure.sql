@@ -38,6 +38,16 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
+-- Name: form_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.form_type AS ENUM (
+    'permission-to-start',
+    'completion-report'
+);
+
+
+--
 -- Name: organisation_type; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -96,6 +106,20 @@ CREATE TABLE public.projects (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     user_id bigint NOT NULL
+);
+
+
+--
+-- Name: released_forms; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.released_forms (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    project_id uuid,
+    type public.form_type,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    payload jsonb
 );
 
 
@@ -173,6 +197,14 @@ ALTER TABLE ONLY public.projects
 
 
 --
+-- Name: released_forms released_forms_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.released_forms
+    ADD CONSTRAINT released_forms_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -193,6 +225,13 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE INDEX index_projects_on_user_id ON public.projects USING btree (user_id);
+
+
+--
+-- Name: index_released_forms_on_project_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_released_forms_on_project_id ON public.released_forms USING btree (project_id);
 
 
 --
@@ -236,6 +275,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191015082139'),
 ('20191015104414'),
 ('20191015105456'),
-('20191015121011');
+('20191015121011'),
+('20191021084252'),
+('20191021140505'),
+('20191021141256');
 
 

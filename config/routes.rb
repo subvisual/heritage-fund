@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get 'auth/failure' => 'auth0#failure'
   get 'dashboard' => 'dashboard#show'
   get 'logout' => 'logout#logout'
+  post 'consumer' => 'released_form#receive' do
+    header "Content-Type", "application/json"
+  end
   resources :organisation
 end
