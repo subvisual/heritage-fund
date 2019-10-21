@@ -116,7 +116,7 @@ CREATE TABLE public.projects (
 CREATE TABLE public.released_forms (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
     project_id uuid,
-    type public.form_type,
+    form_type public.form_type,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     payload jsonb
@@ -278,6 +278,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191015121011'),
 ('20191021084252'),
 ('20191021140505'),
-('20191021141256');
+('20191021141256'),
+('20191021154235');
 
 

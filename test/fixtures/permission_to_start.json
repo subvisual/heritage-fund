@@ -1,0 +1,19 @@
+{
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "Status": "Awarded",
+        "ProjectCosts": [
+            "PC-000095"
+        ],
+        "forms": [],
+        "Email": "lizzie90@example.com",
+        "ContactName": "Nelda",
+        "ApprovedPurpose": {},
+        "ApplicationStages": "Finance Approval",
+        "ApplicationId": "2c660111-ab15-4221-98e0-cf0e02748a9b",
+        "AccountName": "New web test org",
+        "AccountExternalID": "5188ff34-9011-4458-a9ea-19fe1ac9f3c6"
+    }
+}
