@@ -115,17 +115,18 @@ class ProjectsController < ApplicationController
     
     @project = Project.new(project_params)
     @project.user = User.find_by(uid: session[:user_id])
-    @payload_obj = JSON.parse(payload)
-    @payload_obj['meta']['username'] = @project.user.email 
-    @payload_obj['application']['projectName'] = @project.project_title
-    @payload_obj['application']['organisationName'] = @project.user.organisation.name
-    @payload_obj['application']['organisationId'] = @project.user.organisation.id
-
-    @response = client.post('/services/apexrest/loadData', @payload_obj.to_json,  {'Content-Type'=>'application/json'})
-    puts("Salesforce case id is #{JSON.parse(@response.body)['caseId']}")
-
+    
     respond_to do |format|
       if @project.save
+        @payload_obj = JSON.parse(payload)
+        @payload_obj['meta']['username'] = @project.user.email 
+        @payload_obj['meta']['applicationId'] = @project.id
+        @payload_obj['application']['projectName'] = @project.project_title
+        @payload_obj['application']['organisationName'] = @project.user.organisation.name
+        @payload_obj['application']['organisationId'] = @project.user.organisation.id
+    
+        @response = client.post('/services/apexrest/loadData', @payload_obj.to_json,  {'Content-Type'=>'application/json'})
+        puts("Salesforce case id is #{JSON.parse(@response.body)['caseId']}")
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
