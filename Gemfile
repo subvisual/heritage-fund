@@ -65,3 +65,7 @@ gem "pg", "~> 1.1"
 gem "restforce", "~> 4.0"
 
 gem "faraday", "~> 0.17.0"
+
+gem "ideal_postcodes", "~> 2.0"
+
+gem "pry", "~> 0.12.2"

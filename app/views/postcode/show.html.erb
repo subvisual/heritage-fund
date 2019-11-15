@@ -1,0 +1,6 @@
+<h1>hello world</h1>
+<%= form_with url: postcode_lookup_path do |p| %>
+  <%= label_tag(:postcode_lookup, "Postcode") %>
+  <%= text_field(:postcode, :lookup) %>
+  <%= p.submit "Lookup" %>
+<% end %>
