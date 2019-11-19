@@ -50,6 +50,7 @@ class PostcodeController < ApplicationController
     @user.organisation.townCity = @response.fetch(:post_town)
     @user.organisation.county = @response.fetch(:county)
     @user.organisation.save
+    redirect_to organisation_show_path(organisation_id: @user.organisation.id)
 end
 
 

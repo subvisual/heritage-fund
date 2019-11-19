@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"
   end
-  resources :organisation
+  resources :organisation do
+    get 'show'
+  end
 end
