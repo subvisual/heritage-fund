@@ -2,11 +2,20 @@
 <h1>organisation details</h1>
 
 <%= form_with model: @organisation, local: true do |o| %>
-  <%= label_tag(:name, "Organisation name") %>
+  <%= o.label(:name, "Organisation name") %>
   <%= text_field(:organisation, :name) %>
-  <%= label_tag(:name, "Address Line 1") %>
+  <%= o.label(:line1, "Address Line 1") %>
   <%= text_field(:organisation, :line1) %>
-  <%= o.submit "Create" %>
+  <%= o.label(:line2, "Address Line 2") %>
+  <%= text_field(:organisation, :line2) %>
+  <%= o.label(:line3, "Address Line 3") %>
+  <%= text_field(:organisation, :line3) %>
+  <%= o.label(:townCity, "Town/City") %>
+  <%= text_field(:organisation, :townCity) %>
+  <%= o.label(:postcode, "Postcode") %>
+  <%= text_field(:organisation, :postcode) %>
+  <br />
+  <%= o.submit "Save and Continue" %>
 <% end %>
 
 
