@@ -7,7 +7,7 @@ class PostcodeController < ApplicationController
     def lookup
         IdealPostcodes.api_key = ENV['IDEAL_POSTCODES_API_KEY']
         begin
-           @response = IdealPostcodes::Postcode.lookup "ID1 1QD"
+           @response = IdealPostcodes::Postcode.lookup params['postcode']['lookup']
         rescue IdealPostcodes::AuthenticationError => e
                 # Invalid API Key
         rescue IdealPostcodes::TokenExhaustedError => e
@@ -19,10 +19,13 @@ class PostcodeController < ApplicationController
         rescue => e
             # An unexpected error
         end
-        puts(@response)
+
         respond_to do |format|
-            format.json {
-                render json: @response.to_json
+            # format.json {
+            #     render json: @response.to_json
+            # }
+            format.html {
+                render :results
             }
         end
     
