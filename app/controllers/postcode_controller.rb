@@ -28,7 +28,6 @@ class PostcodeController < ApplicationController
         end
     end
     def save
-        puts(params)
     begin
         @response = IdealPostcodes::Address.lookup params[:address]
     rescue IdealPostcodes::AuthenticationError => e
@@ -42,7 +41,15 @@ class PostcodeController < ApplicationController
     rescue => e
         # An unexpected error
     end
-    puts(@response)  
+    
+    @user = User.current_user(session[:user_id])
+    @user.organisation.line1 = @response.fetch(:line_1)
+    @user.organisation.line2 = @response.fetch(:line_2)
+    @user.organisation.line3 = @response.fetch(:line_3)
+    @user.organisation.postcode = @response.fetch(:postcode)
+    @user.organisation.townCity = @response.fetch(:post_town)
+    @user.organisation.county = @response.fetch(:county)
+    @user.organisation.save
 end
 
 
