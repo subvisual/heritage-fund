@@ -10,11 +10,17 @@ def new
 end
 
 def create
-  @organisation = Organisation.create!(organisation_params)
   @user = User.find_by(uid: session[:user_id])
-  @user.organisation = @organisation
+  @user.organisation.update(organisation_params)
   @user.save
-  redirect_to '/projects/new'
+  redirect_to '/postcode'
+end
+
+
+def show
+  @user = User.find_by(uid: session[:user_id])
+  @organisation = @user.organisation 
+  render :show
 end
 
 private

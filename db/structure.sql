@@ -92,7 +92,9 @@ CREATE TABLE public.organisations (
     company_number integer,
     charity_number integer,
     charity_number_ni integer,
-    name character varying
+    name character varying,
+    line2 character varying,
+    line3 character varying
 );
 
 
@@ -279,6 +281,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191021084252'),
 ('20191021140505'),
 ('20191021141256'),
-('20191021154235');
+('20191021154235'),
+('20191119151728');
 
 
