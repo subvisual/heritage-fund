@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
     			"county": "Berkshire",
     			"postcode": "B15 1TR"
     		},
-    		"organisationType": "not-for-profit-company",
+    		"organisationType": "local-authority",
     		"companyNumber": "123456789",
     		"charityNumber": null,
     		"charityNumberNi": null,
@@ -102,20 +102,8 @@ class ProjectsController < ApplicationController
     HEREDOC
 
     client = Restforce.new(username: ENV['SALESFORCE_USERNAME'], password: ENV['SALESFORCE_PASSWORD'], security_token: ENV['SALESFORCE_SECURITY_TOKEN'], client_id: ENV['SALESFORCE_CLIENT_ID'], client_secret: ENV['SALESFORCE_CLIENT_SECRET'],  host: 'test.salesforce.com')
-    # response = client.post do |request|
-    #   request.url '/services/apexrest/loadData'
-    #   request.headers['Content-Type'] = 'application/json'
-    #   request.body = payload
-    # end
-    # debugger
-    
-    # auth = client.authenticate!
-    # resp = Faraday.post(auth.instance_url + '/services/apexrest/loadData', JSON.parse(payload).to_json,
-    #   "Content-Type" => "application/json", "Authorization" => "Bearer #{auth.access_token}")
-    # debugger
     
     @project = Project.new(project_params)
-    debugger
     @project.user = current_user
     
     respond_to do |format|
@@ -127,7 +115,8 @@ class ProjectsController < ApplicationController
         @payload_obj['application']['organisationName'] = @project.user.organisation.name
         @payload_obj['application']['organisationId'] = @project.user.organisation.id
     
-        @response = client.post('/services/apexrest/loadData', @payload_obj.to_json,  {'Content-Type'=>'application/json'})
+        @response = client.post('/services/apexrest/PortalData', @payload_obj.to_json,  {'Content-Type'=>'application/json'})
+        puts("Salesforce response: #{@response.body}")
         puts("Salesforce case id is #{JSON.parse(@response.body)['caseId']}")
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
