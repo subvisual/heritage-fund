@@ -24,6 +24,7 @@ def show
 end
 
 def update
+  redirect_to new_project_path
 end
 
 private
