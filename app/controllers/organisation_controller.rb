@@ -1,4 +1,5 @@
 class OrganisationController < ApplicationController
+  before_action :authenticate_user!
 
     def index
     end
@@ -9,17 +10,20 @@ def new
 end
 
 def create
-  @user = User.find_by(uid: session[:user_id])
-  @user.organisation.update(organisation_params)
+  @user = current_user
+  @user.organisation = Organisation.create(organisation_params)
   @user.save
   redirect_to '/postcode'
 end
 
 
 def show
-  @user = User.find_by(uid: session[:user_id])
+  @user = current_user
   @organisation = @user.organisation 
   render :show
+end
+
+def update
 end
 
 private

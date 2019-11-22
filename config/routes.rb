@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   resources :projects
   get 'dashboard/show'
   root to: "home#show"
-  get 'auth/auth0/callback' => 'auth0#callback'
-  get 'auth/failure' => 'auth0#failure'
   get 'dashboard' => 'dashboard#show'
   get 'postcode' => 'postcode#show'
   post 'postcode_lookup' => 'postcode#lookup'

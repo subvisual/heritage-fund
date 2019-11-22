@@ -55,11 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "dotenv-rails", "~> 2.7", groups: [:development, :test]
 
-gem "omniauth-auth0", "~> 2.2"
-
-gem "omniauth-rails_csrf_protection", "~> 0.1.2"
-
-
 gem "pg", "~> 1.1"
 
 gem "restforce", "~> 4.0"

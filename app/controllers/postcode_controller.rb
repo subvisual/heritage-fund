@@ -42,7 +42,7 @@ class PostcodeController < ApplicationController
         # An unexpected error
     end
     
-    @user = User.current_user(session[:user_id])
+    @user = current_user
     @user.organisation.line1 = @response.fetch(:line_1)
     @user.organisation.line2 = @response.fetch(:line_2)
     @user.organisation.line3 = @response.fetch(:line_3)

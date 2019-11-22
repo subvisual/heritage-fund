@@ -4,6 +4,7 @@ require "json"
 require 'faraday'
 
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 
@@ -114,7 +115,8 @@ class ProjectsController < ApplicationController
     # debugger
     
     @project = Project.new(project_params)
-    @project.user = User.find_by(uid: session[:user_id])
+    debugger
+    @project.user = current_user
     
     respond_to do |format|
       if @project.save
