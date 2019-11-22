@@ -1,5 +1,4 @@
 class OrganisationController < ApplicationController
-    include Secured
 
     def index
     end

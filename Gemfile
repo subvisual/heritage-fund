@@ -69,3 +69,5 @@ gem "faraday", "~> 0.17.0"
 gem "ideal_postcodes", "~> 2.0"
 
 gem "pry", "~> 0.12.2"
+
+gem "devise", "~> 4.7"

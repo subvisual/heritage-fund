@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :projects
   get 'dashboard/show'
-  root 'home#show'
+  root to: "home#show"
   get 'auth/auth0/callback' => 'auth0#callback'
   get 'auth/failure' => 'auth0#failure'
   get 'dashboard' => 'dashboard#show'
