@@ -13,11 +13,13 @@
 
 * `bundle install`
 
+* `yarn install`
+
 * `rails db:setup`
 
 ### Running the app
 #### Backend
-* `rails s`
+* `bundle exec rails s`
 
 #### Frontend
 In a separate terminal tab run:
