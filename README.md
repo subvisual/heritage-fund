@@ -19,7 +19,7 @@
 
 #### Frontend
 In a separate terminal tab run:
-
+`./bin/webpack --watch`
 
 
 
