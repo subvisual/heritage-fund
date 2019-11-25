@@ -1,24 +1,31 @@
-# README
+# Funding frontend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Steps to run locally
 
-Things you may want to cover:
+### Prerequisites
+* Install Ruby version specified in [.ruby-version](.ruby-version). Recommended to do this through `rbenv` to manage Ruby versions on your machine
 
-* Ruby version
+* Install [Postgres.app](https://postgresapp.com/)
 
-* System dependencies
+* Download credentials and save as `.env` in checkout directory (Ask a team member for location)
 
-* Configuration
+* `gem install bundler`
 
-* Database creation
+* `bundle install`
 
-* Database initialization
+### Running the app
+#### Backend
+* `rails s`
 
-* How to run the test suite
+#### Frontend
+In a separate terminal tab run:
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
+
+
+
+
+
+
