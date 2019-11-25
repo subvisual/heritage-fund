@@ -13,12 +13,15 @@
 
 * `bundle install`
 
+* `rails db:setup`
+
 ### Running the app
 #### Backend
 * `rails s`
 
 #### Frontend
 In a separate terminal tab run:
+
 `./bin/webpack --watch`
 
 
