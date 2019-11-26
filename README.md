@@ -13,6 +13,8 @@
 
 * `bundle install`
 
+* Install yarn (https://yarnpkg.com/lang/en/docs/install/#mac-stable)
+
 * `yarn install`
 
 * `rails db:setup`
