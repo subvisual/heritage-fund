@@ -4,7 +4,15 @@
 
 ### Prerequisites
 
+* Install home brew
+
+* Install rbenv `brew install rbenv`
+
+* Install postgres `brew install postgres`
+
 * Install Ruby version specified in [.ruby-version](.ruby-version). Recommended to do this through `rbenv` to manage Ruby versions on your machine
+
+* `rbenv install X.X.X` (replace X.X.X with the version detailed in [.ruby-version](.ruby-version)) 
 
 * If you use rbenv ensure the following line is added to your bash_profile (`~/.bash_profile`): `eval "$(rbenv init -)"`
 
