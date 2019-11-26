@@ -21,6 +21,8 @@
 #### Backend
 * `bundle exec rails s`
 
+* open: http://localhost:3000
+
 #### Frontend
 In a separate terminal tab run:
 
