@@ -12,6 +12,9 @@
 
 * Download credentials and save as `.env` in checkout directory (Ask a team member for location)
 
+* Install the pg gem telling it the path of postgress, typically this is: 
+`gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config`
+
 * `gem install bundler`
 
 * `bundle install`
