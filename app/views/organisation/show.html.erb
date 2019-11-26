@@ -1,21 +1,20 @@
-<%= console %>
-<h1>organisation details</h1>
+<h1 class="govuk-heading-xl">organisation details</h1>
 
-<%= form_with model: @organisation, local: true do |o| %>
-  <%= o.label(:name, "Organisation name") %>
-  <%= text_field(:organisation, :name) %>
-  <%= o.label(:line1, "Address Line 1") %>
-  <%= text_field(:organisation, :line1) %>
-  <%= o.label(:line2, "Address Line 2") %>
-  <%= text_field(:organisation, :line2) %>
-  <%= o.label(:line3, "Address Line 3") %>
-  <%= text_field(:organisation, :line3) %>
-  <%= o.label(:townCity, "Town/City") %>
-  <%= text_field(:organisation, :townCity) %>
-  <%= o.label(:postcode, "Postcode") %>
-  <%= text_field(:organisation, :postcode) %>
+<%= form_with model: @organisation, local: true, class: 'govuk-form-group' do |o| %>
+  <%= o.label(:name, "Organisation name", class: 'govuk-label') %>
+  <%= text_field(:organisation, :name, class: 'govuk-input') %>
+  <%= o.label(:line1, "Address Line 1", class: 'govuk-label') %>
+  <%= text_field(:organisation, :line1, class: 'govuk-input') %>
+  <%= o.label(:line2, "Address Line 2", class: 'govuk-label') %>
+  <%= text_field(:organisation, :line2, class: 'govuk-input') %>
+  <%= o.label(:line3, "Address Line 3", class: 'govuk-label') %>
+  <%= text_field(:organisation, :line3, class: 'govuk-input') %>
+  <%= o.label(:townCity, "Town/City", class: 'govuk-label') %>
+  <%= text_field(:organisation, :townCity, class: 'govuk-input') %>
+  <%= o.label(:postcode, "Postcode", class: 'govuk-label') %>
+  <%= text_field(:organisation, :postcode, class: 'govuk-input') %>
   <br />
-  <%= o.submit "Save and Continue" %>
+  <%= o.submit "Save and Continue", class: 'govuk-button govuk-button--secondary' %>
 <% end %>
 
 
