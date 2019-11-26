@@ -3,7 +3,10 @@
 ## Steps to run locally
 
 ### Prerequisites
+
 * Install Ruby version specified in [.ruby-version](.ruby-version). Recommended to do this through `rbenv` to manage Ruby versions on your machine
+
+* If you use rbenv ensure the following line is added to your bash_profile (`~/.bash_profile`): `eval "$(rbenv init -)"`
 
 * Install [Postgres.app](https://postgresapp.com/)
 
