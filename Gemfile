@@ -66,3 +66,6 @@ gem "ideal_postcodes", "~> 2.0"
 gem "pry", "~> 0.12.2"
 
 gem "devise", "~> 4.7"
+
+
+gem "factory_bot_rails", "~> 5.1"

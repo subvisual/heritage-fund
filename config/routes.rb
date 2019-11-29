@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :projects
+  resources :projects, except: [:destroy]
   get 'dashboard/show'
   root to: "home#show"
   get 'dashboard' => 'dashboard#show'
