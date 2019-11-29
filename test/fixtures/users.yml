@@ -2,9 +2,7 @@
 
 one:
   id: 1
-  uid: MyString
-  email: MyString
+  email: test@example.com
 
 two:
-  uid: MyString
-  email: MyString
+  email: test2@example.com
