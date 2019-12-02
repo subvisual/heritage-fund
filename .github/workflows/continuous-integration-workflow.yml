@@ -42,6 +42,6 @@ jobs:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
-    - run: |
+      run: |
         bin/rails db:setup
         ./bin/rails test
