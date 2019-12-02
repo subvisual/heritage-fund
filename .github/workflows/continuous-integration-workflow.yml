@@ -10,7 +10,6 @@ jobs:
     name: build and test
     runs-on: ubuntu-latest
     steps: 
-    - name: Setup Ruby for use with actions
     - uses: actions/checkout@master
     - uses: actions/setup-node@v1
       with:
