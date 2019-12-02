@@ -19,4 +19,5 @@ jobs:
         ruby-version: '2.6.x'
     - run: yarn install
     - run: gem install bundler
+    - run: bundle install
     - run: ./bin/rails test
