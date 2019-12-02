@@ -1,0 +1,24 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build and test
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Setup Ruby for use with actions
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+      uses: actions/setup-ruby@v1.0.0
+      with:
+        ruby-version: '2.6.x'
+    - run: |
+        yarn install
+        bundle install
+        ./bin/rails test
