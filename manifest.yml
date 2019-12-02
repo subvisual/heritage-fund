@@ -1,0 +1,8 @@
+---
+applications:
+- name: funding-frontend-staging
+  memory: 256M
+  instances: 0
+  buildpack: ruby_buildpack
+  services: 
+  - funding-frontend-staging
