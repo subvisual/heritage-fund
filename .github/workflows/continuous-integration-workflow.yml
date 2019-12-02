@@ -37,5 +37,11 @@ jobs:
     - run: yarn install
     - run: gem install bundler
     - run: bundle install
-    - run: bin/rails db:setup
-    - run: ./bin/rails test
+    - name: Run tests 
+      env:
+        PGHOST: localhost
+        PGUSER: postgres
+        RAILS_ENV: test
+    - run: |
+        bin/rails db:setup
+        ./bin/rails test
