@@ -27,7 +27,7 @@ module FundingFrontendRuby
       require 'rails/generators/generated_attribute'
       Rails::Generators::GeneratedAttribute.prepend hacker
     end
-    config.active_record.schema_format = :sql
+    # config.active_record.schema_format = :sql
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
