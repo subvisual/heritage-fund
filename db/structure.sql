@@ -62,6 +62,8 @@ CREATE TYPE public.organisation_type AS ENUM (
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
 -- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: -
 --
@@ -112,7 +114,6 @@ CREATE TABLE public.organisations (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    type public.organisation_type,
     line1 character varying,
     "townCity" character varying,
     county character varying,
@@ -146,10 +147,10 @@ CREATE TABLE public.projects (
 CREATE TABLE public.released_forms (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
     project_id uuid,
-    form_type public.form_type,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    payload jsonb
+    payload jsonb,
+    form_type integer
 );
 
 
@@ -374,6 +375,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191021154235'),
 ('20191119151728'),
 ('20191121114846'),
-('20191122142454');
+('20191122142454'),
+('20191204094433'),
+('20191204110301');
 
 
