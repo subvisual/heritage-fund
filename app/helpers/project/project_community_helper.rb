@@ -1,0 +1,2 @@
+module Project::ProjectCommunityHelper
+end

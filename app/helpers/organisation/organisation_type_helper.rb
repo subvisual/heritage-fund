@@ -1,0 +1,2 @@
+module Organisation::OrganisationTypeHelper
+end

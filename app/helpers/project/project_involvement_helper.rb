@@ -1,0 +1,2 @@
+module Project::ProjectInvolvementHelper
+end

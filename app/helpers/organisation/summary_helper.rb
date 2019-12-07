@@ -1,0 +1,2 @@
+module Organisation::SummaryHelper
+end

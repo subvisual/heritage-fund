@@ -1,0 +1,2 @@
+module Project::ProjectCashContributionHelper
+end

@@ -36,3 +36,6 @@ yarn-debug.log*
 # Credentials
 .env
 .DS_Store
+.generators
+.idea
+scaff.sh
