@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'health' => 'health#get_status'
+
   devise_for :users
   resources :projects, except: [:destroy]
   get 'dashboard/show'

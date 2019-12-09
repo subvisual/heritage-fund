@@ -4,6 +4,8 @@ applications:
   memory: 256M
   instances: 2
   buildpack: ruby_buildpack
-  services: 
+  health-check-type: http
+  health-check-http-endpoint: /health
+  services:
   - funding-frontend-staging
   - log-drain
