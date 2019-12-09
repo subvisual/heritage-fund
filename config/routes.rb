@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :account do
+    get 'create-new-account' => 'account#new'
+  end
+
   namespace :organisation do
     get 'summary' => 'summary#summary'
     get 'signatory' => 'legal_signatory#legal_signatory'
