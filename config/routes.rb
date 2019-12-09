@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'health' => 'health#get_status'
 
   devise_for :users
-  resources :projects, except: [:destroy]
+  resources :projects, except: [:destroy, :index]
   get 'dashboard/show'
   root to: "home#show"
   get 'dashboard' => 'dashboard#show'
