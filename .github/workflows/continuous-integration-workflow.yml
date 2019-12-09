@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: build and test
+    name: build, test and deploy
     runs-on: ubuntu-latest
     
     services:
@@ -45,3 +45,24 @@ jobs:
       run: |
         bin/rails db:setup
         ./bin/rails test
+    
+    - name: Install the CF CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install -y cf-cli
+    
+    - name: Deploy
+      env:
+        CF_APP: funding-frontend-staging
+        CF_SPACE: sandbox
+        CF_USERNAME: ${{ secrets.CF_USERNAME }}
+        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+      run: |
+        cf api https://api.london.cloud.service.gov.uk
+        cf auth
+        cf target -o national-lottery-heritage-fund -s ${CF_SPACE}
+        cf v3-cancel-zdt-push ${CF_APP} || true
+        cf v3-apply-manifest -f manifest.yml
+        cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
