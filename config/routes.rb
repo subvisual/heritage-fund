@@ -2,9 +2,11 @@ Rails.application.routes.draw do
 
   namespace :account do
     get 'create-new-account' => 'account#new'
+    get 'account-created' => 'account#account_created'
   end
 
   namespace :organisation do
+    get 'type' => 'organisation_type#organisation_type'
     get 'summary' => 'summary#summary'
     get 'signatory' => 'legal_signatory#legal_signatory'
     get 'mission' => 'organisation_mission#organisation_mission'

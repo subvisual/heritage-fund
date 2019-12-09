@@ -1,5 +1,6 @@
 ---
 en:
+  account_created_continue_link: "/organisation/type"
   application_guidance_link: "#"
   fair_processing_email: fair.processing@heritagefund.org.uk
   project_outcomes_link: "#"
