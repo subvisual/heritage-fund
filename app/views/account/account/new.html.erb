@@ -1,2 +1,103 @@
-<h1>Account::Account#new</h1>
-<p>Find me in app/views/account/account/new.html.erb</p>
+<div>
+  <h1 class="govuk-heading-l">Create an account</h1>
+
+  <p aria-label="information">
+    The personal information we collect from you will be shared with fraud prevention agencies who will use it to prevent fraud and
+    money-laundering and to verify your identity. If fraud is detected, you could be refused a grant or loan.
+    Further details of how your information will be used by us and these fraud prevention agencies, and your data protection rights,
+    can be found by contacting <a href="mailto:<%= t :fair_processing_email %>"><%= t :fair_processing_email %></a>.
+  </p>
+
+  <form id="" action="" method="post" role="form">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          What is your email address?
+        </h1>
+      </legend>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="email-address">
+          email address <span class="govuk-visually-hidden">email address</span>
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="email-address" name="email-address" type="email">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="password-one">
+          Enter a password <span class="govuk-visually-hidden">enter a password</span>
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="password-one" name="password-one" type="password" required autocomplete="off">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="password-two">
+          Re-enter a password <span class="govuk-visually-hidden">re-enter a password</span>
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="password-two" name="password-two" type="password" required autocomplete="off">
+      </div>
+    </fieldset>
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          About you
+        </h1>
+      </legend>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="full-name">
+          Full name <span class="govuk-visually-hidden">Full name</span>
+        </label>
+        <input class="govuk-input govuk-input--width-20" id="full-name" name="full-name" type="text" required autocomplete="off">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="telephone-number">
+          Telephone number <span class="govuk-visually-hidden">Telephone number</span>
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="telephone-number" name="telephone-number" type="tel" required autocomplete="off">
+      </div>
+    </fieldset>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="date-of-birth-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Date of birth?
+          </h1>
+        </legend>
+        <span id="date-of-birth-hint" class="govuk-hint">
+      For example, 12 11 2007
+    </span>
+        <div class="govuk-date-input" id="dob">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-of-birth-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-of-birth-day" name="date-of-birth-day" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-of-birth-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-of-birth-month" name="date-of-birth-month" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-of-birth-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date-of-birth-year" name="date-of-birth-year" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <button class="govuk-button" data-module="govuk-button" role="button">
+      Save and continue
+    </button>
+  </form>
+
+</div>
