@@ -1,13 +1,10 @@
 name: Continuous Integration
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   build:
-    name: build, test and deploy
+    name: build, test and deploy (on master only)
     runs-on: ubuntu-latest
     
     services:
@@ -47,6 +44,7 @@ jobs:
         ./bin/rails test
     
     - name: Install the CF CLI
+      if: github.ref == 'refs/heads/master'
       run: |
         wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
         echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
@@ -54,6 +52,7 @@ jobs:
         sudo apt-get install -y cf-cli
     
     - name: Deploy
+      if: github.ref == 'refs/heads/master'
       env:
         CF_APP: funding-frontend-staging
         CF_SPACE: sandbox
