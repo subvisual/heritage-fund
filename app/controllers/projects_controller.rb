@@ -101,6 +101,7 @@ class ProjectsController < ApplicationController
     
     respond_to do |format|
       if @project.save
+        @project.files.attach(params[:project][:files])
         @payload_obj = JSON.parse(payload)
         @payload_obj['meta']['username'] = @project.user.email 
         @payload_obj['meta']['applicationId'] = @project.id
@@ -142,6 +143,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:project_title)
+      params.require(:project).permit(:project_title, files: [])
     end
 end

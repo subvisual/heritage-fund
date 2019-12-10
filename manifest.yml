@@ -9,3 +9,4 @@ applications:
   services:
   - funding-frontend-staging
   - log-drain
+  - funding-frontend-staging-uploads
