@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'signatory' => 'legal_signatory#legal_signatory'
     get 'mission' => 'organisation_mission#organisation_mission'
     get 'about' => 'organisation_about#organisation_about'
+    get 'registered-numbers' => 'registered_numbers#registered_numbers'
   end
 
   namespace :project do
