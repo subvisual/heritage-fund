@@ -1,2 +1,101 @@
-<h1>Organisation::Summary#summary</h1>
-<p>Find me in app/views/organisation/summary/summary.html.erb</p>
+<div>
+
+  <h1 class="govuk-heading-l" aria-label="Heading">Check your answers</h1>
+
+  <dl class="govuk-summary-list">
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Organisation managing your project is a
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= organisation_organisation_type_organisation_type_url %>">
+          Change<span class="govuk-visually-hidden"> organisation type</span>
+        </a>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Organisation's company number
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= '/organisation/registered-numbers' %>">
+          Change<span class="govuk-visually-hidden"> company number</span>
+        </a>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Organisation's charity number
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= '/organisation/registered-numbers' %>">
+          Change<span class="govuk-visually-hidden"> charity number</span>
+        </a>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Your organisation is based in
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= '/organisation/about' %>">
+          Change<span class="govuk-visually-hidden"> location</span>
+        </a>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Your organisation's mission, or objectives include
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= '/organisation/mission' %>">
+          Change<span class="govuk-visually-hidden"> mission or objectives</span>
+        </a>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Legal signatories
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <%= 'To do: Add playback of saved values' %>
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="<%= '/organisation/signatory' %>">
+          Change<span class="govuk-visually-hidden"> legal signatories</span>
+        </a>
+      </dd>
+    </div>
+  </dl>
+
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Declaration</span>
+      By submitting this information you are confirming, that to the best of your knowledge, the details you are providing are correct.
+    </strong>
+  </div>
+
+  <button class="govuk-button" role="button" aria-label="save and continue button">Continue</button>
+</div>
