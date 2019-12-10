@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get 'is-the-project-at-your-location' => 'project_location#project_location'
     get 'location' => 'project_location#project_location_no'
     get 'key-dates' => 'project_dates#project_dates'
-    get 'about-your-project' => 'about#about'
+    get 'title' => 'project_title#project_title'
     get 'new-project' => 'new_project/new_project'
   end
 

@@ -6,7 +6,7 @@ rails g controller organisation/summary summary
 
 # Project controller and views
 rails g controller project/new_project new_project
-rails g controller project/about about
+rails g controller project/project_title project_title
 rails g controller project/project_dates project_dates
 rails g controller project/project_location project_location project_location_no
 rails g controller project/project_description project_description
