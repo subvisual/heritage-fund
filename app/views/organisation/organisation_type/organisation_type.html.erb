@@ -1,9 +1,10 @@
-<div>
-  <p>Check if you are eligible for funding</p>
-</div>
+
+<p>Check if you are eligible for funding</p>
+
 <form action="" method="post">
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
+
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
         <h1 class="govuk-fieldset__heading">
           What type of organisation will be running your project?
@@ -88,8 +89,13 @@
           </label>
         </div>
       </div>
+
     </fieldset>
   </div>
 
   <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
 </form>
+
+<% if Rails.env.development? %>
+  <a href="/organisation/about" >skip to next page</a>
+<% end %>

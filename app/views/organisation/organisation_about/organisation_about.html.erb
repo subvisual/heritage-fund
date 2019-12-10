@@ -1,2 +1,35 @@
-<h1>Organisation::OrganisationAbout#organisation_about</h1>
-<p>Find me in app/views/organisation/organisation_about/organisation_about.html.erb</p>
+<div>
+
+  <h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
+  <p aria-label="information">Your organisation must be based in the UK</p>
+
+  <form>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="organisation-name">
+        Organisation name
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="organisation-name" name="organisation-name" type="text">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="organisation-postcode">
+        Organisation postcode
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="organisation-postcode" name="organisation-postcode" type="text">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="organisation-address">
+        Organisation address
+      </label>
+      <input class="govuk-input govuk-input--width-20" id="organisation-address" name="organisation-address" type="text">
+    </div>
+
+  </form>
+
+  <button role="button" class="govuk-button" aria-label="save and continue button">Save and continue</button>
+
+  <% if Rails.env.development? %>
+    <br><a href="/organisation/mission">skip to next page</a>
+  <% end %>
+</div>
