@@ -1,2 +1,98 @@
-<h1>Project::ProjectDates#project_dates</h1>
-<p>Find me in app/views/project/project_dates/project_dates.html.erb</p>
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+    <h1 class="govuk-heading-l" aria-label="Heading">When will your project happen?</h1>
+  </div>
+
+  <form>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="project-start-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h1 class="govuk-fieldset__heading">
+            Project start date
+          </h1>
+        </legend>
+        <span id="project-start-hint" class="govuk-hint">For example, 12 11 2007</span>
+
+        <div class="govuk-date-input" id="project-start">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="project-start-day">
+                Day
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="project-start-day" name="project-start-day" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="project-start-month">
+                Month
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="project-start-month" name="project-start-month" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="project-start-year">
+                Year
+              </label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="project-start-year" name="project-start-year" type="number" pattern="[0-9]*">
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <div class="govuk-form-group govuk-!-padding-top-6">
+        <fieldset class="govuk-fieldset" role="group" aria-describedby="project-end-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Project end date
+            </h1>
+          </legend>
+          <span id="project-end-hint" class="govuk-hint">For example, 12 11 2007</span>
+          <div class="govuk-date-input" id="project-end">
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="project-end-day">
+                  Day
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="project-end-day" name="project-end-day" type="number" pattern="[0-9]*">
+              </div>
+            </div>
+
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="project-end-month">
+                  Month
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="project-end-month" name="project-end-month" type="number" pattern="[0-9]*">
+              </div>
+            </div>
+
+            <div class="govuk-date-input__item">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="project-end-year">
+                  Year
+                </label>
+                <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="project-end-year" name="project-end-year" type="number" pattern="[0-9]*">
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+
+  </form>
+  
+  <% if Rails.env.development? %>
+    <a href="/project/location">skip to next page</a>
+  <% end %>
+
+
+</div>
