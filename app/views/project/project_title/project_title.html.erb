@@ -13,6 +13,7 @@
   </form>
   <button class="govuk-button" role="button">Save and continue</button>
 </div>
-<% if Rails.env.development? %>
+<!--TODO Remove the link when routing is concrete-->
+  <% if Rails.env.development? %>
   <a href="/project/key-dates">skip to next page</a>
 <% end %>

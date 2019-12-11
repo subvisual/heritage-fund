@@ -1,2 +1,87 @@
-<h1>Project::ProjectPermission#project_permission</h1>
-<p>Find me in app/views/project/project_permission/project_permission.html.erb</p>
+<div>
+  <div>
+    <h2 class="govuk-heading-l" aria-label="Heading">About your project</h2>
+  </div>
+
+  <form>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="project-permission-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h1 class="govuk-fieldset__heading">
+            Do you need permission from anyone else to do your project?
+          </h1>
+        </legend>
+
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="project-permission" name="project-permission" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="project-permission">
+              No, I do not need permission
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="project-permission-2" name="project-permission" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="project-permission-2">
+              Yes, I need permission
+            </label>
+          </div>
+
+          <div class="nlhf-radio-extra-info">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="more-detail-permission-needed">
+                Please provide more information about who you need permission from to do your project
+              </label>
+              <textarea class="govuk-textarea" id="more-detail-permission-needed" name="more-detail-permission-needed" rows="5" aria-describedby="more-detail-hint"></textarea>
+            </div>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="project-permission-3" name="project-permission" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="project-permission-3">
+              Not sure, If I need permission
+            </label>
+          </div>
+
+          <div class="nlhf-radio-extra-info">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="more-detail-permission-unsure">
+                Please provide more information
+              </label>
+              <textarea class="govuk-textarea" id="more-detail-permission-unsure" name="more-detail-permission-unsure" rows="5" aria-describedby="more-detail-hint"></textarea>
+            </div>
+
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+
+  <details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Examples of what might need permission
+    </span>
+    </summary>
+    <div class="govuk-details__text">
+      <ul>
+        <li>agreement from the owner of a heritage asset</li>
+        <li>access rights from a landowner</li>
+        <li>planning permission from the council</li>
+        <li>consent to record audio or take photographs of individuals.</li>
+      </ul>
+      <p>If you don’t know if you need permission, choose the ‘Not sure’ option and provide details.</p>
+    </div>
+  </details>
+
+  <div>
+    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+  </div>
+
+  <!--TODO Remove the link when routing is concrete-->
+  <% if Rails.env.development? %>
+    <a href="/project/description">skip to next page</a>
+  <% end %>
+
+</div>
