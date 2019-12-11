@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'description' => 'project_description#project_description'
     get 'location' => 'project_location#project_location'
     post 'save-location' => 'project_location#save_project_location'
-    get 'other-location' => 'project_location#project_location_no'
+    get 'other-location' => 'project_location#project_other_location'
     get 'key-dates' => 'project_dates#project_dates'
     get 'title' => 'project_title#project_title'
     get 'new-project' => 'new_project/new_project'
@@ -52,7 +52,6 @@ Rails.application.routes.draw do
   post 'postcode_lookup' => 'postcode#lookup'
   post 'postcode_save' => 'postcode#save'
   get 'logout' => 'logout#logout'
-  get 'organisation/organisation_type/organisation_type'
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"
   end

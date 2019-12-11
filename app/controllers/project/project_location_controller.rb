@@ -1,8 +1,9 @@
 class Project::ProjectLocationController < ApplicationController
+
   def project_location
   end
 
-  def project_location_no
+  def project_other_location
   end
 
   def save_project_location
