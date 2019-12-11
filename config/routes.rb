@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
@@ -23,14 +24,15 @@ Rails.application.routes.draw do
     get 'how-is-your-project-available' => 'project_availability#project_availability'
     get 'community' => 'project_community#project_community'
     get 'differences' => 'project_differences#project_differences'
-    get 'do-you-need-permission' => 'project_permission#project_permission'
+    get 'permission' => 'project_permission#project_permission'
     get 'description' => 'project_description#project_description'
     get 'location' => 'project_location#project_location'
     post 'save-location' => 'project_location#save_project_location'
     get 'other-location' => 'project_location#project_other_location'
     get 'key-dates' => 'project_dates#project_dates'
     get 'title' => 'project_title#project_title'
-    get 'new-project' => 'new_project/new_project'
+    get 'new-project' => 'new_project#new_project'
+    get 'capital-works' => 'capital_works#capital_works'
   end
 
   namespace :grant do
