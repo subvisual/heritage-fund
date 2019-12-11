@@ -42,9 +42,10 @@ Rails.application.routes.draw do
     get 'non-cash-contributors' => 'grant_non_cash_contributors#grant_non_cash_contributors'
     get 'request' => 'grant_request#grant_request'
   end
+  get 'health' => 'health#get_status'
 
   devise_for :users
-  resources :projects, except: [:destroy]
+  resources :projects, except: [:destroy, :index]
   get 'dashboard/show'
   root to: "home#show"
   get 'dashboard' => 'dashboard#show'

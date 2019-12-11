@@ -1,13 +1,10 @@
 name: Continuous Integration
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   build:
-    name: build and test
+    name: build, test and deploy (on master only)
     runs-on: ubuntu-latest
     
     services:
@@ -21,12 +18,7 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps: 
     - name: 'Install Postgres client'
-      run: |
-        sudo apt update
-        sudo bash -c "echo deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main >> /etc/apt/sources.list.d/pgdg.list"
-        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-        sudo apt-get update
-        sudo apt-get -yqq install libpq-dev postgresql-client-11
+      run: sudo apt-get -yqq install libpq-dev
     - uses: actions/checkout@master
     - uses: actions/setup-node@v1
       with:
@@ -45,3 +37,26 @@ jobs:
       run: |
         bin/rails db:setup
         ./bin/rails test
+    
+    - name: Install the CF CLI
+      if: github.ref == 'refs/heads/master'
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install -y cf-cli
+    
+    - name: Deploy
+      if: github.ref == 'refs/heads/master'
+      env:
+        CF_APP: funding-frontend-staging
+        CF_SPACE: sandbox
+        CF_USERNAME: ${{ secrets.CF_USERNAME }}
+        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+      run: |
+        cf api https://api.london.cloud.service.gov.uk
+        cf auth
+        cf target -o national-lottery-heritage-fund -s ${CF_SPACE}
+        cf v3-cancel-zdt-push ${CF_APP} || true
+        cf v3-apply-manifest -f manifest.yml
+        cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete

@@ -39,3 +39,4 @@ yarn-debug.log*
 .generators
 .idea
 scaff.sh
+/nbproject/private/
