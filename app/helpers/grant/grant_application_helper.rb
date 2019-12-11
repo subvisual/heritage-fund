@@ -1,0 +1,2 @@
+module Grant::GrantApplicationHelper
+end

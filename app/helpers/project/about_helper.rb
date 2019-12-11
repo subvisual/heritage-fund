@@ -1,0 +1,2 @@
+module Project::AboutHelper
+end

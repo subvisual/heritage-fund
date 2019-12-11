@@ -1,0 +1,2 @@
+module Project::ProjectBestPlacedHelper
+end

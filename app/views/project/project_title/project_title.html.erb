@@ -1,0 +1,18 @@
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+    <h1 class="govuk-heading-l" aria-label="Heading">Project Title</h1>
+  </div>
+  <form>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="project-title">
+        Give your project a title or a name that we can refer to your project by
+      </label>
+      <input class="govuk-input" id="project-title" name="project-title" type="text">
+    </div>
+  </form>
+  <button class="govuk-button" role="button">Save and continue</button>
+</div>
+<% if Rails.env.development? %>
+  <a href="/project/key-dates">skip to next page</a>
+<% end %>

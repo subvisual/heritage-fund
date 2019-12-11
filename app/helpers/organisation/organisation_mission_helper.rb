@@ -1,0 +1,2 @@
+module Organisation::OrganisationMissionHelper
+end

@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+  </div>
+  <form action="/project/save-location" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="same-location-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Is the project taking place at the same location as your organisations address?
+          </h1>
+        </legend>
+        <div class="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="same-location" name="same-location" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="same-location">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="same-location-2" name="same-location" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="same-location-2">
+              No
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+  </form>
+
+  <% if Rails.env.development? %>
+    <a href="/project/location">skip to next page</a>
+  <% end %>
+
+</div>
+
