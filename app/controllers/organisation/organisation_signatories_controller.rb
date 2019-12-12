@@ -17,7 +17,7 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
 
   def update
 
-    @organisation = Organisation.find(params[:organisation_id])
+    @organisation = Organisation.find(current_user.organisation.id)
 
     #logger.debug 'Updating organisation ' + @organisation.id +
     #                 ', setting mission to ' + params[:organisation][:mission]
@@ -34,7 +34,7 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
 
   def finish_wizard_path
 
-    organisation_organisation_summary_get_path(params[:organisation_id])
+    organisation_organisation_summary_get_path(current_user.organisation.id)
 
   end
 

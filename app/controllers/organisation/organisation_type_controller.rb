@@ -31,7 +31,7 @@ class Organisation::OrganisationTypeController < ApplicationController
 
   def finish_wizard_path
 
-    organisation_organisation_numbers_get_path(params[:organisation_id]) + '?id=numbers'
+    organisation_organisation_numbers_get_path(current_user.organisation.id, id: 'numbers')
 
   end
 

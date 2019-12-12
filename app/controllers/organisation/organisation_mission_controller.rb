@@ -7,7 +7,7 @@ class Organisation::OrganisationMissionController < ApplicationController
 
   def show
 
-    @organisation = Organisation.find(params[:organisation_id])
+    @organisation = Organisation.find(current_user.organisation.id)
 
     render_wizard
 
@@ -15,12 +15,12 @@ class Organisation::OrganisationMissionController < ApplicationController
 
   def update
 
-    @organisation = Organisation.find(params[:organisation_id])
+    @organisation = Organisation.find(current_user.organisation.id)
 
     logger.debug 'Updating organisation ' + @organisation.id +
                      ', setting mission to ' + params[:organisation][:mission]
 
-    @organisation = Organisation.update(params[:organisation_id],
+    @organisation = Organisation.update(current_user.organisation.id,
                                         :mission => params[:organisation][:mission])
 
     logger.debug 'Finished updating organisation ' + @organisation.id
@@ -31,7 +31,7 @@ class Organisation::OrganisationMissionController < ApplicationController
 
   def finish_wizard_path
 
-    organisation_organisation_signatories_get_path(params[:organisation_id]) + '?id=signatories'
+    organisation_organisation_signatories_get_path(current_user.organisation.id, id: 'signatories')
 
   end
 
