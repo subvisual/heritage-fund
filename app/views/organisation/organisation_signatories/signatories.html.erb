@@ -2,7 +2,8 @@
 
   <h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
 
-  <form action="" method="post">
+  <%= form_for @organisation, url: wizard_path, method: :put do |f|  %>
+
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
 
@@ -60,14 +61,11 @@
         </div>
 
       </fieldset>
+
+      <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+
     </div>
-  </form>
 
-  <button role="button" class="govuk-button" aria-label="save and continue button">Save and continue</button>
-
-  <!--TODO Remove the link when routing is concrete-->
-  <% if Rails.env.development? %>
-    <br><a href="/organisation/summary">skip to next page</a>
   <% end %>
 
 </div>

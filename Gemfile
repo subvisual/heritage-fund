@@ -71,5 +71,6 @@ gem "pry", "~> 0.12.2"
 
 gem "devise", "~> 4.7"
 
+gem "wicked", "~> 1.3.4"
 
 gem "factory_bot_rails", "~> 5.1"

@@ -7,12 +7,22 @@ Rails.application.routes.draw do
   end
 
   namespace :organisation do
-    get 'type' => 'organisation_type#organisation_type'
-    get 'summary' => 'summary#summary'
-    get 'signatory' => 'legal_signatory#legal_signatory'
-    get 'mission' => 'organisation_mission#organisation_mission'
-    get 'about' => 'organisation_about#organisation_about'
-    get 'registered-numbers' => 'registered_numbers#registered_numbers'
+    get ':organisation_id/type', to: 'organisation_type#show', as: :organisation_type_get
+    put ':organisation_id/type', to: 'organisation_type#update', as: :organisation_type_put
+
+    get ':organisation_id/numbers', to: 'organisation_numbers#show', as: :organisation_numbers_get
+    put ':organisation_id/numbers', to: 'organisation_numbers#update', as: :organisation_numbers_put
+
+    get ':organisation_id/about', to: 'organisation_about#show', as: :organisation_about_get
+    put ':organisation_id/about', to: 'organisation_about#update', as: :organisation_about_put
+
+    get ':organisation_id/mission', to: 'organisation_mission#show', as: :organisation_mission_get
+    put ':organisation_id/mission', to: 'organisation_mission#update', as: :organisation_mission_put
+
+    get ':organisation_id/signatories', to: 'organisation_signatories#show', as: :organisation_signatories_get
+    put ':organisation_id/signatories', to: 'organisation_signatories#update', as: :organisation_signatories_put
+
+    get ':organisation_id/organisation_summary', to: 'organisation_summary#show', as: :organisation_summary_get
   end
 
   namespace :project do
@@ -38,7 +48,7 @@ Rails.application.routes.draw do
   namespace :grant do
     get 'application' => 'grant_application#grant_application'
     get 'declaration' => 'grant_declaration#grant_declaration'
-    get 'summary' => 'grant_summary#grant_summary'
+    get 'organisation_summary' => 'grant_summary#grant_summary'
     get 'support-evidence' => 'grant_support_evidence#grant_support_evidence'
     get 'volunteers' => 'grant_volunteers#grant_volunteers'
     get 'non-cash-contributors' => 'grant_non_cash_contributors#grant_non_cash_contributors'

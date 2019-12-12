@@ -1,3 +1,5 @@
+<% content_for :page_title, "Organisation summary" %>
+
 <div>
 
   <h1 class="govuk-heading-l" aria-label="Heading">Check your answers</h1>
@@ -9,7 +11,7 @@
         Organisation managing your project is a
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <%= @organisation.org_type.humanize %>
       </dd>
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="/organisation/type">
@@ -23,7 +25,7 @@
         Organisation's company number
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <%= @organisation.company_number %>
       </dd>
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="<%= '/organisation/registered-numbers#company-number' %>">
@@ -37,7 +39,7 @@
         Organisation's charity number
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <%= @organisation.charity_number %>
       </dd>
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="<%= '/organisation/registered-numbers#charity-number' %>">
@@ -51,7 +53,7 @@
         Your organisation is based in
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <%= @organisation.line1 %>
       </dd>
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="<%= '/organisation/project_title' %>">
@@ -65,7 +67,7 @@
         Your organisation's mission, or objectives include
       </dt>
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <%= @organisation.mission.humanize %>
       </dd>
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="<%= '/organisation/mission' %>">

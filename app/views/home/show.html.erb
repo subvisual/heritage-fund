@@ -3,7 +3,7 @@
   <span class="govuk-body-l">Use this service to:</span><br>
   <span class="govuk-body">Apply for funding from the National Lottery Heritage fund for your heritage project</span>
   <div class="govuk-!-padding-top-6">
-    <a class="govuk-button" role="button" aria-label="Start now" href="/account/create-new-account">Start now</a>
+    <%= link_to "Start now", organisation_organisation_type_get_path(@organisation.id) + '?id=type', class:"govuk-button", role: "button", 'aria-label' => "Start now" %>
   </div>
 
   <div govuk-!-padding-6>
