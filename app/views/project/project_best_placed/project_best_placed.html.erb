@@ -1,2 +1,34 @@
-<h1>Project::ProjectBestPlaced#project_best_placed</h1>
-<p>Find me in app/views/project/project_best_placed/project_best_placed.html.erb</p>
+<div>
+  <div>
+    <h2 class="govuk-heading-l" aria-label="Heading">About your project</h2>
+  </div>
+
+  <form>
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="500">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="best-placed">
+          Why is your organisation best placed to deliver this project?
+        </label>
+        <span id="with-hint-hint" class="govuk-hint">
+          Tell us why specifically your organisation should run this project.
+          Demonstrate that you have made contact with relevant projects and organisations in your area.
+        </span>
+        <textarea class="govuk-textarea govuk-js-character-count" id="best-placed" name="best-placed" rows="5" aria-describedby="best-placed-info with-hint-hint"></textarea>
+      </div>
+      <span id="best-placed-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You have 500 words remaining
+      </span>
+    </div>
+
+    <div>
+      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+    </div>
+
+  </form>
+
+  <!--TODO Remove the link when routing is concrete-->
+  <% if Rails.env.development? %>
+    <a href="/project/involvement">skip to next page</a>
+  <% end %>
+
+</div>

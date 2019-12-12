@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get 'cash-contributions' => 'project_cash_contribution#project_cash_contribution_yes'
     get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
     get 'involvement' => 'project_involvement#project_involvement'
-    get 'how-is-your-organisation-best-placed' => 'project_best_placed#project_best_placed'
+    get 'best-placed' => 'project_best_placed#project_best_placed'
     get 'availability' => 'project_availability#project_availability'
     get 'community' => 'project_community#project_community'
     get 'differences' => 'project_differences#project_differences'
