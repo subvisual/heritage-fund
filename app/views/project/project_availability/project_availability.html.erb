@@ -1,2 +1,36 @@
-<h1>Project::ProjectAvailability#project_availability</h1>
-<p>Find me in app/views/project/project_availability/project_availability.html.erb</p>
+<div>
+  <div>
+    <h2 class="govuk-heading-l" aria-label="Heading">About your project</h2>
+  </div>
+
+  <form>
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="500">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="project-availability">
+          The heritage of your project: how do you plan to make it available once the project is over?
+        </label>
+        <span id="with-hint-hint" class="govuk-hint">
+          This helps us understand how you plan to preserve the heritage of your project and the difference it will make after the project ends.
+        </span>
+        <span id="with-hint-hint-hint" class="govuk-hint">
+          We use this section to assess the value for money of our investment in your project.
+        </span>
+        <textarea class="govuk-textarea govuk-js-character-count" id="project-availability" name="project-availability" rows="5" aria-describedby="project-availability-info with-hint-hint with-hint-hint-hint"></textarea>
+      </div>
+      <span id="project-availability-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You have 500 words remaining
+      </span>
+    </div>
+
+    <div>
+      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+    </div>
+
+  </form>
+
+  <!--TODO Remove the link when routing is concrete-->
+  <% if Rails.env.development? %>
+    <a href="/project/best-placed">skip to next page</a>
+  <% end %>
+
+</div>
