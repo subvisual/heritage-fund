@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     get 'title' => 'project_title#project_title'
     get 'new-project' => 'new_project#new_project'
     get 'capital-works' => 'capital_works#capital_works'
+    get 'costs' => 'project_costs#project_costs'
   end
 
   namespace :grant do
