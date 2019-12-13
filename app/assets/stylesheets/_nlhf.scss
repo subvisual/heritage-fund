@@ -1,0 +1,290 @@
+
+.nlhf-radio-extra-info {
+
+  padding-left: 55px;
+
+}
+
+.nlhf-check-box-extra-info {
+
+  padding-left: 16px;
+
+}
+
+.nlhf-header {
+  background: #005565;
+  padding: 20px 0;
+}
+
+.nlhf-header__title {
+  color: #fff;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.govuk-tag {
+  background: #005565;
+}
+
+@media (max-width: 19.99em) {
+  .nlhf-visually-hidden-until-mobile {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (min-width: 20em) {
+  .nlhf-visually-hidden-from-mobile {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 40.0525em) {
+  .nlhf-visually-hidden-until-tablet {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .nlhf-visually-hidden-from-tablet {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 48.0525em) {
+  .nlhf-visually-hidden-until-desktop {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .nlhf-visually-hidden-from-desktop {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+.nlhf-606 .nlhf-summary {
+  border: 4px solid #000;
+}
+
+.nlhf-606 .nlhf-summary__header {
+  background: #000;
+  color: #fff;
+  padding: 1.25em 1em;
+  display: block;
+}
+
+.nlhf-606 .nlhf-summary__header .govuk-heading-l,
+.nlhf-606 .nlhf-summary__header .govuk-heading-m {
+  color: inherit;
+  margin: -4px 0 0 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.nlhf-606 .nlhf-summary__body {
+  padding: 1rem;
+}
+
+.nlhf-606 .nlhf-data-row {
+  display: flex;
+  align-items: center;
+}
+
+.nlhf-606 .nlhf-data-row:not(:last-of-type) {
+  margin-bottom: 1.25rem;
+  border-bottom: 2px dashed #ccc;
+}
+
+.nlhf-606 .nlhf-data-row__heading {
+  margin: 0 0 0.15em 0;
+}
+
+@media (max-width: 48.0525em) {
+  .nlhf-606 .nlhf-data-row__group--a {
+    width: 60%;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .nlhf-606 .nlhf-data-row__group--a {
+    width: 75%;
+  }
+}
+
+.nlhf-606 .nlhf-data-row__group--b .nlhf-data-row__heading {
+  text-align: right;
+}
+
+@media (max-width: 48.0525em) {
+  .nlhf-606 .nlhf-data-row__group--b {
+    width: 40%;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .nlhf-606 .nlhf-data-row__group--b {
+    width: 25%;
+  }
+}
+
+.nlhf-606 .nlhf-data-row--files {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nlhf-606 .nlhf-data-row--files .nlhf-data-row__group {
+  max-width: 50%;
+}
+
+.nlhf-606 .nlhf-data-row--files .nlhf-data-row__group:last-of-type {
+  word-break: break-all;
+  text-align: right;
+}
+
+.nlhf-606 .nlhf-data-row--files:last-of-type p {
+  margin-bottom: 0;
+}
+
+.nlhf-606 .nlhf-grant-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.nlhf-606 .nlhf-grant-summary__item {
+  display: flex;
+  padding: 20px;
+  background: #f3f2f1;
+}
+
+.nlhf-606 .nlhf-grant-summary__item:not(:last-of-type) {
+  margin-bottom: 2px;
+}
+
+.nlhf-606 .nlhf-grant-summary__item--calc {
+  display: block;
+}
+
+.nlhf-606 .nlhf-grant-summary__item--calc p {
+  width: 100%;
+}
+
+.nlhf-606 .nlhf-grant-summary__description {
+  width: 70%;
+}
+
+.nlhf-606 .nlhf-grant-summary__amount {
+  width: 30%;
+  align-self: flex-start;
+  text-align: right;
+}
+
+.nlhf-606 .nlhf-grant-summary__amount p {
+  font-size: 1.6rem;
+}
+
+.nlhf-606 .nlhf-summary {
+  margin-bottom: 15px;
+}
+
+.nlhf-606 .nlhf-summary__total {
+  text-align: right;
+}
+
+.nlhf-606 .nlhf-summary__total__title {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  margin: 0;
+}
+
+.nlhf-606 .nlhf-summary__total__title-text {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: .75em;
+  font-size: 1.5rem;
+}
+
+.nlhf-606 .nlhf-summary__total__title-val {
+  font-size: 2.5rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nlhf-606 .nlhf-add-item__header {
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 1rem 0;
+  margin: 0 0 1rem 0;
+}
+
+.nlhf-606 .nlhf-add-item__header__title {
+  margin: 0;
+}
+
+.nlhf-606 .nlhf-highlight-content {
+  border: 1px solid #b1b4b6;
+  padding: 20px;
+  margin: 0 0 25px 0;
+}
+
+.js-enabled select[data-source] {
+  display: none;
+}
+

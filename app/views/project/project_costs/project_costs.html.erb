@@ -1,3 +1,93 @@
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">How much will your project cost?</h1>
+    <h1 class="govuk-caption-m govuk-!-margin-top-0">Project costs help us understand how you plan to put your project into action</h1>
+  </div>
 
-project costs go here
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <!--left hand side-->
+      <h1 class="govuk-heading-m govuk-!-margin-bottom-0">Add a cost</h1>
+      <form>
+        <div class="govuk-form-group govuk-!-margin-top-3">
+          <label class="govuk-label" for="cost-type">
+            Type
+          </label>
+          <select class="govuk-select" id="cost-type" name="cost-type">
+            <option value="Activities">Activities</option>
+            <option value="Equipment and materials">Equipment and materials</option>
+            <option value="People">People</option>
+            <option value="Other">Other</option>
+            <option value="Contingency">Contingency</option>
+            <option value="Evaluation">Evaluation</option>
+          </select>
+        </div>
 
+        <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="cost-description">
+              Description
+            </label>
+            <textarea class="govuk-textarea govuk-js-character-count" id="cost-description" name="cost-description" rows="5" aria-describedby="cost-description-info"></textarea>
+            <span id="cost-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+            You have 50 words remaining</span>
+          </div>
+        </div>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="cost-amount">
+            Amount
+          </label><span id="cost-amount-hint" class="govuk-hint">This can be an estimate</span>
+          <input class="govuk-input" id="cost-amount" name="cost-amount" type="text" aria-describedby="cost-amount-hint" autocomplete="off">
+        </div>
+
+        <button data-prevent-double-click="true" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Add this cost
+        </button>
+      </form>
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+      <div class="nlhf-highlight-content nlhf-highlight-content--help">
+
+        <h2 class="govuk-heading-m">How to add costs</h2>
+        <p class="govuk-body">For each of your project costs:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Choose the type of cost</li>
+          <li>Provide a description of the cost</li>
+          <li>Give the cost amount (this can be an estimate)</li>
+          <li>Click the 'add this cost' button</li>
+        </ul>
+        <h1 class="govuk-heading-m govuk-!-font-weight-bold">Add a new cost for each project cost.</h1>
+        <p class="govuk-body">For example - If you are doing 3 activities, add 3 separate activity cost types, each with their own description and amount. </p>
+
+      </div>
+
+      <section class="nlhf-summary">
+
+        <header class="nlhf-summary__header">
+          <h2 class="govuk-heading-m">Your project costs</h2>
+        </header>
+
+        <div class="nlhf-summary__body">
+          <h3 class="govuk-heading-m">You have not added any costs yet</h3>
+          <p class="govuk-body">Each cost will be shown here with a running total</p>
+          <div class="nlhf-summary__total">
+            <h3 class="nlhf-summary__total__title">
+              <span class="nlhf-summary__total__title-text">Total costs </span>
+              <span class="nlhf-summary__total__title-val">£0</span>
+            </h3>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-margin-bottom-3">If you have finished adding all your costs</span>
+    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+    </div>
+  </div>
+</div>
