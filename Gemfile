@@ -73,3 +73,5 @@ gem "devise", "~> 4.7"
 
 
 gem "factory_bot_rails", "~> 5.1"
+
+gem "mail-notify", "~> 0.2"

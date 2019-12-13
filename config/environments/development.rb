@@ -61,4 +61,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.active_storage.service = :local
+  config.action_mailer.delivery_method = :notify
+  config.action_mailer.notify_settings = {
+      api_key: ENV['NOTIFY_API_KEY']
+  }
 end
