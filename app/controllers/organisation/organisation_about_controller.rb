@@ -22,11 +22,7 @@ class Organisation::OrganisationAboutController < ApplicationController
                      ', postcode to ' + params[:organisation][:postcode] +
                      ' and line1 to ' + params[:organisation][:line1]
 
-    @organisation = Organisation.update(current_user.organisation.id,
-                                        :name => params[:organisation][:name],
-                                        :postcode => params[:organisation][:postcode],
-                                        :line1 => params[:organisation][:line1]
-    )
+    @organisation = Organisation.update(current_user.organisation.id, organisation_about_params)
 
     logger.debug 'Finished updating organisation ' + @organisation.id
 
@@ -39,4 +35,11 @@ class Organisation::OrganisationAboutController < ApplicationController
     organisation_organisation_mission_get_path(current_user.organisation.id, id:'mission')
 
   end
+
+  private
+
+  def organisation_about_params
+    params.require(:organisation).permit(:name, :postcode, :line1)
+  end
+
 end

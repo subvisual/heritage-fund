@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     logger.debug 'Updating user ID: ' + current_user.id.to_s +
                      ' with link to organisation ' + @organisation.id
 
-    @user = User.update(current_user.id, :organisation_id => @organisation.id)
+    @user = User.update(current_user.id, organisation_id: @organisation.id)
 
     logger.debug 'Finished updating user ID: ' + current_user.id.to_s +
                      ' with link to organisation ' + @organisation.id

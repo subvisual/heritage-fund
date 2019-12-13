@@ -3,7 +3,7 @@ class Organisation::OrganisationNumbersController < ApplicationController
 
   steps :numbers
 
-  before_action :authenticate_user!\
+  before_action :authenticate_user!
 
   def show
 
