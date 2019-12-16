@@ -35,9 +35,11 @@ Rails.application.routes.draw do
     get 'new-project' => 'new_project#new_project'
     get 'capital-works' => 'capital_works#capital_works'
     get 'costs' => 'project_costs#project_costs'
-    post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution'
+    post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
     get 'is-there-any-cash-contributions' => 'project_cash_contribution#cash_contribution_question'
     get 'cash-contribution' => 'project_cash_contribution#project_cash_contribution'
+    post 'add-cash-contribution' => 'project_cash_contribution#add_cash_contribution'
+    post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
   end
 
   namespace :grant do
