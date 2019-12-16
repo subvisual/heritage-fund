@@ -2,8 +2,10 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
-  setup do 
+
+  setup do
     get '/users/sign_in'
+    users(:one).confirm
     sign_in users(:one)
     post user_session_url
     @project = projects(:one)
