@@ -1,31 +1,35 @@
 <div>
   <h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
 
-  <%= form_for @organisation, url: wizard_path, method: :put do |f|  %>
+  <%= form_for @organisation, url: organisation_organisation_numbers_put_url, method: :put do |f|  %>
 
     <div class="govuk-form-group">
-      <label class="govuk-heading-m" for="company-number">
-        What is your company number?
-      </label>
-      <span class="govuk-caption-m">
+
+      <%= f.label :company_number, "What is your company number?", class: "govuk-heading-m" %>
+
+      <span class="govuk-hint">
         If you have a company number, related to this project, it would be helpful if you provide it.
         If you need help, please read <a tartget="_blank" href="<%= t :how_to_find_company_number_link %>">how to find my company number</a>
       </span>
+
       <%= f.text_field :company_number, class: "govuk-input govuk-input--width-20" %>
+
     </div>
 
     <div class="govuk-form-group">
-      <label class="govuk-heading-m" for="charity-number">
-        What is your charity number?
-      </label>
-      <span class="govuk-caption-m">
+
+      <%= f.label :charity_number, "What is your charity number?", class: "govuk-heading-m" %>
+
+      <span class="govuk-hint">
         If you have a charity number, related to this project, it would be helpful if you provide it.
         If you need help, please read <a target="_blank" href="<%= t :how_to_find_charity_number_link %>">how to find my charity number</a>
       </span>
+
       <%= f.text_field :charity_number, class: "govuk-input govuk-input--width-20" %>
+
     </div>
 
-    <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+    <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
 
   <% end %>
 

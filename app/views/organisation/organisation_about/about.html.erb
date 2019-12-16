@@ -1,28 +1,26 @@
-<div>
+<h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
 
-  <h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
-  <p aria-label="information">Your organisation must be based in the UK</p>
+<p class="govuk-body" aria-label="information">Your organisation must be based in the UK</p>
 
-  <%= form_for @organisation, url: wizard_path, method: :put do |f|  %>
+<%= form_for @organisation, url: organisation_organisation_about_put_url, method: :put do |f|  %>
 
-    <div class="govuk-form-group">
-      <%= f.label :name, "Organisation name", class: "govuk-label" %>
-      <%= f.text_field :name, class: "govuk-input govuk-input--width-20" %>
-    </div>
+  <div class="govuk-form-group">
+    <%= f.label :name, "Organisation name", class: "govuk-label" %>
+    <%= f.text_field :name, class: "govuk-input govuk-input--width-20" %>
+  </div>
 
-    <div class="govuk-form-group">
-      <%= f.label :postcode, "Organisation postcode", class: "govuk-label" %>
-      <%= f.text_field :postcode, class: "govuk-input govuk-input--width-20" %>
-    </div>
+  <div class="govuk-form-group">
+    <%= f.label :postcode, "Organisation postcode", class: "govuk-label" %>
+    <%= f.text_field :postcode, class: "govuk-input govuk-input--width-20" %>
+  </div>
 
-    <div class="govuk-form-group">
-      <!-- TODO: Don't map this to only line1 within the database -->
-      <%= f.label :line1, "Organisation address", class: "govuk-label" %>
-      <%= f.text_field :line1, class: "govuk-input govuk-input--width-20" %>
-    </div>
+  <div class="govuk-form-group">
+    <!-- TODO: Don't map this to only line1 within the database
+    - awaiting content changes. -->
+    <%= f.label :line1, "Organisation address", class: "govuk-label" %>
+    <%= f.text_field :line1, class: "govuk-input govuk-input--width-20" %>
+  </div>
 
-    <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+  <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
 
-    <% end %>
-
-</div>
+<% end %>

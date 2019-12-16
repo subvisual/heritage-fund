@@ -1,40 +1,54 @@
 class Organisation::OrganisationSignatoriesController < ApplicationController
-  include Wicked::Wizard
-
-  steps :signatories
-
-  before_action :authenticate_user!
+  include OrganisationHelper
+  before_action :authenticate_user!, :set_organisation, :set_legal_signatories
 
   def show
-
-    logger.info 'IN THIS SHOW METHOD'
-
-    @organisation = Organisation.find(params[:organisation_id])
-
-    render_wizard
-
+    render :'organisation/organisation_signatories/signatories'
   end
 
   def update
 
-    @organisation = Organisation.find(current_user.organisation.id)
+    logger.debug 'Updating legal signatories for organisation ID: ' + @organisation.id
 
-    #logger.debug 'Updating organisation ' + @organisation.id +
-    #                 ', setting mission to ' + params[:organisation][:mission]
+    params[:legal_signatories].each do |signatory|
 
-    #@organisation = Organisation.update(params[:organisation_id],
-    #                                    :mission => params[:organisation][:mission])
+      logger.debug 'Updating existing legal signatory ID: ' + signatory[0]
 
-    logger.debug 'Finished updating organisation ' + @organisation.id
+      LegalSignatory.update(signatory[0],
+                            name: signatory[1]['name'],
+                            email_address: signatory[1]['email_address'],
+                            phone_number: signatory[1]['phone_number'])
 
-    redirect_to_finish_wizard
+      logger.debug 'Finished updating existing legal signatory ID: ' + signatory[0]
+
+    end
+
+    logger.debug 'Finished updating legal signatories for organisation ID: ' + @organisation.id
+
+    redirect_to :organisation_organisation_summary_get
 
   end
 
+  private
 
-  def finish_wizard_path
+  def set_legal_signatories
 
-    organisation_organisation_summary_get_path(current_user.organisation.id)
+    @legal_signatories = LegalSignatory.where(organisation_id: @organisation.id)
+
+    if @legal_signatories.present?
+
+      logger.debug 'Found existing legal signatories for organisation ID: ' + @organisation.id
+
+    else
+
+      logger.debug 'Creating legal signatories for organisation ID: ' + @organisation.id
+
+      @legal_signatories = [LegalSignatory.create(organisation_id: @organisation.id),
+                            LegalSignatory.create(organisation_id: @organisation.id)]
+
+      logger.debug 'Finished creating legal signatories for organisation ID: ' + @organisation.id
+
+    end
 
   end
 

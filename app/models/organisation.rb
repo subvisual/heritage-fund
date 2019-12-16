@@ -1,5 +1,6 @@
 class Organisation < ApplicationRecord
     has_many :users
+    has_many :legal_signatories
 
     enum org_type: {
         registered_charity: 0,
@@ -12,13 +13,5 @@ class Organisation < ApplicationRecord
         voluntary_group: 7,
         individual_private_owner_of_heritage: 8,
         other: 9}
-
-    enum mission: {
-        black_or_minority_ethnic_led: 0,
-        disability_led: 1,
-        lgbt_plus_led: 2,
-        female_led: 3,
-        young_people_led: 4
-    }
 
 end

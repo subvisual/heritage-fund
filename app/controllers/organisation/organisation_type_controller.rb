@@ -1,38 +1,28 @@
 class Organisation::OrganisationTypeController < ApplicationController
-  include Wicked::Wizard
-
-  steps :type
-
-  before_action :authenticate_user!
+  include OrganisationHelper
+  before_action :authenticate_user!, :set_organisation
 
   def show
-
-    @organisation = Organisation.find(current_user.organisation.id)
-
-    render_wizard
-
+    render :'organisation/organisation_type/type'
   end
 
   def update
 
-    @organisation = Organisation.find(current_user.organisation.id)
-
-    logger.debug 'Updating organisation ' + @organisation.id +
+    logger.debug 'Updating organisation ID: ' + @organisation.id +
                      ', setting org_type to ' + params[:organisation][:org_type]
 
-    @organisation = Organisation.update(params[:organisation_id],
-                                        :org_type => params[:organisation][:org_type])
+    @organisation.update(organisation_type_params)
 
-    logger.debug 'Finished updating organisation ' + @organisation.id
+    logger.debug 'Finished updating organisation ID: ' + @organisation.id
 
-    redirect_to_finish_wizard
+    redirect_to :organisation_organisation_numbers_get
 
   end
 
-  def finish_wizard_path
+  private
 
-    organisation_organisation_numbers_get_path(current_user.organisation.id, id: 'numbers')
-
+  def organisation_type_params
+    params.require(:organisation).permit(:org_type)
   end
 
 end

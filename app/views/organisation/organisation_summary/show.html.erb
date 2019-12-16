@@ -1,93 +1,133 @@
 <% content_for :page_title, "Organisation summary" %>
 
-<div>
-
   <h1 class="govuk-heading-l" aria-label="Heading">Check your answers</h1>
 
   <dl class="govuk-summary-list">
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Organisation managing your project is a
       </dt>
+
       <dd class="govuk-summary-list__value">
         <%= @organisation.org_type.humanize %>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="/organisation/type">
-          Change<span class="govuk-visually-hidden"> organisation type</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> organisation type</span>".html_safe,
+                    :organisation_organisation_type_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state"  %>
       </dd>
+
     </div>
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Organisation's company number
       </dt>
+
       <dd class="govuk-summary-list__value">
         <%= @organisation.company_number %>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="<%= '/organisation/registered-numbers#company-number' %>">
-          Change<span class="govuk-visually-hidden"> company number</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> company number</span>".html_safe,
+                    :organisation_organisation_numbers_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state" %>
       </dd>
+
     </div>
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Organisation's charity number
       </dt>
+
       <dd class="govuk-summary-list__value">
         <%= @organisation.charity_number %>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="<%= '/organisation/registered-numbers#charity-number' %>">
-          Change<span class="govuk-visually-hidden"> charity number</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> charity number</span>".html_safe,
+                    :organisation_organisation_numbers_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state"  %>
       </dd>
+
     </div>
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Your organisation is based in
       </dt>
+
       <dd class="govuk-summary-list__value">
         <%= @organisation.line1 %>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="<%= '/organisation/project_title' %>">
-          Change<span class="govuk-visually-hidden"> location</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> location</span>".html_safe,
+                    :organisation_organisation_about_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state"  %>
       </dd>
+
     </div>
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Your organisation's mission, or objectives include
       </dt>
+
       <dd class="govuk-summary-list__value">
-        <%= @organisation.mission.humanize %>
+        <ul class="govuk-list">
+          <% @organisation.mission.each do |mission| %>
+            <li>
+              <%= mission.humanize %>
+            </li>
+          <% end %>
+        </ul>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="<%= '/organisation/mission' %>">
-          Change<span class="govuk-visually-hidden"> mission or objectives</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> mission or objectives</span>".html_safe,
+                    :organisation_organisation_mission_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state"  %>
       </dd>
+
     </div>
 
     <div class="govuk-summary-list__row">
+
       <dt class="govuk-summary-list__key">
         Legal signatories
       </dt>
+
       <dd class="govuk-summary-list__value">
-        <%= 'To do: Add playback of saved values' %>
+        <ul class="govuk-list">
+          <% @legal_signatories.each do |legal_signatory| %>
+            <li>
+              <%= legal_signatory.name %>
+            </li>
+          <% end %>
+        </ul>
       </dd>
+
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link" href="<%= '/organisation/signatory' %>">
-          Change<span class="govuk-visually-hidden"> legal signatories</span>
-        </a>
+        <%= link_to "Change<span class='govuk-visually-hidden'> legal signatories</span>".html_safe,
+                    :organisation_organisation_signatories_get,
+                    organisation_id: @organisation.id,
+                    class: "govuk-link govuk-link--no-visited-state"  %>
       </dd>
+
     </div>
   </dl>
 
@@ -99,5 +139,4 @@
     </strong>
   </div>
 
-  <button class="govuk-button" role="button" aria-label="save and continue button">Continue</button>
-</div>
+  <button class="govuk-button" data-module="button" aria-label="save and continue button">Continue</button>

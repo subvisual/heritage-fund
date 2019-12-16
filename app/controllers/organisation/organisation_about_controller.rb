@@ -1,38 +1,23 @@
 class Organisation::OrganisationAboutController < ApplicationController
-  include Wicked::Wizard
-
-  steps :about
-
-  before_action :authenticate_user!
+  include OrganisationHelper
+  before_action :authenticate_user!, :set_organisation
 
   def show
-
-    @organisation = Organisation.find(current_user.organisation.id)
-
-    render_wizard
-
+    render :'organisation/organisation_about/about'
   end
 
   def update
-
-    @organisation = Organisation.find(current_user.organisation.id)
 
     logger.debug 'Updating organisation ' + @organisation.id +
                      ', setting name to ' + params[:organisation][:name] +
                      ', postcode to ' + params[:organisation][:postcode] +
                      ' and line1 to ' + params[:organisation][:line1]
 
-    @organisation = Organisation.update(current_user.organisation.id, organisation_about_params)
+    @organisation.update(organisation_about_params)
 
     logger.debug 'Finished updating organisation ' + @organisation.id
 
-    redirect_to_finish_wizard
-
-  end
-
-  def finish_wizard_path
-
-    organisation_organisation_mission_get_path(current_user.organisation.id, id:'mission')
+    redirect_to :organisation_organisation_mission_get
 
   end
 

@@ -2,69 +2,34 @@
 
   <h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
 
-  <%= form_for @organisation, url: wizard_path, method: :put do |f|  %>
+  <%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
 
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset">
+    <% @legal_signatories.each_with_index do |signatory, i| %>
 
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-          <h1 class="govuk-fieldset__heading">
-            A signatory is a person who is authorised to sign legal documents on behalf of your organisation.
-            Please tell us the names of two legal signatories for your organisation
-          </h1>
-        </legend>
+      <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
 
-        <h1 class="govuk-heading-m govuk-!-padding-top-3" aria-label="Heading">Legal signatory 1</h1>
+        <h2 class="govuk-heading-m" aria-label="Heading">Legal signatory <%= i+1 %></h2>
 
         <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-name-1">
-            Full name
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-name-1" name="legal-signatory-name-1" type="text">
+          <%= signatory_field.label :name, "Full name", class: "govuk-label" %>
+          <%= signatory_field.text_field :name, class: "govuk-input govuk-input--width-20" %>
         </div>
 
         <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-email-1">
-            email address
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-email-1" name="legal-signatory-email-1" type="email">
+          <%= signatory_field.label :email_address, "Email address", class: "govuk-label" %>
+          <%= signatory_field.text_field :email_address, class: "govuk-input govuk-input--width-20" %>
         </div>
 
         <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-phone-1">
-            Phone number
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-phone-1" name="legal-signatory-phone-1" type="tel">
+          <%= signatory_field.label :phone_number, "Phone number", class: "govuk-label" %>
+          <%= signatory_field.text_field :phone_number, class: "govuk-input govuk-input--width-20" %>
         </div>
 
-        <h1 class="govuk-heading-m" aria-label="Heading">Legal signatory 2</h1>
+      <% end %>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-name-2">
-            Full name
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-name-2" name="legal-signatory-name-2" type="text">
-        </div>
+    <% end %>
 
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-email-2">
-            email address
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-email-2" name="legal-signatory-email-2" type="email">
-        </div>
-
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="legal-signatory-phone-2">
-            Phone number
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="legal-signatory-phone-2" name="legal-signatory-phone-2" type="tel">
-        </div>
-
-      </fieldset>
-
-      <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
-
-    </div>
+    <%= submit_tag "Save and continue", {class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button'} %>
 
   <% end %>
 

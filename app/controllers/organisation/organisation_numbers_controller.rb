@@ -1,42 +1,29 @@
 class Organisation::OrganisationNumbersController < ApplicationController
-  include Wicked::Wizard
-
-  steps :numbers
-
-  before_action :authenticate_user!
+  include OrganisationHelper
+  before_action :authenticate_user!, :set_organisation
 
   def show
-
-    @organisation = Organisation.find(current_user.organisation.id)
-
-    render_wizard
-
+    render :'organisation/organisation_numbers/numbers'
   end
 
   def update
 
     company_number = params[:organisation][:company_number].present? ? params[:organisation][:company_number] : nil
-    charity_number = params[:organisation][:charity_number].present? ? params[:organisation][:company_number] : nil
-
-    @organisation = Organisation.find(current_user.organisation.id)
+    charity_number = params[:organisation][:charity_number].present? ? params[:organisation][:charity_number] : nil
 
     logger.debug 'Updating organisation ' + @organisation.id +
                      ', setting company_number to ' + company_number.to_s +
                      ' and setting charity_number to ' + charity_number.to_s
 
-    @organisation = Organisation.update(current_user.organisation.id,
-                                        :company_number => company_number,
-                                        :charity_number => charity_number)
+    @organisation.update(company_number: company_number, charity_number: charity_number)
 
     logger.debug 'Finished updating organisation ' + @organisation.id
 
-    redirect_to_finish_wizard
+    redirect_to :organisation_organisation_about_get
+
 
   end
 
-  def finish_wizard_path
+  private
 
-    organisation_organisation_about_get_path(current_user.organisation.id, id:'about')
-
-  end
 end
