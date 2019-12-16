@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  namespace :project do
+    get 'cash_contributions/cash_contributions_question'
+  end
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
@@ -16,8 +19,6 @@ Rails.application.routes.draw do
   end
 
   namespace :project do
-    get 'is-there-any-cash-contributions' => 'project_cash_contribution#project_cash_contribution'
-    get 'cash-contributions' => 'project_cash_contribution#project_cash_contribution_yes'
     get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
     get 'involvement' => 'project_involvement#project_involvement'
     get 'best-placed' => 'project_best_placed#project_best_placed'
@@ -34,6 +35,9 @@ Rails.application.routes.draw do
     get 'new-project' => 'new_project#new_project'
     get 'capital-works' => 'capital_works#capital_works'
     get 'costs' => 'project_costs#project_costs'
+    post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution'
+    get 'is-there-any-cash-contributions' => 'project_cash_contribution#cash_contribution_question'
+    get 'cash-contribution' => 'project_cash_contribution#project_cash_contribution'
   end
 
   namespace :grant do
