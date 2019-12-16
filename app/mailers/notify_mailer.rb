@@ -12,7 +12,7 @@ class NotifyMailer < Mail::Notify::Mailer
   end
 
   # Use ERB template as Notify does not support required templating logic.
-  def email_changed(record, token, opts = {})
+  def email_changed(record, opts = {})
     @resource = record
     view_mail('cd9fbf07-4960-4cb7-903c-068b76d2ca32',
               to: @resource.email,
@@ -21,7 +21,7 @@ class NotifyMailer < Mail::Notify::Mailer
   end
 
 
-  def password_change(record, token, opts = {})
+  def password_change(record, opts = {})
     template_mail('32bc1da4-99aa-4fde-9124-6c423cfcab15',
                   to: record.email,
     )
