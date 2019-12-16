@@ -1,5 +1,16 @@
+// ############################################################################
+// Settings files (these must come first)
+// ############################################################################
+
+// GOV.UK Settings
 @import "../../../node_modules/govuk-frontend/govuk/settings/all";
+
+// NLHF Settings
 @import "settings.general";
+
+// ############################################################################
+// GOV.UK SCSS Imports (namespace 'govuk-')
+// ############################################################################
 
 @import "../../../node_modules/govuk-frontend/govuk/tools/all";
 @import "../../../node_modules/govuk-frontend/govuk/helpers/all";
@@ -12,5 +23,11 @@
 @import "../../../node_modules/govuk-frontend/govuk/utilities/all";
 @import "../../../node_modules/govuk-frontend/govuk/overrides/all";
 
-// other NLHF imports below here
-@import "_nlhf.funding.front.end";
+// ############################################################################
+// NLHF SCSS Imports (namespace 'nlhf-')
+// ############################################################################
+@import "helpers/all";
+@import "tools/all";
+@import "components/all";
+@import "base.styles";
+@import "utilities/all";

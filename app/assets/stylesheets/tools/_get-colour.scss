@@ -1,0 +1,24 @@
+// ---------------------------------------------------------
+// get
+// Search for any value contained within colour maps, by using
+// dot notation as the key argument
+//
+// Required arguments:
+// `$colour` String
+//
+// optional arguments:
+// `$shade` String - defaults to 'default'
+//
+// Example of use:
+// get-colour('blue')
+// get-colour('blue','dark')
+//
+// Dependencies:
+// get
+//
+// @return Anything
+// ---------------------------------------------------------
+@function get-colour($colour, $shade: 'default') {
+    @return get('colour.#{$colour}.#{$shade}');
+  }
+  
