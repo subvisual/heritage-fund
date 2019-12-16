@@ -3,7 +3,7 @@ class Organisation::OrganisationMissionController < ApplicationController
   before_action :authenticate_user!, :set_organisation
 
   def show
-    render :'organisation/organisation_mission/mission'
+    render :mission
   end
 
   def update
@@ -17,9 +17,9 @@ class Organisation::OrganisationMissionController < ApplicationController
 
       @organisation.update(mission: params[:organisation][:mission])
 
-      logger.debug 'Finished updating organisation ' + @organisation.id
+      logger.debug "Finished updating organisation #{@organisation.id}"
     else
-      logger.debug 'No mission added for organisation ' + @organisation.id
+      logger.debug "No mission added for organisation #{@organisation.id}"
     end
 
     redirect_to :organisation_organisation_signatories_get

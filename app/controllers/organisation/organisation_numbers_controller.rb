@@ -3,7 +3,7 @@ class Organisation::OrganisationNumbersController < ApplicationController
   before_action :authenticate_user!, :set_organisation
 
   def show
-    render :'organisation/organisation_numbers/numbers'
+    render :numbers
   end
 
   def update
@@ -11,13 +11,13 @@ class Organisation::OrganisationNumbersController < ApplicationController
     company_number = params[:organisation][:company_number].present? ? params[:organisation][:company_number] : nil
     charity_number = params[:organisation][:charity_number].present? ? params[:organisation][:charity_number] : nil
 
-    logger.debug 'Updating organisation ' + @organisation.id +
-                     ', setting company_number to ' + company_number.to_s +
-                     ' and setting charity_number to ' + charity_number.to_s
+    logger.debug "Updating organisation #{@organisation.id}, " +
+                     "setting company_number to #{company_number.to_s} " +
+                     "and setting charity_number to #{charity_number.to_s}"
 
     @organisation.update(company_number: company_number, charity_number: charity_number)
 
-    logger.debug 'Finished updating organisation ' + @organisation.id
+    logger.debug "Finished updating organisation #{@organisation.id}"
 
     redirect_to :organisation_organisation_about_get
 
