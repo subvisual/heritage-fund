@@ -1,6 +1,9 @@
 {
   "name": "funding_frontend_ruby",
   "private": true,
+  "scripts": {
+    "start": "./bin/webpack --watch"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
