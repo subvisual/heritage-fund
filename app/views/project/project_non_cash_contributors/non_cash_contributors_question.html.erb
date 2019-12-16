@@ -1,0 +1,40 @@
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+  </div>
+
+  <form method="post" action="/project/save-non-cash-contributions-question">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="non-cash-contributions-hint">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">
+            Are you getting any non cash contributions to your project?
+          </h1>
+        </legend>
+
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="non-cash-contributions" name="non-cash-contributions" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="non-cash-contributions">
+              Yes
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="non-cash-contributions-2" name="non-cash-contributions" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="non-cash-contributions-2">
+              No
+            </label>
+          </div>
+        </div>
+
+      </fieldset>
+    </div>
+
+    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+
+  </form>
+</div>
