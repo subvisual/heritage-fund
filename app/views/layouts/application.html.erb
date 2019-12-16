@@ -14,12 +14,16 @@
 <div class="govuk-width-container">
   <main class="govuk-main-wrapper">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <%= render "layouts/header" %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
-        <%= render "layouts/footer" %>
+      <% if request.path.to_s == '/project/cash-contribution' %>
+        <div class="govuk-grid-column-full">
+      <% else %>
+        <div class="govuk-grid-column-two-thirds">
+      <% end %>
+      <%= render "layouts/header" %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+      <%= render "layouts/footer" %>
       </div>
     </div>
   </main>
