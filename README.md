@@ -43,7 +43,7 @@
 #### Frontend
 In a separate terminal tab run:
 
-`./bin/webpack --watch`
+`./bin/webpack --watch` (or `npm start` if you have node package manager installed)
 
 
 
