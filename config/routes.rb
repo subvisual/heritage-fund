@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-
-  namespace :project do
-    get 'cash_contributions/cash_contributions_question'
-  end
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
