@@ -13,3 +13,17 @@ $govuk-font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", san
 $govuk-canvas-background-colour: $govuk-body-background-colour;
 
 // #########################################################
+// The following are National Lottery Heritage Fund settings
+// #########################################################
+
+// map of nlhf specific variables for use with 'get'
+// which can be found tools/_get.scss
+$nlhf-settings: (
+    'colour': (
+        'blue' : (
+            'default': #005565
+        )
+    )
+);
+
+$theme: $nlhf-settings;
