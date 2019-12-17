@@ -20,4 +20,12 @@ class Project::ProjectNonCashContributorsController < ApplicationController
   def non_cash_contribution
   end
 
+  def add_non_cash_contribution
+    # TODO save cash contribution
+  end
+
+  def process_non_cash
+    # TODO process save and continue
+  end
+
 end

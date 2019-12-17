@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
     post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
     get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
+    post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
+    post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
   end
 
   namespace :grant do

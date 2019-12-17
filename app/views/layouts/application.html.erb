@@ -7,13 +7,13 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
 </head>
 
-<body class="govuk-template__body nlhf-826 js-enabled">
+<body>
 <div class="govuk-width-container">
   <main class="govuk-main-wrapper">
     <div class="govuk-grid-row">
+      <!-- TODO implement custom layouts and path helpers when routes are concrete-->
       <% if request.path.to_s == '/project/cash-contribution' %>
         <div class="govuk-grid-column-full">
       <% else %>
