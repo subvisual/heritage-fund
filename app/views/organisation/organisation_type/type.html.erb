@@ -1,8 +1,26 @@
-<% content_for :page_title, "Type of organisation" %>
+
+<% content_for :page_title, flash[:alert] ? "Error: Type of organisation" : "Type of organisation" %>
+
+<% if flash[:alert] %>
+
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      There is a problem
+    </h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        <li>
+          <a data-turbolinks="false" href="#<%= :organisation_org_type_registered_charity %>"><%= flash.alert%></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<% end %>
 
 <%= form_for @organisation, url: organisation_organisation_type_put_url, method: :put do |f|  %>
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group <% if flash[:alert] %>govuk-form-group--error<% end %>">
 
     <fieldset class="govuk-fieldset">
 
@@ -11,6 +29,14 @@
           What type of organisation will be running your project?
         </h1>
       </legend>
+
+      <% if flash[:alert] %>
+
+      <span id="organisation-type-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error: </span> <%= flash.alert %>
+      </span>
+
+      <% end %>
 
       <div class="govuk-radios">
 

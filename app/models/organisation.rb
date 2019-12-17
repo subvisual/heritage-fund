@@ -2,6 +2,8 @@ class Organisation < ApplicationRecord
     has_many :users
     has_many :legal_signatories
 
+    validates :org_type, presence: true
+
     enum org_type: {
         registered_charity: 0,
         local_authority: 1,

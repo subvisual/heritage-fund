@@ -2,19 +2,41 @@ class Organisation::OrganisationTypeController < ApplicationController
   include OrganisationHelper
   before_action :authenticate_user!, :set_organisation
 
+  @@error_message = "Select the type of organisation that will be running your project"
+
   def show
     render :type
   end
 
   def update
 
-    logger.debug "Updating organisation ID: #{@organisation.id} setting org_type to #{params[:organisation][:org_type]}"
+    if !params[:organisation].present?
 
-    @organisation.update(organisation_type_params)
+      logger.debug "Organisation type not found when attempting to update organisation ID: " +
+                       "#{@organisation.id}"
 
-    logger.debug "Finished updating organisation ID: #{@organisation.id}"
+      flash[:alert] = @@error_message
 
-    redirect_to :organisation_organisation_numbers_get
+    else
+
+      logger.debug "Attempting to updating organisation ID: #{@organisation.id} " +
+                       "- setting org_type to #{params[:organisation][:org_type]}"
+
+      if !@organisation.update(organisation_type_params)
+
+        logger.debug "Error occurred when updating organisation ID: #{@organisation.id}"
+
+        flash[:alert] = @@error_message
+
+      else
+
+        logger.debug "Finished updating organisation ID: #{@organisation.id}"
+
+      end
+
+    end
+
+    redirect_to flash[:alert].present? ? :organisation_organisation_type_get : :organisation_organisation_numbers_get
 
   end
 
