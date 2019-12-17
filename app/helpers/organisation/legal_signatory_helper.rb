@@ -1,2 +1,0 @@
-module Organisation::LegalSignatoryHelper
-end

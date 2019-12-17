@@ -1,0 +1,36 @@
+<div>
+
+  <h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
+
+  <%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
+
+    <% @legal_signatories.each_with_index do |signatory, i| %>
+
+      <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
+
+        <h2 class="govuk-heading-m" aria-label="Heading">Legal signatory <%= i+1 %></h2>
+
+        <div class="govuk-form-group">
+          <%= signatory_field.label :name, "Full name", class: "govuk-label" %>
+          <%= signatory_field.text_field :name, class: "govuk-input govuk-input--width-20" %>
+        </div>
+
+        <div class="govuk-form-group">
+          <%= signatory_field.label :email_address, "Email address", class: "govuk-label" %>
+          <%= signatory_field.email_field :email_address, class: "govuk-input govuk-input--width-20" %>
+        </div>
+
+        <div class="govuk-form-group">
+          <%= signatory_field.label :phone_number, "Phone number", class: "govuk-label" %>
+          <%= signatory_field.text_field :phone_number, class: "govuk-input govuk-input--width-20" %>
+        </div>
+
+      <% end %>
+
+    <% end %>
+
+    <%= submit_tag "Save and continue", {class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button'} %>
+
+  <% end %>
+
+</div>

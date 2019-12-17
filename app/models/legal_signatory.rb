@@ -1,0 +1,2 @@
+class LegalSignatory < ApplicationRecord
+end

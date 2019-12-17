@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template nlhf-template">
 <head>
+  <title><%= yield(:page_title) %> - National Lottery Heritage Fund</title>
   <meta charset="utf-8" />
   <title>FundingFrontendRuby</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,6 +10,7 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
+
 <body class="govuk-template__body nlhf-template__body">
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>

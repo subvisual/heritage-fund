@@ -1,0 +1,55 @@
+
+<div>
+
+  <h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
+
+  <%= form_for @organisation, url: organisation_organisation_mission_put_url, method: :put do |f|  %>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+        <h1 class="govuk-fieldset__heading">
+          Tell us about the mission, or objectives of your organisation
+        </h1>
+      </legend>
+
+        <span id="mission-hint" class="govuk-hint">
+          Select all that apply.
+        </span>
+
+        <div class="govuk-checkboxes">
+
+          <div class="govuk-checkboxes__item">
+            <%= f.check_box :mission, {multiple: true, id: :organisation_mission_black_or_minority_ethnic_led, class: "govuk-checkboxes__input"}, "black_or_minority_ethnic_led", nil %>
+            <%= f.label :mission_black_or_minority_ethnic_led, "Black or minority ethnic led", class: "govuk-label govuk-checkboxes__label" %>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <%= f.check_box :mission, {multiple: true, id: :organisation_mission_disability_led, class: "govuk-checkboxes__input"}, "disability_led", nil  %>
+            <%= f.label :mission_disability_led, "Disability led", class: "govuk-label govuk-checkboxes__label" %>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <%= f.check_box :mission, {multiple: true, id: :organisation_mission_lgbt_plus_led, class: "govuk-checkboxes__input"}, "lgbt_plus_led", nil  %>
+            <%= f.label :mission_lgbt_plus_led, "LGBT+ led", class: "govuk-label govuk-checkboxes__label" %>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <%= f.check_box :mission, {multiple: true, id: :organisation_mission_female_led, class: "govuk-checkboxes__input"}, "female_led", nil  %>
+            <%= f.label :mission_female_led, "Female led", class: "govuk-label govuk-checkboxes__label" %>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <%= f.check_box :mission, {multiple: true, id: :organisation_young_people_led, class: "govuk-checkboxes__input"}, "young_people_led", nil  %>
+            <%= f.label :young_people_led, "Young people led", class: "govuk-label govuk-checkboxes__label" %>
+          </div>
+
+        </div>
+      </fieldset>
+    </div>
+
+    <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+
+  <% end %>
+
+</div>

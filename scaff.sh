@@ -1,8 +1,8 @@
 # Organisation controller and views
 rails g controller organisation/organisation_about organisation_about
 rails g controller organisation/organisation_mission organisation_mission
-rails g controller organisation/legal_signatory legal_signatory
-rails g controller organisation/summary summary
+rails g controller organisation/organisation_signatories organisation_signatories
+rails g controller organisation/organisation_summary organisation_summary
 
 # Project controller and views
 rails g controller project/new_project new_project

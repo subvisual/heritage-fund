@@ -1,0 +1,2 @@
+module Organisation::OrganisationSignatoriesHelper
+end

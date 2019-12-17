@@ -1,0 +1,75 @@
+<% content_for :page_title, "Type of organisation" %>
+
+<%= form_for @organisation, url: organisation_organisation_type_put_url, method: :put do |f|  %>
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          What type of organisation will be running your project?
+        </h1>
+      </legend>
+
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "registered_charity", class: "govuk-radios__input" %>
+          <%= f.label :org_type_registered_charity, "Registered charity", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "local_authority", class: "govuk-radios__input" %>
+          <%= f.label :org_type_local_authority, "Local authority", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "registered_company", class: "govuk-radios__input" %>
+          <%= f.label :org_type_registered_company, "Registered company", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "community_interest_company", class: "govuk-radios__input" %>
+          <%= f.label :org_type_community_interest_company, "Community Interest Company", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "faith_based_organisation", class: "govuk-radios__input" %>
+          <%= f.label :org_type_faith_based_organisation, "Faith-based organisation", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "church_organisation", class: "govuk-radios__input" %>
+          <%= f.label :org_type_church_organisation, "Church organisation", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "community_group", class: "govuk-radios__input" %>
+          <%= f.label :org_type_community_group, "Community group", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "voluntary_group", class: "govuk-radios__input" %>
+          <%= f.label :org_type_voluntary_group, "Voluntary group", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "individual_private_owner_of_heritage", class: "govuk-radios__input" %>
+          <%= f.label :org_type_individual_private_owner_of_heritage, "Individual private owner of heritage", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "other", class: "govuk-radios__input" %>
+          <%= f.label :org_type_other, "Other", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+
+<% end %>
