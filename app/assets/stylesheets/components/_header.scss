@@ -1,0 +1,8 @@
+.nlhf-header-global {
+    padding: govuk-spacing(3) 0;
+    background: get('colour.blue.default');
+    color: #fff;
+    &__logo {
+        width: to-rem(150px);
+    }
+}

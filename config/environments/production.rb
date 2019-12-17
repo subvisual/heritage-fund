@@ -110,4 +110,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  # Send emails via notify
+  # TODO: replace with production host
+  config.action_mailer.default_url_options = { host: 'http://example.com' }
+    config.action_mailer.delivery_method = :notify
+    config.action_mailer.notify_settings = {
+        api_key: ENV['NOTIFY_API_KEY']
+    }
 end
