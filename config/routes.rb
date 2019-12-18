@@ -51,6 +51,9 @@ Rails.application.routes.draw do
     get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
     post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
     post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
+    get 'confirm-declaration' => 'project_declaration#confirm_declaration'
+    get 'declaration' => 'project_declaration#project_declaration'
+    post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
   end
 
   namespace :grant do
