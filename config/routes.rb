@@ -59,12 +59,8 @@ Rails.application.routes.draw do
 
   namespace :grant do
     get 'application' => 'grant_application#grant_application'
-    get 'declaration' => 'grant_declaration#grant_declaration'
     get 'organisation_summary' => 'grant_summary#grant_summary'
-    get 'support-evidence' => 'grant_support_evidence#grant_support_evidence'
     get 'volunteers' => 'grant_volunteers#grant_volunteers'
-    get 'non-cash-contributors' => 'grant_non_cash_contributors#grant_non_cash_contributors'
-    get 'request' => 'grant_request#grant_request'
   end
   get 'health' => 'health#get_status'
 
