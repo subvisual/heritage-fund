@@ -2,19 +2,19 @@
   Confirm declaration
 </h1>
 
-<p class="govuk-body-l  govuk-!-margin-bottom-7">Now that you're happy with your application, you are ready to apply for funding.</p>
-<div class="govuk-form-group">
-  <div class="govuk-checkboxes govuk-!-margin-bottom-7">
-    <div class="govuk-checkboxes__item">
-      <input class="govuk-checkboxes__input" id="confirm-declaration" name="confirm-declaration" type="checkbox" value="true">
-      <label class="govuk-label govuk-checkboxes__label" for="confirm-declaration">
-        I have read and agreed with the <a href="declaration">declaration</a>
-      </label>
+<form method="post" action="submit-application">
+  <p class="govuk-body-l  govuk-!-margin-bottom-7">Now that you're happy with your application, you are ready to apply for funding.</p>
+  <div class="govuk-form-group">
+    <div class="govuk-checkboxes govuk-!-margin-bottom-7">
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="confirm-declaration" name="confirm-declaration" type="checkbox" value="true">
+        <label class="govuk-label govuk-checkboxes__label" for="confirm-declaration">
+          I have read and agreed with the <a href="declaration">declaration</a>
+        </label>
+      </div>
     </div>
   </div>
-</div>
 
-<form method="post" action="application-submitted">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
   <button class="govuk-button govuk-button--start" data-module="govuk-button">
     Submit application

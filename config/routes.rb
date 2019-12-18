@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     get 'confirm-declaration' => 'project_declaration#confirm_declaration'
     get 'declaration' => 'project_declaration#project_declaration'
     post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
+    post 'submit-application' => 'project_declaration#submit_application'
   end
 
   namespace :grant do
