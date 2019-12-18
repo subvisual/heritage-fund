@@ -3,7 +3,7 @@ class Organisation < ApplicationRecord
   has_many :legal_signatories
   attr_accessor :validate_org_type
 
-  validates :org_type, presence: true, if: :validate_org_type
+  validates :org_type, presence: true, if: :validate_org_type?
 
   def validate_org_type?
     validate_org_type == true
