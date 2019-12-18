@@ -1,2 +1,123 @@
-<h1>Project::ProjectCashContribution#project_cash_contribution</h1>
-<p>Find me in app/views/project/project_cash_contribution/project_cash_contribution.html.erb</p>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-xl">Support for your project</span>
+      <h1 class="govuk-heading-xl">Cash contributions</h1>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <form action="add-cash-contribution" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+        <div class="nlhf-add-item">
+          <header class="nlhf-add-item__header">
+            <h2 class="govuk-heading-l nlhf-add-item__header__title">Add a cash contribution</h2>
+          </header>
+          <div class="nlhf-add-item__body">
+            <div class="nlhf-add-item__row">
+              <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="cash-cont-description">
+                    Description
+                  </label>
+                  <textarea class="govuk-textarea govuk-js-character-count" id="cash-cont-description" name="cash-cont-description" rows="5" aria-describedby="cash-cont-description-info"></textarea><span id="cash-cont-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You have 50 words remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="nlhf-add-item__row">
+              <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend">
+                    Is this cash contribution secured?
+                  </legend>
+                  <div class="govuk-radios govuk-radios--small">
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="cash-cont-secured" name="cash-cont-secured" type="radio" value="Yes, I can provide evidence">
+                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured">
+                        Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>
+                      </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="cash-cont-secured-2" name="cash-cont-secured" type="radio" value="Yes, but I do not have evidence yet">
+                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-2">
+                        Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>
+                      </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="cash-cont-secured-3" name="cash-cont-secured" type="radio" value="No">
+                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-3">
+                        No
+                      </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="cash-cont-secured-4" name="cash-cont-secured" type="radio" value="Not sure if cash contribution is secured">
+                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-4">
+                        Not sure
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="nlhf-add-item__row">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="cash-cont-amount">
+                  Amount
+                </label>
+                <input class="govuk-input" id="cash-cont-amount" name="cash-cont-amount" type="text" autocomplete="off">
+              </div>
+            </div>
+            <div class="nlhf-add-item__row">
+              <button data-prevent-double-click="true" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Add cash contribution
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /.nlhf-add-item -->
+      </form>
+      <!-- /add-cost form -->
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+      <div class="nlhf-highlight-content nlhf-highlight-content--help">
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-3">What do we mean by cash contributions?</h3>
+        <p class="govuk-body">
+          Cash contributions include any additional funds you expect to receive for your project.
+        </p>
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-3">What is a secured contribution?</h3>
+        <p class="govuk-body">
+          By secured we mean the cash in your bank account reserved specifically for this project, or grant money has been formally offered. You can add evidence later in your application.
+        </p>
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-3">Do I need cash contributions?</h3>
+        <p class="govuk-body govuk-!-margin-bottom-3">
+          You do not need to have cash contributions at this grant level, so don't worry if you cannot add anything to this section.
+        </p>
+        <div class="govuk-inset-text govuk-!-margin-top-0 govuk-!-margin-bottom-0">
+          Once you tell us that you are getting money from elsewhere, we will need to see evidence of this, as it helps with our assessment.
+        </div>
+      </div>
+      <section class="nlhf-summary nlhf-summary--cash">
+        <header class="nlhf-summary__header">
+          <h2 class="govuk-heading-m">Your cash contributions</h2>
+        </header>
+        <div class="nlhf-summary__body">
+          <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any cash contributions</h3>
+        </div>
+        <!-- /.nlhf-summary__body -->
+      </section>
+      <!-- /.nlhf-summary-container -->
+    </div>
+  </div>
+  <hr class="govuk-section-break--l govuk-section-break--visible">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="process-cash-contributions" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+        <p class="govuk-body">If you have finished adding all your cash contributions</p>
+        <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      </form></div>
+  </div>
+</div>

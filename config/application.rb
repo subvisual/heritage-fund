@@ -12,6 +12,7 @@ module FundingFrontendRuby
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.assets.paths << Rails.root.join('node_modules')
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
 
