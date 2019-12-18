@@ -9,6 +9,7 @@ class Organisation::OrganisationTypeController < ApplicationController
   end
 
   def update
+    @organisation.validate_org_type
 
     if !params[:organisation].present?
 
