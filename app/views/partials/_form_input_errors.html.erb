@@ -1,0 +1,7 @@
+<% if form_object.errors.messages.has_key? input_field_id %>
+  <% form_object.errors.messages[input_field_id].each do |msg| %>
+    <span id="<%= form_object.class.name.downcase %>[<%= input_field_id %>]-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> <%= msg %>
+    </span>
+  <% end %>
+<% end %>

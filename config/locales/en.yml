@@ -11,9 +11,15 @@ en:
     attributes:
       organisation:
         org_type: "Organisation type"
+        company_number: "Company number"
+        charity_number: "Charity number"
     errors:
       models:
         organisation:
           attributes:
             org_type:
               blank: "Select the type of organisation that will be running your project"
+            company_number:
+              not_a_number: "Company number must be a number, like 12345678"
+            charity_number:
+              not_a_number: "Charity number must be a number, like 1079639"
