@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :project do
+    get 'project-list' => 'project_list#project_list'
     get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
     get 'involvement' => 'project_involvement#project_involvement'
     get 'best-placed' => 'project_best_placed#project_best_placed'
@@ -52,19 +53,15 @@ Rails.application.routes.draw do
     post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
     post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
     get 'grant-request' => 'project_grant_request#grant_request'
-    post 'grant-save-and-continue'=> 'project_grant_request#grant_save_and_continue'
+    post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
     get 'confirm-declaration' => 'project_declaration#confirm_declaration'
     get 'declaration' => 'project_declaration#project_declaration'
     post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
     post 'submit-application' => 'project_declaration#submit_application'
+    get 'volunteers' => 'project_volunteers#project_volunteers'
     post 'add-project-cost' => 'project_costs#add_cost'
   end
 
-  namespace :grant do
-    get 'application' => 'grant_application#grant_application'
-    get 'organisation_summary' => 'grant_summary#grant_summary'
-    get 'volunteers' => 'grant_volunteers#grant_volunteers'
-  end
   get 'health' => 'health#get_status'
 
   devise_for :users
