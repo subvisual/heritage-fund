@@ -57,13 +57,9 @@ Rails.application.routes.draw do
     get 'declaration' => 'project_declaration#project_declaration'
     post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
     post 'submit-application' => 'project_declaration#submit_application'
+    get get 'volunteers' => 'project_volunteers#project_volunteers'
   end
 
-  namespace :grant do
-    get 'application' => 'grant_application#grant_application'
-    get 'organisation_summary' => 'grant_summary#grant_summary'
-    get 'volunteers' => 'grant_volunteers#grant_volunteers'
-  end
   get 'health' => 'health#get_status'
 
   devise_for :users
