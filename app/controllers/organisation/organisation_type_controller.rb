@@ -8,20 +8,39 @@ class Organisation::OrganisationTypeController < ApplicationController
 
   def update
 
-    logger.debug "Updating organisation ID: #{@organisation.id} setting org_type to #{params[:organisation][:org_type]}"
+    logger.debug "Attempting to update organisation ID: #{@organisation.id} "
+
+    @organisation.validate_org_type = true
 
     @organisation.update(organisation_type_params)
 
-    logger.debug "Finished updating organisation ID: #{@organisation.id}"
+    if @organisation.valid?
 
-    redirect_to :organisation_organisation_numbers_get
+      redirect_to :organisation_organisation_numbers_get
+
+    else
+
+      logger.debug "Organisation type not found when attempting to update organisation ID: " +
+                       "#{@organisation.id}"
+
+      render :type
+
+    end
+
+    logger.debug "Finished updating organisation ID: #{@organisation.id}"
 
   end
 
   private
 
   def organisation_type_params
+
+    if !params[:organisation].present?
+      params.merge!({organisation: {org_type: ""}})
+    end
+
     params.require(:organisation).permit(:org_type)
+
   end
 
 end

@@ -12,18 +12,16 @@
 </head>
 
 <body class="govuk-template__body nlhf-template__body">
-<script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
-<a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-<%= render "partials/header" %>
-<div class="govuk-width-container">
-  <main class="govuk-main-wrapper" id="main-content" role="main">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
+  <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+  <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+  <%= render "partials/header" %>
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content" role="main">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <%= yield %>
+        </div>
       </div>
-    </div>
   </main>
 </div>
 </body>

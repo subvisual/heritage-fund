@@ -7,3 +7,13 @@ en:
   how_to_find_company_number_link: "#"
   project_outcomes_link: "#"
   what_we_fund_link: "#"
+  activerecord:
+    attributes:
+      organisation:
+        org_type: "Organisation type"
+    errors:
+      models:
+        organisation:
+          attributes:
+            org_type:
+              blank: "Select the type of organisation that will be running your project"
