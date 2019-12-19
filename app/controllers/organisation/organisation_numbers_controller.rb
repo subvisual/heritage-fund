@@ -11,16 +11,29 @@ class Organisation::OrganisationNumbersController < ApplicationController
     company_number = params[:organisation][:company_number].present? ? params[:organisation][:company_number] : nil
     charity_number = params[:organisation][:charity_number].present? ? params[:organisation][:charity_number] : nil
 
-    logger.debug "Updating organisation #{@organisation.id}, " +
-                     "setting company_number to #{company_number.to_s} " +
-                     "and setting charity_number to #{charity_number.to_s}"
+    logger.debug "Attempting to update organisation ID: #{@organisation.id}, " +
+                     "setting company_number and charity_number"
+
+    @organisation.validate_company_number = true
+    @organisation.validate_charity_number = true
 
     @organisation.update(company_number: company_number, charity_number: charity_number)
 
-    logger.debug "Finished updating organisation #{@organisation.id}"
+    if @organisation.valid?
 
-    redirect_to :organisation_organisation_about_get
+      logger.debug "Finished setting company_number and charity_number for " +
+                       "organisation ID: #{@organisation.id}"
 
+      redirect_to :organisation_organisation_about_get
+
+    else
+
+      logger.debug "Invalid company or charity number found when attempting " +
+                       "to update organisation ID: #{@organisation.id}"
+
+      render :numbers
+
+    end
 
   end
 
