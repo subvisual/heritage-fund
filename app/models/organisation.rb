@@ -4,10 +4,16 @@ class Organisation < ApplicationRecord
   attr_accessor :validate_org_type
   attr_accessor :validate_company_number
   attr_accessor :validate_charity_number
+  attr_accessor :validate_mission
 
   validates :org_type, presence: true, if: :validate_org_type?
   validates :company_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_company_number?
   validates :charity_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_charity_number?
+  validate :validate_mission_array, if: :validate_mission?
+
+  def validate_org_type?
+    validate_org_type == true
+  end
 
   def validate_company_number?
     validate_company_number == true
@@ -17,8 +23,24 @@ class Organisation < ApplicationRecord
     validate_charity_number == true
   end
 
-  def validate_org_type?
-    validate_org_type == true
+  def validate_mission?
+    validate_mission == true
+  end
+
+  # Custom validator to determine whether any of the items in the incoming mission array
+  # are not included in the expected list of options
+  def validate_mission_array
+    if !mission.nil?
+      mission.each do |m|
+        if !["black_or_minority_ethnic_led",
+             "disability_led",
+             "lgbt_plus_led",
+             "female_led",
+             "young_people_led"].include? m
+          errors.add(:mission, m + " is not a valid selection")
+        end
+      end
+    end
   end
 
   enum org_type: {
