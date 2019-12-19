@@ -30,7 +30,7 @@ class Organisation < ApplicationRecord
   # Custom validator to determine whether any of the items in the incoming mission array
   # are not included in the expected list of options
   def validate_mission_array
-    if !mission.nil?
+    if mission.present?
       mission.each do |m|
         if !["black_or_minority_ethnic_led",
              "disability_led",
