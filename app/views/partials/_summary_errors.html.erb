@@ -1,0 +1,21 @@
+<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    There is a problem
+  </h2>
+
+  <div class="govuk-error-summary__body">
+
+    <ul class="govuk-list govuk-error-summary__list">
+
+      <% form_object.errors.each do |attr, msg| %>
+        <li>
+          <a data-turbolinks="false" href="#<%= first_form_element %>"><%= msg %></a>
+        </li>
+      <% end %>
+
+    </ul>
+
+  </div>
+
+</div>

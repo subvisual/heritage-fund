@@ -23,9 +23,7 @@ class Organisation::OrganisationTypeController < ApplicationController
       logger.debug "Organisation type not found when attempting to update organisation ID: " +
                        "#{@organisation.id}"
 
-      flash[:alert] = @organisation.errors[:org_type][0]
-
-      redirect_to :organisation_organisation_type_get
+      render :type
 
     end
 
