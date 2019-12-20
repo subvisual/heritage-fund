@@ -12,9 +12,9 @@ class Project::ProjectLocationController < ApplicationController
     # todo really save same_location data
 
     if (same_location == true)
-      redirect_to '/project/description'
+      redirect_to '/3-10k/project/description'
     else
-      redirect_to '/project/other-location'
+      redirect_to '/3-10k/project/other-location'
     end
   end
 end
