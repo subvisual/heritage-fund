@@ -2,4 +2,8 @@
 
 require_relative 'config/environment'
 
-run Rails.application
+# run Rails.application
+
+map '/3-10k/' do
+  run Rails.application
+end
