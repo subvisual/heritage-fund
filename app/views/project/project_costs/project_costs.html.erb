@@ -6,10 +6,11 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-one-third">
       <!--left hand side-->
       <h1 class="govuk-heading-m govuk-!-margin-bottom-0">Add a cost</h1>
-      <form>
+      <form action="add-project-cost" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
         <div class="govuk-form-group govuk-!-margin-top-3">
           <label class="govuk-label" for="cost-type">
             Type
@@ -48,7 +49,7 @@
       </form>
     </div>
 
-    <div class="govuk-grid-column-one-half">
+    <div class="govuk-grid-column-two-thirds">
       <div class="nlhf-highlight-content nlhf-highlight-content--help">
 
         <h2 class="govuk-heading-m">How to add costs</h2>
@@ -64,21 +65,90 @@
 
       </div>
 
-      <section class="nlhf-summary">
+      <section class="nlhf-summary" id="summary-section">
 
         <header class="nlhf-summary__header">
           <h2 class="govuk-heading-m">Your project costs</h2>
         </header>
 
         <div class="nlhf-summary__body">
-          <h3 class="govuk-heading-m">You have not added any costs yet</h3>
-          <p class="govuk-body">Each cost will be shown here with a running total</p>
-          <div class="nlhf-summary__total">
-            <h3 class="nlhf-summary__total__title">
-              <span class="nlhf-summary__total__title-text">Total costs </span>
-              <span class="nlhf-summary__total__title-val">£0</span>
-            </h3>
-          </div>
+          <% if @total_costs == 0 %>
+            <h3 class="govuk-heading-m">You have not added any costs yet</h3>
+            <p class="govuk-body">Each cost will be shown here with a running total</p>
+
+          <% else %>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Cost Type</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header">Amount</th>
+              </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+
+              <% if @activities_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">Activities
+                  </th>
+                  <td class="govuk-table__cell"><%= @activities_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @activities_cost %></td>
+                </tr>
+              <% end %>
+
+              <% if @contingency_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">Contingency
+                  </th>
+                  <td class="govuk-table__cell"><%= @contingency_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @contingency_cost %></td>
+                </tr>
+              <% end %>
+
+              <% if @equipment_and_materials_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">Equipment and materials
+                  </th>
+                  <td class="govuk-table__cell"><%= @equipment_and_materials_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @equipment_and_materials_cost %></td>
+                </tr>
+              <% end %>
+
+              <% if @evaluation_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">Evaluation
+                  </th>
+                  <td class="govuk-table__cell"><%= @evaluation_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @evaluation_cost %></td>
+                </tr>
+              <% end %>
+
+              <% if @people_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">People
+                  </th>
+                  <td class="govuk-table__cell"><%= @people_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @people_cost %></td>
+                </tr>
+              <% end %>
+
+              <% if @other_cost > 0 %>
+                <tr class="govuk-table__row">
+                  <td scope="row" class="govuk-table__cell">Other
+                  </th>
+                  <td class="govuk-table__cell"><%= @other_desc %></td>
+                  <td class="govuk-table__cell">£ <%= @other_cost %></td>
+                </tr>
+              <% end %>
+
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__header">£ <%= @total_costs.to_s %></td>
+              </tr>
+              </tbody>
+            </table>
+          <% end %>
         </div>
       </section>
     </div>
@@ -87,7 +157,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-m govuk-!-margin-bottom-3">If you have finished adding all your costs</span>
-    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
     </div>
   </div>
 </div>

@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
     post 'submit-application' => 'project_declaration#submit_application'
     get 'volunteers' => 'project_volunteers#project_volunteers'
+    post 'add-project-cost' => 'project_costs#add_cost'
   end
 
   get 'health' => 'health#get_status'
