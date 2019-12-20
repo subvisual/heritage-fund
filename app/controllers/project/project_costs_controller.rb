@@ -35,6 +35,6 @@ class Project::ProjectCostsController < ApplicationController
 
     session[cost_type.gsub(' ', '_').to_s.downcase] = { 'cost-description' => cost_description, 'cost-amount' => cost_amount }
 
-    redirect_to '/project/costs#summary-section'
+    redirect_to '/3-10k/project/costs#summary-section'
   end
 end

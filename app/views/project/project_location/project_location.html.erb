@@ -2,7 +2,7 @@
   <div>
     <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
   </div>
-  <form action="/project/save-location" method="post">
+  <form action="/3-10k/project/save-location" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="same-location-hint">
@@ -32,7 +32,7 @@
 
   <!--TODO Remove the link when routing is concrete-->
   <% if Rails.env.development? %>
-    <a href="/project/location">skip to next page</a>
+    <a href="/3-10k/project/location">skip to next page</a>
   <% end %>
 
 </div>

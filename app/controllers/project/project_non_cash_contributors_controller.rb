@@ -10,9 +10,9 @@ class Project::ProjectNonCashContributorsController < ApplicationController
     # TODO really save non_cash_contributions data
 
     if (non_cash_contributions == true)
-      redirect_to '/project/non-cash-contribution'
+      redirect_to '/3-10k/project/non-cash-contribution'
     else
-      redirect_to '/project/cash-contribution-question'
+      redirect_to '/3-10k/project/cash-contribution-question'
     end
 
   end

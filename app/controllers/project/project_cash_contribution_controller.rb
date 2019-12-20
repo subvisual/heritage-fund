@@ -12,7 +12,7 @@ class Project::ProjectCashContributionController < ApplicationController
     # TODO really save cash_contributions data
 
     if (cash_contributions == true)
-      redirect_to '/project/cash-contribution'
+      redirect_to '/3-10k/project/cash-contribution'
     else
       redirect_to '/grant/request'
     end
