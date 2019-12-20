@@ -8,24 +8,45 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
 
   def update
 
-    logger.debug 'Updating legal signatories for organisation ID: #{@organisation.id}'
+    logger.debug "Updating legal signatories for organisation ID: #{@organisation.id}"
 
-    params[:legal_signatories].each do |signatory|
+    set_signatory_validation_paramaters
 
-      logger.debug 'Updating existing legal signatory ID: #{signatory[0]}'
+    signatory_validation_statuses = []
 
-      LegalSignatory.update(signatory[0],
-                            name: signatory[1]['name'],
-                            email_address: signatory[1]['email_address'],
-                            phone_number: signatory[1]['phone_number'])
+    @legal_signatories.each do |signatory|
 
-      logger.debug 'Finished updating existing legal signatory ID: #{signatory[0]'
+      logger.debug "Assigning attributes for legal signatory ID: #{signatory.id}"
+
+      signatory.assign_attributes({
+                           name: params[:legal_signatories][signatory.id][:name],
+                           email_address: params[:legal_signatories][signatory.id][:email_address],
+                           phone_number: params[:legal_signatories][signatory.id][:phone_number]
+                       })
+
+      logger.debug "Finished assigning attributes for legal signatory ID: #{signatory.id}"
+
+      signatory_validation_statuses << signatory.valid?
 
     end
 
-    logger.debug 'Finished updating legal signatories for organisation ID: #{@organisation.id}'
+    if signatory_validation_statuses.include?(false)
 
-    redirect_to :organisation_organisation_summary_get
+      logger.debug "Validation checks failed for one or more legal signatory updates"
+
+      render :signatories
+
+    else
+
+      logger.debug "Finished updating legal signatories for organisation ID: #{@organisation.id}"
+
+      @legal_signatories.each do |signatory|
+        signatory.save
+      end
+
+      redirect_to :organisation_organisation_summary_get
+
+    end
 
   end
 
@@ -48,6 +69,26 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
 
       logger.debug "Finished creating legal signatories for organisation ID: #{@organisation.id}"
 
+    end
+
+  end
+
+  def set_signatory_validation_paramaters
+
+    # The first legal signatory is mandatory, so enable validation
+    @legal_signatories[0].validate_name = true
+    @legal_signatories[0].validate_email_address = true
+    @legal_signatories[0].validate_phone_number = true
+
+    # Only enable validation for the second legal signatory if any attributes have been passed
+    if (
+    params[:legal_signatories][params[:legal_signatories].keys[1]][:name].present? ||
+        params[:legal_signatories][params[:legal_signatories].keys[1]][:email_address].present? ||
+        params[:legal_signatories][params[:legal_signatories].keys[1]][:phone_number].present?
+    )
+      @legal_signatories[1].validate_name = true
+      @legal_signatories[1].validate_email_address = true
+      @legal_signatories[1].validate_phone_number = true
     end
 
   end

@@ -9,6 +9,10 @@ en:
   what_we_fund_link: "#"
   activerecord:
     attributes:
+      legal_signatory:
+        name: "Name"
+        email_addres: "Email address"
+        phone_number: "Phone number"
       organisation:
         org_type: "Organisation type"
         company_number: "Company number"
@@ -23,3 +27,11 @@ en:
               not_a_number: "Company number must be a number, like 12345678"
             charity_number:
               not_a_number: "Charity number must be a number, like 1079639"
+        legal_signatory:
+          attributes:
+            name:
+              blank: "Enter the name of a legal signatory"
+            email_address:
+              blank: "Enter the email address of a legal signatory"
+            phone_number:
+              blank: "Enter the phone number of a legal signatory"
