@@ -3,7 +3,7 @@
 <head>
   <title><%= yield(:page_title) %> - National Lottery Heritage Fund</title>
   <meta charset="utf-8" />
-  <title>FundingFrontendRuby</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -15,6 +15,7 @@
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
   <%= render "partials/header" %>
+  <%= render "partials/toolbar" %>
   <div class="govuk-width-container">
     <main class="govuk-main-wrapper" id="main-content" role="main">
       <div class="govuk-grid-row">

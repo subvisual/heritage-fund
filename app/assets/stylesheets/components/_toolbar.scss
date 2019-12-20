@@ -1,0 +1,24 @@
+.nlhf-toolbar {
+    border-bottom: 1px solid #ccc;
+    &__items {
+        display: block;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: right;
+    }
+    &__item {
+        display: inline-block;
+        &:not(:last-child) {
+            margin-right: govuk-spacing(3);
+        }
+    }
+    &__link {
+        display: inline-block;
+        padding: govuk-spacing(3) 0;
+    }
+    &__info {
+        padding: govuk-spacing(3) 0;
+        @include govuk-typography-common;
+    }
+}
