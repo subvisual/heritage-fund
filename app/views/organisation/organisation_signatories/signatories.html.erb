@@ -1,36 +1,71 @@
-<div>
+<% content_for :page_title, @legal_signatories.any? { |legal_signatory| legal_signatory.errors.present?} ? "Error: Who is your legal signatory?" : "Who is your legal signatory?" %>
 
-  <h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
+<% if @legal_signatories.any? { |legal_signatory| legal_signatory.errors.present? } %>
 
-  <%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
 
-    <% @legal_signatories.each_with_index do |signatory, i| %>
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      There is a problem
+    </h2>
 
-      <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
+    <div class="govuk-error-summary__body">
 
-        <h2 class="govuk-heading-m" aria-label="Heading">Legal signatory <%= i+1 %></h2>
+      <ul class="govuk-list govuk-error-summary__list">
 
-        <div class="govuk-form-group">
-          <%= signatory_field.label :name, "Full name", class: "govuk-label" %>
-          <%= signatory_field.text_field :name, class: "govuk-input govuk-input--width-20" %>
-        </div>
+        <% @legal_signatories.each do |signatory| %>
+          <% signatory.errors.each do |attr, msg| %>
+            <li>
+              <a data-turbolinks="false" href=<%="#legal_signatories_#{signatory.id}_#{attr}" %>><%= msg %></a>
+            </li>
+          <% end %>
+        <% end %>
 
-        <div class="govuk-form-group">
-          <%= signatory_field.label :email_address, "Email address", class: "govuk-label" %>
-          <%= signatory_field.email_field :email_address, class: "govuk-input govuk-input--width-20" %>
-        </div>
+      </ul>
 
-        <div class="govuk-form-group">
-          <%= signatory_field.label :phone_number, "Phone number", class: "govuk-label" %>
-          <%= signatory_field.text_field :phone_number, class: "govuk-input govuk-input--width-20" %>
-        </div>
+    </div>
 
-      <% end %>
+  </div>
+
+<% end %>
+
+<h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
+
+<%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
+
+  <% @legal_signatories.each_with_index do |signatory, i| %>
+
+    <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
+
+      <h2 class="govuk-heading-m" aria-label="Heading">Legal signatory <%= i+1 %></h2>
+
+      <div class="govuk-form-group">
+        <%= signatory_field.label :name, "Full name", class: "govuk-label" %>
+        <%= render partial: "partials/form_input_errors",
+                   locals: {form_object: signatory,
+                            input_field_id: :name} if signatory.errors[:name].any? %>
+        <%= signatory_field.text_field :name, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:name].any?}" %>
+      </div>
+
+      <div class="govuk-form-group">
+        <%= signatory_field.label :email_address, "Email address", class: "govuk-label" %>
+        <%= render partial: "partials/form_input_errors",
+                   locals: {form_object: signatory,
+                            input_field_id: :email_address} if signatory.errors[:email_address].any? %>
+        <%= signatory_field.email_field :email_address, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:email_address].any?}" %>
+      </div>
+
+      <div class="govuk-form-group">
+        <%= signatory_field.label :phone_number, "Phone number", class: "govuk-label" %>
+        <%= render partial: "partials/form_input_errors",
+                   locals: {form_object: signatory,
+                            input_field_id: :phone_number} if signatory.errors[:phone_number].any? %>
+        <%= signatory_field.text_field :phone_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:phone_number].any?}" %>
+      </div>
 
     <% end %>
 
-    <%= submit_tag "Save and continue", {class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button'} %>
-
   <% end %>
 
-</div>
+  <%= submit_tag "Save and continue", {class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button'} %>
+
+<% end %>
