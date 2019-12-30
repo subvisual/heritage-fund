@@ -63,6 +63,9 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.action_mailer.delivery_method = :notify
   config.action_mailer.notify_settings = {
-      api_key: ENV['NOTIFY_API_KEY']
+      api_key: ENV.fetch("NOTIFY_API_KEY")
   }
+
+  config.x.ideal_postcodes.api_key = ENV.fetch("IDEAL_POSTCODES_API_KEY")
+
 end

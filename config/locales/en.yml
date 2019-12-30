@@ -27,6 +27,16 @@ en:
               not_a_number: "Company number must be a number, like 12345678"
             charity_number:
               not_a_number: "Charity number must be a number, like 1079639"
+            name:
+              blank: "Enter the name of your organisation"
+            line1:
+              blank: "Enter the first line of your organisation's address"
+            townCity:
+              blank: "Enter the town or city where your organisation is located"
+            county:
+              blank: "Enter the county where your organisation is located"
+            postcode:
+              blank: "Enter the postcode where your organisation is located"
         legal_signatory:
           attributes:
             name:

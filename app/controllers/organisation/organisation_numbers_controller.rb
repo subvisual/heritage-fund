@@ -24,7 +24,7 @@ class Organisation::OrganisationNumbersController < ApplicationController
       logger.debug "Finished setting company_number and charity_number for " +
                        "organisation ID: #{@organisation.id}"
 
-      redirect_to :organisation_organisation_about_get
+      redirect_to :organisation_about_get
 
     else
 

@@ -1,8 +1,0 @@
-<%= form_with(url: postcode_lookup_path, local: true) do |p| %>
-<div class="govuk-form-group">
-  <%= label_tag(:postcode_lookup, "Postcode", class: 'govuk-label') %>
-  <%= text_field(:postcode, :lookup, class: 'govuk-input') %>
-  </div>
-  <%= p.submit "Find address", class: 'govuk-button govuk-button--secondary' %>
-  <div id="results">
-<% end %>

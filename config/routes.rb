@@ -12,8 +12,14 @@ Rails.application.routes.draw do
     get ':organisation_id/numbers', to: 'organisation_numbers#show', as: :organisation_numbers_get
     put ':organisation_id/numbers', to: 'organisation_numbers#update', as: :organisation_numbers_put
 
-    get ':organisation_id/about', to: 'organisation_about#show', as: :organisation_about_get
-    put ':organisation_id/about', to: 'organisation_about#update', as: :organisation_about_put
+    get ':organisation_id/about', to: 'organisation_about#show_postcode_lookup', as: :about_get
+    put ':organisation_id/about', to: 'organisation_about#update', as: :about_put
+    post ':organisation_id/about/address-results', to: 'organisation_about#display_address_search_results', as: :about_search_results
+    get ':organisation_id/about/address', to: 'organisation_about#show', as: :about_address_get
+    put ':organisation_id/about/address', to: 'organisation_about#assign_address_attributes', as: :about_assign_address_attributes
+    # This route ensures that attempting to navigate back to the list of address results
+    # redirects the user back to the search page
+    get ':organisation_id/about/address-results', to: 'organisation_about#show_postcode_lookup'
 
     get ':organisation_id/mission', to: 'organisation_mission#show', as: :organisation_mission_get
     put ':organisation_id/mission', to: 'organisation_mission#update', as: :organisation_mission_put
@@ -74,9 +80,6 @@ Rails.application.routes.draw do
   get 'dashboard/show'
   root to: "home#show"
   get 'dashboard' => 'dashboard#show'
-  get 'postcode' => 'postcode#show'
-  post 'postcode_lookup' => 'postcode#lookup'
-  post 'postcode_save' => 'postcode#save'
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"

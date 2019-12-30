@@ -1,5 +1,0 @@
-<h2 class="govuk-heading-l">Select an address</h2>
-<%= form_with(url: postcode_save_path, local: true) do |p| %>
-<%= select_tag "address", options_for_select(@response.map {|p| result_formatter(p) }) , class: 'govuk-select' %>
-<%= p.submit "Select", class: 'govuk-button govuk-button--secondary' %>
-<% end %>
