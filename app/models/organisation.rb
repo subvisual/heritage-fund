@@ -1,15 +1,22 @@
 class Organisation < ApplicationRecord
   has_many :users
   has_many :legal_signatories
+
   attr_accessor :validate_org_type
   attr_accessor :validate_company_number
   attr_accessor :validate_charity_number
+  attr_accessor :validate_address
   attr_accessor :validate_mission
 
   validates :org_type, presence: true, if: :validate_org_type?
   validates :company_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_company_number?
   validates :charity_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_charity_number?
   validate :validate_mission_array, if: :validate_mission?
+  validates :name, presence: true, if: :validate_address?
+  validates :line1, presence: true, if: :validate_address?
+  validates :townCity, presence: true, if: :validate_address?
+  validates :county, presence: true, if: :validate_address?
+  validates :postcode, presence: true, if: :validate_address?
 
   def validate_org_type?
     validate_org_type == true
@@ -21,6 +28,10 @@ class Organisation < ApplicationRecord
 
   def validate_charity_number?
     validate_charity_number == true
+  end
+
+  def validate_address?
+    validate_address == true
   end
 
   def validate_mission?
@@ -53,6 +64,7 @@ class Organisation < ApplicationRecord
       community_group: 6,
       voluntary_group: 7,
       individual_private_owner_of_heritage: 8,
-      other: 9}
+      other: 9
+  }
 
 end

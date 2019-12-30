@@ -8,12 +8,9 @@
 
     <ul class="govuk-list govuk-error-summary__list">
 
-      <% form_object.errors.each do |attr, msg| %>
+      <% flash[:errors].each do |attr, msg| %>
         <li>
-          <a data-turbolinks='false' href='#<%= form_object.errors.size == 1 ? first_form_element :
-                                                    "#{form_object.class.name.downcase}_#{attr.to_s}" %>'>
-            <%= msg %>
-          </a>
+          <a data-turbolinks="false" href="#<%= first_form_element %>"><%= msg %></a>
         </li>
       <% end %>
 
