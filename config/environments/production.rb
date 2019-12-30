@@ -117,9 +117,6 @@ Rails.application.configure do
       api_key: ENV.fetch("NOTIFY_API_KEY")
   }
 
-  config.x.ideal_postcodes = {
-      settings: {
-          api_key: ENV.fetch("IDEAL_POSTCODES_API_KEY")
-      }
-  }
+  config.x.ideal_postcodes.api_key = ENV.fetch("IDEAL_POSTCODES_API_KEY")
+
 end
