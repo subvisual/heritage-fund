@@ -21,7 +21,10 @@ class Organisation::OrganisationAboutController < ApplicationController
   # back to the :postcode_lookup view.
   def display_address_search_results
 
-    if !params['postcode']['lookup'].present?
+    # TODO: Add postcode validation to return a helpful error message to
+    #       the user, rather than relying on the empty array returned from
+    #       the IdealPostcodes API to determine the 'No results found' message
+    unless params['postcode']['lookup'].present?
 
       logger.error "No postcode entered when searching for an address for organisation ID: #{@organisation.id}"
 
@@ -68,6 +71,8 @@ class Organisation::OrganisationAboutController < ApplicationController
   # on the :about view.
   def assign_address_attributes
 
+    # TODO: Cache the initial address response from the IdealPostcodes API
+    #       and use this if available, rather than looking up the address again
     lookup_address
 
     @organisation.assign_attributes({
@@ -107,7 +112,7 @@ class Organisation::OrganisationAboutController < ApplicationController
   private
 
   def set_api_key
-    IdealPostcodes.api_key = ENV['IDEAL_POSTCODES_API_KEY']
+    IdealPostcodes.api_key = Rails.configuration.ideal_postcodes[:settings][:api_key]
   end
 
   def organisation_about_params
