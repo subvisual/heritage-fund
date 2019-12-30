@@ -112,7 +112,7 @@ class Organisation::OrganisationAboutController < ApplicationController
   private
 
   def set_api_key
-    IdealPostcodes.api_key = Rails.configuration.ideal_postcodes[:settings][:api_key]
+    IdealPostcodes.api_key = Rails.configuration.x.ideal_postcodes[:settings][:api_key]
   end
 
   def organisation_about_params
