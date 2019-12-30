@@ -4,7 +4,19 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: {
+       id: "ca326b0a-89ba-44b2-8500-eee5e8ce611f",
+       name: "test organisation",
+       mission: ["black_or_minority_ethnic_led",
+                 "disability_led",
+                 "lgbt_plus_led",
+                 "female_led",
+                 "young_people_led"],
+       org_type: 0,
+       line1: 'line 1',
+       charity_number: 123,
+       townCity: "town"
+}
 # column: value
 #
 two: {}
