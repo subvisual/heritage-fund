@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get ':organisation_id/organisation_summary', to: 'organisation_summary#show', as: :organisation_summary_get
   end
 
-  scope "/3-10k", as: :'/3-10k' do
+  scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
@@ -39,7 +39,8 @@ Rails.application.routes.draw do
       post 'save-location' => 'project_location#save_project_location'
       get 'other-location' => 'project_location#project_other_location'
       get 'key-dates' => 'project_dates#project_dates'
-      get 'title' => 'project_title#project_title'
+      get 'title' => 'project_title#show'
+      put 'title' => 'project_title#put'
       get 'new-project' => 'new_project#new_project'
       get 'capital-works' => 'capital_works#capital_works'
       get 'costs' => 'project_costs#project_costs'
@@ -61,6 +62,8 @@ Rails.application.routes.draw do
       post 'submit-application' => 'project_declaration#submit_application'
       get 'volunteers' => 'project_volunteers#project_volunteers'
       post 'add-project-cost' => 'project_costs#add_cost'
+      get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
+      put ':project_id/support-evidence' => 'project_support_evidence#put'
     end
   end
 

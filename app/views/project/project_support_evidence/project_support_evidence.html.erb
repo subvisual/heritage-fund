@@ -1,0 +1,93 @@
+<div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-xl">Support for your project</span>
+      <h1 class="govuk-heading-xl">Evidence of support</h1>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <%= form_with model:  @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put do |f|  %>
+
+        <div class="nlhf-add-item">
+          <header class="nlhf-add-item__header">
+            <h2 class="govuk-heading-l nlhf-add-item__header__title">Add evidence</h2>
+          </header>
+          <div class="nlhf-add-item__body">
+            <div class="nlhf-add-item__row">
+              <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="evidence-description">
+                    Describe the evidence you are providing
+                  </label>
+                  <%= f.text_area :evidence_description, value: "", class: 'govuk-textarea' %>
+                  <%# TODO: Get word count to work  %>
+                  <span id="evidence-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+                    You have 50 words remaining
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="nlhf-add-item__row">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="evidence-upload">
+                  Upload a file
+                </label>
+               <%= f.file_field :evidence_of_support_files, multiple: true %>
+              </div>
+            </div>
+            <div class="nlhf-add-item__row">
+              <button data-prevent-double-click="true" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Add evidence
+              </button>
+      <% end %>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+      <div class="nlhf-highlight-content nlhf-highlight-content--help">
+        <p class="govuk-body-l">
+          Send us evidence to support the commitments made to your project.
+        </p>
+        <p class="govuk-body">
+          Evidence for non-cash contributions could be letters, emails or videos showing support from the people involved in your project.
+        </p>
+        <p class="govuk-body">
+          Evidence for secured cash contributions could be a letter from the contributor, or a copy of bank statements to show the funds.
+        </p>
+      </div>
+
+      <section class="nlhf-summary nlhf-summary--evidence">
+        <header class="nlhf-summary__header">
+          <h2 class="govuk-heading-m">Your evidence of support</h2>
+        </header>
+        <% @project.evidence_description.each do |e| %>
+          <li><%= e %></li>
+        <% end %>
+        <hr />
+        <% @project.evidence_of_support_files.each do |f| %>
+          <li><%=link_to(f.blob.filename, rails_blob_path(f, disposition: "attachment")) %></li>
+        <% end %>
+        <div class="nlhf-summary__body">
+          <%= '<h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>'.html_safe unless @project.evidence_description.any? %>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <hr class="govuk-section-break--l govuk-section-break--visible">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">If you have finished adding all your evidence</p>
+        <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+    </div>
+  </div>
+</div>

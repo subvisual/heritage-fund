@@ -3,15 +3,15 @@
     <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
     <h1 class="govuk-heading-l" aria-label="Heading">Project Title</h1>
   </div>
-  <form>
+  <%= form_for @project, url: three_to_ten_k_project_title_path, method: :put do |f|  %>
     <div class="govuk-form-group">
       <label class="govuk-label" for="project-title">
         Give your project a title or a name that we can refer to your project by
       </label>
-      <input class="govuk-input" id="project-title" name="project-title" type="text">
+      <%= f.text_field :project_title, class: 'govuk-input' %>
     </div>
-  </form>
   <button class="govuk-button" role="button">Save and continue</button>
+  <% end %>
 </div>
 <!--TODO Remove the link when routing is concrete-->
   <% if Rails.env.development? %>

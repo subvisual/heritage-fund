@@ -6,12 +6,13 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# Rails tries to read this on all environments and expects a string value
 production:
   service: S3
-  access_key_id: <%= CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_access_key_id'] %>
-  secret_access_key: <%= CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_secret_access_key'] %>
-  region: <%= CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_region'] %>
-  bucket: <%= CF::App::Credentials.find_by_service_label('aws-s3-bucket')['bucket_name'] %>
+  access_key_id: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_access_key_id']  : "" %>
+  secret_access_key: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_secret_access_key'] : "" %>
+  region: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_region'] : "" %>
+  bucket: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['bucket_name'] : "" %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
