@@ -1,17 +1,29 @@
 class Project::ProjectTitleController < ApplicationController
-
-  before_action { @project = Project.new(user: current_user) }
+  include ProjectHelper
+  before_action :authenticate_user!, :set_project
 
   def show
   end
 
-  def put
-    @project.update!(project_params)
-    redirect_to three_to_ten_k_project_project_support_evidence_path(@project.id)
+  def update
+
+    @project.validate_title = true
+
+    @project.update(project_params)
+
+    if @project.valid?
+      redirect_to three_to_ten_k_project_dates_get_path(@project.id)
+    else
+      render :show
+    end
+
+
   end
 
+  private
 
   def project_params
     params.require(:project).permit(:project_title)
   end
+
 end
