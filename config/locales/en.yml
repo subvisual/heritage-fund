@@ -45,3 +45,8 @@ en:
               blank: "Enter the email address of a legal signatory"
             phone_number:
               blank: "Enter the phone number of a legal signatory"
+        project:
+          attributes:
+            project_title:
+              blank: "Enter the title of your project"
+              too_long: "Project title must be 255 characters or fewer"

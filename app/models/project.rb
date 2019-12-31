@@ -4,6 +4,14 @@ class Project < ApplicationRecord
     has_many :released_forms
     has_many_attached :evidence_of_support_files
 
+    attr_accessor :validate_title
+
+    validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
+
+    def validate_title?
+        validate_title == true
+    end
+
     def to_salesforce_json
         Jbuilder.encode do |json|
             json.ignore_nil!

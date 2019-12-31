@@ -8,10 +8,8 @@ Rails.application.routes.draw do
   namespace :organisation do
     get ':organisation_id/type', to: 'organisation_type#show', as: :organisation_type_get
     put ':organisation_id/type', to: 'organisation_type#update', as: :organisation_type_put
-
     get ':organisation_id/numbers', to: 'organisation_numbers#show', as: :organisation_numbers_get
     put ':organisation_id/numbers', to: 'organisation_numbers#update', as: :organisation_numbers_put
-
     get ':organisation_id/about', to: 'organisation_about#show_postcode_lookup', as: :about_get
     put ':organisation_id/about', to: 'organisation_about#update', as: :about_put
     post ':organisation_id/about/address-results', to: 'organisation_about#display_address_search_results', as: :about_search_results
@@ -20,18 +18,25 @@ Rails.application.routes.draw do
     # This route ensures that attempting to navigate back to the list of address results
     # redirects the user back to the search page
     get ':organisation_id/about/address-results', to: 'organisation_about#show_postcode_lookup'
-
     get ':organisation_id/mission', to: 'organisation_mission#show', as: :organisation_mission_get
     put ':organisation_id/mission', to: 'organisation_mission#update', as: :organisation_mission_put
-
     get ':organisation_id/signatories', to: 'organisation_signatories#show', as: :organisation_signatories_get
     put ':organisation_id/signatories', to: 'organisation_signatories#update', as: :organisation_signatories_put
-
     get ':organisation_id/organisation_summary', to: 'organisation_summary#show', as: :organisation_summary_get
   end
 
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
+
+      get 'new' => 'new_project#new_project'
+      # TODO: Remove this when creation of project is wired up
+      put 'new', to: 'new_project#temp_create_new_project', as: :temp_create_new
+
+      get ':project_id/title', to: 'project_title#show', as: :title_get
+      put ':project_id/title', to: 'project_title#update', as: :title_put
+
+      get ':project_id/key-dates', to: 'project_dates#project_dates', as: :dates_get
+
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
@@ -44,10 +49,6 @@ Rails.application.routes.draw do
       get 'location' => 'project_location#project_location'
       post 'save-location' => 'project_location#save_project_location'
       get 'other-location' => 'project_location#project_other_location'
-      get 'key-dates' => 'project_dates#project_dates'
-      get 'title' => 'project_title#show'
-      put 'title' => 'project_title#put'
-      get 'new-project' => 'new_project#new_project'
       get 'capital-works' => 'capital_works#capital_works'
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
