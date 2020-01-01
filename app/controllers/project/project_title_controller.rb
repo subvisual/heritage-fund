@@ -17,7 +17,6 @@ class Project::ProjectTitleController < ApplicationController
       render :show
     end
 
-
   end
 
   private

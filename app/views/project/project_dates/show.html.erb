@@ -1,0 +1,170 @@
+<% content_for :page_title, @project.errors.any? ? "Error: When will your project happen?"
+                                : "When will your project happen?" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :start_date_day
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_dates_put_path, method: :put do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <h1 class="govuk-heading-xl">
+      <span class="govuk-caption-xl">About your project</span>
+      When will your project happen?
+    </h1>
+
+    <% if flash.notice %>
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text-assistive">Warning</span>
+          <%= flash.notice %>
+        </strong>
+      </div>
+
+    <% end %>
+
+    <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="project-start-hint">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          Project start date
+        </legend>
+
+        <span id="project-start-hint" class="govuk-hint">
+          For example, 27 3 2007
+        </span>
+
+        <% @project.errors.each do |attr, msg| %>
+          <% if attr.to_s.include? "start" %>
+            <span id="project[<%= attr %>]-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> <%= msg %></span>
+          <% end %>
+        <% end %>
+
+        <div class="govuk-date-input" id="start-date">
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :start_date, "Day", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :start_date_day, class: "govuk-input govuk-date-input__input govuk-input--width-2
+                                 #{"govuk-input--error" if @project.errors[:start_date_day].any?}",
+                                 value: "#{@project.start_date.day if @project.start_date.present?}" %>
+
+            </div>
+
+          </div>
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :start_date, "Month", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :start_date_month, class: "govuk-input govuk-date-input__input govuk-input--width-2
+                                 #{"govuk-input--error" if @project.errors[:start_date_month].any?}",
+                                 value: "#{@project.start_date.month if @project.start_date.present?}" %>
+
+            </div>
+
+          </div>
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :start_date, "Year", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :start_date_year, class: "govuk-input govuk-date-input__input govuk-input--width-4
+                                 #{"govuk-input--error" if @project.errors[:start_date_year].any?}",
+                                 value: "#{@project.start_date.year if @project.start_date.present?}" %>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </fieldset>
+
+    </div>
+
+    <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="project-end-hint">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          Project end date
+        </legend>
+
+        <span id="project-start-hint" class="govuk-hint">
+        For example, 29 4 2007
+      </span>
+
+        <% @project.errors.each do |attr, msg| %>
+          <% if attr.to_s.include? "end" %>
+            <span id="project[<%= attr %>]-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> <%= msg %></span>
+          <% end %>
+        <% end %>
+
+        <div class="govuk-date-input" id="end-date">
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :end_date, "Day", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :end_date_day, class: "govuk-input govuk-date-input__input govuk-input--width-2
+                                 #{"govuk-input--error" if @project.errors[:end_date_day].any?}",
+                                 value: "#{@project.end_date.day if @project.end_date.present?}" %>
+
+            </div>
+
+          </div>
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :end_date, "Month", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :end_date_month, class: "govuk-input govuk-date-input__input govuk-input--width-2
+                                 #{"govuk-input--error" if @project.errors[:end_date_month].any?}",
+                                 value: "#{@project.end_date.month if @project.end_date.present?}" %>
+
+            </div>
+
+          </div>
+
+          <div class="govuk-date-input__item">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :end_date, "Year", class: "govuk-label govuk-date-input__label" %>
+              <%= f.number_field :end_date_year, class: "govuk-input govuk-date-input__input govuk-input--width-4
+                                 #{"govuk-input--error" if @project.errors[:end_date_year].any?}",
+                                 value: "#{@project.end_date.year if @project.end_date.present?}" %>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </fieldset>
+
+    </div>
+
+  </div>
+
+  <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+<% end %>
+
+<div class="govuk-inset-text">
+  We don't expect projects at this grant level to last for more than one year
+</div>

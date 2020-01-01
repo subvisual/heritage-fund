@@ -35,7 +35,10 @@ Rails.application.routes.draw do
       get ':project_id/title', to: 'project_title#show', as: :title_get
       put ':project_id/title', to: 'project_title#update', as: :title_put
 
-      get ':project_id/key-dates', to: 'project_dates#project_dates', as: :dates_get
+      get ':project_id/key-dates', to: 'project_dates#show', as: :dates_get
+      put ':project_id/key-dates', to: 'project_dates#update', as: :dates_put
+
+      get ':project_id/location', to: 'project_location#project_location', as: :location_get
 
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
@@ -46,7 +49,6 @@ Rails.application.routes.draw do
       get 'differences' => 'project_differences#project_differences'
       get 'permission' => 'project_permission#project_permission'
       get 'description' => 'project_description#project_description'
-      get 'location' => 'project_location#project_location'
       post 'save-location' => 'project_location#save_project_location'
       get 'other-location' => 'project_location#project_other_location'
       get 'capital-works' => 'capital_works#capital_works'
