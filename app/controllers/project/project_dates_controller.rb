@@ -65,6 +65,12 @@ class Project::ProjectDatesController < ApplicationController
 
   private
 
+  # Temporarily stores values in FlashHash to redisplay if there
+  # have been any errors - this is necessary as we don't have
+  # model attributes that are persistent for the individual date
+  # items.
+  # TODO: Handle empty inputs in a cleaner way than piping a 0
+  #       back into the input field
   def store_values_in_flash
 
     params[:project].each do | key, value |
