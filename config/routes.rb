@@ -56,8 +56,6 @@ Rails.application.routes.draw do
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
-      get 'cash-contribution' => 'project_cash_contribution#project_cash_contribution'
-      post 'add-cash-contribution' => 'project_cash_contribution#add_cash_contribution'
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
       get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
       post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
@@ -74,6 +72,8 @@ Rails.application.routes.draw do
       post 'add-project-cost' => 'project_costs#add_cost'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
+      get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
+      put ':project_id/cash-contribution' => 'project_cash_contribution#put'
     end
   end
 

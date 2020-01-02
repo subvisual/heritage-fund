@@ -2,7 +2,9 @@ class Project < ApplicationRecord
     belongs_to :user
     has_one :organisation, through: :user
     has_many :released_forms
+    has_many :cash_contributions
     has_many_attached :evidence_of_support_files
+    accepts_nested_attributes_for :cash_contributions
 
     attr_accessor :validate_title
     attr_accessor :validate_description

@@ -1,3 +1,4 @@
+<% content_for :page_title, "Cash contributions"  %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -7,8 +8,8 @@
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-      <form action="add-cash-contribution" method="post">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+      <%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put do |f| %>
+        <% f.fields_for :cash_contributions, @cash_contribution do |cc| %>
         <div class="nlhf-add-item">
           <header class="nlhf-add-item__header">
             <h2 class="govuk-heading-l nlhf-add-item__header__title">Add a cash contribution</h2>
@@ -17,10 +18,8 @@
             <div class="nlhf-add-item__row">
               <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
                 <div class="govuk-form-group">
-                  <label class="govuk-label" for="cash-cont-description">
-                    Description
-                  </label>
-                  <textarea class="govuk-textarea govuk-js-character-count" id="cash-cont-description" name="cash-cont-description" rows="5" aria-describedby="cash-cont-description-info"></textarea><span id="cash-cont-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You have 50 words remaining</span>
+                  <%= cc.label :description, class: 'govuk-label' %>
+                  <%= cc.text_area :description, class: 'govuk-textarea' %>
                 </div>
               </div>
             </div>
@@ -32,50 +31,42 @@
                   </legend>
                   <div class="govuk-radios govuk-radios--small">
                     <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="cash-cont-secured" name="cash-cont-secured" type="radio" value="Yes, I can provide evidence">
-                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured">
-                        Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>
-                      </label>
+                      <%= cc.radio_button :secured, :yes_with_evidence, class: "govuk-radios__input" %>
+                      <%= cc.label :secured_yes_with_evidence, 'Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
                     </div>
                     <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="cash-cont-secured-2" name="cash-cont-secured" type="radio" value="Yes, but I do not have evidence yet">
-                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-2">
-                        Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>
-                      </label>
+                      <%= cc.radio_button :secured, :yes_no_evidence_yet, class: "govuk-radios__input" %>
+                      <%= cc.label :secured_no_evidence_yet, 'Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>'.html_safe, class: "govuk-label govuk-radios__label"%>
                     </div>
                     <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="cash-cont-secured-3" name="cash-cont-secured" type="radio" value="No">
-                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-3">
-                        No
-                      </label>
+                      <%= cc.radio_button :secured, :no, class: "govuk-radios__input" %>
+                      <%= cc.label :secured_no, 'No', class: "govuk-label govuk-radios__label" %>
                     </div>
                     <div class="govuk-radios__item">
-                      <input class="govuk-radios__input" id="cash-cont-secured-4" name="cash-cont-secured" type="radio" value="Not sure if cash contribution is secured">
-                      <label class="govuk-label govuk-radios__label" for="cash-cont-secured-4">
-                        Not sure
-                      </label>
+                      <%= cc.radio_button :secured, :x_not_sure, class: "govuk-radios__input" %>
+                      <%= cc.label :secured_x_not_sure, 'Not sure', class: "govuk-label govuk-radios__label"   %>
                     </div>
                   </div>
                 </fieldset>
+                <%# TODO: Only show this if user selects yes with evidence %>
+                <%= cc.label :cash_contribution_evidence_files, "Select supporting evidence", class: 'govuk-label' %>
+                <%= cc.file_field :cash_contribution_evidence_files, class: 'govuk-file-upload' %>
               </div>
             </div>
             <div class="nlhf-add-item__row">
               <div class="govuk-form-group">
-                <label class="govuk-label" for="cash-cont-amount">
-                  Amount
-                </label>
-                <input class="govuk-input" id="cash-cont-amount" name="cash-cont-amount" type="text" autocomplete="off">
+              <%= cc.label :amount, class: 'govuk-label' %>
+              <%= cc.number_field :amount, min: 1, class: 'govuk-input' %>
               </div>
             </div>
             <div class="nlhf-add-item__row">
-              <button data-prevent-double-click="true" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                Add cash contribution
-              </button>
+              <%= cc.submit 'Add cash contribution', role: "button", 'data-prevent-double-click' => 'true', class: 'govuk-button govuk-button--secondary'%>
             </div>
           </div>
         </div>
         <!-- /.nlhf-add-item -->
-      </form>
+          <% end %>
+      <% end %>
       <!-- /add-cost form -->
     </div>
 
@@ -101,8 +92,22 @@
         <header class="nlhf-summary__header">
           <h2 class="govuk-heading-m">Your cash contributions</h2>
         </header>
+        <%# TODO: Need design for cash contributions display %>
         <div class="nlhf-summary__body">
+            <% if @project.cash_contributions.empty? %>
           <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any cash contributions</h3>
+            <% else %>
+          <% @project.cash_contributions.filter{ |cc| cc.description.present? }.each do |cc| %>
+           <ul>
+              <%= content_tag(:li, cc.description) %>
+                <ul>
+                  <%= content_tag(:li, "Amount:  #{number_to_currency(cc.amount, strip_insignificant_zeros: true)}") if cc.amount.present? %>
+                  <%= content_tag(:li, link_to(cc.cash_contribution_evidence_files.blobs.first.filename, rails_blob_path(cc.cash_contribution_evidence_files.first, disposition: "attachment"))) if cc.cash_contribution_evidence_files.present?  %>
+                </ul>
+            </ul>
+            <% end %>
+          <% end %>
+
         </div>
         <!-- /.nlhf-summary__body -->
       </section>
@@ -113,7 +118,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form action="process-cash-contributions" method="post">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
         <p class="govuk-body">If you have finished adding all your cash contributions</p>
         <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
           Save and continue
