@@ -45,6 +45,7 @@ class Project < ApplicationRecord
 
     def validate_no_errors?
         self.errors.empty?
+    end
 
     def validate_description?
         validate_description == true
