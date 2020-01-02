@@ -50,3 +50,6 @@ en:
             project_title:
               blank: "Enter the title of your project"
               too_long: "Project title must be 255 characters or fewer"
+            description:
+              blank: "Enter a description of your project"
+              too_long: "Project description must be 500 words or fewer"

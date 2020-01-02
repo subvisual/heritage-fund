@@ -37,6 +37,11 @@ Rails.application.routes.draw do
 
       get ':project_id/key-dates', to: 'project_dates#project_dates', as: :dates_get
 
+      get ':project_id/description', to: 'project_description#show', as: :description_get
+      put ':project_id/description', to: 'project_description#update', as: :description_put
+
+      get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
+
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
@@ -45,11 +50,9 @@ Rails.application.routes.draw do
       get 'community' => 'project_community#project_community'
       get 'differences' => 'project_differences#project_differences'
       get 'permission' => 'project_permission#project_permission'
-      get 'description' => 'project_description#project_description'
       get 'location' => 'project_location#project_location'
       post 'save-location' => 'project_location#save_project_location'
       get 'other-location' => 'project_location#project_other_location'
-      get 'capital-works' => 'capital_works#capital_works'
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'

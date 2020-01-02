@@ -1,0 +1,44 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Project description" : "Project description" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_description
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_description_put_path, method: :put do |f| %>
+
+  <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="500">
+
+    <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors[:description].any? %>">
+
+      <h1 class="govuk-label-wrapper">
+        <span class="govuk-caption-xl">About your project</span>
+        <%= f.label :description, "Describe your idea", class: "govuk-label govuk-label--xl" %>
+      </h1>
+
+      <span id="project_description-hint" class="govuk-hint">
+        This helps us to understand what your project is all about.
+        Explain the ambitions of your project, how it relates to heritage and what you will spend the money on.
+      </span>
+
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :description} if @project.errors[:description].any? %>
+
+      <%= f.text_area :description, rows: 10,
+                      class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:description].any?}",
+                      "aria-describedby" => "project_description-info project_description-hint" %>
+
+      <%# TODO: Fix word count JS implementation %>
+
+      <span id="project_description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You can enter up to 500 words
+      </span>
+
+    </div>
+
+  </div>
+
+  <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+  <% end %>

@@ -7,11 +7,30 @@ class Project < ApplicationRecord
     accepts_nested_attributes_for :cash_contributions
 
     attr_accessor :validate_title
+    attr_accessor :validate_description
 
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
+    validates :description, presence: true, if: :validate_description?
+    validate :validate_description_length, if: :validate_description?
 
     def validate_title?
         validate_title == true
+    end
+
+    def validate_description?
+        validate_description == true
+    end
+
+    def validate_description_length
+
+        description_word_count = self.description.split(' ').count
+
+        logger.debug "Description word count is #{description_word_count}"
+
+        if description_word_count > 500
+            self.errors.add(:description, "Project description must be 500 words or fewer")
+        end
+
     end
 
     def to_salesforce_json
