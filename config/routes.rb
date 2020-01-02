@@ -35,7 +35,10 @@ Rails.application.routes.draw do
       get ':project_id/title', to: 'project_title#show', as: :title_get
       put ':project_id/title', to: 'project_title#update', as: :title_put
 
-      get ':project_id/key-dates', to: 'project_dates#project_dates', as: :dates_get
+      get ':project_id/key-dates', to: 'project_dates#show', as: :dates_get
+      put ':project_id/key-dates', to: 'project_dates#update', as: :dates_put
+
+      get ':project_id/location', to: 'project_location#project_location', as: :location_get
 
       get ':project_id/description', to: 'project_description#show', as: :description_get
       put ':project_id/description', to: 'project_description#update', as: :description_put

@@ -1,0 +1,13 @@
+<% unless flash[input_name].present? %>
+
+    <%= form_for_object.number_field input_name, class: "govuk-input govuk-date-input__input govuk-input--width-#{input_width}
+                                     #{"govuk-input--error" if form_object.errors[input_name].any?}",
+                                     value: "#{form_object.public_send(model_attribute).public_send(date_type) if form_object[model_attribute].present?}" %>
+
+<% else %>
+
+  <%= form_for_object.number_field input_name, class: "govuk-input govuk-date-input__input govuk-input--width-#{input_width}
+                                   #{"govuk-input--error" if form_object.errors[input_name].any?}",
+                                   value: "#{flash[input_name] if flash[input_name].present?}" %>
+
+<% end %>

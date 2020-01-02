@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2020_01_02_085856) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.string "evidence_description", default: [], array: true
+    t.date "start_date"
+    t.date "end_date"
     t.text "description"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
