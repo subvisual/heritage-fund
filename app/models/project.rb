@@ -26,7 +26,7 @@ class Project < ApplicationRecord
     validates :end_date_month, presence: true, if: :validate_start_and_end_dates?
     validates :end_date_year, presence: true, if: :validate_start_and_end_dates?
 
-    validates_with ProjectValidator, if: :validate_start_and_end_dates?
+    validates_with ProjectValidator, if: :validate_start_and_end_dates? && :validate_no_errors?
 
     def validate_title?
         validate_title == true
@@ -34,6 +34,10 @@ class Project < ApplicationRecord
 
     def validate_start_and_end_dates?
         validate_start_and_end_dates == true
+    end
+
+    def validate_no_errors?
+        self.errors.empty?
     end
 
     def to_salesforce_json

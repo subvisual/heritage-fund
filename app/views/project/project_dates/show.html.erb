@@ -53,9 +53,15 @@
             <div class="govuk-form-group">
 
               <%= f.label :start_date, "Day", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :start_date_day, class: "govuk-input govuk-date-input__input govuk-input--width-2
-                                 #{"govuk-input--error" if @project.errors[:start_date_day].any?}",
-                                 value: "#{@project.start_date.day if @project.start_date.present?}" %>
+
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :start_date,
+                  input_name: :start_date_day,
+                  input_width: 2,
+                  date_type: "day"
+              } %>
 
             </div>
 
@@ -66,9 +72,15 @@
             <div class="govuk-form-group">
 
               <%= f.label :start_date, "Month", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :start_date_month, class: "govuk-input govuk-date-input__input govuk-input--width-2
-                                 #{"govuk-input--error" if @project.errors[:start_date_month].any?}",
-                                 value: "#{@project.start_date.month if @project.start_date.present?}" %>
+
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :start_date,
+                  input_name: :start_date_month,
+                  input_width: 2,
+                  date_type: "month"
+              } %>
 
             </div>
 
@@ -79,9 +91,14 @@
             <div class="govuk-form-group">
 
               <%= f.label :start_date, "Year", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :start_date_year, class: "govuk-input govuk-date-input__input govuk-input--width-4
-                                 #{"govuk-input--error" if @project.errors[:start_date_year].any?}",
-                                 value: "#{@project.start_date.year if @project.start_date.present?}" %>
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :start_date,
+                  input_name: :start_date_year,
+                  input_width: 4,
+                  date_type: "year"
+              } %>
 
             </div>
 
@@ -119,9 +136,15 @@
             <div class="govuk-form-group">
 
               <%= f.label :end_date, "Day", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :end_date_day, class: "govuk-input govuk-date-input__input govuk-input--width-2
-                                 #{"govuk-input--error" if @project.errors[:end_date_day].any?}",
-                                 value: "#{@project.end_date.day if @project.end_date.present?}" %>
+
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :end_date,
+                  input_name: :end_date_day,
+                  input_width: 2,
+                  date_type: "day"
+              } %>
 
             </div>
 
@@ -132,9 +155,15 @@
             <div class="govuk-form-group">
 
               <%= f.label :end_date, "Month", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :end_date_month, class: "govuk-input govuk-date-input__input govuk-input--width-2
-                                 #{"govuk-input--error" if @project.errors[:end_date_month].any?}",
-                                 value: "#{@project.end_date.month if @project.end_date.present?}" %>
+
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :end_date,
+                  input_name: :end_date_month,
+                  input_width: 2,
+                  date_type: "month"
+              } %>
 
             </div>
 
@@ -145,9 +174,15 @@
             <div class="govuk-form-group">
 
               <%= f.label :end_date, "Year", class: "govuk-label govuk-date-input__label" %>
-              <%= f.number_field :end_date_year, class: "govuk-input govuk-date-input__input govuk-input--width-4
-                                 #{"govuk-input--error" if @project.errors[:end_date_year].any?}",
-                                 value: "#{@project.end_date.year if @project.end_date.present?}" %>
+
+              <%= render partial: "partials/date_input", locals: {
+                  form_object: @project,
+                  form_for_object: f,
+                  model_attribute: :end_date,
+                  input_name: :end_date_year,
+                  input_width: 4,
+                  date_type: "year"
+              } %>
 
             </div>
 

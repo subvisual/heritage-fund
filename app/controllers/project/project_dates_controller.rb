@@ -30,6 +30,8 @@ class Project::ProjectDatesController < ApplicationController
       # it before, which we can determine by checking the FlashHash
       if is_project_length_greater_than_one_year(start_date, end_date) && flash.empty?
 
+        store_values_in_flash
+
         logger.debug "Displaying project length warning for project ID: #{@project.id}"
 
         flash.notice = "You can still submit your application if the start " +
@@ -53,7 +55,7 @@ class Project::ProjectDatesController < ApplicationController
 
     else
 
-      logger.debug "Start or end date validation failed for project ID: #{@project.id}"
+      store_values_in_flash
 
       render :show
 
@@ -62,6 +64,14 @@ class Project::ProjectDatesController < ApplicationController
   end
 
   private
+
+  def store_values_in_flash
+
+    params[:project].each do | key, value |
+      flash[key] = value.empty? ? "a" : value
+    end
+
+  end
 
   def project_params
     params.require(:project).permit(:start_date_day,
