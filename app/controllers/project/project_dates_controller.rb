@@ -68,7 +68,7 @@ class Project::ProjectDatesController < ApplicationController
   def store_values_in_flash
 
     params[:project].each do | key, value |
-      flash[key] = value.empty? ? "a" : value
+      flash[key] = value.empty? ? 0 : value
     end
 
   end
