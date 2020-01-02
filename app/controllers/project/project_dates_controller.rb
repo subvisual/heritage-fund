@@ -92,11 +92,7 @@ class Project::ProjectDatesController < ApplicationController
 
     logger.debug "Project length in days of #{length_in_days} for project ID: #{@project.id}"
 
-    if length_in_days > 365
-      return true
-    else
-      return false
-    end
+    return length_in_days > 365
 
   end
 
