@@ -40,6 +40,11 @@ Rails.application.routes.draw do
 
       get ':project_id/location', to: 'project_location#project_location', as: :location_get
 
+      get ':project_id/description', to: 'project_description#show', as: :description_get
+      put ':project_id/description', to: 'project_description#update', as: :description_put
+
+      get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
+
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
@@ -48,15 +53,12 @@ Rails.application.routes.draw do
       get 'community' => 'project_community#project_community'
       get 'differences' => 'project_differences#project_differences'
       get 'permission' => 'project_permission#project_permission'
-      get 'description' => 'project_description#project_description'
+      get 'location' => 'project_location#project_location'
       post 'save-location' => 'project_location#save_project_location'
       get 'other-location' => 'project_location#project_other_location'
-      get 'capital-works' => 'capital_works#capital_works'
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
-      get 'cash-contribution' => 'project_cash_contribution#project_cash_contribution'
-      post 'add-cash-contribution' => 'project_cash_contribution#add_cash_contribution'
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
       get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
       post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
@@ -73,6 +75,8 @@ Rails.application.routes.draw do
       post 'add-project-cost' => 'project_costs#add_cost'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
+      get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
+      put ':project_id/cash-contribution' => 'project_cash_contribution#put'
     end
   end
 

@@ -4,10 +4,13 @@ class Project < ApplicationRecord
     belongs_to :user
     has_one :organisation, through: :user
     has_many :released_forms
+    has_many :cash_contributions
     has_many_attached :evidence_of_support_files
+    accepts_nested_attributes_for :cash_contributions
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
+    attr_accessor :validate_description
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -28,6 +31,10 @@ class Project < ApplicationRecord
 
     validates_with ProjectValidator, if: :validate_no_errors && :validate_start_and_end_dates?
 
+    validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
+    validates :description, presence: true, if: :validate_description?
+    validate :validate_description_length, if: :validate_description?
+
     def validate_title?
         validate_title == true
     end
@@ -38,6 +45,21 @@ class Project < ApplicationRecord
 
     def validate_no_errors?
         self.errors.empty?
+
+    def validate_description?
+        validate_description == true
+    end
+
+    def validate_description_length
+
+        description_word_count = self.description.split(' ').count
+
+        logger.debug "Description word count is #{description_word_count}"
+
+        if description_word_count > 500
+            self.errors.add(:description, "Project description must be 500 words or fewer")
+        end
+
     end
 
     def to_salesforce_json

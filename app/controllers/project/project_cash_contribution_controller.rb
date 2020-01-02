@@ -1,29 +1,21 @@
 class Project::ProjectCashContributionController < ApplicationController
+
+  include ProjectContext
+
   def project_cash_contribution
+    @cash_contribution = @project.cash_contributions.build
   end
 
-  def cash_contribution_question
+
+  def put
+    # TODO: Validate fields
+    @project.update(project_params)
+    redirect_to three_to_ten_k_project_project_cash_contribution_path
   end
 
-  def save_cash_contribution_question
-
-    cash_contributions = params['cash-contributions'].to_s == 'yes' ? true : false unless params['cash-contributions'].nil?
-
-    # TODO really save cash_contributions data
-
-    if (cash_contributions == true)
-      redirect_to '/3-10k/project/cash-contribution'
-    else
-      redirect_to '/grant/request'
-    end
-  end
-
-  def add_cash_contribution
-    # TODO save cash_contribution
-  end
-
-  def process_cash_contributions
-    # TODO process cash contributions
+  private
+  def project_params
+    params.require(:project).permit(cash_contributions_attributes: [:description, :secured, :amount, :cash_contribution_evidence_files])
   end
 
 

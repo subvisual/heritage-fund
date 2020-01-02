@@ -1,8 +1,6 @@
 class Project::ProjectSupportEvidenceController < ApplicationController
 
-  include ProjectHelper
-
-  before_action :set_project
+  include ProjectContext
 
   def project_support_evidence
 
