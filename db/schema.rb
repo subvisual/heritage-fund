@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_133056) do
+ActiveRecord::Schema.define(version: 2020_01_02_085856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 2019_12_19_133056) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "cash_contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "amount"
+    t.string "description"
+    t.integer "secured"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "project_id", null: false
+    t.index ["project_id"], name: "index_cash_contributions_on_project_id"
   end
 
   create_table "legal_signatories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_12_19_133056) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.string "evidence_description", default: [], array: true
+    t.text "description"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -103,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_12_19_133056) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cash_contributions", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"
 end
