@@ -26,7 +26,7 @@ class Project < ApplicationRecord
     validates :end_date_month, presence: true, if: :validate_start_and_end_dates?
     validates :end_date_year, presence: true, if: :validate_start_and_end_dates?
 
-    validates_with ProjectValidator, if: :validate_no_erros && :validate_start_and_end_dates?
+    validates_with ProjectValidator, if: :validate_no_errors && :validate_start_and_end_dates?
 
     def validate_title?
         validate_title == true
