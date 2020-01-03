@@ -70,7 +70,8 @@
         <% end %>
         <hr />
         <% @project.evidence_of_support_files.each do |f| %>
-          <li><%=link_to(f.blob.filename, rails_blob_path(f, disposition: "attachment")) %></li>
+          <%# TODO: Link to download path (currently not working due to PaaS permissions %>
+          <li><%= f.blob.filename %></li>
         <% end %>
         <div class="nlhf-summary__body">
           <%= '<h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>'.html_safe unless @project.evidence_description.any? %>
