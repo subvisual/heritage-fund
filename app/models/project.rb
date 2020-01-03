@@ -13,6 +13,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_same_location
     attr_accessor :validate_description
     attr_accessor :validate_difference
+    attr_accessor :validate_matter
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -55,6 +56,14 @@ class Project < ApplicationRecord
         ) if validate_difference?
     end
 
+    validate do
+        validate_length(
+            :matter,
+            500,
+            "Description of why your project matters to you and your community must be 500 words or fewer"
+        ) if validate_matter?
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -77,6 +86,10 @@ class Project < ApplicationRecord
 
     def validate_difference?
         validate_difference == true
+    end
+
+    def validate_matter?
+        validate_matter == true
     end
 
     def validate_length(field, max_length, error_msg)
