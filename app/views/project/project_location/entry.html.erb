@@ -1,0 +1,83 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Enter your project address details" : "Enter your project address details" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_line1
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_location_address_put_path, method: :put do |f|  %>
+
+  <fieldset class="govuk-fieldset">
+
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-fieldset__heading">
+        <span class="govuk-caption-xl">About your project</span>
+        Enter your project address details
+      </h1>
+    </legend>
+
+    <div class="govuk-form-group">
+      <%= f.label :line1, "Project address line 1", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :line1} if @project.errors[:line1].any? %>
+      <%= f.text_field :line1,
+                       autocomplete: 'address-line1',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:line1].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :line2, "Project address line 2", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :line2} if @project.errors[:line2].any? %>
+      <%= f.text_field :line2,
+                       autocomplete: 'address-line2',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:line2].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :line3, "Project address line 3", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :line3} if @project.errors[:line3].any? %>
+      <%= f.text_field :line3,
+                       autocomplete: 'address-line3',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:line3].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :townCity, "Project town", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :townCity} if @project.errors[:townCity].any? %>
+      <%= f.text_field :townCity,
+                       autocomplete: 'address-level2',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:townCity].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :county, "Project county", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :county} if @project.errors[:county].any? %>
+      <%= f.text_field :county,
+                       autocomplete: 'address-level1',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:county].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :postcode, "Project postcode", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :postcode} if @project.errors[:postcode].any? %>
+      <%= f.text_field :postcode,
+                       autocomplete: 'postal-code',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @project.errors[:postcode].any?}" %>
+    </div>
+
+    <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+  </fieldset>
+
+<% end %>

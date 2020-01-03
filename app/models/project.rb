@@ -11,6 +11,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
     attr_accessor :validate_same_location
+    attr_accessor :validate_address
     attr_accessor :validate_description
     attr_accessor :validate_difference
     attr_accessor :validate_matter
@@ -37,6 +38,11 @@ class Project < ApplicationRecord
     validates_with ProjectValidator, if: :validate_no_errors && :validate_start_and_end_dates?
 
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
+    validates :same_location, presence: true, if: :validate_same_location?
+    validates :line1, presence: true, if: :validate_address?
+    validates :townCity, presence: true, if: :validate_address?
+    validates :county, presence: true, if: :validate_address?
+    validates :postcode, presence: true, if: :validate_address?
     validates :same_location, presence: true, if: :validate_same_location?
     validates :description, presence: true, if: :validate_description?
 
@@ -78,6 +84,10 @@ class Project < ApplicationRecord
 
     def validate_same_location?
         validate_same_location == true
+    end
+
+    def validate_address?
+        validate_address == true
     end
 
     def validate_description?
