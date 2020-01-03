@@ -1,0 +1,2 @@
+class ProjectCost < ApplicationRecord
+end
