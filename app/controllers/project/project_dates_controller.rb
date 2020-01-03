@@ -34,7 +34,7 @@ class Project::ProjectDatesController < ApplicationController
 
         logger.debug "Displaying project length warning for project ID: #{@project.id}"
 
-        flash.notice = "You can still submit your application if the start " +
+        flash[:date_warning] = "You can still submit your application if the start " +
             "and end dates are over one year but this can affect assessment."
 
         render :show

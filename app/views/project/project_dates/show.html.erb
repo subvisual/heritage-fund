@@ -15,13 +15,13 @@
       When will your project happen?
     </h1>
 
-    <% if flash.notice %>
+    <% if flash[:date_warning] %>
 
       <div class="govuk-warning-text">
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-warning-text-assistive">Warning</span>
-          <%= flash.notice %>
+          <%= flash[:date_warning] %>
         </strong>
       </div>
 
