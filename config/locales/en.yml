@@ -66,4 +66,3 @@ en-GB:
               blank: "Select whether or not your project will take place at the same location as your organisation"
             description:
               blank: "Enter a description of your project"
-              too_long: "Project description must be 500 words or fewer"

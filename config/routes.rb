@@ -46,13 +46,16 @@ Rails.application.routes.draw do
 
       get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
 
+      get ':project_id/difference', to: 'project_difference#show', as: :difference_get
+      put ':project_id/difference', to: 'project_difference#update', as: :difference_put
+
+      get ':project_id/why-does-your-project-matter', to: 'project_community#project_community', as: :matter_get
+
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
       get 'best-placed' => 'project_best_placed#project_best_placed'
       get 'availability' => 'project_availability#project_availability'
-      get 'community' => 'project_community#project_community'
-      get 'differences' => 'project_differences#project_differences'
       get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
       post 'save-location' => 'project_location#save_project_location'

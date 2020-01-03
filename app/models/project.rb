@@ -12,6 +12,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_start_and_end_dates
     attr_accessor :validate_same_location
     attr_accessor :validate_description
+    attr_accessor :validate_difference
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -37,7 +38,22 @@ class Project < ApplicationRecord
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
     validates :same_location, presence: true, if: :validate_same_location?
     validates :description, presence: true, if: :validate_description?
-    validate :validate_description_length, if: :validate_description?
+
+    validate do
+        validate_length(
+            :description,
+            500,
+            "Project description must be 500 words or fewer"
+        ) if validate_description?
+    end
+
+    validate do
+        validate_length(
+            :difference,
+            500,
+            "Description of the difference your project will make must be 500 words or fewer"
+        ) if validate_difference?
+    end
 
     def validate_title?
         validate_title == true
@@ -59,14 +75,18 @@ class Project < ApplicationRecord
         validate_description == true
     end
 
-    def validate_description_length
+    def validate_difference?
+        validate_difference == true
+    end
 
-        description_word_count = self.description.split(' ').count
+    def validate_length(field, max_length, error_msg)
 
-        logger.debug "Description word count is #{description_word_count}"
+        word_count = self.public_send(field).split(' ').count
 
-        if description_word_count > 500
-            self.errors.add(:description, "Project description must be 500 words or fewer")
+        logger.debug "#{field} word count is #{word_count}"
+
+        if word_count > max_length
+            self.errors.add(field, error_msg)
         end
 
     end
