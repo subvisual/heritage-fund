@@ -62,6 +62,8 @@ en-GB:
               blank: "Enter the month your project will end on"
             end_date_year:
               blank: "Enter the year your project will end on"
+            same_location:
+              blank: "Select whether or not your project will take place at the same location as your organisation"
             description:
               blank: "Enter a description of your project"
               too_long: "Project description must be 500 words or fewer"

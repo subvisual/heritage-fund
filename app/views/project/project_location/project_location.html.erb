@@ -1,39 +1,45 @@
-<div>
-  <div>
-    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
-  </div>
-  <form action="/3-10k/project/save-location" method="post">
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="same-location-hint">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <h1 class="govuk-fieldset__heading">
-            Is the project taking place at the same location as your organisations address?
-          </h1>
-        </legend>
-        <div class="govuk-radios">
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="same-location" name="same-location" type="radio" value="yes">
-            <label class="govuk-label govuk-radios__label" for="same-location">
-              Yes
-            </label>
-          </div>
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="same-location-2" name="same-location" type="radio" value="no">
-            <label class="govuk-label govuk-radios__label" for="same-location-2">
-              No
-            </label>
-          </div>
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_same_location_yes
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_location_put_path, method: :put do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">About your project</span>
+          Is the project taking place at the same location as your organisation's address?
+        </h1>
+
+      </legend>
+
+      <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+          <%= f.radio_button :same_location, "yes", class: "govuk-radios__input" %>
+          <%= f.label :same_location_yes, "Yes", class: "govuk-label govuk-radios__label" %>
         </div>
-      </fieldset>
-    </div>
-    <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
-  </form>
 
-  <!--TODO Remove the link when routing is concrete-->
-  <% if Rails.env.development? %>
-    <a href="/3-10k/project/location">skip to next page</a>
-  <% end %>
+        <div class="govuk-radios__item">
+          <%= f.radio_button :same_location, "no", class: "govuk-radios__input" %>
+          <%= f.label :same_location_yes, "No", class: "govuk-label govuk-radios__label" %>
+        </div>
 
-</div>
+      </div>
 
+
+    </fieldset>
+
+
+  </div>
+
+  <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'save and continue button' %>
+
+<% end %>
