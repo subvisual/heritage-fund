@@ -41,6 +41,16 @@ Rails.application.routes.draw do
       get ':project_id/location', to: 'project_location#project_location', as: :location_get
       put ':project_id/location', to: 'project_location#update', as: :location_put
 
+      # TODO: Refactor this into a single place for both organisation and projects
+      get ':project_id/location/postcode', to: 'project_location#show_postcode_lookup', as: :location_postcode_get
+      post ':project_id/location/address-results', to: 'project_location#display_address_search_results', as: :location_search_results
+      put ':project_id/location/address', to: 'project_location#assign_address_attributes', as: :location_assign_address_attributes
+      get ':project_id/location/address', to: 'project_location#entry', as: :location_address_get
+      put ':project_id/location/address/add', to: 'project_location#different_location', as: :location_address_put
+      # This route ensures that attempting to navigate back to the list of address results
+      # redirects the user back to the search page
+      get ':project_id/location/address-results', to: 'project_location#show_postcode_lookup'
+
       get ':project_id/description', to: 'project_description#show', as: :description_get
       put ':project_id/description', to: 'project_description#update', as: :description_put
 
@@ -59,9 +69,6 @@ Rails.application.routes.draw do
       get 'involvement' => 'project_involvement#project_involvement'
       get 'best-placed' => 'project_best_placed#project_best_placed'
       get 'permission' => 'project_permission#project_permission'
-      get 'location' => 'project_location#project_location'
-      post 'save-location' => 'project_location#save_project_location'
-      get 'other-location' => 'project_location#project_other_location'
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
