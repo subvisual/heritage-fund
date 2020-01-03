@@ -16,7 +16,7 @@ class Project::ProjectMattersController < ApplicationController
 
       logger.debug "Finished setting project matter for project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_availability_get
+      redirect_to :three_to_ten_k_project_heritage_get
 
     else
 

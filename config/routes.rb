@@ -62,12 +62,14 @@ Rails.application.routes.draw do
       get ':project_id/how-does-your-project-matter', to: 'project_matters#show', as: :matter_get
       put ':project_id/how-does-your-project-matter', to: 'project_matters#update', as: :matter_put
 
-      get ':project_id/availability', to: 'project_availability#project_availability', as: :availability_get
+      get ':project_id/your-project-heritage', to: 'project_heritage#show', as: :heritage_get
+      put ':project_id/your-project-heritage', to: 'project_heritage#update', as: :heritage_put
+
+      get 'best-placed', to: 'project_best_placed#project_best_placed', as: :best_placed_get
 
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
-      get 'best-placed' => 'project_best_placed#project_best_placed'
       get 'permission' => 'project_permission#project_permission'
       get 'costs' => 'project_costs#project_costs'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
