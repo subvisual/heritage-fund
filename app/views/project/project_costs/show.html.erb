@@ -1,0 +1,107 @@
+<%= content_for :page_title, 'Project costs' %>
+<div>
+  <div>
+    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">How much will your project cost?</h1>
+    <h1 class="govuk-caption-m govuk-!-margin-top-0">Project costs help us understand how you plan to put your project into action</h1>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <!--left hand side-->
+      <h1 class="govuk-heading-m govuk-!-margin-bottom-0">Add a cost</h1>
+      <%= form_with model:  @project, url: three_to_ten_k_project_project_costs_path, method: :put do |f|  %>
+        <% f.fields_for :project_costs, @project_cost do |pc| %>
+        <div class="govuk-form-group govuk-!-margin-top-3">
+          <%= pc.label :cost_type, class: 'govuk-label' %>
+          <%= pc.select :cost_type, options_for_select(ProjectCost.cost_types.sort.map{|k,_v| [k.humanize.capitalize, k]}), {},  {class: 'govuk-select'} %>
+        </div>
+
+        <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+          <div class="govuk-form-group">
+            <%= pc.label :description, class: 'govuk-label' %>
+            <%= pc.text_area :description, class: 'govuk-textarea', rows: 5 %>
+            <%# TODO: Fix JS word count %>
+            <span id="cost-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+            You have 50 words remaining</span>
+          </div>
+        </div>
+
+        <div class="govuk-form-group">
+          <%= pc.label :amount, class: 'govuk-label' %>
+          <span id="cost-amount-hint" class="govuk-hint">This can be an estimate</span>
+         <%= pc.number_field :amount, class: 'govuk-input' %>
+        </div>
+
+          <%= pc.submit 'Add this cost', role: "button", 'data-prevent-double-click' => 'true', class: 'govuk-button govuk-button--secondary' %>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+      <div class="nlhf-highlight-content nlhf-highlight-content--help">
+
+        <h2 class="govuk-heading-m">How to add costs</h2>
+        <p class="govuk-body">For each of your project costs:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Choose the type of cost</li>
+          <li>Provide a description of the cost</li>
+          <li>Give the cost amount (this can be an estimate)</li>
+          <li>Click the 'add this cost' button</li>
+        </ul>
+        <h1 class="govuk-heading-m govuk-!-font-weight-bold">Add a new cost for each project cost.</h1>
+        <p class="govuk-body">For example - If you are doing 3 activities, add 3 separate activity cost types, each with their own description and amount. </p>
+
+      </div>
+
+      <section class="nlhf-summary" id="summary-section">
+
+        <header class="nlhf-summary__header">
+          <h2 class="govuk-heading-m">Your project costs</h2>
+        </header>
+
+        <div class="nlhf-summary__body">
+          <% unless @project.project_costs.first.id.present? %>
+            <h3 class="govuk-heading-m">You have not added any costs yet</h3>
+            <p class="govuk-body">Each cost will be shown here with a running total</p>
+
+          <% else %>
+            <table class="govuk-table">
+              <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Cost Type</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header">Amount</th>
+              </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+
+                <% @project.project_costs.each do |pc| %>
+                <tr class="govuk-table__row">
+                  <td scope="govuk-table__cell" class="govuk-table__cell"><%= pc.cost_type&.humanize&.capitalize %>
+                  <td class="govuk-table__cell"><%= pc.description %></td>
+                  <td class="govuk-table__cell"><%= number_to_currency(pc.amount, strip_insignificant_zeros: true) %></td>
+                </tr>
+               <% end %>
+
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">Total</th>
+                <td class="govuk-table__cell"></td>
+                <td class="govuk-table__header"><%= number_to_currency(calculate_total(@project.project_costs), strip_insignificant_zeros: true) %></td>
+              </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-margin-bottom-3">If you have finished adding all your costs</span>
+      <%# TODO: Button should redirect to next route %>
+      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+    </div>
+  </div>
+</div>

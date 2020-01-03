@@ -67,11 +67,17 @@ Rails.application.routes.draw do
 
       get 'best-placed', to: 'project_best_placed#project_best_placed', as: :best_placed_get
 
+      get ':project_id/costs' => 'project_costs#show', as: :project_costs
+      put ':project_id/costs' => 'project_costs#update'
+
+
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'involvement' => 'project_involvement#project_involvement'
       get 'permission' => 'project_permission#project_permission'
-      get 'costs' => 'project_costs#project_costs'
+      get 'location' => 'project_location#project_location'
+      post 'save-location' => 'project_location#save_project_location'
+      get 'other-location' => 'project_location#project_other_location'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
@@ -87,7 +93,6 @@ Rails.application.routes.draw do
       post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
       post 'submit-application' => 'project_declaration#submit_application'
       get 'volunteers' => 'project_volunteers#project_volunteers'
-      post 'add-project-cost' => 'project_costs#add_cost'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
       get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution

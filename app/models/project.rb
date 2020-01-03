@@ -5,8 +5,9 @@ class Project < ApplicationRecord
     has_one :organisation, through: :user
     has_many :released_forms
     has_many :cash_contributions
+    has_many :project_costs
     has_many_attached :evidence_of_support_files
-    accepts_nested_attributes_for :cash_contributions
+    accepts_nested_attributes_for :cash_contributions, :project_costs
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
