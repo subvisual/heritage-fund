@@ -35,7 +35,7 @@ class Project < ApplicationRecord
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
     validates :description, presence: true, if: :validate_description?
 
-    validate do ||
+    validate do
         validate_length(
             :description,
             500,
@@ -43,7 +43,7 @@ class Project < ApplicationRecord
         ) if validate_description?
     end
 
-    validate do ||
+    validate do
         validate_length(
             :difference,
             500,
