@@ -1,5 +1,4 @@
 require 'ideal_postcodes'
-require 'pry'
 
 class Project::ProjectLocationController < ApplicationController
   include ProjectContext
