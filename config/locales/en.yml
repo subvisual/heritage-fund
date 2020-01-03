@@ -64,4 +64,3 @@ en-GB:
               blank: "Enter the year your project will end on"
             description:
               blank: "Enter a description of your project"
-              too_long: "Project description must be 500 words or fewer"

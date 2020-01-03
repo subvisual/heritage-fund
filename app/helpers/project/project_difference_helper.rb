@@ -1,0 +1,2 @@
+module Project::ProjectDifferenceHelper
+end

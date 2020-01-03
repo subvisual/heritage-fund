@@ -11,7 +11,7 @@ rails g controller project/project_dates project_dates
 rails g controller project/project_location project_location project_location_no
 rails g controller project/project_description project_description
 rails g controller project/project_permission project_permission
-rails g controller project/project_differences project_differences
+rails g controller project/project_difference project_difference
 rails g controller project/project_community project_community
 rails g controller project/project_availability project_availability
 rails g controller project/project_best_placed project_best_placed
