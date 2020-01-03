@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_123144) do
+ActiveRecord::Schema.define(version: 2020_01_03_123718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2020_01_03_123144) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "project_id", null: false
+    t.index ["project_id"], name: "index_project_costs_on_project_id"
   end
 
   create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -133,6 +135,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_123144) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_contributions", "projects"
+  add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"
 end
