@@ -10,6 +10,7 @@ class Project < ApplicationRecord
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
+    attr_accessor :validate_same_location
     attr_accessor :validate_description
 
     # These attributes are used to set individual error messages
@@ -20,6 +21,8 @@ class Project < ApplicationRecord
     attr_accessor :end_date_day
     attr_accessor :end_date_month
     attr_accessor :end_date_year
+
+    attr_accessor :same_location
 
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
     validates :start_date_day, presence: true, if: :validate_start_and_end_dates?
@@ -32,6 +35,7 @@ class Project < ApplicationRecord
     validates_with ProjectValidator, if: :validate_no_errors && :validate_start_and_end_dates?
 
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
+    validates :same_location, presence: true, if: :validate_same_location?
     validates :description, presence: true, if: :validate_description?
     validate :validate_description_length, if: :validate_description?
 
@@ -45,6 +49,10 @@ class Project < ApplicationRecord
 
     def validate_no_errors?
         self.errors.empty?
+    end
+
+    def validate_same_location?
+        validate_same_location == true
     end
 
     def validate_description?
