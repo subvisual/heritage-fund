@@ -37,8 +37,6 @@
                       class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:heritage_description].any?}",
                       "aria-describedby" => "project_heritage_description-info project_heritage_description-hint" %>
 
-      <%# TODO: Fix word count JS implementation %>
-
       <span id="project_difference-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
         You can enter up to 500 words
       </span>
