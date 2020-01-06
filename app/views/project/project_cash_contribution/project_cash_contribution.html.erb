@@ -19,7 +19,8 @@
               <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
                 <div class="govuk-form-group">
                   <%= cc.label :description, class: 'govuk-label' %>
-                  <%= cc.text_area :description, class: 'govuk-textarea' %>
+                  <%= cc.text_area :description, class: 'govuk-textarea govuk-js-character-count' %>
+                  <span class="govuk-hint govuk-character-count__message" id="project_cash_contributions_attributes_0_description-info"></span>
                 </div>
               </div>
             </div>
