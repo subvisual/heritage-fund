@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_01_06_101655) do
     t.text "matter"
     t.text "heritage_description"
     t.text "best_placed_description"
+    t.text "involvement_description"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
