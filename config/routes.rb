@@ -65,19 +65,21 @@ Rails.application.routes.draw do
       get ':project_id/your-project-heritage', to: 'project_heritage#show', as: :heritage_get
       put ':project_id/your-project-heritage', to: 'project_heritage#update', as: :heritage_put
 
-      get 'best-placed', to: 'project_best_placed#project_best_placed', as: :best_placed_get
+      get ':project_id/why-is-your-organisation-best-placed',
+          to: 'project_best_placed#show', as: :best_placed_get
+      put ':project_id/why-is-your-organisation-best-placed',
+          to: 'project_best_placed#update', as: :best_placed_put
+
+      get ':project_id/how-will-your-project-involve-people',
+          to: 'project_involvement#project_involvement', as: :involvement_get
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
-
       get 'project-list' => 'project_list#project_list'
       get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
-      get 'involvement' => 'project_involvement#project_involvement'
       get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
-      post 'save-location' => 'project_location#save_project_location'
-      get 'other-location' => 'project_location#project_other_location'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'

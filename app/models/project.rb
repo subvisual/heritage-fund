@@ -17,6 +17,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_difference
     attr_accessor :validate_matter
     attr_accessor :validate_heritage_description
+    attr_accessor :validate_best_placed_description
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -80,6 +81,14 @@ class Project < ApplicationRecord
         ) if validate_heritage_description?
     end
 
+    validate do
+        validate_length(
+            :best_placed_description,
+            500,
+            "Description of why your organisation is best placed to deliver your project must be 500 words or fewer"
+        ) if validate_best_placed_description?
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -114,6 +123,10 @@ class Project < ApplicationRecord
 
     def validate_heritage_description?
         validate_heritage_description == true
+    end
+
+    def validate_best_placed_description?
+        validate_best_placed_description == true
     end
 
     def validate_length(field, max_length, error_msg)
