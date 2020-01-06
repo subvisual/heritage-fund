@@ -45,6 +45,13 @@ In a separate terminal tab run:
 
 `./bin/webpack --watch` (or `npm start` if you have node package manager installed)
 
+### Deploying the app
+#### Staging
+`master` branch is deployed automatically by GitHub actions
+#### Research
+From your local machine run `cf v3-push funding-frontend-research`
+
+
 
 
 
