@@ -74,3 +74,5 @@ en-GB:
               blank: "Enter the postcode where your project is located"
             description:
               blank: "Enter a description of your project"
+            involvement_description:
+              blank: "Enter a description of how your project will involve a wider range of people"
