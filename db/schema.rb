@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_145614) do
+ActiveRecord::Schema.define(version: 2020_01_06_080153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_145614) do
     t.text "difference"
     t.text "matter"
     t.text "heritage_description"
+    t.text "best_placed_description"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
