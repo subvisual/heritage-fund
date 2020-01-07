@@ -8,9 +8,4 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     post user_session_url
   end
 
-  test "should get show" do
-    get dashboard_show_url
-    assert_response :success
-  end
-
 end

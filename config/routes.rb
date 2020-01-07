@@ -27,10 +27,7 @@ Rails.application.routes.draw do
 
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
-
-      get 'new' => 'new_project#new_project'
-      # TODO: Remove this when creation of project is wired up
-      put 'new', to: 'new_project#temp_create_new_project', as: :temp_create_new
+      get 'create-new-project', to: 'new_project#create_new_project', as: :create
 
       get ':project_id/title', to: 'project_title#show', as: :title_get
       put ':project_id/title', to: 'project_title#update', as: :title_put
@@ -109,9 +106,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :projects, except: [:destroy, :index]
-  get 'dashboard/show'
-  root to: "home#show"
-  get 'dashboard' => 'dashboard#show'
+  root to: "dashboard#show"
+  get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"

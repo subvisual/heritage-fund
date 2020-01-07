@@ -11,7 +11,8 @@ class HomeController < ApplicationController
     if current_user.organisation
 
       logger.info "Existing organisation #{current_user.organisation.id} found for #{current_user.id.to_s}"
-      @start_now_link_value = organisation_organisation_summary_get_path(current_user.organisation)
+
+      @start_now_link_value = three_to_ten_k_project_create_path
 
     else
 
