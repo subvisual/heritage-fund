@@ -21,6 +21,14 @@ class Project::ProjectVolunteersController < ApplicationController
 
   end
 
+  def process_volunteers
+    # TODO process volunteers and redirect to next page in the journey
+
+    redirect_to request.referer
+
+
+  end
+
   def volunteers
     # TODO get volunteers from the db
     current_volunteers = session['volunteers'].present? ? session['volunteers'] : Array.new
