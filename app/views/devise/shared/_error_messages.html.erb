@@ -1,4 +1,4 @@
-<% if resource.errors.any? %>
+<% if resource.errors.any?  || flash[:alert].present? %>
 <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
   <h2 class="govuk-error-summary__title" id="error-summary-title">
       <%= I18n.t(
@@ -8,6 +8,7 @@
        %>
   </h2>
   <div class="govuk-error-summary__body">
+    <%= flash[:alert] %>
     <ul class="govuk-list govuk-error-summary__list">
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
