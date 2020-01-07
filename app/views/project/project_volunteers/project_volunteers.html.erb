@@ -10,10 +10,23 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <form action="add-volunteer" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
         <div class="nlhf-add-item">
           <header class="nlhf-add-item__header">
-            <h2 class="govuk-heading-l nlhf-add-item__header__title">Add a volunteer</h2>
+            <h2 class="govuk-heading-m">Add a volunteer</h2>
           </header>
+
+          <div class="nlhf-add-item__row">
+            <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="volunteer-description">
+                  Description
+                </label>
+                <textarea class="govuk-textarea govuk-js-character-count" id="volunteer-description" name="volunteer-description" rows="5" aria-describedby="volunteer-description-info"></textarea><span id="volunteer-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You have 50 words remaining</span>
+              </div>
+            </div>
+          </div>
+
           <div class="nlhf-add-item__body">
 
             <div class="nlhf-add-item__row">
@@ -48,30 +61,49 @@
           <h2 class="govuk-heading-m">Your project volunteers</h2>
         </header>
 
-        <div class="nlhf-summary__body">
+        <% if @total_volunteer_hours == 0 %>
           <h3 class="govuk-heading-m">You have not added any volunteers</h3>
-          <div class="nlhf-summary__total">
-            <h3 class="nlhf-summary__total__title">
-              <span class="nlhf-summary__total__title-text">Total</span>
-              <span class="nlhf-summary__total__title-val">0 Hours</span>
-            </h3>
-          </div>
-        </div>
+        <% end %>
+
+        <% if @total_volunteer_hours > 0 %>
+
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Description</th>
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Hours</th>
+            </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+
+            <% @current_volunteers.each do |volunteer| %>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header"><%= volunteer['description'].to_s %></th>
+                <td class="govuk-table__cell govuk-table__cell--numeric"><%= volunteer['amount'].to_s %></td>
+              </tr>
+            <% end %>
+
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">Total hours</th>
+              <td class="govuk-table__cell govuk-table__cell--numeric"><%= @total_volunteer_hours.to_s %></td>
+            </tr>
+            </tbody>
+          </table>
+
+        <% end %>
       </section>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <form action="process-volunteers">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
+            <p class="govuk-body">If you have finished adding volunteers</p>
+            <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
+              Save and continue
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-
-  <hr class="govuk-section-break--l govuk-section-break--visible">
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <form action="process-volunteers">
-        <p class="govuk-body">If you have finished adding volunteers</p>
-        <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
-          Save and continue
-        </button>
-      </form>
-    </div>
-  </div>
-
-
 </div>

@@ -95,6 +95,7 @@ Rails.application.routes.draw do
       post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
       post 'submit-application' => 'project_declaration#submit_application'
       get 'volunteers' => 'project_volunteers#project_volunteers'
+      post 'add-volunteer' => 'project_volunteers#add_volunteer'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
       get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
