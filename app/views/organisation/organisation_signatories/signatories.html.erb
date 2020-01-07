@@ -30,9 +30,23 @@
 
 <h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
 
+<span class="govuk-hint" id="legal-signatory-1-fieldset-hint">
+  A signatory is a person who is authorised to sign legal documents on behalf
+  of your organisation. Please tell us the names of 2 legal, or authorised,
+  signatories for your organisation.
+
+  <br /><br />
+
+  We expect an organisation to have 2 legal signatories. However, we can
+  accept 1 signatory in some limited cases, call us on 020 7591 6044 to
+  discuss your application.
+</span>
+
 <%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
 
   <% @legal_signatories.each_with_index do |signatory, i| %>
+
+    <fieldset class="govuk-fieldset" id=<%= "legal-signatory-#{i+1}-fieldset" %>>
 
     <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
 
@@ -63,6 +77,8 @@
       </div>
 
     <% end %>
+
+    </fieldset>
 
   <% end %>
 

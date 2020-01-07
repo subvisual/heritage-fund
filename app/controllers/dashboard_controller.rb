@@ -2,7 +2,9 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
+
+    @projects = Project.all.where(user_id: current_user.id)
+
   end
   
 end

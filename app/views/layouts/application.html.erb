@@ -9,7 +9,6 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
-
 <body class="govuk-template__body nlhf-template__body">
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
@@ -21,6 +20,11 @@
         <div class="govuk-grid-column-two-thirds">
           <%= yield %>
         </div>
+        <% if content_for? :secondarycontent %>
+          <div class="govuk-grid-column-one-third">
+            <%= yield :secondarycontent %>
+          </div>
+        <% end %>
       </div>
     </main>
   </div>

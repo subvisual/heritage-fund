@@ -27,10 +27,7 @@ Rails.application.routes.draw do
 
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
-
-      get 'new' => 'new_project#new_project'
-      # TODO: Remove this when creation of project is wired up
-      put 'new', to: 'new_project#temp_create_new_project', as: :temp_create_new
+      get 'create-new-project', to: 'new_project#create_new_project', as: :create
 
       get ':project_id/title', to: 'project_title#show', as: :title_get
       put ':project_id/title', to: 'project_title#update', as: :title_put
@@ -71,13 +68,16 @@ Rails.application.routes.draw do
           to: 'project_best_placed#update', as: :best_placed_put
 
       get ':project_id/how-will-your-project-involve-people',
-          to: 'project_involvement#project_involvement', as: :involvement_get
+          to: 'project_involvement#show', as: :involvement_get
+      put ':project_id/how-will-your-project-involve-people',
+          to: 'project_involvement#update', as: :involvement_put
+
+      get ':project_id/other-outcomes', to: 'project_other_outcomes#project_other_outcomes', as: :other_outcomes_get
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
       get 'project-list' => 'project_list#project_list'
-      get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
@@ -107,9 +107,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :projects, except: [:destroy, :index]
-  get 'dashboard/show'
-  root to: "home#show"
-  get 'dashboard' => 'dashboard#show'
+  root to: "dashboard#show"
+  get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"

@@ -1,0 +1,51 @@
+<% content_for :page_title, @project.errors.any? ? "Error: How will your project involve a wider range of people?" : "How will your project involve a wider range of people?" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_involvement_description
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_involvement_put_path, method: :put do |f| %>
+
+  <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+    <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors[:involvement_description].any? %>">
+
+      <h1 class="govuk-label-wrapper">
+        <span class="govuk-caption-xl">About your project</span>
+        <%= f.label :involvement_description,
+                    "How will your project involve a wider range of people?",
+                    class: "govuk-label govuk-label--xl"
+        %>
+      </h1>
+
+      <div class="govuk-inset-text">
+        This is a mandatory outcome for all projects funded by the National Lottery Heritage Fund.
+      </div>
+
+      <span id="project_involvement_description-hint" class="govuk-hint">
+        Your answer should tell us how you will reach new groups of people through your project.
+        Include evidence to support your plans.
+      </span>
+
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @project,
+                          input_field_id: :involvement_description} if @project.errors[:involvement_description].any? %>
+
+      <%= f.text_area :involvement_description, rows: 10,
+                      class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:involvement_description].any?}",
+                      "aria-describedby" => "project_involvement_description-info project_involvement_description-hint" %>
+
+      <%# TODO: Fix word count JS implementation %>
+
+      <span id="project_involvement_description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+        You can enter up to 300 words
+      </span>
+
+    </div>
+
+  </div>
+
+  <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+<% end %>
