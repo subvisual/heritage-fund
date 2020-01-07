@@ -18,6 +18,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_matter
     attr_accessor :validate_heritage_description
     attr_accessor :validate_best_placed_description
+    attr_accessor :validate_involvement_description
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -48,6 +49,7 @@ class Project < ApplicationRecord
     validates :postcode, presence: true, if: :validate_address?
     validates :same_location, presence: true, if: :validate_same_location?
     validates :description, presence: true, if: :validate_description?
+    validates :involvement_description, presence: true, if: :validate_involvement_description?
 
     validate do
         validate_length(
@@ -89,6 +91,14 @@ class Project < ApplicationRecord
         ) if validate_best_placed_description?
     end
 
+    validate do
+        validate_length(
+            :involvement_description,
+            300,
+            "Description of how your project will involve a wider range of people must be 300 words or fewer"
+        ) if validate_involvement_description?
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -127,6 +137,10 @@ class Project < ApplicationRecord
 
     def validate_best_placed_description?
         validate_best_placed_description == true
+    end
+
+    def validate_involvement_description?
+        validate_involvement_description == true
     end
 
     def validate_length(field, max_length, error_msg)

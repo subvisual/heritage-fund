@@ -71,13 +71,16 @@ Rails.application.routes.draw do
           to: 'project_best_placed#update', as: :best_placed_put
 
       get ':project_id/how-will-your-project-involve-people',
-          to: 'project_involvement#project_involvement', as: :involvement_get
+          to: 'project_involvement#show', as: :involvement_get
+      put ':project_id/how-will-your-project-involve-people',
+          to: 'project_involvement#update', as: :involvement_put
+
+      get ':project_id/other-outcomes', to: 'project_other_outcomes#project_other_outcomes', as: :other_outcomes_get
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
       get 'project-list' => 'project_list#project_list'
-      get 'other-outcomes' => 'project_other_outcomes#project_other_outcomes'
       get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
