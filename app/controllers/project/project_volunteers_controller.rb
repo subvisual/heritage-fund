@@ -24,7 +24,6 @@ class Project::ProjectVolunteersController < ApplicationController
   def volunteers
     # TODO get volunteers from the db
     current_volunteers = session['volunteers'].present? ? session['volunteers'] : Array.new
-    p current_volunteers
     current_volunteers
   end
 
