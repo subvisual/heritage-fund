@@ -95,7 +95,7 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-          <form action="process-volunteers">
+          <form action="process-volunteers" method="post">
             <%= hidden_field_tag :authenticity_token, form_authenticity_token, id: :form_token %>
             <p class="govuk-body">If you have finished adding volunteers</p>
             <button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button">
