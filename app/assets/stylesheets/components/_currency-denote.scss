@@ -1,0 +1,10 @@
+.nlhf-currency-denote {
+    display: flex;
+    align-items: center;
+    &__symbol {
+        text-align: right;
+        padding: 0 govuk-spacing(3);
+        font-family: $govuk-font-family;
+        @include govuk-font($size: 27, $weight: bold);
+    }
+}
