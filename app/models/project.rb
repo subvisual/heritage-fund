@@ -166,6 +166,67 @@ class Project < ApplicationRecord
                 json.set!('username', self.user.email)
             end
             json.application do
+                json.set!('projectName', self.project_title)
+                json.projectDateRange do
+                    json.startDate self.start_date
+                    json.endDate self.end_date
+                end
+                json.projectAddress do
+                    json.line1 self.line1
+                    json.line2 self.line2
+                    json.line3 self.line3
+                    json.county self.county
+                    json.townCity self.townCity
+                    json.projectPostcode self.postcode
+                end
+                json.set!('yourIdeaProject', self.description)
+                json.set!('projectDifference', self.difference)
+                json.set!('projectCommunity', self.matter)
+                json.set!('projectOrgBestPlace', self.best_placed_description)
+                json.set!('projectAvailable', self.heritage_description)
+                json.set!('projectOutcome1', 'Dummy data')
+                json.set!('projectOutcome2', 'Dummy data')
+                json.set!('projectOutcome3', 'Dummy data')
+                json.set!('projectOutcome4', 'Dummy data')
+                json.set!('projectOutcome5', 'Dummy data')
+                json.set!('projectOutcome6', 'Dummy data')
+                json.set!('projectOutcome7', 'Dummy data')
+                json.set!('projectOutcome8', 'Dummy data')
+                json.set!('projectOutcome9', 'Dummy data')
+                json.set!('projectOutcome1Checked', true)
+                json.set!('projectOutcome2Checked', true)
+                json.set!('projectOutcome3Checked', true)
+                json.set!('projectOutcome4Checked', true)
+                json.set!('projectOutcome5Checked', true)
+                json.set!('projectOutcome6Checked', true)
+                json.set!('projectOutcome7Checked', true)
+                json.set!('projectOutcome8Checked', true)
+                json.set!('projectOutcome9Checked', true)
+                json.projectCosts do
+                    json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
+                    json.costType 'new-staff'
+                    json.costDescription 'Dummy data'
+                    json.costAmount '1000'
+                end
+                json.projectVolunteers do
+                    json.description 'Dummy data'
+                    json.hours 10
+                end
+                json.nonCashContributions do
+                    json.description 'Dummy data'
+                    json.estimatedValue 1000
+                    json.secured 'not-sure'
+                end
+                json.cashContributions do
+                    json.description 'Dummy data'
+                    json.amount 2000
+                    json.secured 'no'
+                    json.id 'c4237718-ced7-4d03-a95b-1eceaecfdbe0'
+                end
+                json.evidenceOfSupport do
+                    json.description 'Dummy data'
+                end
+                json.set!('organisationId', self.organisation.id)
                 json.set!('organisationName', self.organisation.name)
                 json.set!('organisationMission',
                           self.organisation.mission.map!(&:dasherize).map { |m| m == 'lgbt-plus-led' ? 'lgbt+-led' : m })
