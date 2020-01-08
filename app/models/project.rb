@@ -19,6 +19,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_heritage_description
     attr_accessor :validate_best_placed_description
     attr_accessor :validate_involvement_description
+    attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -30,6 +31,8 @@ class Project < ApplicationRecord
     attr_accessor :end_date_year
 
     attr_accessor :same_location
+
+    attr_accessor :confirm_declaration
 
     validates :project_title, presence: true, length: { maximum: 255 }, if: :validate_title?
     validates :start_date_day, presence: true, if: :validate_start_and_end_dates?
@@ -50,6 +53,7 @@ class Project < ApplicationRecord
     validates :same_location, presence: true, if: :validate_same_location?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
+    validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
 
     validate do
         validate_length(
@@ -141,6 +145,10 @@ class Project < ApplicationRecord
 
     def validate_involvement_description?
         validate_involvement_description == true
+    end
+
+    def validate_confirm_declaration?
+        validate_confirm_declaration == true
     end
 
     def validate_length(field, max_length, error_msg)

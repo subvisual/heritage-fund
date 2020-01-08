@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_154043) do
+ActiveRecord::Schema.define(version: 2020_01_08_150358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -108,6 +108,10 @@ ActiveRecord::Schema.define(version: 2020_01_07_154043) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
+    t.string "capital_work_supporting_document"
+    t.text "declaration_reasons_description"
+    t.boolean "user_research_declaration", default: false
+    t.boolean "keep_informed_declaration", default: false
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
