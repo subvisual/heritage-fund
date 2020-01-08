@@ -203,28 +203,33 @@ class Project < ApplicationRecord
                 json.set!('projectOutcome8Checked', true)
                 json.set!('projectOutcome9Checked', true)
                 json.projectCosts do
-                    json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
-                    json.costType 'new-staff'
-                    json.costDescription 'Dummy data'
-                    json.costAmount '1000'
+                    json.child! {
+                        json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
+                        json.costType 'new-staff'
+                        json.costDescription 'Dummy data'
+                        json.costAmount '1000'
+                    }
                 end
                 json.projectVolunteers do
-                    json.description 'Dummy data'
-                    json.hours 10
+                    json.child! {
+                        json.description 'Dummy data'
+                        json.hours 10
+                    }
                 end
                 json.nonCashContributions do
-                    json.description 'Dummy data'
-                    json.estimatedValue 1000
-                    json.secured 'not-sure'
+                    json.child! {
+                        json.description 'Dummy data'
+                        json.estimatedValue 1000
+                        json.secured 'not-sure'
+                    }
                 end
                 json.cashContributions do
-                    json.description 'Dummy data'
-                    json.amount 2000
-                    json.secured 'no'
-                    json.id 'c4237718-ced7-4d03-a95b-1eceaecfdbe0'
-                end
-                json.evidenceOfSupport do
-                    json.description 'Dummy data'
+                    json.child! {
+                        json.description 'Dummy data'
+                        json.amount 2000
+                        json.secured 'no'
+                        json.id 'c4237718-ced7-4d03-a95b-1eceaecfdbe0'
+                    }
                 end
                 json.set!('organisationId', self.organisation.id)
                 json.set!('organisationName', self.organisation.name)
