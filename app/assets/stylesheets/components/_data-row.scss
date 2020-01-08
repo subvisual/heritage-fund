@@ -1,0 +1,51 @@
+.nlhf-data-row {
+    display: flex;
+    align-items: flex-start;
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+        border-bottom: 2px dashed #ccc;
+    }
+    &__heading {
+        margin: 0 0 0.15em 0;
+    }
+}
+
+.nlhf-data-row__group {
+    &--a {
+        @include govuk-media-query($until: desktop) {
+            width: 60%;
+        }
+        @include govuk-media-query($from: desktop) {
+            width: 75%;
+        }
+    }
+    &--b {
+        
+        .nlhf-data-row__heading {
+            text-align: right;
+        }
+        @include govuk-media-query($until: desktop) {
+            width: 40%;
+        }
+        @include govuk-media-query($from: desktop) {
+            width: 25%;
+        }
+    }
+}
+
+.nlhf-data-row--files {
+    align-items: center;
+    justify-content: space-between;
+    .nlhf-data-row__group {
+        max-width: 50%;
+        &:last-of-type {
+            word-break: break-all;
+            text-align: right;
+        }
+    }
+    &:last-of-type {
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
