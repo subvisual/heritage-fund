@@ -184,7 +184,7 @@ class Project < ApplicationRecord
                 json.set!('projectCommunity', self.matter)
                 json.set!('projectOrgBestPlace', self.best_placed_description)
                 json.set!('projectAvailable', self.heritage_description)
-                json.set!('projectOutcome1', 'Dummy data')
+                json.set!('projectOutcome1', self.involvement_description)
                 json.set!('projectOutcome2', 'Dummy data')
                 json.set!('projectOutcome3', 'Dummy data')
                 json.set!('projectOutcome4', 'Dummy data')
