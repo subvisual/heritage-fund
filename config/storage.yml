@@ -9,8 +9,8 @@ local:
 # Rails tries to read this on all environments and expects a string value
 production:
   service: S3
-  access_key_id: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_access_key_id']  : "" %>
-  secret_access_key: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_secret_access_key'] : "" %>
+  access_key_id: <%= Rails.env.production? ? ENV.fetch('AWS_ACCESS_KEY')  : "" %>
+  secret_access_key: <%= Rails.env.production? ? ENV.fetch('AWS_SECRET_KEY') : "" %>
   region: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['aws_region'] : "" %>
   bucket: <%= Rails.env.production? ? CF::App::Credentials.find_by_service_label('aws-s3-bucket')['bucket_name'] : "" %>
 
