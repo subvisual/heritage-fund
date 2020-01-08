@@ -8,7 +8,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-      <%= form_with model: @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put do |f| %>
+      <%= form_for @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put, remote: true do |f| %>
 
         <div class="nlhf-add-item">
           <header class="nlhf-add-item__header">
@@ -34,13 +34,13 @@
                   Upload a file
                 </label>
 
-                <%= f.file_field :files, multiple: true, direct_upload: true %>
+                <%= f.file_field :evidence_of_support_files, multiple: false, direct_upload: true %>
 
               </div>
 
             </div>
             <div class="nlhf-add-item__row">
-              <button data-prevent-double-click="true" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
                 Add evidence
               </button>
       <% end %>

@@ -13,10 +13,10 @@ class Project::ProjectSupportEvidenceController < ApplicationController
     @project.save
     redirect_to three_to_ten_k_project_project_support_evidence_path(@project.id)
 
-
   end
 
   private
+
   def project_params
     params.require(:project).permit(:evidence_description, :evidence_of_support_files[])
   end
