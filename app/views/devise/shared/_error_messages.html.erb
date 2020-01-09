@@ -1,5 +1,11 @@
+<% if flash[:notice].present? %>
+  <div class="nlhf-panel nlhf-panel--border-wide nlhf-alert--success govuk-!-margin-bottom-6">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+      <%= flash[:notice]  %>
+    </h2>
+  </div>  
+<% end %>
 
-<%= content_tag(:h1, flash[:notice]) if flash[:notice].present? %> <%#TODO: Style this for notification messages %>
 <% if resource.errors.any?  || flash[:alert].present? %>
 <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
   <h2 class="govuk-error-summary__title" id="error-summary-title">
@@ -10,8 +16,10 @@
        %>
   </h2>
   <div class="govuk-error-summary__body">
-    <%= flash[:alert] %>
     <ul class="govuk-list govuk-error-summary__list">
+      <% if flash[:alert].present? %>
+        <li><%= flash[:alert] %></li>
+      <% end %>
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
