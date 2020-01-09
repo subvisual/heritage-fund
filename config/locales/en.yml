@@ -78,3 +78,9 @@ en-GB:
               blank: "Enter a description of how your project will involve a wider range of people"
             confirm_declaration:
               blank: "You must confirm that you have read and agreed with the declaration"
+            permission_type:
+              blank: "Select an option to tell us whether you need permission from others to do your project"
+            permission_description_yes:
+              blank: "Enter a description of who you need permission from to do your project"
+            permission_description_not_sure:
+              blank: "Enter a description of who you need permission from to do your project"
