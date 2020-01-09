@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_142055) do
     t.boolean "outcome_6"
     t.boolean "outcome_7"
     t.boolean "outcome_8"
+    t.boolean "outcome_9"
     t.text "outcome_2_description"
     t.text "outcome_3_description"
     t.text "outcome_4_description"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_142055) do
     t.text "outcome_6_description"
     t.text "outcome_7_description"
     t.text "outcome_8_description"
+    t.text "outcome_9_description"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
