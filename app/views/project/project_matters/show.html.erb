@@ -1,4 +1,4 @@
-<% content_for :page_title, @project.errors.any? ? "Error: Why is your project important to your community?" : "How does your project matter?" %>
+<% content_for :page_title, @project.errors.any? ? "Error: Why is your project important to your community?" : "Why is your project important to your community?" %>
 
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @project,
