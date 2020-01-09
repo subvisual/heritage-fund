@@ -7,6 +7,8 @@ require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 require("govuk");
+require("@rails/activestorage").start();
+require("../active_storage/active_storage");
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
