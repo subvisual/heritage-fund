@@ -76,6 +76,8 @@ Rails.application.routes.draw do
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
+      get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
+      put ':project_id/volunteers' => 'project_volunteers#put'
 
       get ':project_id/declaration', to: 'project_declaration#show_declaration', as: :declaration_get
       put ':project_id/declaration', to: 'project_declaration#update_declaration', as: :declaration_put
@@ -107,9 +109,6 @@ Rails.application.routes.draw do
       get 'grant-request' => 'project_grant_request#grant_request'
       post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
       post 'submit-application' => 'show_declaration#submit_application'
-      get 'volunteers' => 'project_volunteers#project_volunteers'
-      post 'add-volunteer' => 'project_volunteers#add_volunteer'
-      post 'process-volunteers' => 'project_volunteers#process_volunteers'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
       get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution

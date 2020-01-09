@@ -1,2 +1,0 @@
-module Grant::GrantSupportEvidenceHelper
-end
