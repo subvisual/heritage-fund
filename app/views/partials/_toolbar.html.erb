@@ -10,9 +10,9 @@
                     <% end %>
                     <li class="nlhf-toolbar__item">
                       <% if user_signed_in? %>
-                        <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'nlhf-toolbar__link') %>
+                        <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'nlhf-toolbar__link') %>
                         <% else %>
-                        <%= link_to('Login', new_user_session_path, class: 'nlhf-toolbar__link') %>
+                        <%= link_to('Sign in', new_user_session_path, class: 'nlhf-toolbar__link') %>
                       <% end %>
                     </li>
                 </ul>

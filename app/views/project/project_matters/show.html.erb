@@ -1,4 +1,4 @@
-<% content_for :page_title, @project.errors.any? ? "Error: How does your project matter?" : "How does your project matter?" %>
+<% content_for :page_title, @project.errors.any? ? "Error: Why is your project important to your community?" : "Why is your project important to your community?" %>
 
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @project,
@@ -13,7 +13,7 @@
 
       <h1 class="govuk-label-wrapper">
         <span class="govuk-caption-xl">About your project</span>
-        <%= f.label :matter, "How does your project matter to you and your community?", class: "govuk-label govuk-label--xl" %>
+        <%= f.label :matter, "Why is your project important to your community?", class: "govuk-label govuk-label--xl" %>
       </h1>
 
       <span id="project_description-hint" class="govuk-hint">
