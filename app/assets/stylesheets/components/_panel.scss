@@ -1,4 +1,11 @@
 .nlhf-panel {
     padding: govuk-spacing(3) govuk-spacing(4);
-    background: get('colour.sand.default');
+    background: get('colour.stone.20');
+    box-sizing: border-box;
+    border-left-style: solid;
+    border-color: get('colour.gold.60');
+}
+
+.nlhf-panel--border-wide {
+    border-left-width: 10px;
 }
