@@ -14,7 +14,8 @@ one: {
                  "young_people_led"],
        org_type: 0,
        line1: 'line 1',
-       charity_number: 123,
+       charity_number: 12345,
+       company_number: 54321,
        townCity: "town"
 }
 # column: value
