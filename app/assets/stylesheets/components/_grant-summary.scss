@@ -1,0 +1,30 @@
+.nlhf-grant-summary {
+    p:last-child {
+        margin-bottom: 0;
+    }
+    &__item {
+        display: flex;
+        padding: govuk-spacing(4);
+        background: govuk-colour("light-grey");
+        &:not(:last-of-type) {
+            margin-bottom: 2px;
+        }
+        &--calc {
+            display: block;
+           p{
+            width: 100%;
+           }
+        }
+    }
+    &__description {
+        width: 70%;
+    }
+    &__amount {
+        width: 30%;
+        align-self: flex-start;
+        text-align: right;
+        p {
+            font-size: 1.6rem;
+        }
+    }
+}

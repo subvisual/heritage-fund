@@ -1,0 +1,40 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Confirm declaration" : "Confirm declaration" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_confirm_declaration
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_confirm_declaration_put_path, method: :put do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-3">
+      <span class="govuk-caption-xl">About your project</span>
+      Confirm declaration
+    </h1>
+
+    <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
+    <p class="govuk-body-l">
+      Now that you're happy with your application, you are ready to apply for funding.
+    </p>
+
+    <div class="govuk-checkboxes">
+
+      <div class="govuk-checkboxes__item">
+        <%= f.check_box :confirm_declaration, {id: :project_confirm_declaration, class: "govuk-checkboxes__input"}, "confirm_declaration", nil %>
+        <%= f.label :confirm_declaration,
+                    "I have read and agreed with the #{link_to 'declaration',
+                                                               three_to_ten_k_project_declaration_get_path}".html_safe,
+                    class: "govuk-label govuk-checkboxes__label"
+        %>
+      </div>
+
+    </div>
+
+  </div>
+
+  <%= f.submit "Submit application", class:'govuk-button', role: 'button', 'aria-label' => 'submit application button' %>
+
+<% end %>

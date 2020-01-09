@@ -4,7 +4,23 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: 
-  id: '2c660111-ab15-4221-98e0-cf0e02748a9b'
-  user_id: 1
+one: {
+  id: '2c660111-ab15-4221-98e0-cf0e02748a9b',
+  user_id: 1,
+  project_title: "Test Project",
+  start_date: "1/1/2025",
+  end_date: "1/10/2025",
+  line1: "10 Downing Street",
+  line2: "Westminster",
+  townCity: "London",
+  county: "Greater London",
+  postcode: "SW1A 2AA",
+  description: "A description of my project...",
+  difference: "The difference my project will make to...",
+  matter: "My project matters because...",
+  best_placed_description: "My organisation is best placed to...",
+  heritage_description: "The heritage of my project...",
+  involvement_description: "My project will involve a wider range of people..."
+}
+
 
