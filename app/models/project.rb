@@ -15,7 +15,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_address
     attr_accessor :validate_permission_type
     attr_accessor :validate_permission_description_yes
-    attr_accessor :validate_permission_description_not_sure
+    attr_accessor :validate_permission_description_x_not_sure
     attr_accessor :validate_description
     attr_accessor :validate_difference
     attr_accessor :validate_matter
@@ -36,7 +36,7 @@ class Project < ApplicationRecord
     attr_accessor :same_location
 
     attr_accessor :permission_description_yes
-    attr_accessor :permission_description_not_sure
+    attr_accessor :permission_description_x_not_sure
 
     attr_accessor :confirm_declaration
 
@@ -59,7 +59,7 @@ class Project < ApplicationRecord
     validates :same_location, presence: true, if: :validate_same_location?
     validates :permission_type, presence: true, if: :validate_permission_type?
     validates :permission_description_yes, presence: true, if: :validate_permission_description_yes?
-    validates :permission_description_not_sure, presence: true, if: :validate_permission_description_not_sure?
+    validates :permission_description_x_not_sure, presence: true, if: :validate_permission_description_x_not_sure?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
@@ -82,10 +82,10 @@ class Project < ApplicationRecord
 
     validate do
         validate_length(
-            :permission_description_not_sure,
+            :permission_description_x_not_sure,
             300,
             "Description must be 300 words or fewer"
-        ) if validate_permission_description_not_sure?
+        ) if validate_permission_description_x_not_sure?
     end
 
     validate do
@@ -156,8 +156,8 @@ class Project < ApplicationRecord
         validate_permission_description_yes == true
     end
 
-    def validate_permission_description_not_sure?
-        validate_permission_description_not_sure == true
+    def validate_permission_description_x_not_sure?
+        validate_permission_description_x_not_sure == true
     end
 
     def validate_description?
@@ -191,7 +191,7 @@ class Project < ApplicationRecord
     enum permission_type: {
         yes: 0,
         no: 1,
-        not_sure: 2
+        x_not_sure: 2
     }
 
     def validate_length(field, max_length, error_msg)

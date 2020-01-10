@@ -82,5 +82,5 @@ en-GB:
               blank: "Select an option to tell us whether you need permission from others to do your project"
             permission_description_yes:
               blank: "Enter a description of who you need permission from to do your project"
-            permission_description_not_sure:
+            permission_description_x_not_sure:
               blank: "Enter a description of who you need permission from to do your project"

@@ -13,9 +13,9 @@ class Project::ProjectPermissionController < ApplicationController
       @project.validate_permission_description_yes = true
     end
 
-    if params[:project][:permission_type] == "not_sure"
-      @project.permission_description = params[:project][:permission_description_not_sure]
-      @project.validate_permission_description_not_sure = true
+    if params[:project][:permission_type] == "x_not_sure"
+      @project.permission_description = params[:project][:permission_description_x_not_sure]
+      @project.validate_permission_description_x_not_sure = true
     end
 
     @project.update(project_params)
@@ -26,8 +26,8 @@ class Project::ProjectPermissionController < ApplicationController
         @project.permission_description = params[:project][:permission_description_yes]
       end
 
-      if params[:project][:permission_type] == "not_sure"
-        @project.permission_description = params[:project][:permission_description_not_sure]
+      if params[:project][:permission_type] == "x_not_sure"
+        @project.permission_description = params[:project][:permission_description_x_not_sure]
       end
 
       @project.save
@@ -55,7 +55,7 @@ class Project::ProjectPermissionController < ApplicationController
     params.require(:project).permit(
         :permission_type,
         :permission_description_yes,
-        :permission_description_not_sure
+        :permission_description_x_not_sure
     )
 
   end

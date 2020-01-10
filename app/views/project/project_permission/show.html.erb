@@ -74,33 +74,33 @@
         <div class="govuk-radios__item">
 
           <%= f.radio_button :permission_type,
-                             "not_sure",
+                             "x_not_sure",
                              class: "govuk-radios__input",
-                             "data-aria-controls" => "conditional-project_permission_type_not_sure"
+                             "data-aria-controls" => "conditional-project_permission_type_x_not_sure"
           %>
-          <%= f.label :permission_type_not_sure, "Not sure if I need permission", class: "govuk-label govuk-radios__label" %>
+          <%= f.label :permission_type_x_not_sure, "Not sure if I need permission", class: "govuk-label govuk-radios__label" %>
 
         </div>
 
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-             id="<%= "conditional-#{:project_permission_type_not_sure}" %>">
+             id="<%= "conditional-#{:project_permission_type_x_not_sure}" %>">
 
           <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
 
             <div class="govuk-form-group">
 
-              <%= f.label :permission_description_not_sure,
+              <%= f.label :permission_description_x_not_sure,
                                     "Please provide more information about who you need permission from to do your project",
                                     class: "govuk-label"
               %>
 
-              <%= f.text_area :permission_description_not_sure, rows: 5,
-                                        class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:permission_description_not_sure].any?}",
-                                        "aria-describedby" => "project_permission_description_not_sure-info",
-                              value: "#{@project.permission_description if @project.permission_type == "not_sure"}"
+              <%= f.text_area :permission_description_x_not_sure, rows: 5,
+                                        class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:permission_description_x_not_sure].any?}",
+                                        "aria-describedby" => "project_permission_description_x_not_sure-info",
+                              value: "#{@project.permission_description if @project.permission_type == "x_not_sure"}"
               %>
 
-              <span id="project_permission_description_not_sure-info" class="govuk-hint govuk-character-count__message"
+              <span id="project_permission_description_x_not_sure-info" class="govuk-hint govuk-character-count__message"
                     aria-live="polite">
                 You can enter up to 300 words
               </span>
