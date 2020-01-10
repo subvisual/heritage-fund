@@ -4,7 +4,10 @@
 
 <% unless @projects.present? %>
 
-  <h2 class="govuk-heading-l">You have no active projects</h2>
+  <div class="nlhf-panel nlhf-alert nlhf-alert--slim govuk-!-margin-bottom-8">
+   <h2 class="govuk-heading-m">No Projects</h2>
+   <p class="govuk-body">This account currently has no active projects with the National Lottery Heritage Fund</p>
+  </div>
 
 <% else %>
 
