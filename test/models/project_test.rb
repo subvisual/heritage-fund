@@ -38,5 +38,21 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal 'The heritage of my project...', @project_salesforce_json_obj['application']['projectAvailable']
      assert_equal 'My project will involve a wider range of people...',
                   @project_salesforce_json_obj['application']['projectOutcome1']
+     assert_equal 'Description of outcome 2', @project_salesforce_json_obj['application']['projectOutcome2']
+     assert_equal '', @project_salesforce_json_obj['application']['projectOutcome3']
+     assert_equal 'Description of outcome 4', @project_salesforce_json_obj['application']['projectOutcome4']
+     assert_equal '', @project_salesforce_json_obj['application']['projectOutcome5']
+     assert_equal 'Description of outcome 6', @project_salesforce_json_obj['application']['projectOutcome6']
+     assert_equal '', @project_salesforce_json_obj['application']['projectOutcome7']
+     assert_equal 'Description of outcome 8', @project_salesforce_json_obj['application']['projectOutcome8']
+     assert_equal '', @project_salesforce_json_obj['application']['projectOutcome9']
+     assert_equal true, @project_salesforce_json_obj['application']['projectOutcome2Checked']
+     assert_equal false, @project_salesforce_json_obj['application']['projectOutcome3Checked']
+     assert_equal true, @project_salesforce_json_obj['application']['projectOutcome4Checked']
+     assert_equal false, @project_salesforce_json_obj['application']['projectOutcome5Checked']
+     assert_equal true, @project_salesforce_json_obj['application']['projectOutcome6Checked']
+     assert_equal false, @project_salesforce_json_obj['application']['projectOutcome7Checked']
+     assert_equal true, @project_salesforce_json_obj['application']['projectOutcome8Checked']
+     assert_equal false, @project_salesforce_json_obj['application']['projectOutcome9Checked']
    end
 end
