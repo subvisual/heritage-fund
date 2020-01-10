@@ -182,9 +182,10 @@
       <span class="govuk-label">
       Are you applying on behalf of a partnership?
     </span>
+      <%# TODO: Add validation for this field being set  %>
       <div class="govuk-radios govuk-radios--inline">
         <div class="govuk-radios__item">
-          <%= f.radio_button(:is_partnership, 'true', class: 'govuk-radios__input') %>
+          <%= f.radio_button(:is_partnership, 'true', class: 'govuk-radios__input', required: true) %>
           <%= f.label(:is_partnership_true, 'Yes', class: 'govuk-label govuk-radios__label' ) %>
         </div>
         <div class="govuk-radios__item">
