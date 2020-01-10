@@ -52,7 +52,15 @@
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
              id="<%= "conditional-#{:project_capital_work_true}" %>">
 
-          <div class="govuk-form-group">
+          <span id="project_capital_work_file-hint" class="govuk-hint">
+            If your project involves capital work, please send us a condition survey, or another appropriate document,
+            such as a draft or outline conservation plan.
+              <br /> <br />
+            A condition survey explains the condition of a building and work that will need to be done to it.
+            It is usually done by a chartered surveyor.
+          </span>
+
+          <div class="govuk-form-group" id="file-upload-group">
 
             <label class="govuk-label" for="evidence-upload">
               Upload a file
@@ -106,3 +114,35 @@
   <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
 
 <% end %>
+
+<details class="govuk-details" data-module="govuk-details">
+
+  <summary class="govuk-details__summary">
+
+    <span class="govuk-details__summary-text">
+      Examples of capital work
+    </span>
+
+  </summary>
+
+  <div class="govuk-details__text">
+
+    <ul class="govuk-list govuk-list--bullet">
+
+      <li>conservation of a heathland</li>
+      <li>repairs to a war memorial</li>
+      <li>digitisation of a photographic archive</li>
+
+    </ul>
+
+    <p class="govuk-body">
+      For projects involving physical works, for example conservation to a historic building or new building work,
+      please read the ownership requirements section of
+      <a href="http://www.heritagefund.org.uk/publications/receiving-grant-guidance-ps3000-ps10000#heading-8"
+        class="govuk-link"> the £3,000 to £10,000 grant programme guidance</a> and look at
+      <a href="https://www.heritagefund.org.uk/publications/receiving-grant-guidance-ps3000-ps10000"
+        class="govuk-link"> receiving a grant guidance</a>.
+    </p>
+  </div>
+
+</details>

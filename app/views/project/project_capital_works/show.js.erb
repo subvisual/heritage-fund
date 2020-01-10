@@ -4,6 +4,9 @@ document.title = "Error: Will capital work be part of your project?";
 
 addSummaryErrors();
 addFormGroupErrors();
+<% if @project.errors.include?(:capital_work_file) %>
+  addErrorToFileField();
+<% end %>
 
 <% end %>
 
@@ -77,6 +80,35 @@ function addFormGroupErrors() {
         formGroupErrorsElement.appendChild(spanElement);
 
     }
+
+    <% end %>
+
+}
+
+function addErrorToFileField() {
+
+    var fileUploadGroup = document.getElementById("file-upload-group");
+
+    <% @project.errors.each do |attr, msg| %>
+
+      <% if attr.to_s == "capital_work_file" %>
+
+        if (!fileUploadGroup.innerHTML.includes("<%= msg %>")) {
+
+            var spanElement = document.createElement("span");
+            spanElement.setAttribute("id", "project_capital_work_file-error");
+            spanElement.classList.add("govuk-error-message");
+            spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span><%= msg %>";
+
+            var fileField = document.getElementById("project_capital_work_file");
+            fileField.classList.add("govuk-file-upload--error");
+            fileField.setAttribute("aria-describedby", "project_capital_work_file-error");
+
+            fileUploadGroup.prepend(spanElement);
+
+        }
+
+      <% end %>
 
     <% end %>
 
