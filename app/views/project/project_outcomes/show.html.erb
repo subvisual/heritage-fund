@@ -1,0 +1,382 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Will your project achieve any of our other outcomes?" : "Will your project achieve any of our other outcomes?" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_other_outcome_2
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_other_outcomes_put_path, method: :put do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors[:description].any? %>">
+
+    <fieldset class="govuk-fieldset" aria-describedby="other-outcomes-hint">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+        <span class="govuk-caption-xl">About your project</span>
+
+        <h1 class="govuk-fieldset__heading">
+          Will your project achieve any of our other outcomes?
+        </h1>
+
+      </legend>
+
+      <span id="other-outcomes-hint" class="govuk-hint">
+        Check the outcomes you will achieve and describe how you will achieve them
+      </span>
+
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_2,
+                          {
+                              id: :project_project_outcome_2,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-2-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_2, "Heritage will be in a better condition", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-2-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_2_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_2_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_2_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_2_description if @project.outcome_2 == true}"
+              %>
+
+              <span id="project_outcome_2_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_3,
+                          {
+                              id: :project_project_outcome_3,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-3-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_3, "Heritage will be identified and better explained", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-3-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_3_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_3_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_3_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_3_description if @project.outcome_3 == true}"
+              %>
+
+              <span id="project_outcome_3_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_4,
+                          {
+                              id: :project_project_outcome_4,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-4-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_4, "People will have developed skills", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-4-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_4_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_4_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_4_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_4_description if @project.outcome_4 == true}"
+              %>
+
+              <span id="project_outcome_4_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_5,
+                          {
+                              id: :project_project_outcome_5,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-5-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_5, "People will have learned about heritage, leading to change in ideas and actions", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-5-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_5_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_5_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_5_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_5_description if @project.outcome_5 == true}"
+              %>
+
+              <span id="project_outcome_5_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_6,
+                          {
+                              id: :project_project_outcome_6,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-6-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_6, "People will have greater wellbeing", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-6-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_6_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_6_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_6_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_6_description if @project.outcome_6 == true}"
+              %>
+
+              <span id="project_outcome_6_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_7,
+                          {
+                              id: :project_project_outcome_7,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-7-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_7, "The funded organisation will be more resilient", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-7-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_7_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_7_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_7_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_7_description if @project.outcome_7 == true}"
+              %>
+
+              <span id="project_outcome_7_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_8,
+                          {
+                              id: :project_project_outcome_8,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-8-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_8, "The local area will be a better place to live, work or visit", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-8-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_8_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_8_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_8_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_8_description if @project.outcome_8 == true}"
+              %>
+
+              <span id="project_outcome_8_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-checkboxes__item">
+
+          <%= f.check_box :outcome_9,
+                          {
+                              id: :project_project_outcome_9,
+                              class: "govuk-checkboxes__input",
+                              "data-aria-controls" => "conditional-outcome-9-conditional"
+                          },
+                          "true",
+                          "false"
+          %>
+          <%= f.label :project_outcome_9, "The local economy will be boosted", class: "govuk-label govuk-checkboxes__label" %>
+
+        </div>
+
+        <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-outcome-9-conditional">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :outcome_9_description,
+                          "How will you achieve this outcome?",
+                          class: "govuk-label"
+              %>
+
+              <%= f.text_area :outcome_9_description, rows: 5,
+                              class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:outcome_9_description].any?}",
+                              "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.outcome_9_description if @project.outcome_9 == true}"
+              %>
+
+              <span id="project_outcome_9_description-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%= f.submit "Save and continue", class:'govuk-button', role: 'button', 'aria-label' => 'Save and continue button' %>
+
+<% end %>
