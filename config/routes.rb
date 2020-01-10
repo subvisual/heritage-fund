@@ -72,7 +72,8 @@ Rails.application.routes.draw do
       put ':project_id/how-will-your-project-involve-people',
           to: 'project_involvement#update', as: :involvement_put
 
-      get ':project_id/other-outcomes', to: 'project_other_outcomes#project_other_outcomes', as: :other_outcomes_get
+      get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
+      put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
