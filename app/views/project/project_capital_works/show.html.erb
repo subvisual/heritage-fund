@@ -1,0 +1,108 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Will capital work be part of your project?" : "Will capital work be part of your project?" %>
+
+<div id="summary-errors"></div>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_capital_work_no
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: true do |f| %>
+
+  <div id="capital-works-form-group-main" class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">About your project</span>
+          Will capital work be part of your project?
+        </h1>
+      </legend>
+
+      <div id="form-group-errors"></div>
+
+      <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
+      <span id="capital-work-conditional-hint" class="govuk-hint">
+        By capital work we mean repair and conservation works, new building work,
+        digitisation of objects, or the conservation of artefacts and objects.
+      </span>
+
+      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :capital_work, "false", class: "govuk-radios__input" %>
+          <%= f.label :capital_work, "No, capital work is not part of my project", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :capital_work,
+                             "true",
+                             class: "govuk-radios__input",
+                             "data-aria-controls" => "conditional-project_capital_work_true"
+          %>
+          <%= f.label :capital_work, "Yes, capital work is part of my project", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+             id="<%= "conditional-#{:project_capital_work_true}" %>">
+
+          <div class="govuk-form-group">
+
+            <label class="govuk-label" for="evidence-upload">
+              Upload a file
+            </label>
+
+            <%= f.file_field :capital_work_file, multiple: false, direct_upload: true, class: "govuk-file-upload" %>
+
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              Add condition survey
+            </button>
+
+          </div>
+
+          <% unless @project.capital_work_file.present? == true %>
+
+              <p class="govuk-body">You have not added a condition survey</p>
+
+          <% else %>
+
+            <table class="govuk-table">
+
+              <thead class="govuk-table__head">
+
+                <tr class="govuk-table__row">
+
+                  <th scope="col" class="govuk-table__header">Condition Survey File</th>
+
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+              <tr>
+                <td>
+                  <%# TODO: Link to download path (currently not working due to PaaS permissions %>
+                  <a href="#">
+                    <%= @project.capital_work_file.blob.filename %>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          <% end %>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+<% end %>

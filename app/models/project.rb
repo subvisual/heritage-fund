@@ -8,12 +8,15 @@ class Project < ApplicationRecord
     has_many :project_costs
     has_many :volunteers
     has_many_attached :evidence_of_support_files
+    has_one_attached :capital_work_file
     accepts_nested_attributes_for :cash_contributions, :project_costs, :volunteers
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
     attr_accessor :validate_same_location
     attr_accessor :validate_address
+    attr_accessor :validate_capital_work
+    attr_accessor :validate_capital_work_file
     attr_accessor :validate_permission_type
     attr_accessor :validate_permission_description_yes
     attr_accessor :validate_permission_description_x_not_sure
@@ -58,12 +61,20 @@ class Project < ApplicationRecord
     validates :county, presence: true, if: :validate_address?
     validates :postcode, presence: true, if: :validate_address?
     validates :same_location, presence: true, if: :validate_same_location?
+    validates_inclusion_of :capital_work, in: [true, false], if: :validate_capital_work?
     validates :permission_type, presence: true, if: :validate_permission_type?
     validates :permission_description_yes, presence: true, if: :validate_permission_description_yes?
     validates :permission_description_x_not_sure, presence: true, if: :validate_permission_description_x_not_sure?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
+
+    validate do
+        validate_file_attached(
+            :capital_work_file,
+            "Condition survey must be attached if capital work is part of your project"
+        ) if validate_capital_work_file?
+    end
 
     validate do
         validate_length(
@@ -149,6 +160,14 @@ class Project < ApplicationRecord
         validate_address == true
     end
 
+    def validate_capital_work?
+        validate_capital_work == true
+    end
+
+    def validate_capital_work_file?
+        validate_capital_work_file == true
+    end
+
     def validate_permission_type?
         validate_permission_type == true
     end
@@ -194,6 +213,12 @@ class Project < ApplicationRecord
         no: 1,
         x_not_sure: 2
     }
+
+    def validate_file_attached(field, error_msg)
+        unless self.public_send(field).attached?
+            errors.add(field, error_msg)
+        end
+    end
 
     def validate_length(field, max_length, error_msg)
 
