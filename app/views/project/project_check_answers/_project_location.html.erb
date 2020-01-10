@@ -1,0 +1,18 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Where is your project taking place?
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <div><%= @project.line1 if @project.line1? %></div>
+    <div><%= @project.line2 if @project.line2? %></div>
+    <div><%= @project.line3 if @project.line2? %></div>
+    <div><%= @project.townCity if @project.townCity? %></div>
+    <div><%= @project.county if @project.county? %></div>
+    <div><%= @project.postcode if @project.postcode? %></div>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a class="govuk-link" href="#">
+      Change<span class="govuk-visually-hidden"> contact details</span>
+    </a>
+  </dd>
+</div>

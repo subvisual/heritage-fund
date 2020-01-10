@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
@@ -115,6 +114,8 @@ Rails.application.routes.draw do
       put ':project_id/support-evidence' => 'project_support_evidence#put'
       get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
       put ':project_id/cash-contribution' => 'project_cash_contribution#put'
+
+      get ':project_id/check-your-answers' => 'project_check_answers#project_check_answers', as: :project_check_answers
     end
   end
 
