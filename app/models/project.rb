@@ -23,6 +23,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_heritage_description
     attr_accessor :validate_best_placed_description
     attr_accessor :validate_involvement_description
+    attr_accessor :validate_other_outcomes
     attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
@@ -129,6 +130,16 @@ class Project < ApplicationRecord
         ) if validate_involvement_description?
     end
 
+    validate do
+        for i in 2..9 do
+            validate_length(
+                "outcome_#{i}_description",
+                300,
+                "Description of how you will meet this outcome must be 300 words or fewer"
+            ) if validate_other_outcomes?
+        end
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -183,6 +194,10 @@ class Project < ApplicationRecord
 
     def validate_involvement_description?
         validate_involvement_description == true
+    end
+
+    def validate_other_outcomes?
+        validate_other_outcomes == true
     end
 
     def validate_confirm_declaration?
