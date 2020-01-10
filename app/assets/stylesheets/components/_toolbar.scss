@@ -1,4 +1,5 @@
 .nlhf-toolbar {
+    background: get('colour.blue.5');
     border-bottom: 1px solid #ccc;
     &__items {
         display: block;
@@ -16,6 +17,10 @@
     &__link {
         display: inline-block;
         padding: govuk-spacing(3) 0;
+        color: get('colour.blue.default');
+        &:visited {
+            color: get('colour.blue.default');
+        }
     }
     &__info {
         padding: govuk-spacing(3) 0;
