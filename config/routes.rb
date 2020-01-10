@@ -53,6 +53,9 @@ Rails.application.routes.draw do
 
       get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
 
+      get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
+      put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
+
       get ':project_id/difference', to: 'project_difference#show', as: :difference_get
       put ':project_id/difference', to: 'project_difference#update', as: :difference_put
 
@@ -96,7 +99,6 @@ Rails.application.routes.draw do
 
 
       get 'project-list' => 'project_list#project_list'
-      get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'

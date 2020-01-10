@@ -1,0 +1,148 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Do you need permission?" : "Do you need permission?" %>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_permission_type_no
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_permission_put_path, method: :put do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">About your project</span>
+          Do you need permission from anyone else to do your project?
+        </h1>
+      </legend>
+
+      <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
+      <span id="permission-required-conditional-hint" class="govuk-hint">Select one option.</span>
+
+      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :permission_type, "no", class: "govuk-radios__input" %>
+          <%= f.label :permission_type_no, "No, I do not need permission", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :permission_type,
+                             "yes",
+                             class: "govuk-radios__input",
+                             "data-aria-controls" => "conditional-project_permission_type_yes"
+          %>
+          <%= f.label :permission_type_yes, "Yes, I need permission", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+             id="<%= "conditional-#{:project_permission_type_yes}" %>">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :permission_description_yes,
+                                  "Please provide more information about who you need permission from to do your project",
+                                  class: "govuk-label"
+              %>
+
+              <%= f.text_area :permission_description_yes, rows: 5,
+                                      class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:permission_description_yes].any?}",
+                                      "aria-describedby" => "project_permission_description_yes-info",
+                              value: "#{@project.permission_description if @project.permission_type == "yes"}"
+              %>
+
+              <span id="project_permission_description_yes-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :permission_type,
+                             "x_not_sure",
+                             class: "govuk-radios__input",
+                             "data-aria-controls" => "conditional-project_permission_type_x_not_sure"
+          %>
+          <%= f.label :permission_type_x_not_sure, "Not sure if I need permission", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+             id="<%= "conditional-#{:project_permission_type_x_not_sure}" %>">
+
+          <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="300">
+
+            <div class="govuk-form-group">
+
+              <%= f.label :permission_description_x_not_sure,
+                                    "Please provide more information about who you need permission from to do your project",
+                                    class: "govuk-label"
+              %>
+
+              <%= f.text_area :permission_description_x_not_sure, rows: 5,
+                                        class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:permission_description_x_not_sure].any?}",
+                                        "aria-describedby" => "project_permission_description_x_not_sure-info",
+                              value: "#{@project.permission_description if @project.permission_type == "x_not_sure"}"
+              %>
+
+              <span id="project_permission_description_x_not_sure-info" class="govuk-hint govuk-character-count__message"
+                    aria-live="polite">
+                You can enter up to 300 words
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+<% end %>
+
+<details class="govuk-details" data-module="govuk-details">
+
+  <summary class="govuk-details__summary">
+
+    <span class="govuk-details__summary-text">
+      Examples of what might need permission
+    </span>
+
+  </summary>
+
+  <div class="govuk-details__text">
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>agreement from the owner of a heritage asset</li>
+      <li>access rights from a landowner</li>
+      <li>planning permission from the council</li>
+      <li>consent to record audio or take photographs of individuals.</li>
+    </ul>
+
+    <p class="govuk-body">If you don’t know if you need permission,
+      choose the ‘Not sure’ option and provide details.</p>
+
+    </div>
+
+</details>
