@@ -179,7 +179,7 @@
 
   <div class="govuk-form-group">
     <fieldset class="govuk-fieldset">
-      <span class="govuk-hint">
+      <span class="govuk-label">
       Are you applying on behalf of a partnership?
     </span>
       <div class="govuk-radios govuk-radios--inline">
@@ -194,6 +194,13 @@
       </div>
     </fieldset>
   </div>
+  <div class="govuk-form-group">
+
+      <%= f.label(:partnership_details, 'Please tell us the organisation(s) you will be delivering your project in partnership with and provide a contact for each partner organisation (name and position).', class: 'govuk-label') %>
+    <%# TODO: Conditionally show this if user selec†s Yes option %>
+      <%= f.text_area(:partnership_details, class: 'govuk-textarea', rows: 5) %>
+  </div>
+
   <%= f.submit "Continue", class:'govuk-button', role: 'button', 'aria-label' => 'Continue button' %>
 
 <% end %>
