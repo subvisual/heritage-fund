@@ -1,0 +1,13 @@
+.nlhf-list--links {
+    .nlhf-list {
+        &__item {
+            padding-top: govuk-spacing(3);
+            padding-bottom: govuk-spacing(3);
+            padding-left: .5em;
+            border-bottom: 1px solid #ccc;
+            &:first-child {
+                border-top: 1px solid #ccc;
+            }
+        }
+    }
+}

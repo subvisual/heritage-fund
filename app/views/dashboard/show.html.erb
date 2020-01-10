@@ -11,19 +11,19 @@
 
 <% else %>
 
-  <ul class="govuk-list">
+  <p class="govuk-body">The following projects are associated with your account:</p>
 
+  <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links govuk-!-margin-bottom-8">
     <% @projects.each do| project | %>
-
-    <li>
+    <li class="nlhf-list__item">
       <a href="<%= three_to_ten_k_project_title_get_url(project_id: project.id) %>" class="govuk-link govuk-link--no-visited-state">
         <%= project.project_title.present? ? project.project_title : "Untitled project" %>
       </a>
     </li>
-
     <% end %>
-
   </ul>
+
+  <p class="govuk-body">You can also:</p>
 
 <% end %>
 
