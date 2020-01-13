@@ -20,18 +20,16 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
+          <%= @project.evidence_description.zip @project.evidence_of_support_files.each do |description, file|  %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <% @project.evidence_description.each do |e| %>
-              <%= e %><br>
-            <% end %>
+              <%= description %>
           </td>
           <td class="govuk-table__cell">
-            <% @project.evidence_of_support_files.each do |f| %>
-              <%=link_to(f.blob.filename, rails_blob_path(f, disposition: "attachment")) %><br>
-            <% end %>
+              <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %><br>
           </td>
         </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
