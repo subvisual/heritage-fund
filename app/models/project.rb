@@ -8,12 +8,15 @@ class Project < ApplicationRecord
     has_many :project_costs
     has_many :volunteers
     has_many_attached :evidence_of_support_files
+    has_one_attached :capital_work_file
     accepts_nested_attributes_for :cash_contributions, :project_costs, :volunteers
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
     attr_accessor :validate_same_location
     attr_accessor :validate_address
+    attr_accessor :validate_capital_work
+    attr_accessor :validate_capital_work_file
     attr_accessor :validate_permission_type
     attr_accessor :validate_permission_description_yes
     attr_accessor :validate_permission_description_x_not_sure
@@ -23,6 +26,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_heritage_description
     attr_accessor :validate_best_placed_description
     attr_accessor :validate_involvement_description
+    attr_accessor :validate_other_outcomes
     attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
@@ -58,12 +62,20 @@ class Project < ApplicationRecord
     validates :county, presence: true, if: :validate_address?
     validates :postcode, presence: true, if: :validate_address?
     validates :same_location, presence: true, if: :validate_same_location?
+    validates_inclusion_of :capital_work, in: [true, false], if: :validate_capital_work?
     validates :permission_type, presence: true, if: :validate_permission_type?
     validates :permission_description_yes, presence: true, if: :validate_permission_description_yes?
     validates :permission_description_x_not_sure, presence: true, if: :validate_permission_description_x_not_sure?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
+
+    validate do
+        validate_file_attached(
+            :capital_work_file,
+            "Condition survey must be attached if capital work is part of your project"
+        ) if validate_capital_work_file?
+    end
 
     validate do
         validate_length(
@@ -129,6 +141,16 @@ class Project < ApplicationRecord
         ) if validate_involvement_description?
     end
 
+    validate do
+        for i in 2..9 do
+            validate_length(
+                "outcome_#{i}_description",
+                300,
+                "Description of how you will meet this outcome must be 300 words or fewer"
+            ) if validate_other_outcomes?
+        end
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -147,6 +169,14 @@ class Project < ApplicationRecord
 
     def validate_address?
         validate_address == true
+    end
+
+    def validate_capital_work?
+        validate_capital_work == true
+    end
+
+    def validate_capital_work_file?
+        validate_capital_work_file == true
     end
 
     def validate_permission_type?
@@ -185,6 +215,10 @@ class Project < ApplicationRecord
         validate_involvement_description == true
     end
 
+    def validate_other_outcomes?
+        validate_other_outcomes == true
+    end
+
     def validate_confirm_declaration?
         validate_confirm_declaration == true
     end
@@ -194,6 +228,12 @@ class Project < ApplicationRecord
         no: 1,
         x_not_sure: 2
     }
+
+    def validate_file_attached(field, error_msg)
+        unless self.public_send(field).attached?
+            errors.add(field, error_msg)
+        end
+    end
 
     def validate_length(field, max_length, error_msg)
 
@@ -237,23 +277,22 @@ class Project < ApplicationRecord
                 json.set!('projectOrgBestPlace', self.best_placed_description)
                 json.set!('projectAvailable', self.heritage_description)
                 json.set!('projectOutcome1', self.involvement_description)
-                json.set!('projectOutcome2', 'Dummy data')
-                json.set!('projectOutcome3', 'Dummy data')
-                json.set!('projectOutcome4', 'Dummy data')
-                json.set!('projectOutcome5', 'Dummy data')
-                json.set!('projectOutcome6', 'Dummy data')
-                json.set!('projectOutcome7', 'Dummy data')
-                json.set!('projectOutcome8', 'Dummy data')
-                json.set!('projectOutcome9', 'Dummy data')
-                json.set!('projectOutcome1Checked', true)
-                json.set!('projectOutcome2Checked', true)
-                json.set!('projectOutcome3Checked', true)
-                json.set!('projectOutcome4Checked', true)
-                json.set!('projectOutcome5Checked', true)
-                json.set!('projectOutcome6Checked', true)
-                json.set!('projectOutcome7Checked', true)
-                json.set!('projectOutcome8Checked', true)
-                json.set!('projectOutcome9Checked', true)
+                json.set!('projectOutcome2', self.outcome_2_description)
+                json.set!('projectOutcome3', self.outcome_3_description)
+                json.set!('projectOutcome4', self.outcome_4_description)
+                json.set!('projectOutcome5', self.outcome_5_description)
+                json.set!('projectOutcome6', self.outcome_6_description)
+                json.set!('projectOutcome7', self.outcome_7_description)
+                json.set!('projectOutcome8', self.outcome_8_description)
+                json.set!('projectOutcome9', self.outcome_9_description)
+                json.set!('projectOutcome2Checked', self.outcome_2)
+                json.set!('projectOutcome3Checked', self.outcome_3)
+                json.set!('projectOutcome4Checked', self.outcome_4)
+                json.set!('projectOutcome5Checked', self.outcome_5)
+                json.set!('projectOutcome6Checked', self.outcome_6)
+                json.set!('projectOutcome7Checked', self.outcome_7)
+                json.set!('projectOutcome8Checked', self.outcome_8)
+                json.set!('projectOutcome9Checked', self.outcome_9)
                 json.projectCosts do
                     json.child! {
                         json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'

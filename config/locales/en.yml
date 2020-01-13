@@ -116,3 +116,5 @@ en-GB:
               blank: "Enter a description of who you need permission from to do your project"
             permission_description_x_not_sure:
               blank: "Enter a description of who you need permission from to do your project"
+            capital_work:
+              inclusion: "Select whether or not capital work will be part of your project"

@@ -20,7 +20,23 @@ one: {
   matter: "My project matters because...",
   best_placed_description: "My organisation is best placed to...",
   heritage_description: "The heritage of my project...",
-  involvement_description: "My project will involve a wider range of people..."
+  involvement_description: "My project will involve a wider range of people...",
+  outcome_2: true,
+  outcome_3: false,
+  outcome_4: true,
+  outcome_5: false,
+  outcome_6: true,
+  outcome_7: false,
+  outcome_8: true,
+  outcome_9: false,
+  outcome_2_description: "Description of outcome 2",
+  outcome_3_description: "",
+  outcome_4_description: "Description of outcome 4",
+  outcome_5_description: "",
+  outcome_6_description: "Description of outcome 6",
+  outcome_7_description: "",
+  outcome_8_description: "Description of outcome 8",
+  outcome_9_description: ""
 }
 
 

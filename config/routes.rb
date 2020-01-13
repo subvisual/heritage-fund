@@ -50,7 +50,8 @@ Rails.application.routes.draw do
       get ':project_id/description', to: 'project_description#show', as: :description_get
       put ':project_id/description', to: 'project_description#update', as: :description_put
 
-      get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
+      get ':project_id/capital-works', to: 'project_capital_works#show', as: :capital_works_get
+      put ':project_id/capital-works', to: 'project_capital_works#update', as: :capital_works_put
 
       get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
       put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
@@ -74,7 +75,8 @@ Rails.application.routes.draw do
       put ':project_id/how-will-your-project-involve-people',
           to: 'project_involvement#update', as: :involvement_put
 
-      get ':project_id/other-outcomes', to: 'project_other_outcomes#project_other_outcomes', as: :other_outcomes_get
+      get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
+      put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
@@ -107,7 +109,7 @@ Rails.application.routes.draw do
       get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
       post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
       post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
-      get 'grant-request' => 'project_grant_request#grant_request'
+      get 'grant-request' => 'project_grant_request#project_grant_request'
       post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
       post 'submit-application' => 'show_declaration#submit_application'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
