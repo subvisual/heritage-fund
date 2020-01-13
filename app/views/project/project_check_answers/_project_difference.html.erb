@@ -1,9 +1,9 @@
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    <%= t('views.project.check_your_answers.describe_your_idea') %>
+    <%= t('views.project.check_your_answers.difference') %>
   </dt>
   <dd class="govuk-summary-list__value">
-    <%= @project.description.nil? ? t('views.project.check_your_answers.not_answered') : @project.description %>
+    <%= @project.difference.nil? ? t('views.project.check_your_answers.not_answered') : @project.difference %>
   </dd>
 
   <%= render 'project/project_check_answers/change_link' %>

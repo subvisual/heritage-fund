@@ -17,8 +17,21 @@
     <%= render 'project/project_check_answers/describe_your_idea' %>
     <%= render 'project/project_check_answers/capital_works' %>
     <%= render 'project/project_check_answers/project_permission' %>
-
+    <%= render 'project/project_check_answers/project_difference' %>
+    <%= render 'project/project_check_answers/community_matters' %>
+    <%= render 'project/project_check_answers/heritage' %>
+    <%= render 'project/project_check_answers/best_placed' %>
+    <%= render 'project/project_check_answers/involvement' %>
+    <%= render 'project/project_check_answers/other_outcomes' %>
+    <%= render 'project/project_check_answers/project_costs' %>
   </dl>
+
+  <div>
+    <% # 'TODO - review button text - Save and continue is not really SAVE just continue...' %>
+    <form action="<%= three_to_ten_k_project_project_check_answers_continue_get_path %>" method="get">
+      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+    </form>
+  </div>
 
 </div>
 

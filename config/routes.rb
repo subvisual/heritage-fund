@@ -115,7 +115,8 @@ Rails.application.routes.draw do
       get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
       put ':project_id/cash-contribution' => 'project_cash_contribution#put'
 
-      get ':project_id/check-your-answers' => 'project_check_answers#project_check_answers', as: :project_check_answers
+      get ':project_id/check-your-answers' => 'project_check_answers#project_check_answers', as: :project_check_answers_get
+      get ':project_id/check-your-answers_post' => 'project_check_answers#save_continue', as: :project_check_answers_continue_get
     end
   end
 

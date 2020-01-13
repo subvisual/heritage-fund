@@ -1,0 +1,21 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.other_outcomes') %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <ul>
+      <% (2 .. 9).each do |n| %>
+        <% unless @project['outcome_' + n.to_s].nil? %>
+          <li>
+            <div> <%= t('views.project.check_your_answers.possible_outcomes.outcome_' + n.to_s) %></div>
+            <div class="govuk-!-margin-top-2"><%= t('views.project.check_your_answers.other_outcomes_how') unless @project['outcome_' + n.to_s].nil? %></div>
+            <div class="govuk-!-margin-top-2"><%= @project['outcome_' + n.to_s + '_description'].nil? ? t('views.project.check_your_answers.not_answered') : @project['outcome_' + n.to_s + '_description'] unless @project['outcome_' + n.to_s].nil? %></div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </dd>
+
+  <%= render 'project/project_check_answers/change_link' %>
+
+</div>
