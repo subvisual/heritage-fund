@@ -12,3 +12,9 @@
   border-color: #c42b2b;
   background-color: #f3dede;
 }
+
+.nlhf-alert--slim {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
