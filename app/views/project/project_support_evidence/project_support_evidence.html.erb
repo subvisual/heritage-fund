@@ -26,7 +26,7 @@
               <%= description %>
           </td>
           <td class="govuk-table__cell">
-              <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %><br>
+              <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %>
           </td>
         </tr>
         <% end %>
