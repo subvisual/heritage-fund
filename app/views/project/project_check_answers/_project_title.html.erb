@@ -1,13 +1,13 @@
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Project Title
+    <%= t('views.project.check_your_answers.project_title') %>
   </dt>
   <dd class="govuk-summary-list__value">
-    <%= @project.project_title %>
+    <%= @project.project_title.nil? ? t('views.project.check_your_answers.not_answered') : @project.project_title %>
   </dd>
   <dd class="govuk-summary-list__actions">
     <a class="govuk-link" href="#">
-      Change<span class="govuk-visually-hidden"> name</span>
+      Change<span class="govuk-visually-hidden"> <%= t('views.project.check_your_answers.project_title') %></span>
     </a>
   </dd>
 </div>

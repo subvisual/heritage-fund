@@ -5,7 +5,7 @@
 
   <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
     <h1 class="govuk-fieldset__heading">
-      Check your answers
+      <%= t('views.project.check_your_answers.page_title') %>
     </h1>
   </legend>
 
@@ -15,6 +15,8 @@
     <%= render 'project/project_check_answers/project_completion_date' %>
     <%= render 'project/project_check_answers/project_location' %>
     <%= render 'project/project_check_answers/describe_your_idea' %>
+    <%= render 'project/project_check_answers/capital_works' %>
+    <%= render 'project/project_check_answers/project_permission' %>
 
   </dl>
 

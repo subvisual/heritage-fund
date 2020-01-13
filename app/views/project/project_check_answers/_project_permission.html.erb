@@ -1,0 +1,26 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.permission') %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <%= @project.permission_type.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_type %>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a class="govuk-link" href="#">
+      Change<span class="govuk-visually-hidden"> <%= t('views.project.check_your_answers.permission') %></span>
+    </a>
+  </dd>
+</div>
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.more_info_about_permission') %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <%= @project.permission_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_description %>
+  </dd>
+  <dd class="govuk-summary-list__actions">
+    <a class="govuk-link" href="#">
+      Change<span class="govuk-visually-hidden"> <%= t('views.project.check_your_answers.more_info_about_permission') %></span>
+    </a>
+  </dd>
+</div>

@@ -1,14 +1,13 @@
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Project start date
+    <%= t('views.project.check_your_answers.project_start_date') %>
   </dt>
   <dd class="govuk-summary-list__value">
-
-    <%= @project.start_date.strftime('%d %b %Y').to_s unless @project.start_date.nil? %>
+    <%= @project.start_date.nil? ? t('views.project.check_your_answers.not_answered') : @project.start_date.strftime('%d %b %Y').to_s %>
   </dd>
   <dd class="govuk-summary-list__actions">
     <a class="govuk-link" href="#">
-      Change<span class="govuk-visually-hidden"> name</span>
+      Change<span class="govuk-visually-hidden">  <%= t('views.project.check_your_answers.project_start_date') %></span>
     </a>
   </dd>
 </div>

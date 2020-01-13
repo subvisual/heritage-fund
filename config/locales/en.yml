@@ -7,6 +7,28 @@ en-GB:
   how_to_find_company_number_link: "#"
   project_outcomes_link: "#"
   what_we_fund_link: "#"
+  views:
+    project:
+      check_your_answers:
+        not_answered: " Not Answered "
+        page_title: "Check your answers"
+        project_title: "Project title"
+        project_start_date: "Project start date"
+        project_completion_date: "Project completion date"
+        where_is_your_project_taking_place: "Where is your project taking place?"
+        describe_your_idea: "Describe your idea"
+        captital_works: "Does your project involve capital works?"
+        permission: "Do you need permission from anyone else to do your project?"
+        more_info_about_permission: "More information about permission"
+        difference: "What difference will your project make?"
+        matter: "How does your project matter to you and your community?"
+        available: "The heritage of your project: how do you plan to make it available once the project is over?"
+        best_placed: "Why is your organisation best placed to deliver this project?"
+        wider_range_of_people: "How will your project involve a wider range of people?"
+        other_outcomes: "Will your project achieve any of our other outcomes?"
+        achieve_outcome: "How will you achieve this outcome?"
+        project_cost: "How much will your project cost?"
+        cash_contributions: "Are you getting any cash contributions towards your project?"
   activerecord:
     attributes:
       legal_signatory:
