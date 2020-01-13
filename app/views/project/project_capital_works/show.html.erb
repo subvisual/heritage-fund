@@ -1,0 +1,148 @@
+<% content_for :page_title, @project.errors.any? ? "Error: Will capital work be part of your project?" : "Will capital work be part of your project?" %>
+
+<div id="summary-errors"></div>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @project,
+    first_form_element: :project_capital_work_no
+} if @project.errors.any? %>
+
+<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: true do |f| %>
+
+  <div id="capital-works-form-group-main" class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          <span class="govuk-caption-xl">About your project</span>
+          Will capital work be part of your project?
+        </h1>
+      </legend>
+
+      <div id="form-group-errors"></div>
+
+      <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
+      <span id="capital-work-conditional-hint" class="govuk-hint">
+        By capital work we mean repair and conservation works, new building work,
+        digitisation of objects, or the conservation of artefacts and objects.
+      </span>
+
+      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :capital_work, "false", class: "govuk-radios__input" %>
+          <%= f.label :capital_work_false, "No, capital work is not part of my project", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__item">
+
+          <%= f.radio_button :capital_work,
+                             "true",
+                             class: "govuk-radios__input",
+                             "data-aria-controls" => "conditional-project_capital_work_true"
+          %>
+          <%= f.label :capital_work_true, "Yes, capital work is part of my project", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+             id="<%= "conditional-#{:project_capital_work_true}" %>">
+
+          <span id="project_capital_work_file-hint" class="govuk-hint">
+            If your project involves capital work, please send us a condition survey, or another appropriate document,
+            such as a draft or outline conservation plan.
+              <br /> <br />
+            A condition survey explains the condition of a building and work that will need to be done to it.
+            It is usually done by a chartered surveyor.
+          </span>
+
+          <div class="govuk-form-group" id="file-upload-group">
+
+            <label class="govuk-label" for="evidence-upload">
+              Upload a file
+            </label>
+
+            <%= f.file_field :capital_work_file, multiple: false, direct_upload: true, class: "govuk-file-upload" %>
+
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              Add condition survey
+            </button>
+
+          </div>
+
+          <% unless @project.capital_work_file.present? == true %>
+
+              <p class="govuk-body">You have not added a condition survey</p>
+
+          <% else %>
+
+            <table class="govuk-table">
+
+              <thead class="govuk-table__head">
+
+                <tr class="govuk-table__row">
+
+                  <th scope="col" class="govuk-table__header">Condition Survey File</th>
+
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+              <tr>
+                <td>
+                <%= link_to(@project.capital_work_file.blob.filename,
+                            rails_blob_path(@project.capital_work_file,
+                            disposition: "attachment")) 
+                %>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          <% end %>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%= f.submit "Save and continue", class: "govuk-button", role: "button", "aria-label" => "save and continue button" %>
+
+<% end %>
+
+<details class="govuk-details" data-module="govuk-details">
+
+  <summary class="govuk-details__summary">
+
+    <span class="govuk-details__summary-text">
+      Examples of capital work
+    </span>
+
+  </summary>
+
+  <div class="govuk-details__text">
+
+    <ul class="govuk-list govuk-list--bullet">
+
+      <li>conservation of a heathland</li>
+      <li>repairs to a war memorial</li>
+      <li>digitisation of a photographic archive</li>
+
+    </ul>
+
+    <p class="govuk-body">
+      For projects involving physical works, for example conservation to a historic building or new building work,
+      please read the ownership requirements section of
+      <a href="http://www.heritagefund.org.uk/publications/receiving-grant-guidance-ps3000-ps10000#heading-8"
+        class="govuk-link"> the £3,000 to £10,000 grant programme guidance</a> and look at
+      <a href="https://www.heritagefund.org.uk/publications/receiving-grant-guidance-ps3000-ps10000"
+        class="govuk-link"> receiving a grant guidance</a>.
+    </p>
+  </div>
+
+</details>

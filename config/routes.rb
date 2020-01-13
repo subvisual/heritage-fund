@@ -51,7 +51,8 @@ Rails.application.routes.draw do
       get ':project_id/description', to: 'project_description#show', as: :description_get
       put ':project_id/description', to: 'project_description#update', as: :description_put
 
-      get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
+      get ':project_id/capital-works', to: 'project_capital_works#show', as: :capital_works_get
+      put ':project_id/capital-works', to: 'project_capital_works#update', as: :capital_works_put
 
       get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
       put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
