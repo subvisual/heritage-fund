@@ -93,10 +93,10 @@
               <tbody class="govuk-table__body">
               <tr>
                 <td>
-                  <%# TODO: Link to download path (currently not working due to PaaS permissions %>
-                  <a href="#">
-                    <%= @project.capital_work_file.blob.filename %>
-                  </a>
+                <%= link_to(@project.capital_work_file.blob.filename,
+                            rails_blob_path(@project.capital_work_file,
+                            disposition: "attachment")) 
+                %>
                 </td>
               </tr>
               </tbody>
