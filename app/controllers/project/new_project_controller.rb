@@ -14,7 +14,7 @@ class Project::NewProjectController < ApplicationController
     logger.debug "Project created for user ID: #{current_user.id} " +
                      "with ID: #{@project.id}"
 
-    redirect_to three_to_ten_k_project_title_get_path(project_id: @project.id)
+    redirect_to three_to_ten_k_project_project_costs_path(project_id: @project.id)
 
   end
 
