@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 2020_01_13_130313) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
-    t.string "capital_work_supporting_document"
     t.text "declaration_reasons_description"
     t.boolean "user_research_declaration", default: false
     t.boolean "keep_informed_declaration", default: false
