@@ -68,4 +68,11 @@ Rails.application.configure do
 
   config.x.ideal_postcodes.api_key = ENV.fetch("IDEAL_POSTCODES_API_KEY")
 
+  config.x.salesforce.username = ENV.fetch("SALESFORCE_USERNAME")
+  config.x.salesforce.password = ENV.fetch("SALESFORCE_PASSWORD")
+  config.x.salesforce.security_token = ENV.fetch("SALESFORCE_SECURITY_TOKEN")
+  config.x.salesforce.client_id = ENV.fetch("SALESFORCE_CLIENT_ID")
+  config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
+  config.x.salesforce.host = "test.salesforce.com"
+
 end
