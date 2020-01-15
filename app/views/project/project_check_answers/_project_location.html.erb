@@ -3,12 +3,30 @@
     <%= t('views.project.check_your_answers.where_is_your_project_taking_place') %>
   </dt>
   <dd class="govuk-summary-list__value">
-    <div><%= @project.line1 if @project.line1? %></div>
-    <div><%= @project.line2 if @project.line2? %></div>
-    <div><%= @project.line3 if @project.line2? %></div>
-    <div><%= @project.townCity if @project.townCity? %></div>
-    <div><%= @project.county if @project.county? %></div>
-    <div><%= @project.postcode if @project.postcode? %></div>
+    
+    <% unless @project.line1.nil? %>
+      <div><%= @project.line1 %></div>
+    <% end %>
+
+    <% unless @project.line2.nil? %>
+      <div><%= @project.line2 %></div>
+    <% end %>
+
+    <% unless @project.line3.nil? %>
+      <div><%= @project.line3 %></div>
+    <% end %>
+
+    <% unless @project.townCity.nil? %>
+      <div><%= @project.townCity %></div>
+    <% end %>
+
+    <% unless @project.county.nil? %>
+      <div><%= @project.county %></div>
+    <% end %>
+
+    <% unless @project.postcode.nil? %>
+      <div><%= @project.postcode %></div>
+    <% end %>
   </dd>
 
   <%= render 'project/project_check_answers/change_link' %>
