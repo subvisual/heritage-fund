@@ -10,7 +10,10 @@ class Project < ApplicationRecord
     has_many :volunteers
     has_many_attached :evidence_of_support_files
     has_one_attached :capital_work_file
-    accepts_nested_attributes_for :cash_contributions, :project_costs, :volunteers
+    accepts_nested_attributes_for :cash_contributions,
+                                  :non_cash_contributions,
+                                  :project_costs,
+                                  :volunteers
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
