@@ -3,7 +3,7 @@ require 'test_helper'
 class HomeControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get root_url
-    assert_response :redirect
+    assert_response :success
   end
 
 end
