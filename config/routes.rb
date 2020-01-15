@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  devise_scope :user do
+    unauthenticated do
+      root to: "devise/sessions#new"
+    end
+    authenticated :user do
+      root to: "dashboard#show", as: :authenticated_root
+    end
+  end
+
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
@@ -126,7 +136,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :projects, except: [:destroy, :index]
-  root to: "dashboard#show"
   get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do

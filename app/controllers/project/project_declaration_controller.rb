@@ -31,6 +31,7 @@ class Project::ProjectDeclarationController < ApplicationController
 
     logger.debug "Updating declaration for project ID: #{@project.id}"
 
+
     @project.update(declaration_params)
 
     if @project.valid?
@@ -63,12 +64,13 @@ class Project::ProjectDeclarationController < ApplicationController
 
   def declaration_params
 
-    # TODO: Include additional partnership params
 
     params.require(:project).permit(
         :declaration_reasons_description,
         :user_research_declaration,
-        :keep_informed_declaration
+        :keep_informed_declaration,
+        :is_partnership,
+        :partnership_details
     )
 
   end
