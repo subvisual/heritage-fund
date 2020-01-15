@@ -61,7 +61,7 @@ gem "dotenv-rails", "~> 2.7", groups: [:development, :test]
 
 gem "pg", "~> 1.1"
 
-gem "restforce", "~> 4.0"
+gem "restforce", "~> 4.2"
 
 gem "faraday", "~> 0.17.0"
 
