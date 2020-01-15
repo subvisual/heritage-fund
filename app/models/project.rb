@@ -5,6 +5,7 @@ class Project < ApplicationRecord
     has_one :organisation, through: :user
     has_many :released_forms
     has_many :cash_contributions
+    has_many :non_cash_contributions
     has_many :project_costs
     has_many :volunteers
     has_many_attached :evidence_of_support_files
