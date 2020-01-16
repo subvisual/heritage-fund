@@ -90,11 +90,12 @@ Rails.application.routes.draw do
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
-      get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
-      put ':project_id/volunteers' => 'project_volunteers#put'
 
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
+
+      get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
+      put ':project_id/volunteers' => 'project_volunteers#put'
 
       #get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
       #post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
