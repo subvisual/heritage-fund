@@ -1,6 +1,6 @@
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    <%= t('views.project.check_your_answers.project_completion_date') %>
+    <%= t('views.project.check_your_answers.end_date') %>
   </dt>
   <dd class="govuk-summary-list__value">
     <%= @project.end_date.nil? ? t('views.project.check_your_answers.not_answered') : @project.end_date.strftime('%d %b %Y').to_s %>
