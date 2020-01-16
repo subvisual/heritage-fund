@@ -97,12 +97,6 @@ Rails.application.routes.draw do
       get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
       put ':project_id/volunteers' => 'project_volunteers#put'
 
-      #get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
-      #post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
-      #get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
-      #post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
-      #post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
-
       get ':project_id/declaration', to: 'project_declaration#show_declaration', as: :declaration_get
       put ':project_id/declaration', to: 'project_declaration#update_declaration', as: :declaration_put
 
