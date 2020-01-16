@@ -46,6 +46,8 @@
 
     <% else %>
 
+      <%# TODO: Design for this section needed %>
+
       <% @project.non_cash_contributions.filter { |ncc| ncc.id.present? }.each do |ncc| %>
 
         <ul class="govuk-list govuk-list--bullet">

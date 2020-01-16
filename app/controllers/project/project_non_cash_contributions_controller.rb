@@ -4,7 +4,7 @@ class Project::ProjectNonCashContributionsController < ApplicationController
   def update
 
     # Empty flash values to ensure that we don't redisplay them unnecessarily
-    flash[:description_value] = ""
+    flash[:description] = ""
     flash[:amount] = ""
 
     logger.debug "Adding non-cash contribution for project ID: #{@project.id}"
