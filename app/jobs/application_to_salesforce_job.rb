@@ -3,7 +3,9 @@ require 'restforce'
 class ApplicationToSalesforceJob < ApplicationJob
   queue_as :default
 
-  def perform(*project)
+  # @param [Project] project
+  def perform(project)
+    puts(project.id)
     client = Restforce.new(
         username: Rails.configuration.x.salesforce.username,
         password: Rails.configuration.x.salesforce.password,
@@ -13,6 +15,7 @@ class ApplicationToSalesforceJob < ApplicationJob
         host: Rails.configuration.x.salesforce.host,
         api_version: '48.0'
     )
-    
+
+    @response = client.post('/services/apexrest/PortalData', project.to_salesforce_json,  {'Content-Type'=>'application/json'})
   end
 end
