@@ -10,10 +10,11 @@
   <dt class="govuk-summary-list__key">
     <%= t('views.project.check_your_answers.more_info_about_permission') %>
   </dt>
-  <dd class="govuk-summary-list__value">
-    <%= @project.permission_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_description %>
-  </dd>
-
+  <% unless @project.permission_type.nil? or @project.permission_type == false %>
+    <dd class="govuk-summary-list__value">
+      <%= @project.permission_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_description %>
+    </dd>
+  <% end %>
   <%= render 'project/project_check_answers/change_link' %>
 
 </div>
