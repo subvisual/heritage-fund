@@ -76,3 +76,5 @@ gem "factory_bot_rails", "~> 5.1"
 gem "mail-notify", "~> 0.2"
 
 gem "rails-i18n", "~> 6.0"
+
+gem "nilify_blanks", "~> 1.3"

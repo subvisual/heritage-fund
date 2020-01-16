@@ -245,11 +245,11 @@ class Project < ApplicationRecord
 
     def validate_length(field, max_length, error_msg)
 
-        word_count = self.public_send(field).split(' ').count
+        word_count = self.public_send(field)&.split(' ')&.count
 
         logger.debug "#{field} word count is #{word_count}"
 
-        if word_count > max_length
+        if word_count && word_count > max_length
             self.errors.add(field, error_msg)
         end
 
@@ -270,6 +270,16 @@ class Project < ApplicationRecord
                 json.projectDateRange do
                     json.startDate self.start_date
                     json.endDate self.end_date
+                end
+                #TODO: Replace this dummy data with real data
+                json.set!('mainContactName', "Jane Doe")
+                json.set!('mainContactDateOfBirth', "1975-10-12")
+                json.set!('mainContactEmail', "test@example.org")
+                json.mainContactAddress do
+                    json.line1 "Buckingham Palace"
+                    json.line2 "Westminster"
+                    json.townCity "London"
+                    json.postcode "SW1A 1AA"
                 end
                 json.projectAddress do
                     json.line1 self.line1
