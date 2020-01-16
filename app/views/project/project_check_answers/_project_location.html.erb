@@ -3,29 +3,29 @@
     <%= t('views.project.check_your_answers.where_is_your_project_taking_place') %>
   </dt>
   <dd class="govuk-summary-list__value">
-    
+
     <% unless @project.line1.nil? %>
-      <div><%= @project.line1 %></div>
+      <p><%= @project.line1 %></p>
     <% end %>
 
     <% unless @project.line2.nil? %>
-      <div><%= @project.line2 %></div>
+      <p><%= @project.line2 %></p>
     <% end %>
 
     <% unless @project.line3.nil? %>
-      <div><%= @project.line3 %></div>
+      <p><%= @project.line3 %></p>
     <% end %>
 
     <% unless @project.townCity.nil? %>
-      <div><%= @project.townCity %></div>
+      <p><%= @project.townCity %></p>
     <% end %>
 
     <% unless @project.county.nil? %>
-      <div><%= @project.county %></div>
+      <p><%= @project.county %></p>
     <% end %>
 
     <% unless @project.postcode.nil? %>
-      <div><%= @project.postcode %></div>
+      <p><%= @project.postcode %></p>
     <% end %>
   </dd>
 
