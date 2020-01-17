@@ -12,7 +12,7 @@
   <dl class="govuk-summary-list">
     <%= render 'project/project_check_answers/project_title' %>
     <%= render 'project/project_check_answers/project_start_date' %>
-    <%= render 'project/project_end_date' %>
+    <%= render 'project/project_check_answers/project_end_date' %>
     <%= render 'project/project_check_answers/project_location' %>
     <%= render 'project/project_check_answers/describe_your_idea' %>
     <%= render 'project/project_check_answers/capital_works' %>
@@ -28,9 +28,9 @@
 
   <div>
     <% # 'TODO - review button text - Save and continue is not really SAVE just continue...' %>
-    <form action="<%= three_to_ten_k_project_project_check_answers_continue_get_path %>" method="get">
+<!--    <form action="<%#= three_to_ten_k_project_project_check_answers_continue_get_path %>" method="get">-->
       <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
-    </form>
+<!--    </form>-->
   </div>
 
 </div>
