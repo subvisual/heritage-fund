@@ -54,5 +54,7 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal false, @project_salesforce_json_obj['application']['projectOutcome7Checked']
      assert_equal true, @project_salesforce_json_obj['application']['projectOutcome8Checked']
      assert_equal false, @project_salesforce_json_obj['application']['projectOutcome9Checked']
+     assert_equal 'not-sure', @project_salesforce_json_obj['application']['projectNeedsPermission']
+     assert_equal 'permission description', @project_salesforce_json_obj['application']['projectNeedsPermissionDetails']
    end
 end
