@@ -71,7 +71,6 @@
         <h3 class="nlhf-summary__total__title">
           <span class="nlhf-summary__total__title-text">Total estimated value </span>
           <span class="nlhf-summary__total__title-val">
-            <%# TODO: make this dynamic and not hard-coded %>
             <%= number_to_currency(calculate_total(@project.non_cash_contributions), strip_insignificant_zeros: true) %>
           </span>
         </h3>
