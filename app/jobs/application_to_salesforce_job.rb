@@ -15,7 +15,8 @@ class ApplicationToSalesforceJob < ApplicationJob
         host: Rails.configuration.x.salesforce.host,
         api_version: '48.0'
     )
-
+    @json = project.to_salesforce_json
+    puts(@json)
     @response = client.post('/services/apexrest/PortalData', project.to_salesforce_json,  {'Content-Type'=>'application/json'})
   end
 end

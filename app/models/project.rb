@@ -274,7 +274,7 @@ class Project < ApplicationRecord
                 #TODO: Replace this dummy data with real data
                 json.set!('mainContactName', "Jane Doe")
                 json.set!('mainContactDateOfBirth', "1975-10-12")
-                json.set!('mainContactEmail', "test@example.org")
+                json.set!('mainContactEmail', "test@example.net")
                 json.mainContactAddress do
                     json.line1 "Buckingham Palace"
                     json.line2 "Westminster"
@@ -361,12 +361,15 @@ class Project < ApplicationRecord
                     json.set!("name", ls.name)
                     json.set!("email", ls.email_address)
                     json.set!("phone", ls.phone_number)
+                    #TODO: Remove or replace with model attribute
+                    json.set!("role", "")
                 }
-                @ls_one = self.organisation.legal_signatories.first
+                # Legal signatories are flipped in the database so the second record is actually what the user populates at the first signatory
+                @ls_one = self.organisation.legal_signatories.second
                 json.authorisedSignatoryOneDetails do
                     set_legal_signatory_fields.call(@ls_one)
                 end
-                @ls_two = self.organisation.legal_signatories.second
+                @ls_two = self.organisation.legal_signatories.first
                 if @ls_two.present?
                     json.authorisedSignatoryTwoDetails do
                         set_legal_signatory_fields.call(@ls_two)

@@ -13,8 +13,8 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal 'registered-charity', @project_salesforce_json_obj['application']['organisationType']
      assert_equal 'line 1', @project_salesforce_json_obj['application']['organisationAddress']['line1']
      assert_equal 'town', @project_salesforce_json_obj['application']['organisationAddress']['townCity']
-     assert_equal 'John Doe', @project_salesforce_json_obj['application']['authorisedSignatoryOneDetails']['name']
-     assert_equal 'Jane Doe', @project_salesforce_json_obj['application']['authorisedSignatoryTwoDetails']['name']
+     assert_equal 'Jane Doe', @project_salesforce_json_obj['application']['authorisedSignatoryOneDetails']['name']
+     assert_equal 'John Doe', @project_salesforce_json_obj['application']['authorisedSignatoryTwoDetails']['name']
      assert_equal '12345', @project_salesforce_json_obj['application']['charityNumber']
      assert_equal '54321', @project_salesforce_json_obj['application']['companyNumber']
      assert_equal %w(black-or-minority-ethnic-led disability-led lgbt+-led female-led young-people-led),
