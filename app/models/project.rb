@@ -328,20 +328,15 @@ class Project < ApplicationRecord
                     json.description volunteer.description
                     json.hours volunteer.hours
                 end
-                json.nonCashContributions do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.estimatedValue 1000
-                        json.secured 'not-sure'
-                    }
+                json.nonCashContributions self.non_cash_contributions do |non_cash_contribution|
+                        json.description non_cash_contribution.description
+                        json.estimatedValue non_cash_contribution.amount
                 end
-                json.cashContributions do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.amount 2000
-                        json.secured 'no'
-                        json.id 'c4237718-ced7-4d03-a95b-1eceaecfdbe0'
-                    }
+                json.cashContributions self.cash_contributions do |cash_contribution|
+                        json.description cash_contribution.description
+                        json.amount cash_contribution.amount
+                        json.secured cash_contribution.secured&.dasherize
+                        json.id cash_contribution.id
                 end
                 json.set!('organisationId', self.organisation.id)
                 json.set!('organisationName', self.organisation.name)
