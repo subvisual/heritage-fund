@@ -5,16 +5,18 @@
   <dd class="govuk-summary-list__value">
     <%= @project.permission_type.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_type %>
   </dd>
+  <%= render 'project/project_check_answers/change_link' %>
 </div>
+
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
     <%= t('views.project.check_your_answers.more_info_about_permission') %>
   </dt>
-  <% unless @project.permission_type.nil? or @project.permission_type == false %>
-    <dd class="govuk-summary-list__value">
+  <dd class="govuk-summary-list__value">
+    <% unless @project.permission_type.nil? or @project.permission_type == false %>
       <%= @project.permission_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_description %>
-    </dd>
-  <% end %>
+    <% end %>
+  </dd>
   <%= render 'project/project_check_answers/change_link' %>
 
 </div>
