@@ -316,19 +316,17 @@ class Project < ApplicationRecord
                 json.set!('projectNeedsPermissionDetails', self.permission_description)
                 json.set!('keepInformed', self.keep_informed_declaration)
                 json.set!('involveInResearch', self.user_research_declaration)
-                json.projectCosts do
-                    json.child! {
-                        json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
-                        json.costType 'new-staff'
-                        json.costDescription 'Dummy data'
-                        json.costAmount '1000'
-                    }
+                json.set!('isPartnership', self.is_partnership)
+                json.set!('projectCapitalWork', self.capital_work)
+                json.projectCosts self.project_costs do |project_cost|
+                    json.costId project_cost.id
+                    json.costType project_cost.cost_type&.dasherize
+                    json.costDescription project_cost.description
+                    json.costAmount project_cost.amount
                 end
-                json.projectVolunteers do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.hours 10
-                    }
+                json.projectVolunteers self.volunteers do |volunteer|
+                    json.description volunteer.description
+                    json.hours volunteer.hours
                 end
                 json.nonCashContributions do
                     json.child! {
