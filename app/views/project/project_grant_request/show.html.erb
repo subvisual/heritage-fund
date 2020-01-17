@@ -1,0 +1,78 @@
+<% content_for :page_title, "Your grant request" %>
+
+<h1 class="govuk-heading-xl">
+  <span class="govuk-caption-xl">About your project</span>
+  Your grant request
+</h1>
+
+<div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-7">
+  <h1 class="govuk-panel__title">
+    £<%= '%.2f' % @final_grant_amount %>
+  </h1>
+
+  <div class="govuk-panel__body">
+    for your project
+  </div>
+
+</div>
+
+<h2 class="govuk-heading-m govuk-!-margin-bottom-2">How did we calculate this?</h2>
+
+<div class="nlhf-grant-summary govuk-!-margin-bottom-7">
+
+  <div class="nlhf-grant-summary__item">
+
+    <div class="nlhf-grant-summary__description">
+
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Your total project costs</h2>
+
+      <p class="govuk-body">This is what you told us the total amount of money your whole project will cost</p>
+
+    </div>
+
+    <div class="nlhf-grant-summary__amount">
+
+      <p>£<%= @total_project_cost %></p>
+
+    </div>
+
+  </div>
+
+  <div class="nlhf-grant-summary__item">
+
+    <div class="nlhf-grant-summary__description">
+
+      <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Your cash contributions</h2>
+
+      <p class="govuk-body">This is the amount of money you told us you will receive for your project that does not include your grant request</p>
+
+    </div>
+
+    <div class="nlhf-grant-summary__amount">
+
+      <p>£<%= @total_cash_contributions %></p>
+
+    </div>
+
+  </div>
+
+  <div class="nlhf-grant-summary__item nlhf-grant-summary__item--calc">
+
+    <p class="govuk-body govuk-!-margin-bottom-0">
+      We calculated what we think you need automatically by subtracting cash contributions you are getting
+      from the total of all the project costs you entered:
+    </p>
+
+    <p class="govuk-heading-m govuk-!-margin-bottom-0"
+       style="text-align: center;">
+      <%= "£#{@total_project_cost} - £#{@total_cash_contributions} = £#{'%.2f' % @final_grant_amount}" %>
+    </p>
+
+  </div>
+
+</div>
+
+<a href="<%= "#{three_to_ten_k_project_non_cash_contributions_get_url}" %>" role="button" draggable="false"
+   class="govuk-button" data-module="govuk-button" aria-label="Continue button">
+  Save and continue
+</a>
