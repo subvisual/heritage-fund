@@ -98,6 +98,12 @@ Rails.application.routes.draw do
           to: 'project_cash_contribution#question_update',
           as: :cash_contributions_question_put
 
+      get ':project_id/are-you-getting-non-cash-contributions',
+          to: 'project_non_cash_contributions#question',
+          as: :non_cash_contributions_question_get
+      put ':project_id/are-you-getting-non-cash-contributions',
+          to: 'project_non_cash_contributions#question_update',
+          as: :non_cash_contributions_question_put
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
 
