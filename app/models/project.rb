@@ -314,6 +314,8 @@ class Project < ApplicationRecord
                 json.set!('projectOutcome9Checked', self.outcome_9)
                 json.set!('projectNeedsPermission', (self.permission_type == 'x_not_sure' ? 'not_sure' : self.permission_type)&.dasherize)
                 json.set!('projectNeedsPermissionDetails', self.permission_description)
+                json.set!('keepInformed', self.keep_informed_declaration)
+                json.set!('involveInResearch', self.user_research_declaration)
                 json.projectCosts do
                     json.child! {
                         json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
