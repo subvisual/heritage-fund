@@ -94,3 +94,9 @@ en-GB:
               blank: "Enter a description of your non-cash contribution"
             amount:
               not_a_number: "Amount must be a number, like 500"
+        volunteer:
+          attributes:
+            description:
+              blank: "Enter a description of your project volunteer"
+            hours:
+              not_a_number: "Hours must be a number, like 5"
