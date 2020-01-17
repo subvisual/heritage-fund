@@ -5,11 +5,14 @@ class Project < ApplicationRecord
     has_one :organisation, through: :user
     has_many :released_forms
     has_many :cash_contributions
+    has_many :non_cash_contributions
     has_many :project_costs
     has_many :volunteers
     has_many_attached :evidence_of_support_files
     has_one_attached :capital_work_file
-    accepts_nested_attributes_for :cash_contributions, :project_costs, :volunteers
+    accepts_nested_attributes_for :cash_contributions, :non_cash_contributions, :project_costs, :volunteers
+
+    validates_associated :non_cash_contributions, if: :validate_non_cash_contributions?
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
@@ -27,6 +30,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_best_placed_description
     attr_accessor :validate_involvement_description
     attr_accessor :validate_other_outcomes
+    attr_accessor :validate_non_cash_contributions
     attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
@@ -217,6 +221,10 @@ class Project < ApplicationRecord
 
     def validate_other_outcomes?
         validate_other_outcomes == true
+    end
+
+    def validate_non_cash_contributions?
+        validate_non_cash_contributions == true
     end
 
     def validate_confirm_declaration?

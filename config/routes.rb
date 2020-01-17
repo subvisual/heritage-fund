@@ -90,6 +90,10 @@ Rails.application.routes.draw do
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
+
+      get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
+      put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
+
       get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
       put ':project_id/volunteers' => 'project_volunteers#put'
 
@@ -114,11 +118,6 @@ Rails.application.routes.draw do
       post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
       get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
-      get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
-      post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
-      get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
-      post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
-      post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
       get 'grant-request' => 'project_grant_request#project_grant_request'
       post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
       post 'submit-application' => 'show_declaration#submit_application'

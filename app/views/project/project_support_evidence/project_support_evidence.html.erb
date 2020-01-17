@@ -9,31 +9,31 @@
     <h2 class="govuk-heading-m">Your evidence of support</h2>
   </header>
   <div class="nlhf-summary__body">
-  <% unless @project.evidence_description.any? %>
-      <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>
-  <% else %>
-    <table class="govuk-table govuk-!-margin-bottom-0">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th scope="col" class="govuk-table__header">Description</th>
-          <th scope="col" class="govuk-table__header">Files</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-          <%= @project.evidence_description.zip @project.evidence_of_support_files.each do |description, file|  %>
-        <tr class="govuk-table__row">
-          <td class="govuk-table__cell">
-              <%= description %>
-          </td>
-          <td class="govuk-table__cell">
-              <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% unless @project.evidence_description.any? %>
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>
+    <% else %>
+      <table class="govuk-table govuk-!-margin-bottom-0">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Files</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+            <%= @project.evidence_description.zip @project.evidence_of_support_files.each do |description, file|  %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+                <%= description %>
+            </td>
+            <td class="govuk-table__cell">
+                <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
-  <% end %>
 </section>
 
 <%= form_with model: @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put, remote: true do |f| %>
