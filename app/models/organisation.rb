@@ -1,4 +1,5 @@
 class Organisation < ApplicationRecord
+  self.implicit_order_column = "created_at"
   has_many :users
   has_many :legal_signatories
 

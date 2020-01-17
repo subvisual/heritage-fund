@@ -1,4 +1,5 @@
 class LegalSignatory < ApplicationRecord
+  self.implicit_order_column = "created_at"
 
   attr_accessor :validate_name
   attr_accessor :validate_email_address
