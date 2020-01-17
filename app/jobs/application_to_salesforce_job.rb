@@ -18,5 +18,6 @@ class ApplicationToSalesforceJob < ApplicationJob
     @json = project.to_salesforce_json
     puts(@json)
     @response = client.post('/services/apexrest/PortalData', project.to_salesforce_json,  {'Content-Type'=>'application/json'})
+    puts(@response&.body)
   end
 end
