@@ -18,7 +18,7 @@
               <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                   <th scope="col" class="govuk-table__header govuk-!-width-one-half">Description</th>
-                  <th scope="col" class="govuk-table__header">Evidence</th>
+                  <th scope="col" class="govuk-table__header">Secured</th>
                   <th scope="col" class="govuk-table__header govuk-table__header--numeric">Value</th>
                 </tr>
               </thead>
@@ -29,9 +29,11 @@
                     <%= cc.description %>
                   </td>
                   <td class="govuk-table__cell">
+                    <%# TODO: Add human friendly value of the choosen radio box "supports" %>
+                    Value here
                     <% if cc.cash_contribution_evidence_files.present? %>
                     <div class="nlhf-!-break-word govuk-!-font-size-16">                    
-                      <%= link_to("Evidence #{(index+1).to_s} attachment", rails_blob_path(cc.cash_contribution_evidence_files.first, disposition: "attachment"), title: "Link to file: #{cc.cash_contribution_evidence_files.blobs.first.filename}") %>
+                      <%= link_to("Evidence attached", rails_blob_path(cc.cash_contribution_evidence_files.first, disposition: "attachment"), title: "Click to view file: #{cc.cash_contribution_evidence_files.blobs.first.filename}") %>
                     </div>
                     <% end %>
                   </td>
@@ -47,6 +49,7 @@
               <h3 class="nlhf-summary__total__title">
                 <span class="nlhf-summary__total__title-text">Total </span>
                 <span class="nlhf-summary__total__title-val">
+                  <%# TODO: Add dynamic calculated total here %>
                   £1000
                 </span>
               </h3>
@@ -95,7 +98,7 @@
 
                     <div class="govuk-radios govuk-radios--conditional govuk-radios--small" data-module="govuk-radios">
                       <div class="govuk-radios__item">
-                        <%= cc.radio_button :secured, :yes_with_evidence, class: "govuk-radios__input", name: "cash-contribution", 'data-aria-controls': "conditional-cash-contribution-conditional" %>
+                        <%= cc.radio_button :secured, "yes_with_evidence", class: "govuk-radios__input", name: "cash-contribution", 'data-aria-controls': "conditional-cash-contribution-conditional" %>
                         <%= cc.label :secured_yes_with_evidence, 'Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
                       </div>
                       <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-cash-contribution-conditional">
@@ -106,17 +109,17 @@
                       </div>
 
                       <div class="govuk-radios__item">
-                        <%= cc.radio_button :secured, :yes_no_evidence_yet, class: "govuk-radios__input", name: "cash-contribution" %>
+                        <%= cc.radio_button :secured, "yes_no_evidence_yet", class: "govuk-radios__input", name: "cash-contribution" %>
                         <%= cc.label :secured_yes_no_evidence_yet, 'Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
                       </div>
 
                       <div class="govuk-radios__item">
-                        <%= cc.radio_button :secured, :no, class: "govuk-radios__input", name: "cash-contribution" %>
+                        <%= cc.radio_button :secured, "no", class: "govuk-radios__input", name: "cash-contribution" %>
                         <%= cc.label :secured_no, 'No', class: "govuk-label govuk-radios__label" %>
                       </div>
 
                       <div class="govuk-radios__item">
-                        <%= cc.radio_button :secured, :x_not_sure, class: "govuk-radios__input", name: "cash-contribution" %>
+                        <%= cc.radio_button :secured, "x_not_sure", class: "govuk-radios__input", name: "cash-contribution" %>
                         <%= cc.label :secured_x_not_sure, 'Not sure', class: "govuk-label govuk-radios__label" %>
                       </div>
 
