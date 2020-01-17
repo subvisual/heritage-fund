@@ -91,6 +91,13 @@ Rails.application.routes.draw do
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
+      get ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question',
+          as: :cash_contributions_question_get
+      put ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question_update',
+          as: :cash_contributions_question_put
+
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
 
@@ -112,11 +119,10 @@ Rails.application.routes.draw do
           to: 'project_declaration#declaration_confirmed',
           as: :declaration_confirmed_get
 
-
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
-      post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
-      get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
+
+
       post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
       get 'grant-request' => 'project_grant_request#project_grant_request'
       post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'

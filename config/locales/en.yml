@@ -118,6 +118,8 @@ en-GB:
               blank: "Enter a description of who you need permission from to do your project"
             capital_work:
               inclusion: "Select whether or not capital work will be part of your project"
+            cash_contributions_question:
+              inclusion: "Select whether or not your project is getting any cash contributions"
         non_cash_contribution:
           attributes:
             description:
