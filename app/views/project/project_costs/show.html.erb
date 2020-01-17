@@ -235,7 +235,11 @@
     <% end %>
   <% end %>
 
-  <span class="govuk-caption-m govuk-!-margin-bottom-3">If you have finished adding all your costs</span>
-  
-  <%# TODO: Button should redirect to next route %>
-  <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
+<hr class="govuk-section-break--l govuk-section-break--visible">
+
+<p class="govuk-body">If you have finished adding all your costs</p>
+
+<a href="<%= "#{three_to_ten_k_project_cash_contributions_question_get_url}" %>" role="button" draggable="false" class="govuk-button"
+   data-module="govuk-button" aria-label="Continue button">
+  Save and continue
+</a>

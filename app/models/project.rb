@@ -31,6 +31,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_involvement_description
     attr_accessor :validate_other_outcomes
     attr_accessor :validate_non_cash_contributions
+    attr_accessor :validate_cash_contributions_question
     attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
@@ -41,6 +42,8 @@ class Project < ApplicationRecord
     attr_accessor :end_date_day
     attr_accessor :end_date_month
     attr_accessor :end_date_year
+
+    attr_accessor :cash_contributions_question
 
     attr_accessor :same_location
 
@@ -72,6 +75,9 @@ class Project < ApplicationRecord
     validates :permission_description_x_not_sure, presence: true, if: :validate_permission_description_x_not_sure?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
+    validates_inclusion_of :cash_contributions_question,
+                           in: ["true", "false"],
+                           if: :validate_cash_contributions_question?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
 
     validate do
@@ -221,6 +227,10 @@ class Project < ApplicationRecord
 
     def validate_other_outcomes?
         validate_other_outcomes == true
+    end
+
+    def validate_cash_contributions_question?
+        validate_cash_contributions_question == true
     end
 
     def validate_non_cash_contributions?
