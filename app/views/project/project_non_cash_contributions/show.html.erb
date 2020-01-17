@@ -46,33 +46,45 @@
 
     <% else %>
 
-      <%# TODO: Design for this section needed %>
+      <table class="govuk-table nlhf-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header govuk-table__header--numeric">Value</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% @project.non_cash_contributions.filter { |ncc| ncc.id.present? }.each do |ncc| %>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell nlhf-table__cell nlhf-table__cell--text">
+              <%= ncc.description %>
+            </td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">
+              <%= "#{number_to_currency(ncc.amount, strip_insignificant_zeros: true)}" if ncc.amount.present? %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-      <% @project.non_cash_contributions.filter { |ncc| ncc.id.present? }.each do |ncc| %>
-
-        <ul class="govuk-list govuk-list--bullet">
-
-          <%= content_tag(:li, ncc.description) %>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <%= content_tag(:li, "Amount:  #{number_to_currency(ncc.amount, strip_insignificant_zeros: true)}") if ncc.amount.present? %>
-          </ul>
-
-        </ul>
-
-      <% end %>
-
+      <div class="nlhf-summary__total">
+        <h3 class="nlhf-summary__total__title">
+          <span class="nlhf-summary__total__title-text">Total estimated value </span>
+          <span class="nlhf-summary__total__title-val">
+            <%# TODO: make this dynamic and not hard-coded %>
+            £1000
+          </span>
+        </h3>
+      </div>
     <% end %>
-
   </div>
-
 </section>
 
 <%= form_with model: @project, url: three_to_ten_k_project_non_cash_contributions_put_path, method: :put, local: true do |f| %>
 
   <%= f.fields_for :non_cash_contributions, @project.non_cash_contributions.build do |ncc| %>
 
-    <div class="nlhf-add-item">
+    <div class="nlhf-add-item govuk-!-margin-bottom-4">
 
       <header class="nlhf-add-item__header">
         <h2 class="govuk-heading-l">Add a non-cash contribution</h2>
@@ -80,36 +92,9 @@
 
       <div class="nlhf-add-item__body">
 
-        <details class="govuk-details" data-module="govuk-details">
-
-          <summary class="govuk-details__summary">
-
-          <span class="govuk-details__summary-text">
-            What are non-cash contributions?
-          </span>
-
-          </summary>
-
-          <div class="govuk-details__text">
-
-            <p class="govuk-body">
-              Non-cash contributions are things you need for your project that you do not have to pay for.
-            </p>
-
-            <p class="govuk-body">
-              For example - the use of a room in a local business, or materials being donated by a local firm.
-            </p>
-
-          </div>
-
-        </details>
-
         <div class="nlhf-add-item__row">
-
           <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
-
             <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['non_cash_contributions.description'].any? %>">
-
               <%= render partial: "partials/form_input_errors",
                          locals: {form_object: @project,
                                   input_field_id: :'non_cash_contributions.description'} if @project.errors['non_cash_contributions.description'].any? %>
@@ -121,18 +106,13 @@
                                 "aria-describedby" => "project_non_cash_contributions_attributes_0_description-info",
                                 value: "#{flash[:description] if flash[:description].present?}"
               %>
-
             </div>
-
-            <span class="govuk-hint govuk-character-count__message"
-                  id="project_non_cash_contributions_attributes_0_description-info"></span>
-
+            <span class="govuk-hint govuk-character-count__message" id="project_non_cash_contributions_attributes_0_description-info"></span>
           </div>
-
         </div>
+        <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
-
           <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['non_cash_contributions.amount'].any? %>">
 
             <%= render partial: "partials/form_input_errors",
@@ -146,13 +126,8 @@
             </span>
 
             <div class="nlhf-currency-denote">
-
-              <div class="nlhf-currency-denote__symbol">
-                &pound;
-              </div>
-
+              <div class="nlhf-currency-denote__symbol">&pound;</div>
               <div class="nlhf-currency-denote__capture">
-
                 <%= ncc.number_field :amount,
                                      min: 1,
                                      class: 'govuk-input',
@@ -161,30 +136,46 @@
                 %>
 
               </div>
-
             </div>
-
           </div>
-
         </div>
+        <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
-
           <%= ncc.submit 'Add non-cash contribution',
                          role: "button",
                          'data-prevent-double-click' => 'true',
                          class: 'govuk-button govuk-button--secondary'
           %>
-
         </div>
+        <!-- / nlhf-add-item__row -->
 
       </div>
+      <!-- / nlhf-add-item__body -->
 
     </div>
+    <!-- / nlhf-add-item -->
 
   <% end %>
 
 <% end %>
+
+<details class="govuk-details govuk-!-margin-bottom-9" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Help with non-cash contributions
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    <h3 class="govuk-heading-m">What are non-cash contributions?</h3>
+    <p class="govuk-body">
+      Non-cash contributions are things you need for your project that you do not have to pay for.
+    </p>
+    <p class="govuk-body">
+      For example - the use of a room in a local business, or materials being donated by a local firm.
+    </p>
+  </div>
+</details>
 
 <hr class="govuk-section-break--l govuk-section-break--visible">
 
