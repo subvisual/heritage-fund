@@ -50,7 +50,7 @@
 
     <div class="nlhf-grant-summary__amount">
 
-      <p>£<%= @total_cash_contributions %></p>
+      <p><%= number_to_currency(@total_cash_contributions, strip_insignificant_zeros: true) %></p>
 
     </div>
 
