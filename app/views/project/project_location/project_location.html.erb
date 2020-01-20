@@ -26,12 +26,18 @@
 
         <div class="govuk-radios__item">
           <%= f.radio_button :same_location, "yes", class: "govuk-radios__input" %>
-          <%= f.label :same_location_yes, "Yes", class: "govuk-label govuk-radios__label" %>
+          <%= f.label :same_location_yes,
+                      "Yes, the project is taking place at the same location as my organisation's address",
+                      class: "govuk-label govuk-radios__label"
+          %>
         </div>
 
         <div class="govuk-radios__item">
           <%= f.radio_button :same_location, "no", class: "govuk-radios__input" %>
-          <%= f.label :same_location_no, "No", class: "govuk-label govuk-radios__label" %>
+          <%= f.label :same_location_no,
+                      "No, the project is not taking place at the same location as my organisation's address",
+                      class: "govuk-label govuk-radios__label"
+          %>
         </div>
 
       </div>
