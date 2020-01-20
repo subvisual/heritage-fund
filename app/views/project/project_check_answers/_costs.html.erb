@@ -1,0 +1,50 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.project_cost') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+
+    <table class="govuk-table">
+
+      <thead class="govuk-table__head">
+
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Cost Type</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+          <th scope="col" class="govuk-table__header">Amount</th>
+        </tr>
+
+      </thead>
+
+      <tbody class="govuk-table__body">
+
+        <% @project.project_costs.select { |pc| pc.id.present? }.each do |pc| %>
+          <tr class="govuk-table__row">
+            <td scope="govuk-table__cell" class="govuk-table__cell"><%= pc.cost_type&.humanize&.capitalize %>
+            <td class="govuk-table__cell"><%= pc.description %></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric"><%= number_to_currency(pc.amount, strip_insignificant_zeros: true) %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td></td>
+          <td class="govuk-heading-s govuk-!-padding-top-3">Total costs</td>
+          <td class="govuk-table__cell--numeric"><%= number_to_currency(calculate_total(@project.project_costs), strip_insignificant_zeros: true) %></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </dd>
+
+  <%= render partial: 'project/project_check_answers/change_link',
+             locals: {
+                 link_url: three_to_ten_k_project_project_costs_path,
+                 link_hidden_label: t('views.project.check_your_answers.project_cost')
+             }
+  %>
+
+</div>

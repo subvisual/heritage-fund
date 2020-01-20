@@ -14,6 +14,7 @@ class Project < ApplicationRecord
 
     validates_associated :non_cash_contributions, if: :validate_non_cash_contributions?
     validates_associated :project_costs, if: :validate_project_costs?
+    validates_associated :volunteers, if: :validate_volunteers?
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
@@ -33,7 +34,9 @@ class Project < ApplicationRecord
     attr_accessor :validate_other_outcomes
     attr_accessor :validate_project_costs
     attr_accessor :validate_non_cash_contributions
+    attr_accessor :validate_volunteers
     attr_accessor :validate_cash_contributions_question
+    attr_accessor :validate_non_cash_contributions_question
     attr_accessor :validate_confirm_declaration
 
     # These attributes are used to set individual error messages
@@ -46,6 +49,7 @@ class Project < ApplicationRecord
     attr_accessor :end_date_year
 
     attr_accessor :cash_contributions_question
+    attr_accessor :non_cash_contributions_question
 
     attr_accessor :same_location
 
@@ -80,6 +84,9 @@ class Project < ApplicationRecord
     validates_inclusion_of :cash_contributions_question,
                            in: ["true", "false"],
                            if: :validate_cash_contributions_question?
+    validates_inclusion_of :non_cash_contributions_question,
+                           in: ["true", "false"],
+                           if: :validate_non_cash_contributions_question?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
 
     validate do
@@ -239,8 +246,16 @@ class Project < ApplicationRecord
         validate_cash_contributions_question == true
     end
 
+    def validate_non_cash_contributions_question?
+        validate_non_cash_contributions_question == true
+    end
+
     def validate_non_cash_contributions?
         validate_non_cash_contributions == true
+    end
+
+    def validate_volunteers?
+        validate_volunteers == true
     end
 
     def validate_confirm_declaration?
