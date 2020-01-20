@@ -7,7 +7,7 @@
 
 <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-7">
   <h1 class="govuk-panel__title">
-    £<%= '%.2f' % @final_grant_amount %>
+    <%= number_to_currency(@final_grant_amount, strip_insignificant_zeros: true) %>
   </h1>
 
   <div class="govuk-panel__body">
