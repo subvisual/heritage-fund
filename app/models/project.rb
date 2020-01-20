@@ -13,6 +13,7 @@ class Project < ApplicationRecord
     accepts_nested_attributes_for :cash_contributions, :non_cash_contributions, :project_costs, :volunteers
 
     validates_associated :non_cash_contributions, if: :validate_non_cash_contributions?
+    validates_associated :volunteers, if: :validate_volunteers?
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
@@ -31,6 +32,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_involvement_description
     attr_accessor :validate_other_outcomes
     attr_accessor :validate_non_cash_contributions
+    attr_accessor :validate_volunteers
     attr_accessor :validate_cash_contributions_question
     attr_accessor :validate_non_cash_contributions_question
     attr_accessor :validate_confirm_declaration
@@ -244,6 +246,10 @@ class Project < ApplicationRecord
 
     def validate_non_cash_contributions?
         validate_non_cash_contributions == true
+    end
+
+    def validate_volunteers?
+        validate_volunteers == true
     end
 
     def validate_confirm_declaration?

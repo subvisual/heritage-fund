@@ -1,12 +1,13 @@
 class Project::ProjectGrantRequestController < ApplicationController
-  def project_grant_request
-    # TODO get project amounts from database when available
-    @total_project_cost = 100
-    @cash_contributions = 50
-    @final_grant_amount = @total_project_cost - @cash_contributions
-  end
-end
+  include ProjectContext
 
-def grant_save_and_continue
-  # TODO save if not already in the database
+  def show
+
+    @total_project_cost = helpers.calculate_total(@project.project_costs)
+    @total_cash_contributions = helpers.calculate_total(@project.cash_contributions)
+
+    @final_grant_amount = @total_project_cost - @total_cash_contributions
+
+  end
+
 end

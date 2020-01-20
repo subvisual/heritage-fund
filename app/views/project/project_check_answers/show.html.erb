@@ -1,0 +1,26 @@
+<% content_for :page_title, "Check your answers" %>
+
+<span class="govuk-caption-xl">About your project</span>
+<h1 class="govuk-heading-xl"><%= t('views.project.check_your_answers.page_title') %></h1>
+
+<dl class="govuk-summary-list">
+  <%= render 'project/project_check_answers/title' %>
+  <%= render 'project/project_check_answers/start_date' %>
+  <%= render 'project/project_check_answers/end_date' %>
+  <%= render 'project/project_check_answers/location' %>
+  <%= render 'project/project_check_answers/description' %>
+  <%= render 'project/project_check_answers/capital_work' %>
+  <%= render 'project/project_check_answers/permission' %>
+  <%= render 'project/project_check_answers/difference' %>
+  <%= render 'project/project_check_answers/community_matters' %>
+  <%= render 'project/project_check_answers/heritage' %>
+  <%= render 'project/project_check_answers/best_placed' %>
+  <%= render 'project/project_check_answers/involvement' %>
+  <%= render 'project/project_check_answers/other_outcomes' %>
+  <%= render 'project/project_check_answers/costs' %>
+</dl>
+
+<a href="<%= "#{three_to_ten_k_project_confirm_declaration_get_url}" %>" role="button" draggable="false" class="govuk-button"
+   data-module="govuk-button" aria-label="Continue button">
+  Save and continue
+</a>
