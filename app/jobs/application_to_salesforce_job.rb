@@ -30,8 +30,9 @@ class ApplicationToSalesforceJob < ApplicationJob
       project.organisation.update(
           salesforce_account_id: @response_body_obj.dig('accountId')
       )
+
     else
-      raise SalesforceApexError("Error response from Salesforce #{@response_body_obj}")
+      raise SalesforceApexError.new("Failure response from Salesforce when POSTing project ID: #{project.id}")
     end
   end
 end
