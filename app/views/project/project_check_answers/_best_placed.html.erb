@@ -1,9 +1,18 @@
 <div class="govuk-summary-list__row">
+
   <dt class="govuk-summary-list__key">
     <%= t('views.project.check_your_answers.best_placed') %>
   </dt>
+
   <dd class="govuk-summary-list__value">
-    <%= @project.best_placed_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.best_placed_description %>
+    <%= @project.best_placed_description.present? ? @project.best_placed_description : t('views.project.check_your_answers.not_answered')%>
   </dd>
-  <%= render 'project/project_check_answers/change_link' %>
+
+  <%= render partial: 'project/project_check_answers/change_link',
+             locals: {
+                 link_url: three_to_ten_k_project_description_get_path,
+                 link_hidden_label: t('views.project.check_your_answers.best_placed')
+             }
+  %>
+
 </div>

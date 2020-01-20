@@ -1,37 +1,26 @@
-<div>
-  <div>
-    <h2 class="govuk-heading-m" aria-label="Heading">About your project</h2>
-  </div>
+<% content_for :page_title, "Check your answers" %>
 
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-    <h1 class="govuk-fieldset__heading">
-      <%= t('views.project.check_your_answers.page_title') %>
-    </h1>
-  </legend>
+<span class="govuk-caption-xl">About your project</span>
+<h1 class="govuk-heading-xl"><%= t('views.project.check_your_answers.page_title') %></h1>
 
-  <dl class="govuk-summary-list">
-    <%= render 'project/project_check_answers/project_title' %>
-    <%= render 'project/project_check_answers/project_start_date' %>
-    <%= render 'project/project_check_answers/project_end_date' %>
-    <%= render 'project/project_check_answers/project_location' %>
-    <%= render 'project/project_check_answers/describe_your_idea' %>
-    <%= render 'project/project_check_answers/capital_works' %>
-    <%= render 'project/project_check_answers/project_permission' %>
-    <%= render 'project/project_check_answers/project_difference' %>
-    <%= render 'project/project_check_answers/community_matters' %>
-    <%= render 'project/project_check_answers/heritage' %>
-    <%= render 'project/project_check_answers/best_placed' %>
-    <%= render 'project/project_check_answers/involvement' %>
-    <%= render 'project/project_check_answers/other_outcomes' %>
-    <%= render 'project/project_check_answers/project_costs' %>
-  </dl>
+<dl class="govuk-summary-list">
+  <%= render 'project/project_check_answers/title' %>
+  <%= render 'project/project_check_answers/start_date' %>
+  <%= render 'project/project_check_answers/end_date' %>
+  <%= render 'project/project_check_answers/location' %>
+  <%= render 'project/project_check_answers/description' %>
+  <%= render 'project/project_check_answers/capital_work' %>
+  <%= render 'project/project_check_answers/permission' %>
+  <%= render 'project/project_check_answers/difference' %>
+  <%= render 'project/project_check_answers/community_matters' %>
+  <%= render 'project/project_check_answers/heritage' %>
+  <%= render 'project/project_check_answers/best_placed' %>
+  <%= render 'project/project_check_answers/involvement' %>
+  <%= render 'project/project_check_answers/other_outcomes' %>
+  <%= render 'project/project_check_answers/costs' %>
+</dl>
 
-  <div>
-    <% # 'TODO - review button text - Save and continue is not really SAVE just continue...' %>
-<!--    <form action="<%#= three_to_ten_k_project_project_check_answers_continue_get_path %>" method="get">-->
-      <button class="govuk-button" role="button" aria-label="save and continue button">Save and continue</button>
-<!--    </form>-->
-  </div>
-
-</div>
-
+<a href="<%= "#{three_to_ten_k_project_confirm_declaration_get_url}" %>" role="button" draggable="false" class="govuk-button"
+   data-module="govuk-button" aria-label="Continue button">
+  Save and continue
+</a>
