@@ -31,6 +31,7 @@ class ApplicationToSalesforceJob < ApplicationJob
           salesforce_account_id: @response_body_obj.dig('accountId')
       )
 
+      NotifyMailer.project_submission_confirmation(project).deliver_later
     else
       raise SalesforceApexError.new("Failure response from Salesforce when POSTing project ID: #{project.id}")
     end

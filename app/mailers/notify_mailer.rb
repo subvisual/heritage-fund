@@ -54,4 +54,14 @@ class NotifyMailer < Mail::Notify::Mailer
     )
   end
 
+  #  @param [Project] project
+  def project_submission_confirmation(project)
+    template_mail('071cfcda-ebd4-4eba-8602-338b12edc4f9',
+                  to: project.user.email,
+                  reply_to_id: @reply_to_id,
+                  personalisation: {
+                      project_reference_number: project.project_reference_number
+                  }
+    )
+  end
 end
