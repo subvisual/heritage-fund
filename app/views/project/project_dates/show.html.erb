@@ -52,7 +52,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :start_date, "Day", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :start_date_day, "Day", class: "govuk-label govuk-date-input__label" %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,
@@ -71,7 +71,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :start_date, "Month", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :start_date_month, "Month", class: "govuk-label govuk-date-input__label" %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,
@@ -90,7 +90,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :start_date, "Year", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :start_date_year, "Year", class: "govuk-label govuk-date-input__label" %>
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,
                   form_for_object: f,
@@ -135,7 +135,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :end_date, "Day", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :end_date_day, "Day", class: "govuk-label govuk-date-input__label" %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,
@@ -154,7 +154,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :end_date, "Month", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :end_date_month, "Month", class: "govuk-label govuk-date-input__label" %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,
@@ -173,7 +173,7 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :end_date, "Year", class: "govuk-label govuk-date-input__label" %>
+              <%= f.label :end_date_year, "Year", class: "govuk-label govuk-date-input__label" %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: @project,

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  devise_scope :user do
+    unauthenticated do
+      root to: "devise/sessions#new"
+    end
+    authenticated :user do
+      root to: "dashboard#show", as: :authenticated_root
+    end
+  end
+
   namespace :account do
     get 'create-new-account' => 'account#new'
     get 'account-created' => 'account#account_created'
@@ -51,7 +60,11 @@ Rails.application.routes.draw do
       get ':project_id/description', to: 'project_description#show', as: :description_get
       put ':project_id/description', to: 'project_description#update', as: :description_put
 
-      get ':project_id/capital-works', to: 'capital_works#capital_works', as: :capital_works_get
+      get ':project_id/capital-works', to: 'project_capital_works#show', as: :capital_works_get
+      put ':project_id/capital-works', to: 'project_capital_works#update', as: :capital_works_put
+
+      get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
+      put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
 
       get ':project_id/difference', to: 'project_difference#show', as: :difference_get
       put ':project_id/difference', to: 'project_difference#update', as: :difference_put
@@ -72,35 +85,64 @@ Rails.application.routes.draw do
       put ':project_id/how-will-your-project-involve-people',
           to: 'project_involvement#update', as: :involvement_put
 
-      get ':project_id/other-outcomes', to: 'project_other_outcomes#project_other_outcomes', as: :other_outcomes_get
+      get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
+      put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
 
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
+      get ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question',
+          as: :cash_contributions_question_get
+      put ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question_update',
+          as: :cash_contributions_question_put
+
+      get ':project_id/cash-contributions',
+          to: 'project_cash_contribution#project_cash_contribution',
+          as: :project_cash_contribution
+      put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
+
+      get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
+
+      get ':project_id/are-you-getting-non-cash-contributions',
+          to: 'project_non_cash_contributions#question',
+          as: :non_cash_contributions_question_get
+      put ':project_id/are-you-getting-non-cash-contributions',
+          to: 'project_non_cash_contributions#question_update',
+          as: :non_cash_contributions_question_put
+
+      get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
+      put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
+
+      get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
+      put ':project_id/volunteers' => 'project_volunteers#put'
+
+      get ':project_id/check-your-answers',
+          to: 'project_check_answers#show', as: :check_answers_get
+
+      get ':project_id/declaration', to: 'project_declaration#show_declaration', as: :declaration_get
+      put ':project_id/declaration', to: 'project_declaration#update_declaration', as: :declaration_put
+
+      get ':project_id/confirm-declaration',
+          to: 'project_declaration#show_confirm_declaration',
+          as: :confirm_declaration_get
+      put ':project_id/confirm-declaration',
+          to: 'project_declaration#update_confirm_declaration',
+          as: :confirm_declaration_put
+
+      # TODO: Replace this with an 'application submitted' route
+      get ':project_id/declaration-confirmed',
+          to: 'project_declaration#declaration_confirmed',
+          as: :declaration_confirmed_get
+
       get 'project-list' => 'project_list#project_list'
-      get 'permission' => 'project_permission#project_permission'
       get 'location' => 'project_location#project_location'
-      post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
-      get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
-      post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
-      get 'non-cash-contributions-question' => 'project_non_cash_contributors#non_cash_contributors_question'
-      post 'save-non-cash-contributions-question' => 'project_non_cash_contributors#save_non_cash_contributions_question'
-      get 'non-cash-contribution' => 'project_non_cash_contributors#non_cash_contribution'
-      post 'add-non-cash-contribution' => 'project_non_cash_contributors#add_non_cash_contribution'
-      post 'process-non-cash' => 'project_non_cash_contributors#process_non_cash'
-      get 'grant-request' => 'project_grant_request#grant_request'
-      post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
-      get 'confirm-declaration' => 'project_declaration#confirm_declaration'
-      get 'declaration' => 'project_declaration#project_declaration'
-      post 'declaration-confirmed' => 'project_declaration#declaration_confirmed'
-      post 'submit-application' => 'project_declaration#submit_application'
-      get 'volunteers' => 'project_volunteers#project_volunteers'
-      post 'add-volunteer' => 'project_volunteers#add_volunteer'
-      post 'process-volunteers' => 'project_volunteers#process_volunteers'
+
+      post 'submit-application' => 'show_declaration#submit_application'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
-      get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
-      put ':project_id/cash-contribution' => 'project_cash_contribution#put'
+
     end
   end
 
@@ -108,7 +150,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :projects, except: [:destroy, :index]
-  root to: "dashboard#show"
   get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do

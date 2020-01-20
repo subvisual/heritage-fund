@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_154043) do
+ActiveRecord::Schema.define(version: 2020_01_13_130313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2020_01_07_154043) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organisation_id"], name: "index_legal_signatories_on_organisation_id"
+  end
+
+  create_table "non_cash_contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "amount"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "project_id", null: false
+    t.index ["project_id"], name: "index_non_cash_contributions_on_project_id"
   end
 
   create_table "organisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -108,6 +117,27 @@ ActiveRecord::Schema.define(version: 2020_01_07_154043) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
+    t.text "declaration_reasons_description"
+    t.boolean "user_research_declaration", default: false
+    t.boolean "keep_informed_declaration", default: false
+    t.boolean "outcome_2"
+    t.boolean "outcome_3"
+    t.boolean "outcome_4"
+    t.boolean "outcome_5"
+    t.boolean "outcome_6"
+    t.boolean "outcome_7"
+    t.boolean "outcome_8"
+    t.boolean "outcome_9"
+    t.text "outcome_2_description"
+    t.text "outcome_3_description"
+    t.text "outcome_4_description"
+    t.text "outcome_5_description"
+    t.text "outcome_6_description"
+    t.text "outcome_7_description"
+    t.text "outcome_8_description"
+    t.text "outcome_9_description"
+    t.boolean "is_partnership"
+    t.text "partnership_details"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -150,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_01_07_154043) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_contributions", "projects"
+  add_foreign_key "non_cash_contributions", "projects"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"

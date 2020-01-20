@@ -1,49 +1,41 @@
 class Project::ProjectVolunteersController < ApplicationController
-  def project_volunteers
-    @current_volunteers = volunteers
-    @total_volunteer_hours = total_volunteers_hours
-  end
+  include ProjectContext
 
-  def add_volunteer
+  def put
 
-    volunteer_amount = params['volunteer-amount'].present? ? params['volunteer-amount'].to_i : 0
-    volunteer_description = params['volunteer-description'].present? ? params['volunteer-description'] : ' '
+    # Empty flash values to ensure that we don't redisplay them unnecessarily
+    flash[:description] = ""
+    flash[:hours] = ""
 
-    volunteer = { 'description' => volunteer_description, 'amount' => volunteer_amount }
+    logger.debug "Adding volunteer for project ID: #{@project.id}"
 
-    current_volunteers = volunteers
-    current_volunteers[current_volunteers.size] = volunteer unless volunteer_amount == 0
-    session['volunteers'] = current_volunteers unless volunteer_amount == 0
+    @project.validate_volunteers = true
 
-    # TODO persist volunteers to the db
+    @project.update(project_params)
 
-    redirect_to request.referer
+    if @project.valid?
 
-  end
+      logger.debug "Successfully added volunteer for project ID: #{@project.id}"
 
-  def process_volunteers
-    # TODO process volunteers and redirect to next page in the journey
+      redirect_to three_to_ten_k_project_volunteers_path
 
-    redirect_to request.referer
+    else
 
+      logger.debug "Validation failed when adding volunteer for project ID: #{@project.id}"
 
-  end
+      # Store flash values to display them again when re-rendering the page
+      flash[:description] = params['project']['volunteers_attributes']['0']['description']
+      flash[:hours] = params['project']['volunteers_attributes']['0']['hours']
 
-  def volunteers
-    # TODO get volunteers from the db
-    current_volunteers = session['volunteers'].present? ? session['volunteers'] : Array.new
-    current_volunteers
-  end
+      render :show
 
-  def total_volunteers_hours
-    # TODO calc totals from data in the db
-    sum = 0
-    current_volunteers = volunteers
-    current_volunteers.each do |volunteer|
-      sum += volunteer['amount']
     end
-    sum
+
   end
 
+  private
+  def project_params
+    params.require(:project).permit(volunteers_attributes: [:description, :hours])
+  end
 
 end
