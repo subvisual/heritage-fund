@@ -91,8 +91,17 @@ Rails.application.routes.draw do
       get ':project_id/costs' => 'project_costs#show', as: :project_costs
       put ':project_id/costs' => 'project_costs#update'
 
-      get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
-      put ':project_id/cash-contribution' => 'project_cash_contribution#put'
+      get ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question',
+          as: :cash_contributions_question_get
+      put ':project_id/are-you-getting-cash-contributions',
+          to: 'project_cash_contribution#question_update',
+          as: :cash_contributions_question_put
+
+      get ':project_id/cash-contributions',
+          to: 'project_cash_contribution#project_cash_contribution',
+          as: :project_cash_contribution
+      put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
 
       get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
 
@@ -101,6 +110,9 @@ Rails.application.routes.draw do
 
       get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
       put ':project_id/volunteers' => 'project_volunteers#put'
+
+      get ':project_id/check-your-answers',
+          to: 'project_check_answers#show', as: :check_answers_get
 
       get ':project_id/declaration', to: 'project_declaration#show_declaration', as: :declaration_get
       put ':project_id/declaration', to: 'project_declaration#update_declaration', as: :declaration_put
@@ -117,15 +129,13 @@ Rails.application.routes.draw do
           to: 'project_declaration#declaration_confirmed',
           as: :declaration_confirmed_get
 
-
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
-      post 'save-project-contributions' => 'project_cash_contribution#save_cash_contribution_question'
-      get 'cash-contributions-question' => 'project_cash_contribution#cash_contribution_question'
-      post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
+
       post 'submit-application' => 'show_declaration#submit_application'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
+
     end
   end
 

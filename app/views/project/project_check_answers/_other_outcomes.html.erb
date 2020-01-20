@@ -1,0 +1,38 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.other_outcomes') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+
+    <% (2 .. 9).each do |n| %>
+
+      <% if @project["outcome_#{n}"].present? %>
+
+        <h4 class="govuk-heading-s">
+          <%= t("views.project.check_your_answers.possible_outcomes.outcome_#{n}") %>
+        </h4>
+
+        <% if @project["outcome_#{n}_description"].present? %>
+
+          <p class="govuk-body">
+            <%= @project["outcome_#{n}_description"] %>
+          </p>
+
+        <% end %>
+
+      <% end %>
+
+    <% end %>
+
+  </dd>
+
+  <%= render partial: 'project/project_check_answers/change_link',
+             locals: {
+                 link_url: three_to_ten_k_project_other_outcomes_get_path,
+                 link_hidden_label: t('views.project.check_your_answers.other_outcomes')
+             }
+  %>
+
+</div>
