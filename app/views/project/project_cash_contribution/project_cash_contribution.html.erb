@@ -48,9 +48,8 @@
         <h3 class="nlhf-summary__total__title">
           <span class="nlhf-summary__total__title-text">Total </span>
           <span class="nlhf-summary__total__title-val">
-                  <%# TODO: Add dynamic calculated total here %>
-            £1000
-                </span>
+            <%= number_to_currency(calculate_total(@project.cash_contributions), strip_insignificant_zeros: true) %>
+          </span>
         </h3>
       </div>
 
