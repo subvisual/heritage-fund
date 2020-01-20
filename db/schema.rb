@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2020_01_13_130313) do
     t.index ["organisation_id"], name: "index_legal_signatories_on_organisation_id"
   end
 
+  create_table "non_cash_contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "amount"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "project_id", null: false
+    t.index ["project_id"], name: "index_non_cash_contributions_on_project_id"
+  end
+
   create_table "organisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -171,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_130313) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_contributions", "projects"
+  add_foreign_key "non_cash_contributions", "projects"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"
