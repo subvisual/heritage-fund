@@ -65,7 +65,8 @@
 
     <p class="govuk-heading-m govuk-!-margin-bottom-0"
        style="text-align: center;">
-      <%= "£#{@total_project_cost} - £#{@total_cash_contributions} = £#{'%.2f' % @final_grant_amount}" %>
+      <%= "£#{@total_project_cost} -
+        £#{@total_cash_contributions} = #{number_to_currency(@final_grant_amount, strip_insignificant_zeros: true)}" %>
     </p>
 
   </div>
