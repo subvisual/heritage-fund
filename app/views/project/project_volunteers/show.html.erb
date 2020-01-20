@@ -107,6 +107,7 @@
 
               <%= v.label :description, class: 'govuk-label' %>
               <%= v.text_area :description,
+                              required: true,
                               class: "govuk-textarea #{'govuk-textarea--error' if @project.errors['volunteers.description'].any?} govuk-js-character-count",
                               rows: 5,
                               value: "#{flash[:description] if flash[:description].present?}"
@@ -125,6 +126,7 @@
 
             <%= v.label :hours, class: 'govuk-label' %>
             <%= v.number_field :hours,
+                               required: true,
                                min: 1,
                                class: "govuk-input govuk-input govuk-input--width-10 #{'govuk-input--error' if @project.errors['volunteers.hours'].any?}",
                                value: "#{flash[:hours] if flash[:hours].present?}"
