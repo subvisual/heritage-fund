@@ -98,6 +98,13 @@ Rails.application.routes.draw do
           to: 'project_cash_contribution#question_update',
           as: :cash_contributions_question_put
 
+      get ':project_id/cash-contributions',
+          to: 'project_cash_contribution#project_cash_contribution',
+          as: :project_cash_contribution
+      put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
+
+      get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
+
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
 
@@ -125,15 +132,9 @@ Rails.application.routes.draw do
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
 
-
-      post 'process-cash-contributions' => 'project_cash_contribution#process_cash_contributions'
-      get 'grant-request' => 'project_grant_request#project_grant_request'
-      post 'grant-save-and-continue' => 'project_grant_request#grant_save_and_continue'
       post 'submit-application' => 'show_declaration#submit_application'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
-      get ':project_id/cash-contribution' => 'project_cash_contribution#project_cash_contribution', as: :project_cash_contribution
-      put ':project_id/cash-contribution' => 'project_cash_contribution#put'
 
     end
   end
