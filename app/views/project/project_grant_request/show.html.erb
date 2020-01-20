@@ -32,7 +32,7 @@
 
     <div class="nlhf-grant-summary__amount">
 
-      <p>£<%= @total_project_cost %></p>
+      <p><%= number_to_currency(@total_project_cost, strip_insignificant_zeros: true) %></p>
 
     </div>
 
