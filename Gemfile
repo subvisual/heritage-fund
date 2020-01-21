@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "pry", "~> 0.12.2"
 end
 
 group :development do
@@ -47,6 +48,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem "webmock", "~> 3.8"
+  gem "factory_bot_rails", "~> 5.1"
 end
 
 group :production do
@@ -61,18 +64,16 @@ gem "dotenv-rails", "~> 2.7", groups: [:development, :test]
 
 gem "pg", "~> 1.1"
 
-gem "restforce", "~> 4.0"
+gem "restforce", "~> 4.2"
 
 gem "faraday", "~> 0.17.0"
 
 gem "ideal_postcodes", "~> 2.0"
 
-gem "pry", "~> 0.12.2"
-
 gem "devise", "~> 4.7"
-
-gem "factory_bot_rails", "~> 5.1"
 
 gem "mail-notify", "~> 0.2"
 
 gem "rails-i18n", "~> 6.0"
+
+gem "nilify_blanks", "~> 1.3"

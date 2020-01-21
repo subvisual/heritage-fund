@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
     include ActiveModel::Validations
+    self.implicit_order_column = "created_at"
 
     belongs_to :user
     has_one :organisation, through: :user
@@ -282,11 +283,11 @@ class Project < ApplicationRecord
 
     def validate_length(field, max_length, error_msg)
 
-        word_count = self.public_send(field).split(' ').count
+        word_count = self.public_send(field)&.split(' ')&.count
 
         logger.debug "#{field} word count is #{word_count}"
 
-        if word_count > max_length
+        if word_count && word_count > max_length
             self.errors.add(field, error_msg)
         end
 
@@ -307,6 +308,16 @@ class Project < ApplicationRecord
                 json.projectDateRange do
                     json.startDate self.start_date
                     json.endDate self.end_date
+                end
+                #TODO: Replace this dummy data with real data
+                json.set!('mainContactName', "Jane Doe")
+                json.set!('mainContactDateOfBirth', "1975-10-12")
+                json.set!('mainContactEmail', "test@example.net")
+                json.mainContactAddress do
+                    json.line1 "Buckingham Palace"
+                    json.line2 "Westminster"
+                    json.townCity "London"
+                    json.postcode "SW1A 1AA"
                 end
                 json.projectAddress do
                     json.line1 self.line1
@@ -338,34 +349,32 @@ class Project < ApplicationRecord
                 json.set!('projectOutcome7Checked', self.outcome_7)
                 json.set!('projectOutcome8Checked', self.outcome_8)
                 json.set!('projectOutcome9Checked', self.outcome_9)
-                json.projectCosts do
-                    json.child! {
-                        json.costId 'baa49446-cb70-46c7-ade1-0e17ad450c8a'
-                        json.costType 'new-staff'
-                        json.costDescription 'Dummy data'
-                        json.costAmount '1000'
-                    }
+                json.set!('projectNeedsPermission', (self.permission_type == 'x_not_sure' ? 'not_sure' : self.permission_type)&.dasherize)
+                json.set!('projectNeedsPermissionDetails', self.permission_description)
+                json.set!('keepInformed', self.keep_informed_declaration)
+                json.set!('involveInResearch', self.user_research_declaration)
+                json.set!('isPartnership', self.is_partnership)
+                json.set!('partnershipDetails', self.partnership_details)
+                json.set!('projectCapitalWork', self.capital_work)
+                json.projectCosts self.project_costs do |project_cost|
+                    json.costId project_cost.id
+                    json.costType project_cost.cost_type&.dasherize
+                    json.costDescription project_cost.description
+                    json.costAmount project_cost.amount
                 end
-                json.projectVolunteers do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.hours 10
-                    }
+                json.projectVolunteers self.volunteers do |volunteer|
+                    json.description volunteer.description
+                    json.hours volunteer.hours
                 end
-                json.nonCashContributions do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.estimatedValue 1000
-                        json.secured 'not-sure'
-                    }
+                json.nonCashContributions self.non_cash_contributions do |non_cash_contribution|
+                        json.description non_cash_contribution.description
+                        json.estimatedValue non_cash_contribution.amount
                 end
-                json.cashContributions do
-                    json.child! {
-                        json.description 'Dummy data'
-                        json.amount 2000
-                        json.secured 'no'
-                        json.id 'c4237718-ced7-4d03-a95b-1eceaecfdbe0'
-                    }
+                json.cashContributions self.cash_contributions do |cash_contribution|
+                        json.description cash_contribution.description
+                        json.amount cash_contribution.amount
+                        json.secured cash_contribution.secured&.dasherize
+                        json.id cash_contribution.id
                 end
                 json.set!('organisationId', self.organisation.id)
                 json.set!('organisationName', self.organisation.name)
@@ -386,6 +395,8 @@ class Project < ApplicationRecord
                     json.set!("name", ls.name)
                     json.set!("email", ls.email_address)
                     json.set!("phone", ls.phone_number)
+                    #TODO: Remove or replace with model attribute
+                    json.set!("role", "")
                 }
                 @ls_one = self.organisation.legal_signatories.first
                 json.authorisedSignatoryOneDetails do

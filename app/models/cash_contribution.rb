@@ -1,4 +1,5 @@
 class CashContribution < ApplicationRecord
+  self.implicit_order_column = "created_at"
   belongs_to :project
   has_many_attached :cash_contribution_evidence_files
 

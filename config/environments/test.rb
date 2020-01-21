@@ -46,4 +46,10 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
   config.active_storage.service = :test
+  config.x.salesforce.host = "test.salesforce.com"
+  config.x.salesforce.username = "test"
+  config.x.salesforce.password = "test"
+  config.x.salesforce.security_token = "test"
+  config.x.salesforce.client_id = "test"
+  config.x.salesforce.client_secret = "test"
 end
