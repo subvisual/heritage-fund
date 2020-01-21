@@ -122,6 +122,14 @@ en-GB:
               inclusion: "Select whether or not your project is getting any cash contributions"
             non_cash_contributions_question:
               inclusion: "Select whether or not your project is getting any non-cash contributions"
+        cash_contribution:
+          attributes:
+            description:
+              blank: "Enter a description of your cash contribution"
+            amount:
+              not_a_number: "Amount must be a number, like 500"
+            secured:
+              inclusion: "Select whether or not your cash contribution is secured"
         non_cash_contribution:
           attributes:
             description:
