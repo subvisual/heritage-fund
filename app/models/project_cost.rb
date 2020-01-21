@@ -1,4 +1,5 @@
 class ProjectCost < ApplicationRecord
+  self.implicit_order_column = "created_at"
   belongs_to :project
 
   validates :cost_type, presence: true

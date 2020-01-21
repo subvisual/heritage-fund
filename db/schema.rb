@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_130313) do
+ActiveRecord::Schema.define(version: 2020_01_20_111236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_130313) do
     t.string "line3"
     t.integer "org_type"
     t.string "mission", default: [], array: true
+    t.string "salesforce_account_id"
   end
 
   create_table "project_costs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -138,6 +139,10 @@ ActiveRecord::Schema.define(version: 2020_01_13_130313) do
     t.text "outcome_9_description"
     t.boolean "is_partnership"
     t.text "partnership_details"
+    t.string "salesforce_case_number"
+    t.string "salesforce_case_id"
+    t.string "project_reference_number"
+    t.datetime "submitted_on"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
