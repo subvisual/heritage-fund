@@ -7,6 +7,38 @@ en-GB:
   how_to_find_company_number_link: "#"
   project_outcomes_link: "#"
   what_we_fund_link: "#"
+  views:
+    project:
+      check_your_answers:
+        not_answered: " Not Answered "
+        page_title: "Check your answers"
+        project_title: "Project title"
+        project_start_date: "Project start date"
+        project_end_date: "Project completion date"
+        where_is_your_project_taking_place: "Where is your project taking place?"
+        description: "Describe your idea"
+        captital_work: "Will capital work be part of your project?"
+        permission: "Do you need permission from anyone else to do your project?"
+        more_info_about_permission: "More information about permission"
+        difference: "What difference will your project make?"
+        community_matters: "How does your project matter to you and your community?"
+        heritage: "The heritage of your project: how do you plan to make it available once the project is over?"
+        best_placed: "Why is your organisation best placed to deliver this project?"
+        involvement: "How will your project involve a wider range of people?"
+        other_outcomes: "Will your project achieve any of our other outcomes?"
+        other_outcomes_how: "How will you achieve this outcome?"
+        achieve_outcome: "How will you achieve this outcome?"
+        project_cost: "How much will your project cost?"
+        cash_contributions: "Are you getting any cash contributions towards your project?"
+        possible_outcomes:
+          outcome_2: "Heritage will be in a better condition"
+          outcome_3: "Heritage will be identified and better explained"
+          outcome_4: "People will have developed skills"
+          outcome_5: "People will have learned about heritage, leading to change in ideas and actions"
+          outcome_6: "People will have a greater wellbeing"
+          outcome_7: "The funded organisation will be more resilient"
+          outcome_8: "The local area will be a better place to live, work or visit"
+          outcome_9: "The local economy will be boosted"
   activerecord:
     attributes:
       legal_signatory:
@@ -86,9 +118,27 @@ en-GB:
               blank: "Enter a description of who you need permission from to do your project"
             capital_work:
               inclusion: "Select whether or not capital work will be part of your project"
+            cash_contributions_question:
+              inclusion: "Select whether or not your project is getting any cash contributions"
+            non_cash_contributions_question:
+              inclusion: "Select whether or not your project is getting any non-cash contributions"
         non_cash_contribution:
           attributes:
             description:
               blank: "Enter a description of your non-cash contribution"
             amount:
               not_a_number: "Amount must be a number, like 500"
+        project_cost:
+          attributes:
+            description:
+              blank: "Enter a description of the project cost you are adding"
+            amount:
+              not_a_number: "Amount must be a number, like 500"
+            cost_type:
+              blank: "Select the cost type for the project cost you are adding"
+        volunteer:
+          attributes:
+            description:
+              blank: "Enter a description of your project volunteer"
+            hours:
+              not_a_number: "Hours must be a number, like 5"

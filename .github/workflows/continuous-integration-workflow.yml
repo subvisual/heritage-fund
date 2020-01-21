@@ -23,9 +23,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - uses: actions/setup-ruby@v1.0.0
+    - uses: actions/setup-ruby@v1
       with:
-        ruby-version: '2.6.x'
+        ruby-version: '2.6'
     - run: yarn install
     - run: gem install bundler
     - name: Cache Gemfile dependencies
