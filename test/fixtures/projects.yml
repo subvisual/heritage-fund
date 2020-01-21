@@ -38,7 +38,8 @@ one: {
   outcome_8_description: "Description of outcome 8",
   outcome_9_description: "",
   permission_type: 2,
-  permission_description: "permission description"
+  permission_description: "permission description",
+  partnership_details: "partnership details"
 }
 
 
