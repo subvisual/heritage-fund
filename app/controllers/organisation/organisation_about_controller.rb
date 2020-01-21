@@ -1,5 +1,4 @@
 require 'ideal_postcodes'
-require 'pry'
 
 class Organisation::OrganisationAboutController < ApplicationController
   include OrganisationHelper
