@@ -116,7 +116,7 @@
   each with their own description and amount. </p>
 
 <%= form_with model: @project, url: three_to_ten_k_project_project_costs_path,
-              class: "govuk-!-margin-bottom-9", method: :put, local: true do |f| %>
+              class: "govuk-!-margin-bottom-3", method: :put, local: true do |f| %>
 
   <%= f.fields_for :project_costs, @project.project_costs.build do |pc| %>
 
@@ -200,12 +200,12 @@
 
 <% end %>
 
-<details class="govuk-details" data-module="govuk-details">
+<details class="govuk-details  govuk-!-margin-bottom-6" data-module="govuk-details">
 
   <summary class="govuk-details__summary">
 
         <span class="govuk-details__summary-text">
-          Choose the right cost type
+          Help with cost types
         </span>
 
   </summary>

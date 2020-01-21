@@ -62,7 +62,7 @@
 
 <%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: true do |f| %>
   <% f.fields_for :cash_contributions, @cash_contribution do |cc| %>
-    <div class="nlhf-add-item">
+    <div class="nlhf-add-item govuk-!-margin-bottom-6">
 
       <header class="nlhf-add-item__header">
         <h2 class="govuk-heading-l">Add a cash contribution</h2>
@@ -97,18 +97,18 @@
               <div class="govuk-radios govuk-radios--conditional govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
                   <%= cc.radio_button :secured, "yes_with_evidence", class: "govuk-radios__input", name: "cash-contribution", 'data-aria-controls': "conditional-cash-contribution-conditional" %>
-                  <%= cc.label :secured_yes_with_evidence, 'Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
+                  <%= cc.label :secured_yes_with_evidence, 'Yes and I can provide evidence'.html_safe, class: "govuk-label govuk-radios__label" %>
                 </div>
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-cash-contribution-conditional">
                   <div class="govuk-form-group">
-                    <%= cc.label :cash_contribution_evidence_files, "Select supporting evidence", class: 'govuk-caption-m' %>
+                    <%= cc.label :cash_contribution_evidence_files, "Evidence could be a letter from the contributor, or a copy of bank statements to show the funds.", class: 'govuk-caption-m govuk-!-margin-bottom-3' %>
                     <%= cc.file_field :cash_contribution_evidence_files, class: 'govuk-file-upload', multiple: false, direct_upload: true %>
                   </div>
                 </div>
 
                 <div class="govuk-radios__item">
                   <%= cc.radio_button :secured, "yes_no_evidence_yet", class: "govuk-radios__input", name: "cash-contribution" %>
-                  <%= cc.label :secured_yes_no_evidence_yet, 'Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
+                  <%= cc.label :secured_yes_no_evidence_yet, 'Yes but I do not have evidence yet'.html_safe, class: "govuk-label govuk-radios__label" %>
                 </div>
 
                 <div class="govuk-radios__item">
@@ -155,6 +155,40 @@
   <% end %>
 <% end %>
 <!-- /add-cost form -->
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      Help with cash contributions
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-3">What do we mean by cash contributions?</h3>
+    <p class="govuk-body">
+      Cash contributions include any additional funds you expect to receive for your project.
+    </p>
+    
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-3">Do I need cash contributions?</h3>
+    <p class="govuk-body govuk-!-margin-bottom-3">
+      You do not need to have cash contributions at this grant level, so don't worry if you cannot add anything to this section.
+    </p>
+
+    <div class="govuk-warning-text govuk-!-margin-bottom-4">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
+          However, if you tell us that you are getting money from elsewhere, we will need to see evidence of this, as it helps with our assessment.
+      </strong>
+    </div>
+
+    <h3 class="govuk-heading-m govuk-!-margin-bottom-3">What is a secured contribution?</h3>
+    <p class="govuk-body">
+      By secured we mean the cash in your bank account reserved specifically for this project, or grant money has been formally offered. You can add evidence later in your application.
+    </p>
+
+  </div>
+</details>
 
 <hr class="govuk-section-break--l govuk-section-break--visible">
 
