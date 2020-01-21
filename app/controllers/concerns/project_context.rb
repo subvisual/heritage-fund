@@ -11,6 +11,8 @@ module ProjectContext
   #
   # If no project object matching the parameters is found,
   # then the user is redirected to the projects dashboard.
+  #
+  # TODO: Write tests for this.
   def set_project
 
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
