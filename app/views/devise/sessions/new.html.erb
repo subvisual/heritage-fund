@@ -5,7 +5,7 @@
 <h2 class="govuk-heading-l">Sign in</h2>
 
 <p class="govuk-body govuk-!-margin-bottom-6">
-  This is a new application form. If you haven't logged in here before, you might not have an account with us - and will need to <%= link_to "create a new account", new_registration_path(resource_name) %> to apply.
+  This is a new application form. If you haven't logged in here before, you might not have an account with us. You will need to <%= link_to "create a new account", new_registration_path(resource_name) %> to apply.
 </p>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
