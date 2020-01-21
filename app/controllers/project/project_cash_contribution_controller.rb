@@ -35,15 +35,31 @@ class Project::ProjectCashContributionController < ApplicationController
 
   end
 
-  def project_cash_contribution
-    @cash_contribution = @project.cash_contributions.build
-  end
-
-
   def put
-    # TODO: Validate fields
+
+    logger.debug "Adding cash contribution for project ID: #{@project.id}"
+
+    @project.validate_cash_contributions = true
+
     @project.update(project_params)
-    redirect_to three_to_ten_k_project_project_cash_contribution_path
+
+    if @project.valid?
+
+      logger.debug "Finished adding cash contribution for project ID: #{@project.id}"
+
+      redirect_to three_to_ten_k_project_project_cash_contribution_path
+
+    else
+
+      logger.debug "Validation failed when adding cash contribution for project ID: #{@project.id}"
+
+      respond_to do |format|
+        format.html {render :show}
+        format.js {render :show}
+      end
+
+    end
+
   end
 
   private

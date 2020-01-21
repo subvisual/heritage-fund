@@ -1,5 +1,7 @@
 <% content_for :page_title, "Cash contributions" %>
 
+<div id="summary-errors"></div>
+
 <span class="govuk-caption-xl">Support for your project</span>
 <h1 class="govuk-heading-xl">Cash contributions</h1>
 
@@ -61,7 +63,7 @@
 <!-- /.nlhf-summary-container -->
 
 <%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: true do |f| %>
-  <% f.fields_for :cash_contributions, @cash_contribution do |cc| %>
+  <% f.fields_for :cash_contributions, @project.cash_contributions.build do |cc| %>
     <div class="nlhf-add-item">
 
       <header class="nlhf-add-item__header">
@@ -71,20 +73,31 @@
       <div class="nlhf-add-item__body">
 
         <div class="nlhf-add-item__row">
+
           <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
-            <div class="govuk-form-group">
+
+            <div class="govuk-form-group" id="description-form-group">
+
+              <div id="description-errors"></div>
+
               <%= cc.label :description, class: 'govuk-label' %>
               <%= cc.text_area :description, class: 'govuk-textarea govuk-js-character-count', rows: 5 %>
+
               <span class="govuk-hint govuk-character-count__message" id="project_cash_contributions_attributes_0_description-info"></span>
+
             </div>
+
           </div>
+
         </div>
         <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
 
-          <div class="govuk-form-group">
+          <div class="govuk-form-group" id="secured-form-group">
             <fieldset class="govuk-fieldset">
+
+              <div id="secured-errors"></div>
 
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                 <h2 class="govuk-fieldset__heading">
@@ -96,8 +109,8 @@
 
               <div class="govuk-radios govuk-radios--conditional govuk-radios--small" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <%= cc.radio_button :secured, "yes_with_evidence", class: "govuk-radios__input", name: "cash-contribution", 'data-aria-controls': "conditional-cash-contribution-conditional" %>
-                  <%= cc.label :secured_yes_with_evidence, 'Yes<br> <span class="govuk-!-font-size-16">I can provide evidence</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
+                  <%= cc.radio_button :secured, "yes_with_evidence", class: "govuk-radios__input", 'data-aria-controls': "conditional-cash-contribution-conditional" %>
+                  <%= cc.label :secured_yes_with_evidence, 'Yes, this cash contribution is secured<br> <span class="govuk-!-font-size-16">I can provide evidence</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
                 </div>
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-cash-contribution-conditional">
                   <div class="govuk-form-group">
@@ -107,18 +120,18 @@
                 </div>
 
                 <div class="govuk-radios__item">
-                  <%= cc.radio_button :secured, "yes_no_evidence_yet", class: "govuk-radios__input", name: "cash-contribution" %>
-                  <%= cc.label :secured_yes_no_evidence_yet, 'Yes<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
+                  <%= cc.radio_button :secured, "yes_no_evidence_yet", class: "govuk-radios__input" %>
+                  <%= cc.label :secured_yes_no_evidence_yet, 'Yes, this cash contribution is secured<br> <span class="govuk-!-font-size-16">but I do not have evidence yet</span>'.html_safe, class: "govuk-label govuk-radios__label" %>
                 </div>
 
                 <div class="govuk-radios__item">
-                  <%= cc.radio_button :secured, "no", class: "govuk-radios__input", name: "cash-contribution" %>
-                  <%= cc.label :secured_no, 'No', class: "govuk-label govuk-radios__label" %>
+                  <%= cc.radio_button :secured, "no", class: "govuk-radios__input" %>
+                  <%= cc.label :secured_no, 'No, this cash contribution is not secured', class: "govuk-label govuk-radios__label" %>
                 </div>
 
                 <div class="govuk-radios__item">
-                  <%= cc.radio_button :secured, "x_not_sure", class: "govuk-radios__input", name: "cash-contribution" %>
-                  <%= cc.label :secured_x_not_sure, 'Not sure', class: "govuk-label govuk-radios__label" %>
+                  <%= cc.radio_button :secured, "x_not_sure", class: "govuk-radios__input" %>
+                  <%= cc.label :secured_x_not_sure, 'Not sure if this cash contribution is secured', class: "govuk-label govuk-radios__label" %>
                 </div>
 
               </div>
@@ -128,7 +141,10 @@
         <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
-          <div class="govuk-form-group">
+          <div class="govuk-form-group" id="amount-form-group">
+
+            <div id="amount-errors"></div>
+
             <%= cc.label :amount, class: 'govuk-label' %>
             <div class="nlhf-currency-denote">
               <div class="nlhf-currency-denote__symbol">

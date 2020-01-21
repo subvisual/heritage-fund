@@ -1,6 +1,14 @@
 class CashContribution < ApplicationRecord
   belongs_to :project
   has_many_attached :cash_contribution_evidence_files
+
+  validates :description, presence: true
+  validates :amount, numericality: { only_integer: true }
+  validates_inclusion_of :secured, in: ["yes_with_evidence", "no", "x_not_sure", "yes_no_evidence_yet"]
+
+  # TODO: Validate inclusion of evidence files if
+  #       :secured == "yes_with_evidence"
+
   enum secured: {
       yes_with_evidence: 0,
       no: 1,
