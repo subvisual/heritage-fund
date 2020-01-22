@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-    include ActiveModel::Validations
+    include ActiveModel::Validations, GenericValidator
     self.implicit_order_column = "created_at"
 
     belongs_to :user
@@ -13,6 +13,7 @@ class Project < ApplicationRecord
     has_one_attached :capital_work_file
     accepts_nested_attributes_for :cash_contributions, :non_cash_contributions, :project_costs, :volunteers
 
+    validates_associated :cash_contributions, if: :validate_cash_contributions?
     validates_associated :non_cash_contributions, if: :validate_non_cash_contributions?
     validates_associated :project_costs, if: :validate_project_costs?
     validates_associated :volunteers, if: :validate_volunteers?
@@ -34,6 +35,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_involvement_description
     attr_accessor :validate_other_outcomes
     attr_accessor :validate_project_costs
+    attr_accessor :validate_cash_contributions
     attr_accessor :validate_non_cash_contributions
     attr_accessor :validate_volunteers
     attr_accessor :validate_cash_contributions_question
@@ -247,6 +249,10 @@ class Project < ApplicationRecord
         validate_cash_contributions_question == true
     end
 
+    def validate_cash_contributions?
+        validate_cash_contributions == true
+    end
+
     def validate_non_cash_contributions_question?
         validate_non_cash_contributions_question == true
     end
@@ -268,24 +274,6 @@ class Project < ApplicationRecord
         no: 1,
         x_not_sure: 2
     }
-
-    def validate_file_attached(field, error_msg)
-        unless self.public_send(field).attached?
-            errors.add(field, error_msg)
-        end
-    end
-
-    def validate_length(field, max_length, error_msg)
-
-        word_count = self.public_send(field)&.split(' ')&.count
-
-        logger.debug "#{field} word count is #{word_count}"
-
-        if word_count && word_count > max_length
-            self.errors.add(field, error_msg)
-        end
-
-    end
 
     def to_salesforce_json
         Jbuilder.encode do |json|

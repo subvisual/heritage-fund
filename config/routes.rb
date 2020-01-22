@@ -99,7 +99,7 @@ Rails.application.routes.draw do
           as: :cash_contributions_question_put
 
       get ':project_id/cash-contributions',
-          to: 'project_cash_contribution#project_cash_contribution',
+          to: 'project_cash_contribution#show',
           as: :project_cash_contribution
       put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
 

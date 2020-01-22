@@ -1,0 +1,169 @@
+<% if @project.errors.any? %>
+
+  document.title = "Error: Cash contributions";
+
+  addSummaryErrors("cash_contributions");
+
+  addFormGroupErrors(
+      "cash_contributions.description",
+      "description-form-group",
+      "description-errors"
+  );
+
+  addFormGroupErrors(
+      "cash_contributions.secured",
+      "secured-form-group",
+      "secured-errors"
+  );
+
+  addFormGroupErrors(
+      "cash_contributions.amount",
+      "amount-form-group",
+      "amount-errors"
+  );
+
+  addErrorToFileField();
+
+<% end %>
+
+function addSummaryErrors(modelName) {
+
+    var summaryErrorsElement = document.getElementById("summary-errors");
+
+    if (summaryErrorsElement.classList.contains("govuk-error-summary") === false)
+        summaryErrorsElement.classList.add("govuk-error-summary");
+
+    summaryErrorsElement.setAttribute("aria-labelledby", "error-summary-title");
+    summaryErrorsElement.setAttribute("role", "alert");
+    summaryErrorsElement.setAttribute("tabindex", "-1");
+    summaryErrorsElement.setAttribute("data-module", "govuk-error-summary");
+
+    if (summaryErrorsElement.innerHTML.includes("h2") === false) {
+        var summaryErrorsHeading = document.createElement("h2");
+        summaryErrorsHeading.classList.add("govuk-error-summary__title");
+        summaryErrorsHeading.setAttribute("id", "error-summary-title");
+        summaryErrorsHeading.innerText = "There is a problem";
+        summaryErrorsElement.appendChild(summaryErrorsHeading);
+    }
+
+    if (summaryErrorsElement.innerHTML.includes("div") === false) {
+        var summaryErrorsBodyElement = document.createElement("div");
+        summaryErrorsBodyElement.setAttribute("id", "summary-errors-body");
+        summaryErrorsBodyElement.classList.add("govuk-error-summary__body");
+        summaryErrorsElement.appendChild(summaryErrorsBodyElement);
+    } else {
+        var summaryErrorsBodyElement = document.getElementById("summary-errors-body");
+    }
+
+    if (summaryErrorsElement.innerHTML.includes("ul") === false) {
+        var summaryErrorsList = document.createElement("ul");
+        summaryErrorsList.setAttribute("id", "summary-errors-list");
+        summaryErrorsList.classList.add("govuk-list")
+        summaryErrorsList.classList.add("govuk-error-summary__list");
+        summaryErrorsBodyElement.appendChild(summaryErrorsList);
+    } else {
+        var summaryErrorsList = document.getElementById("summary-errors-list");
+        summaryErrorsList.innerHTML = "";
+    }
+
+
+    <% @project.errors.each do |attr, msg| %>
+
+    if (summaryErrorsElement.innerHTML.includes("<%= msg %>") === false
+        && ("<%= attr.to_s %>" !== modelName)) {
+
+        var listItemElement = document.createElement("li");
+        var linkElement = document.createElement("a");
+
+        linkElement.setAttribute("data-turbolinks", "false");
+
+        var fieldName = "<%= attr.to_s %>".split(".")[1];
+
+        if (fieldName === "secured")
+            fieldName += "_yes_with_evidence";
+
+        linkElement.setAttribute("href", "#project_" + modelName + "_attributes_0_" + fieldName);
+        linkElement.innerText = "<%= msg %>";
+
+        listItemElement.appendChild(linkElement)
+        summaryErrorsList.appendChild(listItemElement);
+
+    }
+
+    <% end %>
+
+}
+
+function addFormGroupErrors(model_field, form_group, errors_element) {
+
+    var descriptionFormGroupElement = document.getElementById(form_group);
+    descriptionFormGroupElement.classList.add("govuk-form-group--error");
+
+    var descriptionFormGroupErrorsElement = document.getElementById(errors_element);
+
+    var errorKeys = []
+
+    <% @project.errors.each do |attr, msg| %>
+
+      errorKeys.push("<%= attr.to_s %>");
+
+      if (model_field == "<%= attr.to_s %>") {
+
+        if (descriptionFormGroupErrorsElement.innerHTML.includes("<%== escape_javascript(msg) %>") === false) {
+
+            var spanElement = document.createElement("span");
+            spanElement.setAttribute("id", "project[<%= attr %>]-error");
+            spanElement.classList.add("govuk-error-message");
+            spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span><%= msg %>";
+
+            descriptionFormGroupErrorsElement.appendChild(spanElement);
+
+        }
+
+      }
+
+    <% end %>
+
+    if (errorKeys.includes(model_field) === false) {
+
+        descriptionFormGroupElement.classList.remove("govuk-form-group--error");
+        descriptionFormGroupErrorsElement.innerHTML = "";
+
+    }
+
+}
+
+<%# TODO: Refactor this function so that it is reusable %>
+function addErrorToFileField() {
+
+    var fileUploadGroup = document.getElementById("file-upload-group");
+    var fileField = document.getElementById("project_cash_contributions_attributes_0_cash_contribution_evidence_files");
+
+    <% if @project.errors.key?("cash_contributions.cash_contribution_evidence_files") %>
+
+        var fileErrorMessage = "<%= escape_javascript(@project.errors["cash_contributions.cash_contribution_evidence_files"][0]) %>";
+
+        if (fileUploadGroup.innerHTML.includes(fileErrorMessage) === false) {
+
+              var spanElement = document.createElement("span");
+              spanElement.setAttribute("id", "cash_contribution_evidence_files-error");
+              spanElement.classList.add("govuk-error-message");
+              spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span>" + fileErrorMessage;
+
+              fileField.classList.add("govuk-file-upload--error");
+              fileField.setAttribute("aria-describedby", "cash_contribution_evidence_files-error");
+
+              fileUploadGroup.prepend(spanElement);
+
+        }
+
+    <% else %>
+
+        fileUploadGroup.removeChild(document.getElementById("cash_contribution_evidence_files-error"));
+
+        fileField.classList.remove("govuk-file-upload--error");
+        fileField.removeAttribute("aria-describedby");
+
+    <% end %>
+
+}
