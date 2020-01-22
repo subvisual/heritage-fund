@@ -115,8 +115,11 @@ Rails.application.routes.draw do
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
 
-      get ':project_id/volunteers' => 'project_volunteers#show', as: :volunteers
-      put ':project_id/volunteers' => 'project_volunteers#put'
+      get ':project_id/volunteers', to: 'project_volunteers#show', as: :volunteers
+      put ':project_id/volunteers', to: 'project_volunteers#put'
+
+      get ':project_id/evidence-of-support', to: 'project_support_evidence#show', as: :project_support_evidence
+      put ':project_id/evidence-of-support', to: 'project_support_evidence#put'
 
       get ':project_id/check-your-answers',
           to: 'project_check_answers#show', as: :check_answers_get
@@ -140,8 +143,6 @@ Rails.application.routes.draw do
       get 'location' => 'project_location#project_location'
 
       post 'submit-application' => 'show_declaration#submit_application'
-      get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
-      put ':project_id/support-evidence' => 'project_support_evidence#put'
 
     end
   end

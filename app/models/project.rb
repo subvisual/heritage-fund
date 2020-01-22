@@ -3,20 +3,29 @@ class Project < ApplicationRecord
     self.implicit_order_column = "created_at"
 
     belongs_to :user
+
     has_one :organisation, through: :user
+
     has_many :released_forms
     has_many :cash_contributions
     has_many :non_cash_contributions
     has_many :project_costs
     has_many :volunteers
-    has_many_attached :evidence_of_support_files
+    has_many :evidence_of_support
+
     has_one_attached :capital_work_file
-    accepts_nested_attributes_for :cash_contributions, :non_cash_contributions, :project_costs, :volunteers
+
+    accepts_nested_attributes_for :cash_contributions,
+                                  :non_cash_contributions,
+                                  :project_costs,
+                                  :volunteers,
+                                  :evidence_of_support
 
     validates_associated :cash_contributions, if: :validate_cash_contributions?
     validates_associated :non_cash_contributions, if: :validate_non_cash_contributions?
     validates_associated :project_costs, if: :validate_project_costs?
     validates_associated :volunteers, if: :validate_volunteers?
+    validates_associated :evidence_of_support, if: :validate_evidence_of_support?
 
     attr_accessor :validate_title
     attr_accessor :validate_start_and_end_dates
@@ -37,6 +46,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_project_costs
     attr_accessor :validate_cash_contributions
     attr_accessor :validate_non_cash_contributions
+    attr_accessor :validate_evidence_of_support
     attr_accessor :validate_volunteers
     attr_accessor :validate_cash_contributions_question
     attr_accessor :validate_non_cash_contributions_question
@@ -259,6 +269,10 @@ class Project < ApplicationRecord
 
     def validate_non_cash_contributions?
         validate_non_cash_contributions == true
+    end
+
+    def validate_evidence_of_support?
+        validate_evidence_of_support == true
     end
 
     def validate_volunteers?

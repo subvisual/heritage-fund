@@ -1,4 +1,6 @@
-<% content_for :page_title, "Evidence of support" %>
+<% content_for :page_title, @project.errors.any? ? "Error: Evidence of support" : "Evidence of support" %>
+
+<div id="summary-errors"></div>
 
 <span class="govuk-caption-xl">Support for your project</span>
 <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">Evidence of support</h1>
@@ -9,7 +11,7 @@
     <h2 class="govuk-heading-m">Your evidence of support</h2>
   </header>
   <div class="nlhf-summary__body">
-    <% unless @project.evidence_description.any? %>
+    <% unless @project.evidence_of_support.first&.id.present? %>
         <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>
     <% else %>
       <table class="govuk-table govuk-!-margin-bottom-0">
@@ -20,13 +22,15 @@
           </tr>
         </thead>
         <tbody class="govuk-table__body">
-            <%= @project.evidence_description.zip @project.evidence_of_support_files.each do |description, file|  %>
+            <% @project.evidence_of_support.filter { |eos| eos.id.present? }.each do |eos|  %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-                <%= description %>
+                <%= eos.description %>
             </td>
             <td class="govuk-table__cell">
-                <%=link_to(file.blob.filename, rails_blob_path(file, disposition: "attachment")) %>
+                <%= link_to(eos.evidence_of_support_files.blobs.first.filename,
+                            rails_blob_path(eos.evidence_of_support_files.blobs.first, disposition: "attachment"))
+                %>
             </td>
           </tr>
           <% end %>
@@ -38,6 +42,8 @@
 
 <%= form_with model: @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put, remote: true do |f| %>
 
+  <% f.fields_for :evidence_of_support, @project.evidence_of_support.build do |e| %>
+
   <div class="nlhf-add-item govuk-!-margin-bottom-9">
     
     <header class="nlhf-add-item__header">
@@ -48,12 +54,15 @@
 
       <div class="nlhf-add-item__row">
         <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
-          <div class="govuk-form-group">
+          <div class="govuk-form-group" id="evidence-description-form-group">
+
+            <div id="evidence-description-errors"></div>
+
             <label class="govuk-label" for="evidence-description">
               Describe the evidence you are providing
             </label>
-            <%= f.text_area :evidence_description, value: "", id: 'evidence-description', class: 'govuk-textarea govuk-js-character-count', required: "true", rows: 5 %>
-            <span id="evidence-description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
+            <%= e.text_area :description, value: "", class: 'govuk-textarea govuk-js-character-count', rows: 5 %>
+            <span id="project_evidence_of_support_attributes_0_description-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
               You have 50 words remaining
             </span>
           </div>
@@ -62,11 +71,11 @@
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" id="file-upload-group">
           <label class="govuk-label" for="evidence-upload">
             Upload a file
           </label>
-          <%= f.file_field :evidence_of_support_files, multiple: false, direct_upload: true, id: 'evidence-upload', required: 'true' %>
+          <%= e.file_field :evidence_of_support_files, multiple: false, direct_upload: true, class: 'govuk-file-upload' %>
         </div>
       </div>
       <!-- / nlhf-add-item__row -->
@@ -80,6 +89,7 @@
 
     </div>
   </div>
+    <% end %>
 <% end %>
 
 <details class="govuk-details" data-module="govuk-details">
