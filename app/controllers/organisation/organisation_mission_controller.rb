@@ -1,6 +1,5 @@
 class Organisation::OrganisationMissionController < ApplicationController
-  include OrganisationHelper
-  before_action :authenticate_user!, :set_organisation
+  include OrganisationContext
 
   def show
     render :mission

@@ -1,8 +1,8 @@
 require 'ideal_postcodes'
 
 class Organisation::OrganisationAboutController < ApplicationController
-  include OrganisationHelper
-  before_action :set_api_key, :authenticate_user!, :set_organisation
+  include OrganisationContext
+  before_action :set_api_key
 
   # Renders the initial postcode lookup view
   def show_postcode_lookup
