@@ -1,14 +1,6 @@
 <% content_for :page_title, "Organisation summary" %>
 
-<h1 class="govuk-heading-l" aria-label="Heading">Check your answers</h1>
-
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive">Declaration</span>
-    By submitting this information you are confirming, that to the best of your knowledge, the details you are providing are correct.
-  </strong>
-</div>
+<h1 class="govuk-heading-xl" aria-label="Heading">Check your answers</h1>
 
 <dl class="govuk-summary-list">
 
@@ -139,7 +131,15 @@
   </div>
 </dl>
 
+<div class="govuk-warning-text">
+  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+  <strong class="govuk-warning-text__text">
+    <span class="govuk-warning-text__assistive">Declaration</span>
+    By saving this information you are confirming, that to the best of your knowledge, the details you are providing are correct.
+  </strong>
+</div>
+
 <a href="<%= "#{three_to_ten_k_project_create_url}" %>" role="button" draggable="false" class="govuk-button govuk-button--start"
    data-module="govuk-button" aria-label="Continue button">
-  Continue
+  Save and continue
 </a>
