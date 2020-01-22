@@ -28,25 +28,23 @@
 
 <% end %>
 
-<h1 class="govuk-heading-l" aria-label="Heading">Who is your legal signatory?</h1>
+<h1 class="govuk-heading-xl govuk-!-margin-bottom-5" aria-label="Heading">Who is your legal signatory?</h1>
 
-<span class="govuk-hint" id="legal-signatory-1-fieldset-hint">
+<p class="govuk-body" id="legal-signatory-1-fieldset-hint">
   A signatory is a person who is authorised to sign legal documents on behalf
   of your organisation. Please tell us the names of 2 legal, or authorised,
-  signatories for your organisation.
+  signatories for your organisation.</p>
 
-  <br /><br />
-
+<p class="govuk-body govuk-!-margin-bottom-7">
   We expect an organisation to have 2 legal signatories. However, we can
-  accept 1 signatory in some limited cases, call us on 020 7591 6044 to
-  discuss your application.
-</span>
+  accept 1 signatory in some limited cases, <a href="https://www.heritagefund.org.uk/about/contact-us" target="_blank">contact us</a> to discuss your application.
+</p>
 
-<%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
+<%= form_tag(organisation_organisation_signatories_put_url, { method: :put }) do %>
 
   <% @legal_signatories.each_with_index do |signatory, i| %>
 
-    <fieldset class="govuk-fieldset" id=<%= "legal-signatory-#{i+1}-fieldset" %>>
+    <fieldset class="govuk-fieldset govuk-!-margin-bottom-6" id=<%= "legal-signatory-#{i+1}-fieldset" %>>
 
     <%= fields_for "legal_signatories[]", signatory do |signatory_field| %>
 
@@ -76,6 +74,7 @@
         <%= signatory_field.text_field :phone_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:phone_number].any?}" %>
       </div>
 
+      
     <% end %>
 
     </fieldset>
