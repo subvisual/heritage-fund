@@ -7,7 +7,7 @@
         first_form_element: :organisation_company_number
 } if @organisation.errors.any? %>
 
-<%= form_for @organisation, url: organisation_organisation_numbers_put_url, method: :put do |f|  %>
+<%= form_with model: @organisation, url: organisation_numbers_path, method: :put do |f|  %>
 
   <div class="govuk-form-group">
 

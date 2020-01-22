@@ -42,7 +42,7 @@
   discuss your application.
 </span>
 
-<%= form_tag(organisation_organisation_signatories_put_url, {method: :put}) do %>
+<%= form_tag(organisation_signatories_path, {method: :put}) do %>
 
   <% @legal_signatories.each_with_index do |signatory, i| %>
 

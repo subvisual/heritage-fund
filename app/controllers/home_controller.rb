@@ -30,7 +30,7 @@ class HomeController < ApplicationController
 
       logger.debug "Finished updating user ID: #{current_user.id.to_s}  with link to organisation #{@organisation.id}"
 
-      @start_now_link_value = organisation_organisation_type_get_path(@organisation.id)
+      @start_now_link_value = organisation_type_path(@organisation.id)
 
     end
 

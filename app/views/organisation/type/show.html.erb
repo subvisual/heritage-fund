@@ -6,7 +6,7 @@
     first_form_element: :organisation_org_type_registered_charity
 } if @organisation.errors.any? %>
 
-<%= form_for @organisation, url: organisation_organisation_type_put_url, method: :put do |f|  %>
+<%= form_with model: @organisation, url: organisation_type_path, method: :put do |f|  %>
 
   <div class="govuk-form-group <%= "govuk-form-group--error" if @organisation.errors.any? %>">
 

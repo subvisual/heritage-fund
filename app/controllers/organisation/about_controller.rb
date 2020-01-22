@@ -1,6 +1,6 @@
 require 'ideal_postcodes'
 
-class Organisation::OrganisationAboutController < ApplicationController
+class Organisation::AboutController < ApplicationController
   include OrganisationContext
   before_action :set_api_key
 
@@ -27,7 +27,7 @@ class Organisation::OrganisationAboutController < ApplicationController
 
       logger.error "No postcode entered when searching for an address for organisation ID: #{@organisation.id}"
 
-      redirect_to(:organisation_about_get, flash: {
+      redirect_to(:organisation_about, flash: {
           errors: {
               postcode: 'Please enter a postcode'
           }
@@ -43,7 +43,7 @@ class Organisation::OrganisationAboutController < ApplicationController
         logger.debug "No results found when searching for postcode #{params['postcode']['lookup']} " +
                          " for organisation ID: #{@organisation.id}"
 
-        redirect_to(:organisation_about_get, flash: {
+        redirect_to(:organisation_about, flash: {
             errors: {
                 postcode: 'No results found for postcode'
             }
@@ -95,7 +95,7 @@ class Organisation::OrganisationAboutController < ApplicationController
 
     if @organisation.valid?
 
-      redirect_to :organisation_organisation_mission_get
+      redirect_to :organisation_mission
 
     else
 
