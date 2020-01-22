@@ -131,15 +131,13 @@ Rails.application.routes.draw do
           to: 'project_declaration#update_confirm_declaration',
           as: :confirm_declaration_put
 
-      # TODO: Replace this with an 'application submitted' route
-      get ':project_id/declaration-confirmed',
-          to: 'project_declaration#declaration_confirmed',
-          as: :declaration_confirmed_get
+      get ':project_id/application-submitted',
+          to: 'project_application_submitted#show',
+          as: :application_submitted_get
 
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
 
-      post 'submit-application' => 'show_declaration#submit_application'
       get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
       put ':project_id/support-evidence' => 'project_support_evidence#put'
 
