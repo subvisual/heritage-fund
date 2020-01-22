@@ -28,8 +28,8 @@
                 <%= eos.description %>
             </td>
             <td class="govuk-table__cell">
-                <%= link_to(eos.evidence_of_support_files.blobs.first.filename,
-                            rails_blob_path(eos.evidence_of_support_files.blobs.first, disposition: "attachment"))
+                <%= link_to(eos.evidence_of_support_files.blob.filename,
+                            rails_blob_path(eos.evidence_of_support_files.blob, disposition: "attachment"))
                 %>
             </td>
           </tr>

@@ -7,7 +7,7 @@ class EvidenceOfSupport < ApplicationRecord
   self.implicit_order_column = "created_at"
 
   belongs_to :project
-  has_many_attached :evidence_of_support_files
+  has_one_attached :evidence_of_support_files
 
   validates :description, presence: true
 
