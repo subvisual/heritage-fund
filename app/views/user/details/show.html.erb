@@ -5,7 +5,10 @@
     first_form_element: :user_name
 } if current_user.errors.any? %>
 
-<h2 class="govuk-heading-l">Add your details</h2>
+<h1 class="govuk-heading-xl">
+  <span class="govuk-caption-xl">Add your details</span>
+  About you
+</h1>
 
 <%= form_with model: current_user, url: user_details_path, method: :put, local: true do |f| %>
 
@@ -129,13 +132,18 @@
 
   </fieldset>
 
-  <p class="govuk-body-s">
-    The personal information we collect from you will be shared with fraud prevention agencies who will
-    use it to prevent fraud and money-laundering and to verify your identity. If fraud is detected, you
-    could be refused a grant or loan. Further details of how your information will be used by us and these
-    fraud prevention agencies, and your data protection rights, can be found by contacting
-    <%=mail_to 'fair.processing@heritagefund.org.uk' %>.
-  </p>
+  <div class="govuk-inset-text govuk-!-margin-top-0">
+    <p class="govuk-body-s">
+      The personal information we collect from you will be shared with fraud prevention agencies who will
+      use it to prevent fraud and money-laundering and to verify your identity. If fraud is detected, you
+      could be refused a grant or loan. 
+    </p>
+    <p class="govuk-body-s">
+      Further details of how your information will be used by us and these
+      fraud prevention agencies, and your data protection rights, can be found by contacting
+      <%=mail_to 'fair.processing@heritagefund.org.uk' %>.
+    </p>
+  </div>
 
   <%= f.submit "Save and continue",
                class: "govuk-button",

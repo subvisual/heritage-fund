@@ -3,14 +3,15 @@
     first_form_element: :user_line1
 } if current_user.errors.any? %>
 
-<h1 class="govuk-heading-l" aria-label="Heading">Add your details</h1>
-
-<h2 class="govuk-heading-m" aria-label="Heading">Enter your address details</h2>
+<h2 class="govuk-heading-xl">
+<span class="govuk-caption-xl">Add your details</span>
+Enter your address details
+</h2>
 
 <%= form_for current_user, url: user_address_path, method: :put do |f|  %>
 
   <div class="govuk-form-group">
-    <%= f.label :line1, "Organisation address line 1", class: "govuk-label" %>
+    <%= f.label :line1, "Address line 1", class: "govuk-label" %>
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: current_user,
                         input_field_id: :line1} if current_user.errors[:line1].any? %>
@@ -20,21 +21,21 @@
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :line2, "Organisation address line 2", class: "govuk-label" %>
+    <%= f.label :line2, "Address line 2", class: "govuk-label" %>
     <%= f.text_field :line2,
                      autocomplete: 'address-line2',
                      class: "govuk-input govuk-input--width-20" %>
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :line3, "Organisation address line 3", class: "govuk-label" %>
+    <%= f.label :line3, "Address line 3", class: "govuk-label" %>
     <%= f.text_field :line3,
                      autocomplete: 'address-line3',
                      class: "govuk-input govuk-input--width-20" %>
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :townCity, "Organisation town", class: "govuk-label" %>
+    <%= f.label :townCity, "Town", class: "govuk-label" %>
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: current_user,
                         input_field_id: :townCity} if current_user.errors[:townCity].any? %>
@@ -44,7 +45,7 @@
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :county, "Organisation county", class: "govuk-label" %>
+    <%= f.label :county, "County", class: "govuk-label" %>
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: current_user,
                         input_field_id: :county} if current_user.errors[:county].any? %>
@@ -54,22 +55,14 @@
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :postcode, "Organisation postcode", class: "govuk-label" %>
+    <%= f.label :postcode, "Your postcode", class: "govuk-label" %>
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: current_user,
                         input_field_id: :postcode} if current_user.errors[:postcode].any? %>
     <%= f.text_field :postcode,
                      autocomplete: 'postal-code',
-                     class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if current_user.errors[:postcode].any?}" %>
+                     class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if current_user.errors[:postcode].any?}" %>
   </div>
-
-  <p class="govuk-body-s">
-    The personal information we collect from you will be shared with fraud prevention agencies who will
-    use it to prevent fraud and money-laundering and to verify your identity. If fraud is detected, you
-    could be refused a grant or loan. Further details of how your information will be used by us and these
-    fraud prevention agencies, and your data protection rights, can be found by contacting
-    <%=mail_to 'fair.processing@heritagefund.org.uk' %>.
-  </p>
 
   <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
 
