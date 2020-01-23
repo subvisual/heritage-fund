@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         as: :assign_address_attributes
     # This route ensures that attempting to navigate back to the list of address results
     # redirects the user back to the search page
-    get 'address/results', to: 'about#show_postcode_lookup'
+    get 'address/results', to: 'address#show_postcode_lookup'
 
   end
 
