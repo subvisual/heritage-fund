@@ -3,7 +3,7 @@ class CashContribution < ApplicationRecord
 
   self.implicit_order_column = "created_at"
   belongs_to :project
-  has_many_attached :cash_contribution_evidence_files
+  has_one_attached :cash_contribution_evidence_files
 
   validates :description, presence: true
   validates :amount, numericality: { only_integer: true }

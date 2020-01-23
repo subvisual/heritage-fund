@@ -32,6 +32,15 @@ class ApplicationToSalesforceJob < ApplicationJob
       )
 
       NotifyMailer.project_submission_confirmation(project).deliver_later
+      salesforce_case_id = project.salesforce_case_id
+
+      ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project.capital_work_file, "capital work attachment") if project.capital_work_file.attached?
+      project.evidence_of_support.each do |eos|
+        ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, eos.evidence_of_support_files, eos.description)
+      end
+      project.cash_contributions.filter{|cc| cc.cash_contribution_evidence_files.attached?}.each do |cc|
+        ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, cc.cash_contribution_evidence_files, cc.description)
+      end
     else
       raise SalesforceApexError.new("Failure response from Salesforce when POSTing project ID: #{project.id}")
     end
