@@ -20,7 +20,7 @@
 
       <%= render partial: "partials/form_group_errors", locals: {form_object: @organisation} if @organisation.errors.any? %>
 
-      <div class="govuk-radios">
+      <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
 
         <div class="govuk-radios__item">
           <%= f.radio_button :org_type, "registered_charity", class: "govuk-radios__input" %>
@@ -68,8 +68,17 @@
         </div>
 
         <div class="govuk-radios__item">
-          <%= f.radio_button :org_type, "other", class: "govuk-radios__input" %>
+          <%= f.radio_button :org_type, "other", class: "govuk-radios__input",
+                             "data-aria-controls" => "conditional-organisation_org_type_other"
+          %>
           <%= f.label :org_type_other, "Other", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+             id="conditional-organisation_org_type_other">
+          <p class="govuk-body">
+            Other types of organisations also have to satisfy our applicant funding criteria.
+          </p>
         </div>
 
       </div>
