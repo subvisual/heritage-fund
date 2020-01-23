@@ -5,3 +5,17 @@
 .nlhf-\!-line-height-1-3 {
     line-height: 1.3!important;
 }
+
+.nlhf-\!-text-align-right {
+    text-align: right!important;
+    &--tablet {        
+        @include govuk-media-query($from: tablet) {
+            text-align: right!important;
+        }
+    }
+    &--desktop {
+        @include govuk-media-query($from: desktop) {
+            text-align: right!important;
+        }
+    }
+}

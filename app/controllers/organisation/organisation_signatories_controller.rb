@@ -1,6 +1,6 @@
 class Organisation::OrganisationSignatoriesController < ApplicationController
-  include OrganisationHelper
-  before_action :authenticate_user!, :set_organisation, :set_legal_signatories
+  include OrganisationContext
+  before_action :set_legal_signatories
 
   def show
     render :signatories

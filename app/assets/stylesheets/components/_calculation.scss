@@ -1,0 +1,46 @@
+.nlhf-calculation-breakdown {
+    &__row {
+        padding-bottom: govuk-spacing(3);
+        border-bottom: 1px solid get('colour.border');
+        margin-bottom: govuk-spacing(6);
+        &:first-child {
+            padding-top: govuk-spacing(6);
+            border-top: 1px solid get('colour.border');
+        }
+    }
+}
+
+.nlhf-calculation {
+    &--subtraction {
+        display: block;
+        @include govuk-media-query($from: tablet) {
+            text-align: right;
+        }
+        .nlhf-calculation {
+            &__block {
+                text-align: center;
+                @include govuk-media-query($from: tablet) {
+                    text-align: right;
+                    display: inline-block;
+                    margin: 0 auto;
+                }
+            }
+            &__number {
+                display: inline-block;
+            }
+            &__symbol {
+                display: inline-block;
+            }
+            &__row {
+                display: block;
+                padding-bottom: 0.2em;
+                border-bottom: 2px solid #000;
+            }
+            &__total {
+                border-top: 2px solid #000;
+                padding-top: 0.2em;
+                display: block;
+            }
+        }
+    }
+}

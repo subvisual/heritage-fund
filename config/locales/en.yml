@@ -150,3 +150,7 @@ en-GB:
               blank: "Enter a description of your project volunteer"
             hours:
               not_a_number: "Hours must be a number, like 5"
+        evidence_of_support:
+          attributes:
+            description:
+              blank: "Enter a description of your evidence of support"
