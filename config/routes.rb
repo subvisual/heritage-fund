@@ -15,23 +15,35 @@ Rails.application.routes.draw do
   end
 
   namespace :organisation do
-    get ':organisation_id/type', to: 'organisation_type#show', as: :organisation_type_get
-    put ':organisation_id/type', to: 'organisation_type#update', as: :organisation_type_put
-    get ':organisation_id/numbers', to: 'organisation_numbers#show', as: :organisation_numbers_get
-    put ':organisation_id/numbers', to: 'organisation_numbers#update', as: :organisation_numbers_put
-    get ':organisation_id/about', to: 'organisation_about#show_postcode_lookup', as: :about_get
-    put ':organisation_id/about', to: 'organisation_about#update', as: :about_put
-    post ':organisation_id/about/address-results', to: 'organisation_about#display_address_search_results', as: :about_search_results
-    get ':organisation_id/about/address', to: 'organisation_about#show', as: :about_address_get
-    put ':organisation_id/about/address', to: 'organisation_about#assign_address_attributes', as: :about_assign_address_attributes
-    # This route ensures that attempting to navigate back to the list of address results
-    # redirects the user back to the search page
-    get ':organisation_id/about/address-results', to: 'organisation_about#show_postcode_lookup'
-    get ':organisation_id/mission', to: 'organisation_mission#show', as: :organisation_mission_get
-    put ':organisation_id/mission', to: 'organisation_mission#update', as: :organisation_mission_put
-    get ':organisation_id/signatories', to: 'organisation_signatories#show', as: :organisation_signatories_get
-    put ':organisation_id/signatories', to: 'organisation_signatories#update', as: :organisation_signatories_put
-    get ':organisation_id/organisation_summary', to: 'organisation_summary#show', as: :organisation_summary_get
+    scope '/:organisation_id' do
+      get '/type', to: 'type#show'
+      put '/type', to: 'type#update'
+      get '/numbers', to: 'numbers#show'
+      put '/numbers', to: 'numbers#update'
+
+      # The following routes relate to the address lookup flow for an organisation
+      # TODO: Refactor these into a reusable component for address lookup
+      get '/about', to: 'about#show_postcode_lookup'
+      put '/about', to: 'about#update'
+      post '/about/address-results',
+           to: 'about#display_address_search_results',
+           as: :about_search_results
+      get '/about/address',
+          to: 'about#show',
+          as: :about_address_get
+      put '/about/address',
+          to: 'about#assign_address_attributes',
+          as: :about_assign_address_attributes
+      # This route ensures that attempting to navigate back to the list of address results
+      # redirects the user back to the search page
+      get '/about/address-results', to: 'about#show_postcode_lookup'
+
+      get '/mission', to: 'mission#show'
+      put '/mission', to: 'mission#update'
+      get '/signatories', to: 'signatories#show'
+      put '/signatories', to: 'signatories#update'
+      get '/summary', to: 'summary#show'
+    end
   end
 
   scope "/3-10k", as: :three_to_ten_k do

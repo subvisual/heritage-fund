@@ -1,9 +1,5 @@
-class Organisation::OrganisationNumbersController < ApplicationController
+class Organisation::NumbersController < ApplicationController
   include OrganisationContext
-
-  def show
-    render :numbers
-  end
 
   def update
 
@@ -23,19 +19,17 @@ class Organisation::OrganisationNumbersController < ApplicationController
       logger.debug "Finished setting company_number and charity_number for " +
                        "organisation ID: #{@organisation.id}"
 
-      redirect_to :organisation_about_get
+      redirect_to :organisation_about
 
     else
 
       logger.debug "Invalid company or charity number found when attempting " +
                        "to update organisation ID: #{@organisation.id}"
 
-      render :numbers
+      render :show
 
     end
 
   end
-
-  private
 
 end

@@ -1,9 +1,5 @@
-class Organisation::OrganisationTypeController < ApplicationController
+class Organisation::TypeController < ApplicationController
   include OrganisationContext
-
-  def show
-    render :type
-  end
 
   def update
 
@@ -15,14 +11,14 @@ class Organisation::OrganisationTypeController < ApplicationController
 
     if @organisation.valid?
 
-      redirect_to :organisation_organisation_numbers_get
+      redirect_to :organisation_numbers
 
     else
 
       logger.debug "Organisation type not found when attempting to update organisation ID: " +
                        "#{@organisation.id}"
 
-      render :type
+      render :show
 
     end
 

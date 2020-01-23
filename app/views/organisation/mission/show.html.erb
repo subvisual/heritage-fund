@@ -5,7 +5,7 @@
     first_form_element: :organisation_mission_black_or_minority_ethnic_led
 } if @organisation.errors.any? %>
 
-<%= form_for @organisation, url: organisation_organisation_mission_put_url, method: :put do |f|  %>
+<%= form_for @organisation, url: organisation_mission_path, method: :put do |f|  %>
 
   <div class="govuk-form-group <%= "govuk-form-group--error" if @organisation.errors.any? %>">
     <fieldset class="govuk-fieldset">

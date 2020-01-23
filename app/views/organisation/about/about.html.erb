@@ -9,7 +9,7 @@
 
 <h2 class="govuk-heading-m" aria-label="Heading">Enter your organisation address details</h2>
 
-<%= form_for @organisation, url: organisation_about_put_url, method: :put do |f|  %>
+<%= form_for @organisation, url: organisation_about_path, method: :put do |f|  %>
 
     <div class="govuk-form-group">
       <%= f.label :name, "Organisation name", class: "govuk-label" %>

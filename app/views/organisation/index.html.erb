@@ -1,9 +1,0 @@
-<h1 class="govuk-heading-xl">organisation details</h1>
-
-<%= form_with model: @organisation, local: true, class: 'govuk-label' do |o| %>
-  <%= label_tag(:name, "Organisation name", class: 'govuk-label') %>
-  <%= text_field(:organisation, :name, class: 'govuk-input') %>
-  <%= o.submit "Create", class:'govuk-button' %>
-<% end %>
-
-
