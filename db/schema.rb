@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_094550) do
+ActiveRecord::Schema.define(version: 2020_01_23_093801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_094550) do
     t.text "outcome_7_description"
     t.text "outcome_8_description"
     t.text "outcome_9_description"
-    t.boolean "is_partnership"
+    t.boolean "is_partnership", default: false
     t.text "partnership_details"
     t.string "salesforce_case_number"
     t.string "salesforce_case_id"
