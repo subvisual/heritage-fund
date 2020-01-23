@@ -159,7 +159,6 @@ Rails.application.routes.draw do
   get 'health' => 'health#get_status'
 
   devise_for :users
-  resources :projects, except: [:destroy, :index]
   get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do
