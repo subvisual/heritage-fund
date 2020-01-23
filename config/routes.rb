@@ -141,9 +141,6 @@ Rails.application.routes.draw do
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
 
-      get ':project_id/support-evidence' => 'project_support_evidence#project_support_evidence', as: :project_support_evidence
-      put ':project_id/support-evidence' => 'project_support_evidence#put'
-
     end
   end
 
