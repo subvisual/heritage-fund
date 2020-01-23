@@ -1,0 +1,34 @@
+<% content_for :page_title, current_user.errors.any? ? "Error: Add your details" : "Add your details" %>
+
+<%= render partial: "partials/summary_errors_flash", locals: {
+    first_form_element: :postcode_lookup
+} if flash[:errors] %>
+
+<h1 class="govuk-heading-l">Add your details</h1>
+
+<h2 class="govuk-heading-m">Find your address</h2>
+
+<%= form_with(url: user_search_results_path, local: true) do |p| %>
+
+  <div class="govuk-form-group">
+
+    <%= label_tag(:postcode_lookup, "Your postcode", class: 'govuk-label') %>
+
+    <% if flash[:errors] %>
+      <span id="<%= :postcode_lookup %>]-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> <%= flash[:errors]['postcode'] %>
+      </span>
+    <% end %>
+
+    <%= text_field(:postcode, :lookup, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if flash[:errors]}") %>
+
+  </div>
+
+  <%= p.submit "Find address",
+               class:"govuk-button govuk-button",
+               role: "button",
+               "aria-label" => "Find address button",
+               "data-module" => "govuk-button"
+  %>
+
+<% end %>

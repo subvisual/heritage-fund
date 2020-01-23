@@ -10,8 +10,30 @@ Rails.application.routes.draw do
   end
 
   namespace :account do
-    get 'create-new-account' => 'account#new'
-    get 'account-created' => 'account#account_created'
+    get 'create-new-account', to: 'account#new'
+    get 'account-created', to: 'account#account_created'
+  end
+
+  namespace :user do
+    get 'details', to: 'details#show'
+    put 'details', to: 'details#update'
+
+    get 'address', to: 'address#show_postcode_lookup'
+    put 'address', to: 'address#update'
+
+    post 'address/results',
+         to: 'address#display_address_search_results',
+         as: :search_results
+    get 'address/show',
+        to: 'address#show',
+        as: :user_address_get
+    put 'address/show',
+        to: 'address#assign_address_attributes',
+        as: :assign_address_attributes
+    # This route ensures that attempting to navigate back to the list of address results
+    # redirects the user back to the search page
+    get 'address/results', to: 'about#show_postcode_lookup'
+
   end
 
   namespace :organisation do
