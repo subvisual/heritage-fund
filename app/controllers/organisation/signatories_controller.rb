@@ -1,10 +1,6 @@
-class Organisation::OrganisationSignatoriesController < ApplicationController
+class Organisation::SignatoriesController < ApplicationController
   include OrganisationContext
   before_action :set_legal_signatories
-
-  def show
-    render :signatories
-  end
 
   def update
 
@@ -34,7 +30,7 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
 
       logger.debug "Validation checks failed for one or more legal signatory updates"
 
-      render :signatories
+      render :show
 
     else
 
@@ -44,7 +40,7 @@ class Organisation::OrganisationSignatoriesController < ApplicationController
         signatory.save
       end
 
-      redirect_to :organisation_organisation_summary_get
+      redirect_to :organisation_summary
 
     end
 

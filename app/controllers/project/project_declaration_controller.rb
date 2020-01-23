@@ -13,7 +13,7 @@ class Project::ProjectDeclarationController < ApplicationController
 
       logger.debug "Finished updating declaration confirmation for project ID: #{@project.id}"
 
-      redirect_to three_to_ten_k_project_declaration_confirmed_get_path
+      redirect_to three_to_ten_k_project_application_submitted_get_path
 
     else
 

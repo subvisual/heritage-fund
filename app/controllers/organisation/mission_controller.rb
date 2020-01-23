@@ -1,9 +1,5 @@
-class Organisation::OrganisationMissionController < ApplicationController
+class Organisation::MissionController < ApplicationController
   include OrganisationContext
-
-  def show
-    render :mission
-  end
 
   def update
 
@@ -15,14 +11,14 @@ class Organisation::OrganisationMissionController < ApplicationController
 
     if @organisation.valid?
 
-      redirect_to :organisation_organisation_signatories_get
+      redirect_to :organisation_signatories
 
     else
 
       logger.debug "Organisation type invalid when attempting to update organisation ID: " +
                        "#{@organisation.id}"
 
-      render :mission
+      render :show
 
     end
 

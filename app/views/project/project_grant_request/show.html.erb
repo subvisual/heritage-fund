@@ -5,75 +5,113 @@
   Your grant request
 </h1>
 
-<div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-7">
-  <h2 class="govuk-panel__title">
-    <%= number_to_currency(@final_grant_amount, strip_insignificant_zeros: true) %>
-  </h2>
-
-  <div class="govuk-panel__body">
-    for your project
+<% unless (@final_grant_amount.to_i).positive? %>
+  <div class="nlhf-panel nlhf-alert nlhf-alert--error nlhf-alert--slim govuk-!-margin-bottom-8">
+    <h2 class="govuk-heading-m">
+      We have found a problem
+    </h2>
+    <p class="govuk-body govuk-!-font-size-19">Your cash contributions are <%= "#{number_to_currency(@final_grant_amount.abs, strip_insignificant_zeros: true)}" %> more than the total cost of your project.</p>
+    <p class="govuk-body govuk-!-font-size-19">Please review your project costs and cash contributions.</p>
   </div>
+<% else %>
+  <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-7">
+    <h2 class="govuk-panel__title govuk-!-margin-bottom-3">
+      <%= number_to_currency(@final_grant_amount, strip_insignificant_zeros: true) %>
+    </h2>
+    <div class="govuk-panel__body">
+      for your project
+    </div>
+  </div>
+<% end %>
+
+<h2 class="govuk-heading-l govuk-!-margin-bottom-6">How did we calculate this?</h2>
+
+<div class="nlhf-calculation-breakdown">
+  
+  <div class="nlhf-calculation-breakdown__row">  
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Your total project costs</h2>
+        <p class="govuk-body">This is what you told us the total amount of money your whole project will cost.</p>
+        <p class="govuk-body"><a href="costs">Change project costs</a></p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body govuk-!-font-size-27 govuk-!-margin-bottom-1 govuk-!-font-weight-bold nlhf-!-text-align-right--tablet">
+          <%= number_to_currency(@total_project_cost, strip_insignificant_zeros: true) %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /.nlhf-calculation-breakdown__row -->
+
+  <div class="nlhf-calculation-breakdown__row">  
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Your cash contributions</h2>
+        <p class="govuk-body">This is the amount of money you told us you will receive towards your project.</p>
+        <p class="govuk-body"><a href="cash-contributions">Change cash contributions</a></p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body govuk-!-font-size-27 govuk-!-margin-bottom-1 govuk-!-font-weight-bold nlhf-!-text-align-right--tablet">
+          <%= number_to_currency(@total_cash_contributions, strip_insignificant_zeros: true) %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /.nlhf-calculation-breakdown__row -->
+
+  <% if (@final_grant_amount.to_i).positive? %>
+  <div class="nlhf-calculation-breakdown__row">  
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-3">Your grant request</h2>
+        <p class="govuk-body">We calculated your grant request by subtracting cash contributions for your project from the total amount of project costs.</p>
+
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              See the calculation
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+
+            <p class="nlhf-calculation nlhf-calculation--subtraction govuk-!-font-size-27">
+              <span class="nlhf-calculation__block">  
+                <span class="nlhf-calculation__row">
+                  <%= "#{number_to_currency(@total_project_cost, strip_insignificant_zeros: true)}" %>
+                </span>
+                <span class="nlhf-calculation__row">
+                <span class="nlhf-calculation__symbol">-</span>
+                <span class="nlhf-calculation__number"><%= "#{number_to_currency(@total_cash_contributions, strip_insignificant_zeros: true)}" %></span>
+                </span>
+                <span class="nlhf-calculation__total">
+                  <span class="nlhf-calculation__symbol">=</span>
+                  <%= "#{number_to_currency(@final_grant_amount, strip_insignificant_zeros: true)}" %>
+                </span>
+              </span>
+            </p>
+            <!-- /.nlhf-calculation nlhf-calculation--subtraction -->
+
+          </div>
+        </details>
+              
+      </div>
+        <div class="govuk-grid-column-full">
+          <p class="govuk-body govuk-!-font-size-48 govuk-!-font-weight-bold nlhf-!-text-align-right--tablet">
+            <%= "#{number_to_currency(@final_grant_amount, strip_insignificant_zeros: true)}" %>
+          </p>
+        </div>          
+    </div>
+  </div>
+  <!-- /.nlhf-calculation-breakdown__row -->
+  <% end %>
 
 </div>
+<!-- /.nlhf-calculation-breakdown -->
 
-<h2 class="govuk-heading-m govuk-!-margin-bottom-2">How did we calculate this?</h2>
-
-<div class="nlhf-grant-summary govuk-!-margin-bottom-7">
-
-  <div class="nlhf-grant-summary__item">
-
-    <div class="nlhf-grant-summary__description">
-
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Your total project costs</h2>
-
-      <p class="govuk-body">This is what you told us the total amount of money your whole project will cost</p>
-
-    </div>
-
-    <div class="nlhf-grant-summary__amount">
-
-      <p><%= number_to_currency(@total_project_cost, strip_insignificant_zeros: true) %></p>
-
-    </div>
-
-  </div>
-
-  <div class="nlhf-grant-summary__item">
-
-    <div class="nlhf-grant-summary__description">
-
-      <h2 class="govuk-heading-s govuk-!-margin-bottom-3">Your cash contributions</h2>
-
-      <p class="govuk-body">This is the amount of money you told us you will receive for your project that does not include your grant request</p>
-
-    </div>
-
-    <div class="nlhf-grant-summary__amount">
-
-      <p><%= number_to_currency(@total_cash_contributions, strip_insignificant_zeros: true) %></p>
-
-    </div>
-
-  </div>
-
-  <div class="nlhf-grant-summary__item nlhf-grant-summary__item--calc">
-
-    <p class="govuk-body govuk-!-margin-bottom-0">
-      We calculated what we think you need automatically by subtracting cash contributions you are getting
-      from the total of all the project costs you entered:
-    </p>
-
-    <p class="govuk-heading-m govuk-!-margin-bottom-0"
-       style="text-align: center;">
-      <%= "£#{@total_project_cost} -
-        £#{@total_cash_contributions} = #{number_to_currency(@final_grant_amount, strip_insignificant_zeros: true)}" %>
-    </p>
-
-  </div>
-
-</div>
-
-<a href="<%= "#{three_to_ten_k_project_non_cash_contributions_get_url}" %>" role="button" draggable="false"
-   class="govuk-button" data-module="govuk-button" aria-label="Continue button">
-  Save and continue
-</a>
+<% if (@final_grant_amount.to_i).positive? %>
+  <a href="<%= "#{three_to_ten_k_project_non_cash_contributions_get_url}" %>" role="button" draggable="false"
+    class="govuk-button" data-module="govuk-button" aria-label="Continue button">
+    Save and continue
+  </a>
+<% end %>

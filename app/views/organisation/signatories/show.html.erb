@@ -40,7 +40,7 @@
   accept 1 signatory in some limited cases, <a href="https://www.heritagefund.org.uk/about/contact-us" target="_blank">contact us</a> to discuss your application.
 </p>
 
-<%= form_tag(organisation_organisation_signatories_put_url, { method: :put }) do %>
+<%= form_tag(organisation_signatories_path, {method: :put}) do %>
 
   <% @legal_signatories.each_with_index do |signatory, i| %>
 

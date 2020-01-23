@@ -16,13 +16,6 @@ def create
   redirect_to '/postcode'
 end
 
-
-def show
-  @user = current_user
-  @organisation = @user.organisation 
-  render :show
-end
-
 def update
   redirect_to new_project_path
 end
