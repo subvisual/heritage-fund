@@ -140,6 +140,10 @@ en-GB:
               inclusion: "Select whether or not your project is getting any cash contributions"
             non_cash_contributions_question:
               inclusion: "Select whether or not your project is getting any non-cash contributions"
+            is_partnership:
+              inclusion: "Select whether or not you are applying on behalf of a partnership"
+            partnership_details:
+              blank: "Enter details about the organisation(s) you will be delivering your project in partnership with"
         cash_contribution:
           attributes:
             description:

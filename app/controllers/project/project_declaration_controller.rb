@@ -31,6 +31,8 @@ class Project::ProjectDeclarationController < ApplicationController
 
     logger.debug "Updating declaration for project ID: #{@project.id}"
 
+    @project.validate_is_partnership = true
+    @project.validate_partnership_details = true if params[:project][:is_partnership] == "true"
 
     @project.update(declaration_params)
 
