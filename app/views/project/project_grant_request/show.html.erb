@@ -10,7 +10,13 @@
     <h2 class="govuk-heading-m">
       We have found a problem
     </h2>
-    <p class="govuk-body govuk-!-font-size-19">Your cash contributions are <%= "#{number_to_currency(@final_grant_amount.abs, strip_insignificant_zeros: true)}" %> more than the total cost of your project.</p>
+    <p class="govuk-body govuk-!-font-size-19">
+      <%= (@final_grant_amount.to_i == 0) ?
+              "You have not added any cash contributions or project costs"
+              : "Your cash contributions are #{number_to_currency(@final_grant_amount.abs,
+                                                                  strip_insignificant_zeros: true)} more than the total cost of your project"
+      %>
+    </p>
     <p class="govuk-body govuk-!-font-size-19">Please review your project costs and cash contributions.</p>
   </div>
 <% else %>
