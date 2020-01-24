@@ -7,10 +7,6 @@ class Project::ProjectCapitalWorksController < ApplicationController
 
     @project.validate_capital_work = true
 
-    if params[:project].present?
-      @project.validate_capital_work_file = true if params[:project][:capital_work] == "true"
-    end
-
     @project.update(project_params)
 
     if @project.valid?
