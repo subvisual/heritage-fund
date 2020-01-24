@@ -79,3 +79,5 @@ gem "rails-i18n", "~> 6.0"
 
 gem "nilify_blanks", "~> 1.3"
 
+
+gem "delayed_job_web", "~> 1.4"
