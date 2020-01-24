@@ -21,7 +21,7 @@ class Project::ProjectCashContributionController < ApplicationController
 
       else
 
-        redirect_to three_to_ten_k_project_non_cash_contributions_get_path
+        redirect_to three_to_ten_k_project_grant_request_get_path
 
       end
 
