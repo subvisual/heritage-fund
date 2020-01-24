@@ -122,8 +122,11 @@ Rails.application.routes.draw do
       get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
       put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
 
-      get ':project_id/costs' => 'project_costs#show', as: :project_costs
-      put ':project_id/costs' => 'project_costs#update'
+      get ':project_id/costs', to: 'project_costs#show', as: :project_costs
+      put ':project_id/costs', to: 'project_costs#update'
+      put ':project_id/confirm-costs',
+          to: 'project_costs#validate_and_redirect',
+          as: :project_costs_validate_and_redirect
 
       get ':project_id/are-you-getting-cash-contributions',
           to: 'project_cash_contribution#question',

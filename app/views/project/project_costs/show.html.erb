@@ -12,7 +12,16 @@
 
       <ul class="govuk-list govuk-error-summary__list">
 
+        <% if @project.errors.size == 1 && @project.errors[:project_costs].any? %>
+          <li>
+            <a data-turbolinks='false' href='#project_project_costs_attributes_0_cost_type'>
+              <%= @project.errors.messages[:project_costs][0] %>
+            </a>
+          </li>
+        <% end %>
+
         <% @project.errors.each do |attr, msg| %>
+
           <% unless attr.to_s == "project_costs" %>
             <li>
               <a data-turbolinks='false' href='#project_project_costs_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
@@ -20,6 +29,7 @@
               </a>
             </li>
           <% end %>
+
         <% end %>
 
       </ul>
@@ -377,7 +387,8 @@
 
 <p class="govuk-body">If you have finished adding all your costs</p>
 
-<a href="<%= "#{three_to_ten_k_project_cash_contributions_question_get_url}" %>" role="button" draggable="false" class="govuk-button"
-   data-module="govuk-button" aria-label="Continue button">
-  Save and continue
-</a>
+<%= form_with url: three_to_ten_k_project_project_costs_validate_and_redirect_path, method: :put, local: true do %>
+
+  <%= submit_tag("Save and continue", {class: "govuk-button"}) %>
+
+<% end %>

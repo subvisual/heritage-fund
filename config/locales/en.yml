@@ -97,6 +97,8 @@ en-GB:
               blank: "Enter the phone number of a legal signatory"
         project:
           attributes:
+            project_costs:
+              blank: "Enter at least one project cost"
             project_title:
               blank: "Enter the title of your project"
               too_long: "Project title must be 255 characters or fewer"
