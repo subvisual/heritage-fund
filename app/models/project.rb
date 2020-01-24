@@ -51,6 +51,8 @@ class Project < ApplicationRecord
     attr_accessor :validate_cash_contributions_question
     attr_accessor :validate_non_cash_contributions_question
     attr_accessor :validate_confirm_declaration
+    attr_accessor :validate_is_partnership
+    attr_accessor :validate_partnership_details
 
     # These attributes are used to set individual error messages
     # for each of the project date input fields
@@ -100,6 +102,8 @@ class Project < ApplicationRecord
     validates_inclusion_of :non_cash_contributions_question,
                            in: ["true", "false"],
                            if: :validate_non_cash_contributions_question?
+    validates :is_partnership, inclusion: [true, false], if: :validate_is_partnership?
+    validates :partnership_details, presence: true, if: :validate_partnership_details?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
 
     validate do
@@ -281,6 +285,14 @@ class Project < ApplicationRecord
 
     def validate_confirm_declaration?
         validate_confirm_declaration == true
+    end
+
+    def validate_is_partnership?
+        validate_is_partnership == true
+    end
+
+    def validate_partnership_details?
+        validate_partnership_details == true
     end
 
     enum permission_type: {

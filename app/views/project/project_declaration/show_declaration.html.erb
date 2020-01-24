@@ -2,10 +2,10 @@
 
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @project,
-    first_form_element: :project_declaration_reasons_description
+    first_form_element: :project_partnership_details
 } if @project.errors.any? %>
 
-<%= form_for @project, url: three_to_ten_k_project_declaration_put_path, method: :put do |f| %>
+<%= form_for @project, url: three_to_ten_k_project_declaration_put_path, method: :put, local: true do |f| %>
 
 <h1 class="govuk-heading-xl">
   Declaration
@@ -177,25 +177,35 @@
 
   </ul>
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
+
+    <%= render partial: "partials/form_group_errors", locals: {form_object: @project} if @project.errors.any? %>
+
     <fieldset class="govuk-fieldset">
       <span class="govuk-label">
       Are you applying on behalf of a partnership?
     </span>
       <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
         <div class="govuk-radios__item">
-          <%= f.radio_button(:is_partnership, 'true', class: 'govuk-radios__input', required: true, "data-aria-controls" => "conditional-is_partnership_true") %>
+          <%= f.radio_button(:is_partnership, "true", class: 'govuk-radios__input', required: true,
+                             "data-aria-controls" => "conditional-is_partnership_true")
+          %>
           <%= f.label(:is_partnership_true, 'Yes', class: 'govuk-label govuk-radios__label' ) %>
         </div>
         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-is_partnership_true">
           <div class="govuk-form-group">
-            <%= f.label(:partnership_details, 'Please tell us the organisation(s) you will be delivering your project in partnership with and provide a contact for each partner organisation (name and position).', class: 'govuk-label') %>
-            <%= f.text_area(:partnership_details, class: 'govuk-textarea', rows: 5) %>
+            <%= f.label(:partnership_details,
+                        'Please tell us the organisation(s) you will be delivering your project in partnership ' \
+                            'with and provide a contact for each partner organisation (name and position).',
+                        class: 'govuk-label') %>
+            <%= f.text_area(:partnership_details,
+                            class: "govuk-textarea #{'govuk-textarea--error' if @project.errors[:partnership_details].any?}",
+                            rows: 5) %>
           </div>
 
         </div>
         <div class="govuk-radios__item">
-          <%= f.radio_button(:is_partnership, 'false', class: 'govuk-radios__input') %>
+          <%= f.radio_button(:is_partnership, "false", class: 'govuk-radios__input') %>
           <%= f.label(:is_partnership_false, 'No', class: 'govuk-label govuk-radios__label') %>
         </div>
 
