@@ -2,6 +2,28 @@ class Project::ProjectCostsController < ApplicationController
   include ProjectContext
   before_action :remove_flash_values
 
+  def validate_and_redirect
+
+    logger.debug "Confirming that user has added project costs for project ID: #{@project.id}"
+
+    @project.validate_has_associated_project_costs = true
+
+    if @project.valid?
+
+      logger.debug "Project costs found for project ID: #{@project.id}"
+
+      redirect_to three_to_ten_k_project_cash_contributions_question_get_url
+
+    else
+
+      logger.debug "No project costs found for project ID: #{@project.id}"
+
+      render :show
+
+    end
+
+  end
+
   def update
 
     logger.debug "Updating project costs for project ID: #{@project.id}"

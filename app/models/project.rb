@@ -43,6 +43,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_involvement_description
     attr_accessor :validate_other_outcomes
     attr_accessor :validate_project_costs
+    attr_accessor :validate_has_associated_project_costs
     attr_accessor :validate_cash_contributions
     attr_accessor :validate_non_cash_contributions
     attr_accessor :validate_evidence_of_support
@@ -95,6 +96,7 @@ class Project < ApplicationRecord
     validates :permission_description_x_not_sure, presence: true, if: :validate_permission_description_x_not_sure?
     validates :description, presence: true, if: :validate_description?
     validates :involvement_description, presence: true, if: :validate_involvement_description?
+    validates :project_costs, presence: true, if: :validate_has_associated_project_costs?
     validates_inclusion_of :cash_contributions_question,
                            in: ["true", "false"],
                            if: :validate_cash_contributions_question?
@@ -245,6 +247,10 @@ class Project < ApplicationRecord
 
     def validate_project_costs?
         validate_project_costs == true
+    end
+
+    def validate_has_associated_project_costs?
+        validate_has_associated_project_costs == true
     end
 
     def validate_cash_contributions_question?
