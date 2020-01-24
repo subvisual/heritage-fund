@@ -125,5 +125,7 @@ Rails.application.configure do
   config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
   # TODO: update this with production host once credentials available
   config.x.salesforce.host = "test.salesforce.com"
+  config.x.hotjar.id = ENV.fetch("HOTJAR_ID")
+  config.x.hotjar.snippet_version = ENV.fetch("HOTJAR_SNIPPET_VERSION")
 
 end
