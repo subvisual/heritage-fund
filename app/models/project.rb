@@ -407,7 +407,8 @@ class Project < ApplicationRecord
                     set_legal_signatory_fields.call(@ls_one)
                 end
                 @ls_two = self.organisation.legal_signatories.second
-                if @ls_two.present?
+                # TODO Only create legal signatory two record if populated
+                if @ls_two&.name.present?
                     json.authorisedSignatoryTwoDetails do
                         set_legal_signatory_fields.call(@ls_two)
                     end
