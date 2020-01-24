@@ -55,6 +55,7 @@ end
 group :production do
   gem "aws-sdk-s3", require: false
   gem 'cf-app-utils'
+  gem "delayed_job_active_record", "~> 4.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -77,3 +78,4 @@ gem "mail-notify", "~> 0.2"
 gem "rails-i18n", "~> 6.0"
 
 gem "nilify_blanks", "~> 1.3"
+

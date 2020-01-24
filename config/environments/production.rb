@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :delayed_job
   # config.active_job.queue_name_prefix = "funding_frontend_ruby_production"
 
   config.action_mailer.perform_caching = false
@@ -118,5 +118,12 @@ Rails.application.configure do
   }
 
   config.x.ideal_postcodes.api_key = ENV.fetch("IDEAL_POSTCODES_API_KEY")
+  config.x.salesforce.username = ENV.fetch("SALESFORCE_USERNAME")
+  config.x.salesforce.password = ENV.fetch("SALESFORCE_PASSWORD")
+  config.x.salesforce.security_token = ENV.fetch("SALESFORCE_SECURITY_TOKEN")
+  config.x.salesforce.client_id = ENV.fetch("SALESFORCE_CLIENT_ID")
+  config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
+  # TODO: update this with production host once credentials available
+  config.x.salesforce.host = "test.salesforce.com"
 
 end

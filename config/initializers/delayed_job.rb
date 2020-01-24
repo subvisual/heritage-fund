@@ -1,0 +1,1 @@
+Delayed::Worker.logger = Rails.logger if Rails.env.production?

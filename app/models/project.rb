@@ -376,7 +376,7 @@ class Project < ApplicationRecord
                 json.set!('organisationName', self.organisation.name)
                 json.set!('organisationMission',
                           self.organisation.mission.map!(&:dasherize).map { |m| m == 'lgbt-plus-led' ? 'lgbt+-led' : m })
-                json.set!('organisationType', self.organisation.org_type.dasherize)
+                json.set!('organisationType', self.organisation.org_type&.dasherize)
                 json.set!('companyNumber', self.organisation.company_number&.to_s)
                 json.set!('charityNumber', self.organisation.charity_number&.to_s)
                 json.organisationAddress do

@@ -26,10 +26,12 @@ class ApplicationAttachmentsToSalesforceJob < ApplicationJob
   queue_as :default
 
   # Implements API https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_insert_update_blob.htm#inserting_a_contentversion
-  # @param salesforce_case_id [String]
-  # @param file [ActiveStorage::Attachment]
+  # @param salesforce_case_id [string]
+  # @param record [ActiveRecord]
+  # @param attachment_field [Symbol]
   # @param description [String] file description
-  def perform(salesforce_case_id, file, description)
+  def perform(salesforce_case_id, record, attachment_field, description)
+
     client = Restforce.new(
         username: Rails.configuration.x.salesforce.username,
         password: Rails.configuration.x.salesforce.password,
@@ -39,6 +41,8 @@ class ApplicationAttachmentsToSalesforceJob < ApplicationJob
         host: Rails.configuration.x.salesforce.host,
         api_version: '48.0'
     )
+
+    file = record.send(attachment_field)
 
     filename = file.filename.to_s
     path = '/services/data/v48.0/sobjects/ContentVersion'
