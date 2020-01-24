@@ -43,7 +43,7 @@ class HomeController < ApplicationController
   # present
   def complete_organisation_details?
 
-    return [
+    [
         current_user.organisation.name.present?,
         current_user.organisation.line1.present?,
         current_user.organisation.townCity.present?,
