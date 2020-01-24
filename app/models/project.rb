@@ -32,7 +32,6 @@ class Project < ApplicationRecord
     attr_accessor :validate_same_location
     attr_accessor :validate_address
     attr_accessor :validate_capital_work
-    attr_accessor :validate_capital_work_file
     attr_accessor :validate_permission_type
     attr_accessor :validate_permission_description_yes
     attr_accessor :validate_permission_description_x_not_sure
@@ -101,13 +100,6 @@ class Project < ApplicationRecord
                            in: ["true", "false"],
                            if: :validate_non_cash_contributions_question?
     validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
-
-    validate do
-        validate_file_attached(
-            :capital_work_file,
-            "Condition survey must be attached if capital work is part of your project"
-        ) if validate_capital_work_file?
-    end
 
     validate do
         validate_length(
@@ -205,10 +197,6 @@ class Project < ApplicationRecord
 
     def validate_capital_work?
         validate_capital_work == true
-    end
-
-    def validate_capital_work_file?
-        validate_capital_work_file == true
     end
 
     def validate_permission_type?
