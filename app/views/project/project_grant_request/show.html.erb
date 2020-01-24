@@ -5,32 +5,36 @@
   Your grant request
 </h1>
 
-<%
-  $maximumRequestValue = 10000.to_i
-  $costsGreaterThanContributions = ((@final_grant_amount.to_i).positive? ? true : false)
-  $grantRequestLessThanFundingBand = ((@final_grant_amount.to_i)<= $maximumRequestValue ? true : false)
-  $grantRequestIsValid = ($costsGreaterThanContributions and $grantRequestLessThanFundingBand ? true : false)  
-%>
-
-<% unless $grantRequestIsValid %>
+<% unless @grant_request_is_valid %>
   <div class="nlhf-panel nlhf-alert nlhf-alert--error nlhf-alert--slim govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m">
       We have found a problem
     </h2>
 
-    <%# show this message if grant request is a negative number (not greater than the ammount being received in contributions)  %>
-    <% unless $costsGreaterThanContributions %>      
-      <p class="govuk-body govuk-!-font-size-19">
-        Your cash contributions are <%= "#{number_to_currency(@final_grant_amount.abs, strip_insignificant_zeros: true)}"  %>  more than the total cost of your project.
-      </p>
-    <% end %>
+    <p class="govuk-body govuk-font-size-19">
 
-    <%# show this message if grant request is higher than the maximum value for this funding level  %>
-    <% unless $grantRequestLessThanFundingBand %>      
-      <p class="govuk-body govuk-!-font-size-19">
-        Your grant request is higher than &pound;10,000 which the maximum allowable for this funding programme.
-      </p>
-    <% end %>
+      <%# Show this message if there are no project costs or cash contributions %>
+      <% if @final_grant_amount == 0 %>
+
+        You have not added any project costs or cash contributions.
+
+      <% else %>
+
+        <%# show this message if grant request is a negative number (not greater than the amount being received in contributions)  %>
+        <% unless @costs_greater_than_contributions %>
+          Your cash contributions are
+          <%= "#{number_to_currency(@final_grant_amount.abs, strip_insignificant_zeros: true)}"  %>
+          more than the total cost of your project.
+        <% end %>
+
+        <%# show this message if grant request is higher than the maximum value for this funding level  %>
+        <% unless @grant_request_less_than_funding_band %>
+          Your grant request is higher than &pound;10,000 which the maximum allowable for this funding programme.
+        <% end %>
+      <% end %>
+
+    </p>
+
     <p class="govuk-body govuk-!-font-size-19">
       Please review your project costs and cash contributions.
     </p>
@@ -131,7 +135,7 @@
 </div>
 <!-- /.nlhf-calculation-breakdown -->
 
-<% if $grantRequestIsValid %>
+<% if @grant_request_is_valid %>
 <p>
   <a href="<%= "#{three_to_ten_k_project_non_cash_contributions_get_url}" %>" role="button" draggable="false"
     class="govuk-button" data-module="govuk-button" aria-label="Continue button">
