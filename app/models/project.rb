@@ -312,7 +312,7 @@ class Project < ApplicationRecord
                     json.endDate self.end_date
                 end
                 json.set!('mainContactName', self.user.name)
-                json.set!('mainContactDateOfBirth', self.user.date_of_birth)
+                json.set!('mainContactDateOfBirth', self.user.date_of_birth.to_s)
                 json.set!('mainContactEmail', self.user.email)
                 json.set!('mainContactPhone', self.user.phone_number)
                 json.mainContactAddress do
