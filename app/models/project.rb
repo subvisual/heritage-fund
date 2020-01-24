@@ -311,15 +311,17 @@ class Project < ApplicationRecord
                     json.startDate self.start_date
                     json.endDate self.end_date
                 end
-                #TODO: Replace this dummy data with real data
-                json.set!('mainContactName', "Jane Doe")
-                json.set!('mainContactDateOfBirth', "1975-10-12")
-                json.set!('mainContactEmail', "test@example.net")
+                json.set!('mainContactName', self.user.name)
+                json.set!('mainContactDateOfBirth', self.user.date_of_birth)
+                json.set!('mainContactEmail', self.user.email)
+                json.set!('mainContactPhone', self.user.phone_number)
                 json.mainContactAddress do
-                    json.line1 "Buckingham Palace"
-                    json.line2 "Westminster"
-                    json.townCity "London"
-                    json.postcode "SW1A 1AA"
+                    json.line1 self.user.line1
+                    json.line2 self.user.line2
+                    json.line3 self.user.line3
+                    json.townCity self.user.townCity
+                    json.county self.user.county
+                    json.postcode self.user.postcode
                 end
                 json.projectAddress do
                     json.line1 self.line1
