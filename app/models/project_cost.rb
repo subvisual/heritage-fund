@@ -1,10 +1,20 @@
 class ProjectCost < ApplicationRecord
+  include GenericValidator
+
   self.implicit_order_column = "created_at"
   belongs_to :project
 
   validates :cost_type, presence: true
   validates :amount, numericality: {only_integer: true}
   validates :description, presence: true
+
+  validate do
+    validate_length(
+        :description,
+        50,
+        "Description of your cost must be 50 words or fewer"
+    )
+  end
 
   enum cost_type: {
       new_staff: 0,

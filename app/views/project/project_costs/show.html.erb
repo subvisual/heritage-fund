@@ -73,6 +73,7 @@
           <th scope="col" class="govuk-table__header">Cost type</th>
           <th scope="col" class="govuk-table__header">Description</th>
           <th scope="col" class="govuk-table__header">Amount</th>
+          <th scope="col" class="govuk-table__header"></th>
 
         </tr>
 
@@ -85,9 +86,21 @@
           <tr class="govuk-table__row">
 
             <td scope="govuk-table__cell" class="govuk-table__cell"><%= pc.cost_type&.humanize&.capitalize %>
-            <td class="govuk-table__cell"><%= pc.description %></td>
+            <td class="govuk-table__cell">
+              <%= pc.description %>
+            </td>
             <td class="govuk-table__cell govuk-table__cell--numeric">
               <%= number_to_currency(pc.amount, strip_insignificant_zeros: true) %>
+            </td>
+
+            <td scope="govuk-table__cell" class="govuk-table__cell">
+
+              <a href="<%= "#{three_to_ten_k_project_cost_delete_url(project_cost_id: pc.id)}" %>"
+                 role="button" draggable="false" class="govuk-button govuk-button--warning"
+                 data-module="govuk-button" data-turbolinks="false" aria-label="Delete button">
+                Delete
+              </a>
+
             </td>
 
           </tr>
