@@ -13,6 +13,10 @@ class Project::ProjectDeclarationController < ApplicationController
 
       logger.debug "Finished updating declaration confirmation for project ID: #{@project.id}"
 
+      logger.info "Triggering Salesforce job for project ID: #{@project.id}"
+
+      ApplicationToSalesforceJob.perform_later(@project)
+
       redirect_to three_to_ten_k_project_application_submitted_get_path
 
     else
