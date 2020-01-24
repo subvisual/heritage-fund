@@ -9,11 +9,10 @@
   $maximumRequestValue = 10000.to_i
   $costsGreaterThanContributions = ((@final_grant_amount.to_i).positive? ? true : false)
   $grantRequestLessThanFundingBand = ((@final_grant_amount.to_i)<= $maximumRequestValue ? true : false)
-  $grantRequestIsValid = (!$costsGreaterThanContributions and $grantRequestLessThanFundingBand ? true : false)  
+  $grantRequestIsValid = ($costsGreaterThanContributions and $grantRequestLessThanFundingBand ? true : false)  
 %>
 
 <% unless $grantRequestIsValid %>
-
   <div class="nlhf-panel nlhf-alert nlhf-alert--error nlhf-alert--slim govuk-!-margin-bottom-8">
     <h2 class="govuk-heading-m">
       We have found a problem
