@@ -125,7 +125,7 @@ Rails.application.routes.draw do
       get ':project_id/costs', to: 'project_costs#show', as: :project_costs
       put ':project_id/costs', to: 'project_costs#update'
 
-      get ':project_id/costs/:project_cost_id', to: 'project_costs#delete', as: :cost_delete
+      delete ':project_id/costs/:project_cost_id', to: 'project_costs#delete', as: :cost_delete
 
       put ':project_id/confirm-costs',
           to: 'project_costs#validate_and_redirect',

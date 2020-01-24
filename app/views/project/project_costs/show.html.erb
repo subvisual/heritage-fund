@@ -95,11 +95,17 @@
 
             <td scope="govuk-table__cell" class="govuk-table__cell">
 
-              <a href="<%= "#{three_to_ten_k_project_cost_delete_url(project_cost_id: pc.id)}" %>"
-                 role="button" draggable="false" class="govuk-button govuk-button--warning"
-                 data-module="govuk-button" data-turbolinks="false" aria-label="Delete button">
-                Delete
-              </a>
+              <%= form_with model: @project,
+                            url: three_to_ten_k_project_cost_delete_path(project_cost_id: pc.id),
+                            method: :delete,
+                            local: true do |f| %>
+
+                <%= f.submit "Delete", class: "govuk-button govuk-button--warning",
+                             "data-module" => "govuk-button", "data-turbolinks" => "false",
+                             "aria-label" => "Delete button"
+                %>
+
+              <% end %>
 
             </td>
 
