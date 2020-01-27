@@ -114,7 +114,7 @@
               <%= ncc.label :description, 'Description', class: 'govuk-label' %>
               <%= ncc.text_area :description,
                                 rows: 5,
-                                class: 'govuk-textarea govuk-js-character-count',
+                                class: "govuk-textarea #{'govuk-textarea--error' if @project.errors['non_cash_contributions.description'].any?} govuk-js-character-count",
                                 "aria-describedby" => "project_non_cash_contributions_attributes_0_description-info",
                                 value: "#{flash[:description] if flash[:description].present?}"
               %>
@@ -142,7 +142,7 @@
               <div class="nlhf-currency-denote__capture">
                 <%= ncc.number_field :amount,
                                      min: 1,
-                                     class: 'govuk-input',
+                                     class: "govuk-input #{'govuk-input--error' if @project.errors['non_cash_contributions.amount'].any?}",
                                      "autocomplete" => "off",
                                      value: "#{flash[:amount] if flash[:amount].present?}"
                 %>
