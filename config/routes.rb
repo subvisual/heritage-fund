@@ -158,6 +158,8 @@ Rails.application.routes.draw do
       get ':project_id/volunteers', to: 'project_volunteers#show', as: :volunteers
       put ':project_id/volunteers', to: 'project_volunteers#put'
 
+      delete ':project_id/volunteers/:volunteer_id', to: 'project_volunteers#delete', as: :volunteer_delete
+
       get ':project_id/evidence-of-support', to: 'project_support_evidence#show', as: :project_support_evidence
       put ':project_id/evidence-of-support', to: 'project_support_evidence#put'
 

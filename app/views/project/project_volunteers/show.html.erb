@@ -53,6 +53,7 @@
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header">Description</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric">Hours</th>
+          <th scope="col" class="govuk-table__header"></th>
         </tr>
         </thead>
 
@@ -62,6 +63,18 @@
           <tr class="govuk-table__row">
             <td class="govuk-table__cell"><%= v.description %></td>
             <td class="govuk-table__cell govuk-table__cell--numeric"><%= v.hours %></td>
+            <td class="govuk-table__cell">
+            <%= form_with model: @project,
+                          url: three_to_ten_k_project_volunteer_delete_path(volunteer_id: v.id),
+                          method: :delete,
+                          local: true do |f| %>
+
+              <%= f.submit "Delete", class: "govuk-button govuk-button--warning",
+                           "data-module" => "govuk-button", "data-turbolinks" => "false",
+                           "aria-label" => "Delete button"
+              %>
+            <% end %>
+            </td>
           </tr>
         <% end %>
 
