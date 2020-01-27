@@ -171,6 +171,10 @@ Rails.application.routes.draw do
       get ':project_id/evidence-of-support', to: 'project_support_evidence#show', as: :project_support_evidence
       put ':project_id/evidence-of-support', to: 'project_support_evidence#put'
 
+      delete ':project_id/evidence-of-support/:supporting_evidence_id',
+             to: 'project_support_evidence#delete',
+             as: :supporting_evidence_delete
+
       get ':project_id/check-your-answers',
           to: 'project_check_answers#show', as: :check_answers_get
 
