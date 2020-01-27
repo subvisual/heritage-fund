@@ -8,7 +8,10 @@ class Organisation::NumbersController < ApplicationController
 
     logger.info "Updating company_number/charity_number for organisation ID: #{@organisation.id}"
 
-    @organisation.validate_company_and_charity_numbers = true
+    # Neither field on this page is mandatory, so we only want to validate them
+    # if they are passed through the form
+    @organisation.validate_company_number = true if params[:organisation].key("company_number")
+    @organisation.validate_charity_number = true if params[:organisation].key("charity_number")
 
     @organisation.update(organisation_params)
 
