@@ -31,5 +31,6 @@
     </main>
   </div>
   <%= javascript_pack_tag 'application', 'data-turbolinks-suppress-warning':'true', 'data-turbolinks-eval': "false", 'data-turbolinks-track': 'reload' %>
+  <%= render "partials/tracking_tags" if Rails.env.production? %>
 </body>
 </html>
