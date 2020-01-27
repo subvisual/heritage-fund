@@ -1,0 +1,4 @@
+<%
+  content_for :page_title,
+              model_object.errors.any? ? "Error: #{page_title}" : page_title
+%>
