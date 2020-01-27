@@ -67,6 +67,23 @@ class Project::ProjectNonCashContributionsController < ApplicationController
 
   end
 
+  def delete
+
+    logger.debug "User has selected to delete non-cash contribution ID: #{params[:non_cash_contribution_id]}" \
+                    " from project ID: #{@project.id}"
+
+    non_cash_contribution = NonCashContribution.find(params[:non_cash_contribution_id])
+
+    logger.debug "Deleting non-cash contribution ID: #{non_cash_contribution.id}"
+
+    non_cash_contribution.destroy if non_cash_contribution.project_id == @project.id
+
+    logger.debug "Finished deleting non-cash contribution ID: #{non_cash_contribution.id}"
+
+    redirect_to three_to_ten_k_project_non_cash_contributions_get_path
+
+  end
+
   private
   def question_params
     if !params[:project].present?

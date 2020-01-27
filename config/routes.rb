@@ -155,6 +155,10 @@ Rails.application.routes.draw do
       get ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#show', as: :non_cash_contributions_get
       put ':project_id/non-cash-contributions', to: 'project_non_cash_contributions#update', as: :non_cash_contributions_put
 
+      delete ':project_id/non-cash-contributions/:non_cash_contribution_id',
+             to: 'project_non_cash_contributions#delete',
+             as: :non_cash_contribution_delete
+
       get ':project_id/volunteers', to: 'project_volunteers#show', as: :volunteers
       put ':project_id/volunteers', to: 'project_volunteers#put'
 
