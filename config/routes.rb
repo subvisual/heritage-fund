@@ -143,6 +143,10 @@ Rails.application.routes.draw do
           as: :project_cash_contribution
       put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
 
+      delete ':project_id/cash-contributions/:cash_contribution_id',
+             to: 'project_cash_contribution#delete',
+             as: :cash_contribution_delete
+
       get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
 
       get ':project_id/are-you-getting-non-cash-contributions',
