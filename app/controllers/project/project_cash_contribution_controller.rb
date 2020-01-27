@@ -62,6 +62,22 @@ class Project::ProjectCashContributionController < ApplicationController
 
   end
 
+  def delete
+
+    logger.debug "User has selected to delete cash contribution ID: #{params[:cash_contribution_id]} from project ID: #{@project.id}"
+
+    cash_contribution = CashContribution.find(params[:cash_contribution_id])
+
+    logger.debug "Deleting cash contribution ID: #{cash_contribution.id}"
+
+    cash_contribution.destroy if cash_contribution.project_id == @project.id
+
+    logger.debug "Finished deleting cash contribution ID: #{cash_contribution.id}"
+
+    redirect_to three_to_ten_k_project_project_cash_contribution_path
+
+  end
+
   private
   def question_params
     if !params[:project].present?

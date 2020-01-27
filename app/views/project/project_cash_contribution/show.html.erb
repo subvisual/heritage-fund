@@ -21,6 +21,7 @@
           <th scope="col" class="govuk-table__header govuk-!-width-one-half">Description</th>
           <th scope="col" class="govuk-table__header">Secured</th>
           <th scope="col" class="govuk-table__header govuk-table__header--numeric">Value</th>
+          <th scope="col" class="govuk-table__header"></th>
         </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -39,6 +40,19 @@
             </td>
             <td class="govuk-table__cell govuk-table__cell--numeric">
               <%= number_to_currency(cc.amount, strip_insignificant_zeros: true) if cc.amount.present? %>
+            </td>
+            <td class="govuk-table__cell">
+              <%= form_with model: @project,
+                            url: three_to_ten_k_project_cash_contribution_delete_path(cash_contribution_id: cc.id),
+                            method: :delete,
+                            local: true do |f| %>
+
+                <%= f.submit "Delete", class: "govuk-button govuk-button--warning",
+                             "data-module" => "govuk-button", "data-turbolinks" => "false",
+                             "aria-label" => "Delete button"
+                %>
+
+              <% end %>
             </td>
           </tr>
         <% end %>
