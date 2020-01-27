@@ -31,7 +31,7 @@
               <%= cc.description %>
             </td>
             <td class="govuk-table__cell">
-              <%= cc.secured&.gsub('x_', '').humanize.gsub('Yes ', 'Yes, ') %>
+              <%= cc.secured&.gsub('x_', '')&.humanize&.gsub('Yes ', 'Yes, ') %>
               <% if cc.cash_contribution_evidence_files.present? %>
                 <div class="nlhf-!-break-word govuk-!-font-size-16">
                   <%= link_to("Evidence attached", rails_blob_path(cc.cash_contribution_evidence_files, disposition: "attachment"), title: "Click to view file: #{cc.cash_contribution_evidence_files.filename}") %>
