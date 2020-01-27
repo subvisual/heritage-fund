@@ -197,4 +197,6 @@ Rails.application.routes.draw do
   resources :organisation do
     get 'show'
   end
+  # TODO Put this behind auth on PAAS
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
 end
