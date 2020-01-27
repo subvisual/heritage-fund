@@ -33,6 +33,23 @@ class Project::ProjectVolunteersController < ApplicationController
 
   end
 
+  def delete
+
+    logger.debug "User has selected to delete volunteer cost ID: #{params[:volunteer_id]}" \
+                    " from project ID: #{@project.id}"
+
+    volunteer = Volunteer.find(params[:volunteer_id])
+
+    logger.debug "Deleting volunteer ID: #{volunteer.id}"
+
+    volunteer.destroy if volunteer.project_id == @project.id
+
+    logger.debug "Finished deleting volunteer ID: #{volunteer.id}"
+
+    redirect_to three_to_ten_k_project_volunteers_path
+
+  end
+
   private
   def project_params
     params.require(:project).permit(volunteers_attributes: [:description, :hours])
