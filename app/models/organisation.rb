@@ -1,17 +1,28 @@
 class Organisation < ApplicationRecord
+
   self.implicit_order_column = "created_at"
+
   has_many :users
   has_many :legal_signatories
 
   attr_accessor :validate_org_type
-  attr_accessor :validate_company_number
-  attr_accessor :validate_charity_number
+  attr_accessor :validate_company_and_charity_numbers
   attr_accessor :validate_address
   attr_accessor :validate_mission
 
   validates :org_type, presence: true, if: :validate_org_type?
-  validates :company_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_company_number?
-  validates :charity_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_charity_number?
+  validates :company_number,
+            numericality: {
+                only_integer: true
+            },
+            allow_blank: true,
+            if: :validate_company_and_charity_numbers?
+  validates :charity_number,
+            numericality: {
+                only_integer: true
+            },
+            allow_blank: true,
+            if: :validate_company_and_charity_numbers?
   validate :validate_mission_array, if: :validate_mission?
   validates :name, presence: true, if: :validate_address?
   validates :line1, presence: true, if: :validate_address?
@@ -23,12 +34,8 @@ class Organisation < ApplicationRecord
     validate_org_type == true
   end
 
-  def validate_company_number?
-    validate_company_number == true
-  end
-
-  def validate_charity_number?
-    validate_charity_number == true
+  def validate_company_and_charity_numbers?
+    validate_company_and_charity_numbers == true
   end
 
   def validate_address?
