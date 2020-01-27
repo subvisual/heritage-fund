@@ -56,6 +56,22 @@ class Project::ProjectCostsController < ApplicationController
 
   end
 
+  def delete
+
+      logger.debug "User has selected to delete project cost ID: #{params[:project_cost_id]} from project ID: #{@project.id}"
+
+      project_cost = ProjectCost.find(params[:project_cost_id])
+
+      logger.debug "Deleting project cost ID: #{project_cost.id}"
+
+      project_cost.destroy if project_cost.project_id == @project.id
+
+      logger.debug "Finished deleting project cost ID: #{project_cost.id}"
+
+      redirect_to :three_to_ten_k_project_project_costs
+
+  end
+
   private
   def project_params
     params.require(:project).permit(project_costs_attributes: [:description, :amount, :cost_type])
