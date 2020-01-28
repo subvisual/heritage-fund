@@ -82,3 +82,5 @@ gem "nilify_blanks", "~> 1.3"
 
 gem "delayed_job_web", "~> 1.4"
 
+
+gem "lograge", "~> 0.11.2"
