@@ -37,7 +37,7 @@
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: @organisation,
                         input_field_id: :charity_number} if @organisation.errors[:charity_number].any? %>
-    <%= f.number_field :charity_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @organisation.errors[:charity_number].any?}" %>
+    <%= f.text_field :charity_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @organisation.errors[:charity_number].any?}" %>
 
   </div>
 
