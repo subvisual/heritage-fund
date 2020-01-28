@@ -125,5 +125,6 @@ Rails.application.configure do
   config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
   # TODO: update this with production host once credentials available
   config.x.salesforce.host = "test.salesforce.com"
+  config.x.devise_pepper = ENV.fetch("DEVISE_PEPPER")
 
 end
