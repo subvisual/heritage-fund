@@ -52,7 +52,7 @@ group :test do
   gem "factory_bot_rails", "~> 5.1"
 end
 
-group :production do
+group :production, :staging do
   gem "aws-sdk-s3", require: false
   gem 'cf-app-utils'
   gem "delayed_job_active_record", "~> 4.1"
