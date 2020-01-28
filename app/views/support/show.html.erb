@@ -1,0 +1,56 @@
+<%=
+  render partial: "partials/summary_errors_flash",
+         locals: {
+             first_form_element: :support_type_report_a_problem
+         } if flash[:errors]
+%>
+
+<%= form_tag :support, local: true do |f| %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if flash[:errors] %>">
+
+    <fieldset class="govuk-fieldset" aria-describedby="how-can-we-help-hint">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+        <h1 class="govuk-fieldset__heading">
+          Suppport
+        </h1>
+
+      </legend>
+
+      <span id="changed-name-hint" class="govuk-hint">
+        How can we help you?
+      </span>
+
+      <div class="govuk-radios">
+
+        <div class="govuk-radios__item">
+
+          <%= radio_button_tag :support_type, "report_a_problem", false, class: "govuk-radios__input" %>
+          <%= label_tag :support_type_report_a_problem, "Report a problem", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+        <div class="govuk-radios__item">
+
+          <%= radio_button_tag :support_type, "ask_a_question", false, class: "govuk-radios__input" %>
+          <%= label_tag :support_type_ask_a_question, "Ask a question or give feedback", class: "govuk-label govuk-radios__label" %>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%=
+    submit_tag "Continue",
+             class: 'govuk-button',
+             role: 'button',
+             'aria-label' => 'Continue button',
+             'data-module' => 'govuk-button'
+  %>
+
+<% end %>

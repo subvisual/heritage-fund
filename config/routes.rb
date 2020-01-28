@@ -200,6 +200,13 @@ Rails.application.routes.draw do
 
   get 'health' => 'health#get_status'
 
+  get 'support', to: 'support#show'
+  post 'support', to: 'support#update'
+  get 'support/report-a-problem', to: 'support#report_a_problem'
+  post 'support/report-a-problem', to: 'support#process_problem'
+  get 'support/question-or-feedback', to: 'support#question_or_feedback'
+  post 'support/question-or-feedback', to: 'support#process_question'
+
   devise_for :users
   get 'start-a-project', to: 'home#show', as: :start_a_project
   get 'logout' => 'logout#logout'

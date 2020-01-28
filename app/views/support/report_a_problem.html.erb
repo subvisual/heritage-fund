@@ -1,0 +1,54 @@
+<%=
+  render partial: "partials/summary_errors_flash",
+         locals: {
+             first_form_element: :support_type_report_a_problem
+         } if flash[:errors]
+%>
+
+<%= form_tag :support_report_a_problem, local: true do %>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if flash[:errors] %>">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+        <h1 class="govuk-fieldset__heading">
+          Report a problem
+        </h1>
+
+      </legend>
+
+      <div class="govuk-inset-text">
+        <a href="https://www.heritagefund.org.uk/service-status">Check our service status page</a>
+        to see if there are any known issues.
+      </div>
+
+      <div class="govuk-form-group">
+        <%= label_tag :support_problem_message, "Your message", class: "govuk-label" %>
+        <%= text_area_tag :support_problem_message, nil, rows: 10, class: "govuk-textarea" %>
+      </div>
+
+      <div class="govuk-form-group">
+        <%= label_tag :support_problem_name, "Your name", class: "govuk-label" %>
+        <%= text_field_tag :support_problem_name, nil, class: "govuk-textarea" %>
+      </div>
+
+      <div class="govuk-form-group">
+        <%= label_tag :support_problem_message, "Your email address", class: "govuk-label" %>
+        <%= email_field_tag :support_problem_email, nil, class: "govuk-input" %>
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%=
+    submit_tag "Send",
+               class: 'govuk-button',
+               role: 'button',
+               'aria-label' => 'Send button',
+               'data-module' => 'govuk-button'
+  %>
+
+<% end %>
