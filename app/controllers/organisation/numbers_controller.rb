@@ -10,7 +10,6 @@ class Organisation::NumbersController < ApplicationController
                      "setting company_number and charity_number"
 
     @organisation.validate_company_number = true
-    @organisation.validate_charity_number = true
 
     @organisation.update(company_number: company_number, charity_number: charity_number)
 
