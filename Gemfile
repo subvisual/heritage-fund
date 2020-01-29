@@ -84,3 +84,5 @@ gem "delayed_job_web", "~> 1.4"
 
 
 gem "lograge", "~> 0.11.2"
+
+gem "silencer", "~> 1.0"
