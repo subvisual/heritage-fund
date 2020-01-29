@@ -129,4 +129,6 @@ Rails.application.configure do
   config.lograge.enabled = true
   config.assets.quiet = true
 
+  config.x.support_email_address = ENV.fetch("SUPPORT_EMAIL_ADDRESS")
+
 end

@@ -1,0 +1,110 @@
+<%
+  content_for :page_title,
+              flash[:errors].present? ? "Error: Report a problem" : "Report a problem"
+%>
+
+<%=
+  render partial: "partials/summary_errors_flash",
+         locals: {
+             first_form_element: :support_type_report_a_problem
+         } if flash[:errors]
+%>
+
+<% if flash[:success] %>
+  <div class="nlhf-panel nlhf-panel--border-wide nlhf-alert--success govuk-!-margin-bottom-6">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+      Your message was sent successfully
+    </h2>
+  </div>
+<% end %>
+
+<%= form_tag :support_report_a_problem, local: true do %>
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
+        <h1 class="govuk-fieldset__heading">
+          Report a problem
+        </h1>
+
+      </legend>
+
+      <div class="govuk-inset-text">
+        <a href="https://www.heritagefund.org.uk/service-status">Check our service status page</a>
+        to see if there are any known issues.
+      </div>
+
+      <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                           flash[:errors] && flash[:errors][:support_problem_message] %>">
+
+        <%=
+          render partial: "partials/form_input_errors_flash",
+                 locals: {
+                     input_field_id: :support_problem_message
+                 } if flash[:errors] && flash[:errors][:support_problem_message].present?
+        %>
+
+        <%= label_tag :support_problem_message, "Your message", class: "govuk-label" %>
+        <%=
+          text_area_tag :support_problem_message,
+                        flash[:support_problem_message].present? ? flash[:support_problem_message] : nil,
+                        rows: 10,
+                        class: "govuk-textarea #{'govuk-textarea--error' if
+                            flash[:errors] && flash[:errors][:support_problem_message].present?}"
+        %>
+      </div>
+
+      <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                           flash[:errors] && flash[:errors][:support_problem_name] %>">
+
+        <%=
+          render partial: "partials/form_input_errors_flash",
+                 locals: {
+                     input_field_id: :support_problem_name
+                 } if flash[:errors] && flash[:errors][:support_problem_name].present?
+        %>
+
+        <%= label_tag :support_problem_name, "Your name", class: "govuk-label" %>
+        <%=
+          text_field_tag :support_problem_name,
+                         flash[:support_problem_name].present? ? flash[:support_problem_name] : nil,
+                         class: "govuk-input #{'govuk-input--error' if
+                             flash[:errors] && flash[:errors][:support_problem_name].present?}"
+        %>
+      </div>
+
+      <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                           flash[:errors] && flash[:errors][:support_problem_email]%>">
+
+        <%=
+          render partial: "partials/form_input_errors_flash",
+                 locals: {
+                     input_field_id: :support_problem_email
+                 } if flash[:errors] && flash[:errors][:support_problem_email].present?
+        %>
+
+        <%= label_tag :support_problem_email, "Your email address", class: "govuk-label" %>
+        <%=
+          email_field_tag :support_problem_email,
+                          flash[:support_problem_email].present? ? flash[:support_problem_email] : nil,
+                          class: "govuk-input #{'govuk-input--error' if
+                              flash[:errors] && flash[:errors][:support_problem_email].present?}"
+        %>
+      </div>
+
+    </fieldset>
+
+  </div>
+
+  <%=
+    submit_tag "Send",
+               class: 'govuk-button',
+               role: 'button',
+               'aria-label' => 'Send button',
+               'data-module' => 'govuk-button'
+  %>
+
+<% end %>

@@ -36,10 +36,7 @@
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">          
         <ul class="govuk-footer__inline-list">
             <li class="govuk-footer__inline-list-item">
-            <%# TODO: Link to support page when created %>
-              <a class="govuk-footer__link" href="#">
-                Get support
-              </a>
+              <%= link_to("Get support", support_path, class: "govuk-footer__link") %>
             </li>
             <li class="govuk-footer__inline-list-item">
               <a class="govuk-footer__link" href="https://www.heritagefund.org.uk/service-status/">
