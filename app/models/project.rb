@@ -296,6 +296,9 @@ class Project < ApplicationRecord
     }
 
     def to_salesforce_json
+        setAddressLines = -> (line1, line2, line3) {
+            [line1, line2, line3].compact.join(', ')
+        }
         Jbuilder.encode do |json|
             json.ignore_nil!
             json.meta do
@@ -316,17 +319,13 @@ class Project < ApplicationRecord
                 json.set!('mainContactEmail', self.user.email)
                 json.set!('mainContactPhone', self.user.phone_number)
                 json.mainContactAddress do
-                    json.line1 self.user.line1
-                    json.line2 self.user.line2
-                    json.line3 self.user.line3
+                    json.line1 setAddressLines.call(self.user.line1, self.user.line2, self.user.line3)
                     json.townCity self.user.townCity
                     json.county self.user.county
                     json.postcode self.user.postcode
                 end
                 json.projectAddress do
-                    json.line1 self.line1
-                    json.line2 self.line2
-                    json.line3 self.line3
+                    json.line1 setAddressLines.call(self.line1, self.line2, self.line3)
                     json.county self.county
                     json.townCity self.townCity
                     json.projectPostcode self.postcode
@@ -389,9 +388,7 @@ class Project < ApplicationRecord
                 json.set!('companyNumber', self.organisation.company_number&.to_s)
                 json.set!('charityNumber', self.organisation.charity_number&.to_s)
                 json.organisationAddress do
-                    json.line1 self.organisation.line1
-                    json.line2 self.organisation.line2
-                    json.line3 self.organisation.line3
+                    json.line1 setAddressLines.call(self.organisation.line1, self.organisation.line2, self.organisation.line3)
                     json.county self.organisation.county
                     json.townCity self.organisation.townCity
                     json.postcode self.organisation.postcode
