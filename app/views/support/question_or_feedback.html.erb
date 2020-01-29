@@ -1,13 +1,26 @@
+<%
+  content_for :page_title,
+              flash[:errors].present? ? "Error: Ask a question or give feedback" : "Ask a question or give feedback"
+%>
+
 <%=
   render partial: "partials/summary_errors_flash",
          locals: {
-             first_form_element: :support_type_report_a_problem
+             first_form_element: :support_question_or_feedback_message
          } if flash[:errors]
 %>
 
+<% if flash[:success] %>
+  <div class="nlhf-panel nlhf-panel--border-wide nlhf-alert--success govuk-!-margin-bottom-6">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+      Your message was sent successfully
+    </h2>
+  </div>
+<% end %>
+
 <%= form_tag :support_question_or_feedback, local: true do %>
 
-  <div class="govuk-form-group <%= "govuk-form-group--error" if flash[:errors] %>">
+  <div class="govuk-form-group">
 
     <fieldset class="govuk-fieldset">
 
@@ -19,9 +32,24 @@
 
       </legend>
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group <%= "govuk-form-group--error" if flash[:errors] %>">
+
+        <%=
+          render partial: "partials/form_input_errors_flash",
+                 locals: {
+                     input_field_id: :support_question_or_feedback_message
+                 } if flash[:errors] && flash[:errors][:support_question_or_feedback_message].present?
+        %>
+
         <%= label_tag :support_question_or_feedback_message, "Your message", class: "govuk-label" %>
-        <%= text_area_tag :support_question_or_feedback_message, nil, rows: 10, class: "govuk-textarea" %>
+        <%=
+          text_area_tag :support_question_or_feedback_message,
+                        flash[:support_question_or_feedback_message].present? ?
+                            flash[:support_question_or_feedback_message] : nil,
+                        rows: 10,
+                        class: "govuk-textarea #{'govuk-textarea--error' if flash[:errors] &&
+                            flash[:errors][:support_question_or_feedback_message].present?}"
+        %>
       </div>
 
       <h2 class="govuk-heading-m">Do you want a reply?</h2>
@@ -29,13 +57,23 @@
       <p class="govuk-body">Leave your details below if you’d like a response.</p>
 
       <div class="govuk-form-group">
-        <%= label_tag :support_problem_name, "Your name", class: "govuk-label" %>
-        <%= text_field_tag :support_problem_name, nil, class: "govuk-textarea" %>
+        <%= label_tag :support_question_or_feedback_name, "Your name", class: "govuk-label" %>
+        <%=
+          text_field_tag :support_question_or_feedback_name,
+                         flash[:support_question_or_feedback_name].present? ?
+                             flash[:support_question_or_feedback_name] : nil,
+                         class: "govuk-textarea"
+        %>
       </div>
 
       <div class="govuk-form-group">
-        <%= label_tag :support_problem_message, "Your email address", class: "govuk-label" %>
-        <%= email_field_tag :support_problem_email, nil, class: "govuk-input" %>
+        <%= label_tag :support_question_or_feedback_message, "Your email address", class: "govuk-label" %>
+        <%=
+          email_field_tag :support_question_or_feedback_email,
+                          flash[:support_question_or_feedback_email].present? ?
+                              flash[:support_question_or_feedback_email] : nil,
+                          class: "govuk-input"
+        %>
       </div>
 
     </fieldset>

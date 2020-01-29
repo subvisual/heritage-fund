@@ -126,4 +126,6 @@ Rails.application.configure do
   # TODO: update this with production host once credentials available
   config.x.salesforce.host = "test.salesforce.com"
 
+  config.x.support_email_address = ENV.fetch("SUPPORT_EMAIL_ADDRESS")
+
 end

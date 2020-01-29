@@ -4,35 +4,105 @@ class SupportController < ApplicationController
     flash[:errors] = nil
   end
 
+  def report_a_problem
+    clear_flash("report_a_problem")
+
+  end
+
+  def question_or_feedback
+    clear_flash("question_or_feedback")
+  end
+
   def process_problem
 
     logger.info "User submitted POST /report-a-problem form"
 
     flash[:errors] = {}
 
-    unless params.key?("support_problem_message")
+    unless params[:support_problem_message].present?
       flash[:errors][:support_problem_message] = "Enter a message"
+    else
+      flash[:support_problem_message] = params[:support_problem_message]
     end
 
-    unless params.key?("support_problem_name")
+    unless params[:support_problem_name].present?
       flash[:errors][:support_problem_name] = "Enter your name"
+    else
+      flash[:support_problem_name] = params[:support_problem_name]
     end
 
-    unless params.key?("support_problem_email")
+    unless params[:support_problem_email].present?
       flash[:errors][:support_problem_email] = "Enter your email address"
+    else
+      flash[:support_problem_email] = params[:support_problem_email]
     end
 
-    unless flash[:errors].empty?
+    if flash[:errors].empty?
 
-      SupportMailer.report_a_problem_email(
+      logger.debug "Validation succeeded for POST /report-a-problem form"
+
+      logger.debug "Calling NotifyMailer.report_a_problem_email"
+
+      NotifyMailer.report_a_problem(
           params[:support_problem_message],
           params[:support_problem_name],
           params[:support_problem_email]
       ).deliver_later
 
+      logger.debug "Finished calling NotifyMailer.report_a_problem_email"
+
+      clear_flash("report_a_problem")
+
+      flash[:success] = true
+
     end
 
+    logger.info "Finished processing of POST /report-a-problem form, re-rendering page"
+
     render :report_a_problem
+
+  end
+
+  def process_question
+
+    logger.info "User submitted POST /question-or-feedback form"
+
+    flash[:errors] = {}
+
+    unless params[:support_question_or_feedback_message].present?
+      flash[:errors][:support_question_or_feedback_message] = "Enter a message"
+    else
+      flash[:support_question_or_feedback_message] = params[:support_question_or_feedback_message]
+    end
+
+    flash[:support_question_or_feedback_name] = params[:support_question_or_feedback_name] if
+        params[:support_question_or_feedback_name].present?
+    flash[:support_question_or_feedback_email] = params[:support_question_or_feedback_email] if
+        params[:support_question_or_feedback_email].present?
+
+    if flash[:errors].empty?
+
+      logger.debug "Validation succeeded for POST /question-or-feedback form"
+
+      logger.debug "Calling SupportMailer.question_or_feedback_email"
+
+      NotifyMailer.question_or_feedback(
+          params[:support_question_or_feedback_message],
+          params[:support_question_or_feedback_name],
+          params[:support_question_or_feedback_email]
+      ).deliver_later
+
+      logger.debug "Finished calling SupportMailer.question_or_feedback_email"
+
+      clear_flash("question_or_feedback")
+
+      flash[:success] = true
+
+    end
+
+    logger.info "Finished processing of POST /question-or-feedback form, re-rendering page"
+
+    render :question_or_feedback
 
   end
 
@@ -80,6 +150,15 @@ class SupportController < ApplicationController
 
     end
 
+  end
+
+  private
+  def clear_flash(page_type)
+    flash[:errors] = nil
+    flash[:success] = nil
+    flash["support_#{page_type}_message"] = nil
+    flash["support_#{page_type}_name"] = nil
+    flash["support_#{page_type}_email"] = nil
   end
 
 end

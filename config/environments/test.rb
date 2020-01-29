@@ -52,4 +52,6 @@ Rails.application.configure do
   config.x.salesforce.security_token = "test"
   config.x.salesforce.client_id = "test"
   config.x.salesforce.client_secret = "test"
+
+  config.x.support_email_address = "test@test.com"
 end
