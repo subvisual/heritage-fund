@@ -61,10 +61,7 @@
 
           <div class="govuk-form-group" id="file-upload-group">
 
-            <label class="govuk-label" for="evidence-upload">
-              Upload a file
-            </label>
-
+            <%= f.label :capital_work_file, "Upload a file", class: "govuk-label" %>
             <%= f.file_field :capital_work_file, multiple: false, direct_upload: true, class: "govuk-file-upload" %>
 
             <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
