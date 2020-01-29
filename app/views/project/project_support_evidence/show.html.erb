@@ -86,9 +86,7 @@
 
       <div class="nlhf-add-item__row">
         <div class="govuk-form-group" id="file-upload-group">
-          <label class="govuk-label" for="evidence-upload">
-            Upload a file
-          </label>
+          <%= e.label :evidence_of_support_files, "Upload a file", class: "govuk-label" %>
           <%= e.file_field :evidence_of_support_files, multiple: false, direct_upload: true, class: 'govuk-file-upload' %>
         </div>
       </div>
