@@ -67,5 +67,6 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal 'not-sure', @project_salesforce_json_obj['application']['projectNeedsPermission']
      assert_equal 'permission description', @project_salesforce_json_obj['application']['projectNeedsPermissionDetails']
      assert_equal 'partnership details', @project_salesforce_json_obj['application']['partnershipDetails']
+     assert_equal 'something', @project_salesforce_json_obj['application']['informationNotPubliclyAvailableRequest']
    end
 end

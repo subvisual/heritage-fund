@@ -357,6 +357,7 @@ class Project < ApplicationRecord
                 json.set!('projectNeedsPermissionDetails', self.permission_description)
                 json.set!('keepInformed', self.keep_informed_declaration)
                 json.set!('involveInResearch', self.user_research_declaration)
+                json.set!('informationNotPubliclyAvailableRequest', self.declaration_reasons_description)
                 json.set!('isPartnership', self.is_partnership)
                 json.set!('partnershipDetails', self.partnership_details)
                 json.set!('projectCapitalWork', self.capital_work)
