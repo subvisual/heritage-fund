@@ -25,6 +25,8 @@ class Project::ProjectSupportEvidenceController < ApplicationController
 
     end
 
+    @has_file_upload = true
+
   end
 
   def delete

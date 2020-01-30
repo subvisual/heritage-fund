@@ -1,6 +1,10 @@
 class Project::ProjectCapitalWorksController < ApplicationController
   include ProjectContext
 
+  def show
+    @has_file_upload = true
+  end
+
   def update
 
     logger.debug "Updating capital works for project ID: #{@project.id}"
@@ -22,8 +26,8 @@ class Project::ProjectCapitalWorksController < ApplicationController
     else
 
       respond_to do |format|
-        format.html {render :show}
-        format.js {render :show}
+        format.html { render :show }
+        format.js { render :show }
       end
 
     end
@@ -35,7 +39,7 @@ class Project::ProjectCapitalWorksController < ApplicationController
   def project_params
 
     if !params[:project].present?
-      params.merge!({project: {capital_work: ""}})
+      params.merge!({ project: { capital_work: "" } })
     end
 
     params.require(:project).permit(:capital_work, :capital_work_file)

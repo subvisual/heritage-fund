@@ -49,6 +49,8 @@ en-GB:
         company_number: "Company number"
         charity_number: "Charity number"
     errors:
+      views:
+        file_upload_error_message: "The upload of this file has failed"
       models:
         user:
           attributes:
