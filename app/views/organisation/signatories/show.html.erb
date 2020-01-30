@@ -63,7 +63,7 @@
         <%= render partial: "partials/form_input_errors",
                    locals: {form_object: signatory,
                             input_field_id: :email_address} if signatory.errors[:email_address].any? %>
-        <%= signatory_field.email_field :email_address, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:email_address].any?}" %>
+        <%= signatory_field.text_field :email_address, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if signatory.errors[:email_address].any?}" %>
       </div>
 
       <div class="govuk-form-group">

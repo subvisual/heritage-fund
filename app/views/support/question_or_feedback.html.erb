@@ -69,7 +69,7 @@
       <div class="govuk-form-group">
         <%= label_tag :support_question_or_feedback_message, "Your email address", class: "govuk-label" %>
         <%=
-          email_field_tag :support_question_or_feedback_email,
+          text_field_tag :support_question_or_feedback_email,
                           flash[:support_question_or_feedback_email].present? ?
                               flash[:support_question_or_feedback_email] : nil,
                           class: "govuk-input"
