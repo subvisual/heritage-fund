@@ -207,7 +207,7 @@
 
         <div class="nlhf-currency-denote__capture">
 
-          <%= pc.number_field :amount,
+          <%= pc.text_field :amount,
                               required: 'true',
                               class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if @project.errors['project_costs.amount'].any?}",
                               value: "#{flash[:amount] if flash[:amount].present?}"

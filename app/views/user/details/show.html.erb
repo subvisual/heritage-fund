@@ -20,7 +20,7 @@
                  locals: {form_object: current_user,
                           input_field_id: :name} if current_user.errors[:name].any? %>
 
-      <%= f.label "Full name", class: "govuk-label" %>
+      <%= f.label :name, "Full name", class: "govuk-label" %>
       <%= f.text_field :name,
                        class:"govuk-input #{'govuk-input--error' if current_user.errors[:name].any?}",
                        "autocomplete" => "name",
@@ -35,8 +35,8 @@
                  locals: {form_object: current_user,
                           input_field_id: :phone_number} if current_user.errors[:phone_number].any? %>
 
-      <%= f.label "Telephone number", class: "govuk-label" %>
-      <%= f.telephone_field :phone_number,
+      <%= f.label :phone_number, "Telephone number", class: "govuk-label" %>
+      <%= f.text_field :phone_number,
                             class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if current_user.errors[:phone_number].any?}",
                             "autocomplete" => "tel"
       %>

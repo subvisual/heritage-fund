@@ -14,8 +14,7 @@
 <h2 class="govuk-heading-m">a) Terms of Grant</h2>
 
 <p class="govuk-body">
-  You must read the <a href="https://www.heritagefund.org.uk/publications/standard-terms-grants-3k-10k"
-                       class="govuk-link">standard terms of grant</a> for this programme on our website.
+  You must read the <a href="https://www.heritagefund.org.uk/publications/standard-terms-grants-3k-10k" class="govuk-link">standard terms of grant</a> for this programme on our website.
 </p>
 
 <p class="govuk-body">
@@ -44,18 +43,15 @@
   National Lottery Heritage Fund website.
 </p>
 
-<p class="govuk-body">
-  When you complete the Declaration at the end of the application form, you are confirming that you understand
+<%= f.label :declaration_reasons_description,
+  "When you complete the Declaration at the end of the application form, you are confirming that you understand
   our legal responsibilities under data protection legislation and the Freedom of
   Information Act 2000 and have no objection to us releasing the About your project and Support for your project
   sections of the application form to anyone who asks to see them once your application has completed the assessment
   process. If there is any information in these sections of the form that you don't want made publicly available,
-  please explain your reasons below:
-</p>
+  please explain your reasons below:", class: "govuk-body govuk-!-margin-bottom-3 nlhf-!-display-block" %>
 
-  <%= f.text_area :declaration_reasons_description, rows: 10,
-                  class: "govuk-textarea govuk-js-character-count #{'govuk-input--error' if @project.errors[:declaration_reasons_description].any?}"
-  %>
+  <%= f.text_area :declaration_reasons_description, rows: 10, class: "govuk-textarea #{'govuk-input--error' if @project.errors[:declaration_reasons_description].any?}" %>
 
   <p class="govuk-body">
     We will take these into account when we respond to any request for access to those sections. We may also be asked
