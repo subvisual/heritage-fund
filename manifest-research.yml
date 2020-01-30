@@ -3,7 +3,8 @@ applications:
 - name: funding-frontend-research
   memory: 256M
   instances: 2
-  buildpack: ruby_buildpack
+   # TODO: Review once upstream issue https://github.com/cloudfoundry/ruby-buildpack/issues/120 is resolved
+  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git#v1.8.4
   health-check-type: http
   health-check-http-endpoint: /health
   services:
