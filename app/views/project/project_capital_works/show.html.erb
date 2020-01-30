@@ -1,13 +1,15 @@
 <% content_for :page_title, @project.errors.any? ? "Error: Will capital work be part of your project?" : "Will capital work be part of your project?" %>
 
+<noscript><% no_js = true %></noscript>
+
 <div id="summary-errors"></div>
 
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @project,
-    first_form_element: :project_capital_work_no
+    first_form_element: :project_capital_work_false
 } if @project.errors.any? %>
 
-<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: true do |f| %>
+<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: no_js ? false : true do |f| %>
 
   <div id="capital-works-form-group-main" class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
 
