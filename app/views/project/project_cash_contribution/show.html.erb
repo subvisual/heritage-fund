@@ -1,4 +1,43 @@
-<% content_for :page_title, "Cash contributions" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: "Cash contributions"
+         }
+%>
+
+<noscript><% no_js = true %></noscript>
+
+<%# TODO: Split this into a partial %>
+<% if @project.errors.any? %>
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title"
+       role="alert" tabindex="-1" data-module="govuk-error-summary">
+
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      There is a problem
+    </h2>
+
+    <div class="govuk-error-summary__body">
+
+      <ul class="govuk-list govuk-error-summary__list">
+
+        <% @project.errors.each do |attr, msg| %>
+          <% unless attr.to_s == "cash_contributions" %>
+            <li>
+              <a data-turbolinks='false'
+                 href='#project_cash_contributions_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
+                <%= msg %>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+
+      </ul>
+
+    </div>
+
+  </div>
+<% end %>
 
 <div id="summary-errors"></div>
 
@@ -75,7 +114,7 @@
 </section>
 <!-- /.nlhf-summary-container -->
 
-<%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: true do |f| %>
+<%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: no_js ? false : true do |f| %>
 
   <% f.fields_for :cash_contributions, @project.cash_contributions.build do |cc| %>
     <div class="nlhf-add-item govuk-!-margin-bottom-6">
@@ -90,12 +129,26 @@
 
           <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
 
-            <div class="govuk-form-group" id="description-form-group">
+            <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                                 @project.errors['cash_contributions.description'].any? %>"
+                 id="description-form-group">
+
+              <%= render partial: "partials/form_input_errors",
+                         locals: {
+                             form_object: @project,
+                             input_field_id: :'cash_contributions.description'} if
+                      @project.errors['cash_contributions.description'].any?
+              %>
 
               <div id="description-errors"></div>
 
               <%= cc.label :description, class: 'govuk-label' %>
-              <%= cc.text_area :description, class: 'govuk-textarea govuk-js-character-count', rows: 5 %>
+              <%=
+                cc.text_area :description,
+                             class: "govuk-textarea govuk-js-character-count #{'govuk-textarea--error' if
+                                 @project.errors['cash_contributions.description'].any?}",
+                             rows: 5
+              %>
 
               <span class="govuk-hint govuk-character-count__message" id="project_cash_contributions_attributes_0_description-info"></span>
 
@@ -108,8 +161,18 @@
 
         <div class="nlhf-add-item__row">
 
-          <div class="govuk-form-group" id="secured-form-group">
+          <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                               @project.errors['cash_contributions.secured'].any? %>"
+               id="secured-form-group">
+
             <fieldset class="govuk-fieldset">
+
+              <%= render partial: "partials/form_input_errors",
+                         locals: {
+                             form_object: @project,
+                             input_field_id: :'cash_contributions.secured'} if
+                      @project.errors['cash_contributions.secured'].any?
+              %>
 
               <div id="secured-errors"></div>
 
@@ -155,7 +218,16 @@
         <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
-          <div class="govuk-form-group" id="amount-form-group">
+          <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                               @project.errors['cash_contributions.amount'].any? %>"
+               id="amount-form-group">
+
+            <%= render partial: "partials/form_input_errors",
+                       locals: {
+                           form_object: @project,
+                           input_field_id: :'cash_contributions.amount'} if
+                    @project.errors['cash_contributions.amount'].any?
+            %>
 
             <div id="amount-errors"></div>
 
@@ -165,7 +237,8 @@
                 &pound;
               </div>
               <div class="nlhf-currency-denote__capture">
-                <%= cc.number_field :amount, class: 'govuk-input govuk-input--width-10' %>
+                <%= cc.number_field :amount, class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if
+                    @project.errors['cash_contributions.amount'].any?}" %>
               </div>
             </div>
             <!-- /.nlhf-currency-denote -->
@@ -174,7 +247,12 @@
         <!-- / nlhf-add-item__row -->
 
         <div class="nlhf-add-item__row">
-          <%= cc.submit 'Add cash contribution', role: "button", 'data-prevent-double-click' => 'true', class: 'govuk-button govuk-button--secondary' %>
+          <%=
+            cc.submit 'Add cash contribution',
+                      role: "button",
+                      'data-prevent-double-click' => 'true',
+                      class: 'govuk-button govuk-button--secondary'
+          %>
         </div>
         <!-- / nlhf-add-item__row -->
 
