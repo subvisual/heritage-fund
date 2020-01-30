@@ -6,6 +6,8 @@
          }
 %>
 
+<noscript><% no_js = true %></noscript>
+
 <%# TODO: Split this into a partial %>
 <% if @project.errors.any? %>
   <div class="govuk-error-summary" aria-labelledby="error-summary-title"
@@ -112,7 +114,7 @@
 </section>
 <!-- /.nlhf-summary-container -->
 
-<%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: true do |f| %>
+<%= form_with model: @project, url: three_to_ten_k_project_project_cash_contribution_path, method: :put, remote: no_js ? false : true do |f| %>
 
   <% f.fields_for :cash_contributions, @project.cash_contributions.build do |cc| %>
     <div class="nlhf-add-item govuk-!-margin-bottom-6">
