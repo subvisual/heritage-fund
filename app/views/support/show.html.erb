@@ -10,7 +10,7 @@
          } if flash[:errors]
 %>
 
-<%= form_tag :support, class: "govuk-!-margin-bottom-3", local: true do |f| %>
+<%= form_tag :support, class: "govuk-!-margin-bottom-0", local: true do |f| %>
 
   <div class="govuk-form-group <%= "govuk-form-group--error" if flash[:errors] %>">
 
@@ -60,6 +60,14 @@
 
 <% end %>
 
+    <div class="govuk-inset-text govuk-!-margin-top-2 govuk-!-margin-bottom-6">
+      <p class="govuk-body">
+        We can only provide support during office hours which are <br>
+          9:00am to 5:00pm, Monday to Friday.
+      </p>
+      <p class="govuk-body">Outside office hours, your query will be stored for us to read the next working day.</p>
+    </div>
+
     <hr class="govuk-section-break govuk-!-margin-bottom-7 govuk-section-break--visible">
     
     <h2 class="govuk-heading-m">Help and guidance</h2>
@@ -67,7 +75,7 @@
     <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
       <li><a href="https://www.heritagefund.org.uk/funding/check-what-we-fund">Check what we fund</a></li>
       <li><a href="https://www.heritagefund.org.uk/funding/check-what-we-fund">Get clear about your project outcomes</a></li>
-      <li><a href="https://www.heritagefund.org.uk/funding">Our funding programmes</a></li>
+      <li><a href="https://www.heritagefund.org.uk/funding">Explore our funding programmes</a></li>
     </ul>
 
 
@@ -78,8 +86,3 @@
 
     <h3 class="govuk-heading-s">Text phone</h3>
     <p class="govuk-body">020 7591 6255</p>
-
-    <p class="govuk-body">Our office hours are 9:00am to 5:00pm, Monday to Friday.</p>
-    
-    <h3 class="govuk-heading-s">By email</h3>
-    <p class="govuk-body"><%=mail_to 'enquire@heritagefund.org.uk' %></p>
