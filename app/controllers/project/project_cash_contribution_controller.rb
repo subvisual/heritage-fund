@@ -1,11 +1,11 @@
 class Project::ProjectCashContributionController < ApplicationController
-  include ProjectContext
+  include ProjectContext, ObjectErrorsLogger
 
   # This method is used to control navigational flow after a user
   # has submitted the 'Are you getting any cash contributions?' form
   def question_update
 
-    logger.debug "Updating cash contributions question for project ID: #{@project.id}"
+    logger.info "Updating cash contributions question for project ID: #{@project.id}"
 
     @project.validate_cash_contributions_question = true
 
@@ -13,7 +13,7 @@ class Project::ProjectCashContributionController < ApplicationController
 
     if @project.valid?
 
-      logger.debug "Finished updating cash contributions question for project ID: #{@project.id}"
+      logger.info "Finished updating cash contributions question for project ID: #{@project.id}"
 
       if @project.cash_contributions_question == "true"
 
@@ -27,7 +27,9 @@ class Project::ProjectCashContributionController < ApplicationController
 
     else
 
-      logger.debug "Validation failed for cash contributions question for project ID: #{@project.id}"
+      logger.info "Validation failed for cash contributions question for project ID: #{@project.id}"
+
+      log_errors(@project)
 
       render :question
 
@@ -37,7 +39,7 @@ class Project::ProjectCashContributionController < ApplicationController
 
   def put
 
-    logger.debug "Adding cash contribution for project ID: #{@project.id}"
+    logger.info "Adding cash contribution for project ID: #{@project.id}"
 
     @project.validate_cash_contributions = true
 
@@ -45,13 +47,15 @@ class Project::ProjectCashContributionController < ApplicationController
 
     if @project.valid?
 
-      logger.debug "Finished adding cash contribution for project ID: #{@project.id}"
+      logger.info "Finished adding cash contribution for project ID: #{@project.id}"
 
       redirect_to three_to_ten_k_project_project_cash_contribution_path
 
     else
 
-      logger.debug "Validation failed when adding cash contribution for project ID: #{@project.id}"
+      logger.info "Validation failed when adding cash contribution for project ID: #{@project.id}"
+
+      log_errors(@project)
 
       respond_to do |format|
         format.html {render :show}
@@ -64,15 +68,15 @@ class Project::ProjectCashContributionController < ApplicationController
 
   def delete
 
-    logger.debug "User has selected to delete cash contribution ID: #{params[:cash_contribution_id]} from project ID: #{@project.id}"
+    logger.info "User has selected to delete cash contribution ID: #{params[:cash_contribution_id]} from project ID: #{@project.id}"
 
     cash_contribution = CashContribution.find(params[:cash_contribution_id])
 
-    logger.debug "Deleting cash contribution ID: #{cash_contribution.id}"
+    logger.info "Deleting cash contribution ID: #{cash_contribution.id}"
 
     cash_contribution.destroy if cash_contribution.project_id == @project.id
 
-    logger.debug "Finished deleting cash contribution ID: #{cash_contribution.id}"
+    logger.info "Finished deleting cash contribution ID: #{cash_contribution.id}"
 
     redirect_to three_to_ten_k_project_project_cash_contribution_path
 
