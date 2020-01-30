@@ -17,7 +17,7 @@ applications:
         health-check-type: http
         health-check-http-endpoint: /health
         routes:
-  	      - route: funding.heritagefund.org.uk
+          - route: funding.heritagefund.org.uk
 
       - type: worker
         command: bundle exec rake jobs:work
