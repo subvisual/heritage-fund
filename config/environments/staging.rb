@@ -88,7 +88,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.active_storage.service = :production
+  config.active_storage.service = :staging
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
@@ -123,11 +123,9 @@ Rails.application.configure do
   config.x.salesforce.security_token = ENV.fetch("SALESFORCE_SECURITY_TOKEN")
   config.x.salesforce.client_id = ENV.fetch("SALESFORCE_CLIENT_ID")
   config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
-  config.x.salesforce.host = "login.salesforce.com"
-  config.x.devise_pepper = ENV.fetch("DEVISE_PEPPER")
+  # TODO: update this with production host once credentials available
+  config.x.salesforce.host = "test.salesforce.com"
   config.lograge.enabled = true
   config.assets.quiet = true
-
-  config.x.support_email_address = ENV.fetch("SUPPORT_EMAIL_ADDRESS")
 
 end

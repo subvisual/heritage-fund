@@ -10,7 +10,7 @@
 
       <% flash[:errors].each do |attr, msg| %>
         <li>
-          <a data-turbolinks="false" href="#<%= first_form_element %>"><%= msg %></a>
+          <a data-turbolinks="false" href="#<%= flash[:errors].size > 1 ? attr : first_form_element  %>"><%= msg %></a>
         </li>
       <% end %>
 

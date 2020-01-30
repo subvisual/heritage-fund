@@ -75,5 +75,5 @@ jobs:
         cf auth
         cf target -o national-lottery-heritage-fund -s ${CF_SPACE}
         cf v3-cancel-zdt-push ${CF_APP} || true
-        cf v3-apply-manifest -f manifest.yml
+        cf v3-apply-manifest -f manifest-staging.yml
         cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete

@@ -1,6 +1,5 @@
 class Project::ProjectTitleController < ApplicationController
-  include ProjectHelper
-  before_action :authenticate_user!, :set_project
+  include ProjectContext
 
   def show
   end

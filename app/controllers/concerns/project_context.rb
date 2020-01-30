@@ -17,7 +17,7 @@ module ProjectContext
 
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
 
-    unless @project.present?
+    if !@project.present? || @project.submitted_on.present?
       redirect_to authenticated_root_path
     end
 

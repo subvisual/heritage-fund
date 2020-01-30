@@ -75,4 +75,6 @@ Rails.application.configure do
   config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
   config.x.salesforce.host = "test.salesforce.com"
 
+  config.x.support_email_address = 'test@example.com'
+
 end

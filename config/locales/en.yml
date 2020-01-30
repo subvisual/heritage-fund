@@ -75,8 +75,6 @@ en-GB:
               blank: "Select the type of organisation that will be running your project"
             company_number:
               not_a_number: "Company number must be a number, like 12345678"
-            charity_number:
-              not_a_number: "Charity number must be a number, like 1079639"
             name:
               blank: "Enter the name of your organisation"
             line1:
@@ -129,7 +127,7 @@ en-GB:
             involvement_description:
               blank: "Enter a description of how your project will involve a wider range of people"
             confirm_declaration:
-              blank: "You must confirm that you have read and agreed with the declaration"
+              blank: "Confirm that you have read and agreed with the declaration"
             permission_type:
               blank: "Select an option to tell us whether you need permission from others to do your project"
             permission_description_yes:

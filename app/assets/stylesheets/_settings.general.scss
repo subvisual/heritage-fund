@@ -33,7 +33,8 @@ $nlhf-settings: (
             'default': #a89357,
             '60': #b9b191
         ),
-        border:  $govuk-border-colour
+        'border':  $govuk-border-colour,
+        'canvas': #f5f7f8
     )
 );
 

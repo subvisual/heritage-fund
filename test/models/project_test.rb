@@ -12,8 +12,7 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal "Joe O'Bloggs", @project_salesforce_json_obj['application']['mainContactName']
      assert_equal "07700900000", @project_salesforce_json_obj['application']['mainContactPhone']
      assert_equal "test@example.com", @project_salesforce_json_obj['application']['mainContactEmail']
-     assert_equal "10 Downing Street", @project_salesforce_json_obj['application']['mainContactAddress']['line1']
-     assert_equal "Westminster", @project_salesforce_json_obj['application']['mainContactAddress']['line2']
+     assert_equal "10 Downing Street, Westminster", @project_salesforce_json_obj['application']['mainContactAddress']['line1']
      assert_equal "London", @project_salesforce_json_obj['application']['mainContactAddress']['townCity']
      assert_equal "Greater London", @project_salesforce_json_obj['application']['mainContactAddress']['county']
      assert_equal "SW1A 2AA", @project_salesforce_json_obj['application']['mainContactAddress']['postcode']
@@ -34,8 +33,7 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal 'Test Project', @project_salesforce_json_obj['application']['projectName']
      assert_equal '2025-01-01', @project_salesforce_json_obj['application']['projectDateRange']['startDate']
      assert_equal '2025-10-01', @project_salesforce_json_obj['application']['projectDateRange']['endDate']
-     assert_equal '10 Downing Street', @project_salesforce_json_obj['application']['projectAddress']['line1']
-     assert_equal 'Westminster', @project_salesforce_json_obj['application']['projectAddress']['line2']
+     assert_equal '10 Downing Street, Westminster', @project_salesforce_json_obj['application']['projectAddress']['line1']
      assert_equal 'London', @project_salesforce_json_obj['application']['projectAddress']['townCity']
      assert_equal 'Greater London', @project_salesforce_json_obj['application']['projectAddress']['county']
      assert_equal 'SW1A 2AA', @project_salesforce_json_obj['application']['projectAddress']['projectPostcode']
@@ -67,5 +65,6 @@ class ProjectTest < ActiveSupport::TestCase
      assert_equal 'not-sure', @project_salesforce_json_obj['application']['projectNeedsPermission']
      assert_equal 'permission description', @project_salesforce_json_obj['application']['projectNeedsPermissionDetails']
      assert_equal 'partnership details', @project_salesforce_json_obj['application']['partnershipDetails']
+     assert_equal 'something', @project_salesforce_json_obj['application']['informationNotPubliclyAvailableRequest']
    end
 end

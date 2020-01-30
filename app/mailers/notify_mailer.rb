@@ -64,4 +64,27 @@ class NotifyMailer < Mail::Notify::Mailer
                   }
     )
   end
+
+  def report_a_problem(message, name, email)
+    template_mail("4d789cc6-bd6a-499f-bae2-502b633c098b",
+                  to: Rails.configuration.x.support_email_address,
+                  reply_to_id: @reply_to_id,
+                  personalisation: {
+                      message_body: message,
+                      name: name,
+                      email_address: email
+                  })
+  end
+
+  def question_or_feedback(message, name, email)
+    template_mail("af4e775b-5a0e-4da2-81a1-3c51dd88a07c",
+                  to: Rails.configuration.x.support_email_address,
+                  reply_to_id: @reply_to_id,
+                  personalisation: {
+                      message_body: message,
+                      name: name.present? ? name : "Name not provided",
+                      email_address: email.present? ? email : "Email address not provided"
+                  })
+  end
+
 end

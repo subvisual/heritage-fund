@@ -1,0 +1,5 @@
+<% if flash[:errors].key?(input_field_id) %>
+    <span id="<%= input_field_id %>-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span> <%= flash[:errors][input_field_id] %>
+    </span>
+<% end %>

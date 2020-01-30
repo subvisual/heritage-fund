@@ -52,10 +52,11 @@ group :test do
   gem "factory_bot_rails", "~> 5.1"
 end
 
-group :production do
+group :production, :staging do
   gem "aws-sdk-s3", require: false
   gem 'cf-app-utils'
   gem "delayed_job_active_record", "~> 4.1"
+  gem "sentry-raven", "~> 2.13"
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -80,3 +81,8 @@ gem "nilify_blanks", "~> 1.3"
 
 
 gem "delayed_job_web", "~> 1.4"
+
+
+gem "lograge", "~> 0.11.2"
+
+gem "silencer", "~> 1.0"
