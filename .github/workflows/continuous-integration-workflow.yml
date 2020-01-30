@@ -63,17 +63,34 @@ jobs:
       run: |
         wget https://s3-us-west-1.amazonaws.com/cf-cli-releases/releases/v6.48.0/cf-cli-installer_6.48.0_x86-64.deb
         sudo dpkg -i cf-cli-installer_6.48.0_x86-64.deb
-    - name: Deploy
+    - name: Cloudfoundry auth
       if: github.ref == 'refs/heads/master'
       env:
-        CF_APP: funding-frontend-staging
-        CF_SPACE: sandbox
         CF_USERNAME: ${{ secrets.CF_USERNAME }}
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
       run: |
         cf api https://api.london.cloud.service.gov.uk
         cf auth
-        cf target -o national-lottery-heritage-fund -s ${CF_SPACE}
+        cf target -o national-lottery-heritage-fund
+    - name: Deploy to staging
+      if: github.ref == 'refs/heads/master'
+      env:
+        CF_APP: funding-frontend-staging
+        CF_SPACE: sandbox
+        CF_MANIFEST: staging
+      run: |
+        cf target -s ${CF_SPACE}
         cf v3-cancel-zdt-push ${CF_APP} || true
-        cf v3-apply-manifest -f manifest-staging.yml
+        cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
+        cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
+    - name: Deploy to production
+      if: github.ref == 'refs/heads/master'
+      env:
+        CF_APP: funding-frontend
+        CF_SPACE: production
+        CF_MANIFEST: production
+      run: |
+        cf target -s ${CF_SPACE}
+        cf v3-cancel-zdt-push ${CF_APP} || true
+        cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
         cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
