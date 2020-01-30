@@ -1,13 +1,21 @@
-<% content_for :page_title, @organisation.errors.any? ? "Error: About your organisation" : "About your organisation" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @organisation,
+             page_title: "About your organisation"
+         }
+%>
 
-<h1 class="govuk-heading-l" aria-label="Heading">About your organisation</h1>
+<%=
+  render partial: "partials/summary_errors", locals: {
+      form_object: @organisation,
+      first_form_element: :organisation_company_number
+} if @organisation.errors.any?
+%>
 
-<%= render partial: "partials/summary_errors", locals: {
-        form_object: @organisation,
-        first_form_element: :organisation_company_number
-} if @organisation.errors.any? %>
+<h1 class="govuk-heading-xl" aria-label="Heading">About your organisation</h1>
 
-<%= form_with model: @organisation, url: organisation_numbers_path, method: :put do |f|  %>
+<%= form_with model: @organisation, url: :organisation_numbers, method: :put, local: true do |f|  %>
 
   <div class="govuk-form-group">
 
@@ -15,13 +23,23 @@
 
     <span class="govuk-hint">
         If you have a company number, related to this project, it would be helpful if you provide it.
-        If you need help, please read <a tartget="_blank" href="<%= t :how_to_find_company_number_link %>">how to find my company number</a>
-      </span>
+        If you need help, please read
+        <a target="_blank" href="https://beta.companieshouse.gov.uk/">how to find my company number</a>
+    </span>
 
-    <%= render partial: "partials/form_input_errors",
-               locals: {form_object: @organisation,
-                        input_field_id: :company_number} if @organisation.errors[:company_number].any? %>
-    <%= f.number_field :company_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @organisation.errors[:company_number].any?}" %>
+    <%=
+      render partial: "partials/form_input_errors",
+             locals: {
+                 form_object: @organisation,
+                 input_field_id: :company_number
+             } if @organisation.errors[:company_number].any?
+    %>
+
+    <%=
+      f.number_field :company_number,
+                     class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if
+                         @organisation.errors[:company_number].any?}"
+    %>
 
   </div>
 
@@ -30,17 +48,33 @@
     <%= f.label :charity_number, "What is your charity number?", class: "govuk-heading-m" %>
 
     <span class="govuk-hint">
-        If you have a charity number, related to this project, it would be helpful if you provide it.
-        If you need help, please read <a target="_blank" href="<%= t :how_to_find_charity_number_link %>">how to find my charity number</a>
-      </span>
+      If you have a charity number, related to this project, it would be helpful if you provide it.
+      If you need help, please read
+      <a target="_blank" href="https://www.gov.uk/find-charity-information">how to find my charity number</a>
+    </span>
 
-    <%= render partial: "partials/form_input_errors",
-               locals: {form_object: @organisation,
-                        input_field_id: :charity_number} if @organisation.errors[:charity_number].any? %>
-    <%= f.text_field :charity_number, class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @organisation.errors[:charity_number].any?}" %>
+    <%=
+      render partial: "partials/form_input_errors",
+             locals: {
+                 form_object: @organisation,
+                 input_field_id: :charity_number
+             } if @organisation.errors[:charity_number].any?
+    %>
+
+    <%=
+      f.text_field :charity_number,
+                   class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if
+                       @organisation.errors[:charity_number].any?}"
+    %>
 
   </div>
 
-  <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
+  <%=
+    f.submit "Save and continue",
+             class: 'govuk-button',
+             role: 'button',
+             'aria-label' => 'save and continue button',
+             'data-module' => 'govuk-button'
+  %>
 
 <% end %>
