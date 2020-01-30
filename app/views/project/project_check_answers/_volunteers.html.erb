@@ -1,0 +1,47 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.volunteers') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+
+    <table class="govuk-table">
+
+      <thead class="govuk-table__head">
+
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header">Description</th>
+        <th scope="col" class="govuk-table__header">Hours</th>
+      </tr>
+
+      </thead>
+
+      <tbody class="govuk-table__body">
+
+      <% @project.volunteers.each do |v| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><%= v.description %></td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><%= v.hours %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td class="govuk-heading-s govuk-!-padding-top-3">Total hours</td>
+        <td class="govuk-table__cell--numeric"><%= calculate_volunteer_total(@project.volunteers) %></td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </dd>
+
+  <%= render partial: 'project/project_check_answers/change_link',
+             locals: {
+                 link_url: three_to_ten_k_project_volunteers_path,
+                 link_hidden_label: t('views.project.check_your_answers.volunteers')
+             }
+  %>
+
+</div>

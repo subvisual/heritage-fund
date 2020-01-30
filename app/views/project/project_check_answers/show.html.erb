@@ -1,4 +1,18 @@
-<% content_for :page_title, "Check your answers" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: "Check your answers"
+         }
+%>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @project,
+             first_form_element: :organisation_org_type_registered_charity
+         } if @project.errors.any?
+%>
 
 <span class="govuk-caption-xl">About your project</span>
 <h1 class="govuk-heading-xl"><%= t('views.project.check_your_answers.page_title') %></h1>
@@ -18,9 +32,26 @@
   <%= render 'project/project_check_answers/involvement' %>
   <%= render 'project/project_check_answers/other_outcomes' %>
   <%= render 'project/project_check_answers/costs' %>
+  <%= render 'project/project_check_answers/cash_contributions' %>
+  <%= render 'project/project_check_answers/non_cash_contributions' %>
+  <%= render 'project/project_check_answers/volunteers' %>
+  <%= render 'project/project_check_answers/evidence_of_support' %>
+
 </dl>
 
-<a href="<%= "#{three_to_ten_k_project_confirm_declaration_get_url}" %>" role="button" draggable="false" class="govuk-button"
-   data-module="govuk-button" aria-label="Continue button">
-  Save and continue
-</a>
+<%=
+  form_with model: @project,
+            url: :three_to_ten_k_project_check_answers_update,
+            method: :put,
+            local: true do |f|
+%>
+
+  <%=
+    f.submit "Save and continue",
+             class: 'govuk-button',
+             role: 'button',
+             'aria-label' => 'save and continue button',
+             'data-module' => 'govuk-button'
+  %>
+
+<% end %>

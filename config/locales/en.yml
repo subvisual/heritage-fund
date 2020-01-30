@@ -3,8 +3,6 @@ en-GB:
   account_created_continue_link: "/organisation/type"
   application_guidance_link: "#"
   fair_processing_email: fair.processing@heritagefund.org.uk
-  how_to_find_charity_number_link: "#"
-  how_to_find_company_number_link: "#"
   project_outcomes_link: "#"
   what_we_fund_link: "#"
   views:
@@ -39,6 +37,7 @@ en-GB:
           outcome_7: "The funded organisation will be more resilient"
           outcome_8: "The local area will be a better place to live, work or visit"
           outcome_9: "The local economy will be boosted"
+        evidence_of_support: "Evidence of support"
   activerecord:
     attributes:
       legal_signatory:

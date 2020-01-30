@@ -1,0 +1,69 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.project.check_your_answers.cash_contributions') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+
+    <table class="govuk-table">
+
+      <thead class="govuk-table__head">
+
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header">Description</th>
+        <th scope="col" class="govuk-table__header">Secured</th>
+        <th scope="col" class="govuk-table__header">Amount</th>
+      </tr>
+
+      </thead>
+
+      <tbody class="govuk-table__body">
+
+      <% @project.cash_contributions.each do |cc| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell"><%= cc.description %></td>
+
+          <td class="govuk-table__cell">
+            <%= cc.secured&.gsub('x_', '')&.humanize&.gsub('Yes ', 'Yes, ') %>
+
+            <% if cc.cash_contribution_evidence_files.present? %>
+              <div class="nlhf-!-break-word govuk-!-font-size-16">
+                <%=
+                  link_to(
+                      "Evidence attached",
+                      rails_blob_path(
+                          cc.cash_contribution_evidence_files,
+                          disposition: "attachment"
+                      ),
+                      title: "Click to view file: #{cc.cash_contribution_evidence_files.filename}"
+                  )
+                %>
+              </div>
+            <% end %>
+
+          </td>
+          <td class="govuk-table__cell govuk-table__cell--numeric"><%= number_to_currency(cc.amount, strip_insignificant_zeros: true) %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td></td>
+        <td class="govuk-heading-s govuk-!-padding-top-3">Total</td>
+        <td class="govuk-table__cell--numeric"><%= number_to_currency(calculate_total(@project.cash_contributions), strip_insignificant_zeros: true) %></td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </dd>
+
+  <%= render partial: 'project/project_check_answers/change_link',
+             locals: {
+                 link_url: three_to_ten_k_project_project_cash_contribution_path,
+                 link_hidden_label: t('views.project.check_your_answers.cash_contributions')
+             }
+  %>
+
+</div>
