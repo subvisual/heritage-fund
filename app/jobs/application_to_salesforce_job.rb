@@ -42,7 +42,7 @@ class ApplicationToSalesforceJob < ApplicationJob
         ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, cc, :cash_contribution_evidence_files, cc.description)
       end
     else
-      raise SalesforceApexError.new("Failure response from Salesforce when POSTing project ID: #{project.id}")
+      raise SalesforceApexError.new("Failure response from Salesforce when POSTing project ID: #{project.id}, status code: #{@response&.status}")
     end
   end
 end
