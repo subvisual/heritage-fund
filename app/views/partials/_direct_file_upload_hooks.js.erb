@@ -1,83 +1,101 @@
-(function () {
+"use strict";
 
-    addEventListener("direct-upload:initialize", function (event) {
-        const {target, detail} = event;
-        const {id, file} = detail;
-        target.insertAdjacentHTML("beforebegin", `<div id="direct-upload-${id}" class="direct-upload direct-upload--pending">
-            <div id="direct-upload-progress-${id}" class="direct-upload__progress" style="width: 0%"></div>
-            <span class="direct-upload__filename">${file.name}</span>
-          </div>`);
+(function() {
+  addEventListener("direct-upload:initialize", function(event) {
+    var target = event.target,
+      detail = event.detail;
+    var id = detail.id,
+      file = detail.file;
+    target.insertAdjacentHTML(
+      "beforebegin",
+      '<div id="direct-upload-'
+        .concat(
+          id,
+          '" class="direct-upload direct-upload--pending">\n            <div id="direct-upload-progress-'
+        )
+        .concat(
+          id,
+          '" class="direct-upload__progress" style="width: 0%"></div>\n            <span class="direct-upload__filename">'
+        )
+        .concat(file.name, "</span>\n          </div>")
+    );
+    errorMessage.hide();
+  });
+  var errorMessage = {
+    show: function show() {
+      var error_form_group = document.getElementById("file-upload-form-group");
+      var main_content_div = document.getElementById("main-content");
+      var file_upload_error_summary_container = document.createElement("div");
+      file_upload_error_summary_container.setAttribute(
+        "id",
+        "file-upload-error-summary-container"
+      );
+      file_upload_error_summary_container.innerHTML =
+        "<%= escape_javascript(render(:partial => 'partials/file_upload_error_summary')) %>";
+      main_content_div.prepend(file_upload_error_summary_container);
+      var file_upload_error_container = document.createElement("div");
+      file_upload_error_container.setAttribute(
+        "id",
+        "file-upload-error-container"
+      );
+      file_upload_error_container.innerHTML =
+        "<%= escape_javascript(render(:partial => 'partials/file_upload_error')) %>";
+      error_form_group.prepend(file_upload_error_container);
+      error_form_group.classList.add("govuk-form-group--error");
+    },
+    hide: function hide() {
+      var error_form_group = document.getElementById("file-upload-form-group");
+      var file_upload_error_summary_container = document.getElementById(
+        "file-upload-error-summary-container"
+      );
+      var file_upload_error_container = document.getElementById(
+        "file-upload-error-container"
+      );
 
-        errorMessage.hide();
+      if (file_upload_error_summary_container) {
+        file_upload_error_summary_container.remove();
+      }
 
-    });
+      if (file_upload_error_container) {
+        file_upload_error_container.remove();
+      }
 
-    const errorMessage = {
-        show: function () {
-            const error_form_group = document.getElementById('file-upload-form-group');
-            const main_content_div = document.getElementById('main-content');
-
-            var file_upload_error_summary_container = document.createElement("div");
-            file_upload_error_summary_container.setAttribute('id', 'file-upload-error-summary-container');
-            file_upload_error_summary_container.innerHTML = "<%= escape_javascript(render(:partial => 'partials/file_upload_error_summary')) %>";
-            main_content_div.prepend(file_upload_error_summary_container);
-
-            var file_upload_error_container = document.createElement("div");
-            file_upload_error_container.setAttribute('id', 'file-upload-error-container');
-            file_upload_error_container.innerHTML = "<%= escape_javascript(render(:partial => 'partials/file_upload_error')) %>";
-
-            error_form_group.prepend(file_upload_error_container);
-            error_form_group.classList.add("govuk-form-group--error");
-        },
-        hide: function () {
-            const error_form_group = document.getElementById('file-upload-form-group');
-            const file_upload_error_summary_container = document.getElementById('file-upload-error-summary-container');
-            const file_upload_error_container = document.getElementById('file-upload-error-container');
-
-            if (file_upload_error_summary_container) {
-                file_upload_error_summary_container.remove();
-            }
-
-            if (file_upload_error_container) {
-                file_upload_error_container.remove();
-            }
-
-            if (error_form_group) {
-                error_form_group.classList.remove("govuk-form-group--error");
-            }
-        }
+      if (error_form_group) {
+        error_form_group.classList.remove("govuk-form-group--error");
+      }
     }
-
-    addEventListener("direct-upload:start", function (event) {
-        const {id} = event.detail;
-        const element = document.getElementById(`direct-upload-${id}`);
-        element.classList.remove("direct-upload--pending");
-        errorMessage.hide();
-    });
-
-    addEventListener("direct-upload:progress", function (event) {
-        const {id, progress} = event.detail;
-        const progressElement = document.getElementById(`direct-upload-progress-${id}`);
-        progressElement.style.width = `${progress}%`
-    });
-
-    addEventListener('ajax:error', function (xhr) {
-        errorMessage.show();
-    });
-
-    addEventListener("direct-upload:error", function (event) {
-        event.preventDefault();
-        const {id, error} = event.detail;
-        const element = document.getElementById(`direct-upload-${id}`);
-        element.classList.add("direct-upload--error");
-        element.setAttribute("title", error);
-        errorMessage.show();
-    });
-
-    addEventListener("direct-upload:end", function (event) {
-        const {id} = event.detail;
-        const element = document.getElementById(`direct-upload-${id}`);
-        element.classList.add("direct-upload--complete");
-    });
-
+  };
+  addEventListener("direct-upload:start", function(event) {
+    var id = event.detail.id;
+    var element = document.getElementById("direct-upload-".concat(id));
+    element.classList.remove("direct-upload--pending");
+    errorMessage.hide();
+  });
+  addEventListener("direct-upload:progress", function(event) {
+    var _event$detail = event.detail,
+      id = _event$detail.id,
+      progress = _event$detail.progress;
+    var progressElement = document.getElementById(
+      "direct-upload-progress-".concat(id)
+    );
+    progressElement.style.width = "".concat(progress, "%");
+  });
+  addEventListener("ajax:error", function(xhr) {
+    errorMessage.show();
+  });
+  addEventListener("direct-upload:error", function(event) {
+    event.preventDefault();
+    var _event$detail2 = event.detail,
+      id = _event$detail2.id,
+      error = _event$detail2.error;
+    var element = document.getElementById("direct-upload-".concat(id));
+    element.classList.add("direct-upload--error");
+    element.setAttribute("title", error);
+    errorMessage.show();
+  });
+  addEventListener("direct-upload:end", function(event) {
+    var id = event.detail.id;
+    var element = document.getElementById("direct-upload-".concat(id));
+    element.classList.add("direct-upload--complete");
+  });
 })();
