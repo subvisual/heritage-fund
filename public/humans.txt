@@ -1,0 +1,31 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Jamie McGarrigle -- Product Manager -- @JamieJohnMcG
+    Alice Kershaw -- Service Owner -- @AliceKershaw
+    Karen Morden -- Content Designer
+    Tom Steinberg -- Digital Leadership -- @steiny
+    Paul Smith -- Designer -- @paulmsmith
+    Kerry Lyons -- Content Designer -- @Kerry1yons
+    Jo Arthur -- User Research -- @JoCArthur
+    Ellie Craven -- Product Manager -- @Ellayanor
+    Gideon Goldberg -- Developer -- @GidsG
+    Abbie Foxton -- Team Assistant -- @ARFxtn
+    Emily Robertson-Knowlton -- Delivery Manager - @probablyreading
+    Stuart McColl -- Developer -- @itstuartmccoll
+
+    Want to know more? We blog here:
+    https://medium.com/doing-service-design-at-the-national-lottery 
+
+# THANKS
+
+    All of our colleagues and applicants who gave us their time as research participants
+    Tim Paul and all of the GOVUK and #GOVDesign community for the GOVUK Design System
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5, JavaScript
+    Ruby-on-Rails, Postgres, Sass
+    GOVUK PaaS, Git, Yarn 
