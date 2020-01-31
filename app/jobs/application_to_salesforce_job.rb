@@ -15,7 +15,7 @@ class ApplicationToSalesforceJob < ApplicationJob
         client_id: Rails.configuration.x.salesforce.client_id,
         client_secret: Rails.configuration.x.salesforce.client_secret,
         host: Rails.configuration.x.salesforce.host,
-        api_version: '48.0'
+        api_version: '47.0'
     )
     @json = project.to_salesforce_json
     @response = client.post('/services/apexrest/PortalData', @json,  {'Content-Type'=>'application/json'})

@@ -24,6 +24,7 @@ class SalesforceFileUploadError < StandardError; end
 
 class ApplicationAttachmentsToSalesforceJob < ApplicationJob
   queue_as :default
+  SALESFORCE_API_VERSION = '47.0'.freeze
 
   # Implements API https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_insert_update_blob.htm#inserting_a_contentversion
   # @param salesforce_case_id [string]
@@ -39,13 +40,13 @@ class ApplicationAttachmentsToSalesforceJob < ApplicationJob
         client_id: Rails.configuration.x.salesforce.client_id,
         client_secret: Rails.configuration.x.salesforce.client_secret,
         host: Rails.configuration.x.salesforce.host,
-        api_version: '48.0'
+        api_version: SALESFORCE_API_VERSION
     )
 
     file = record.send(attachment_field)
 
     filename = file.filename.to_s
-    path = '/services/data/v48.0/sobjects/ContentVersion'
+    path = "/services/data/v#{SALESFORCE_API_VERSION}/sobjects/ContentVersion"
     json = {FirstPublishLocationId: salesforce_case_id, ReasonForChange: "Uploading attachment #{filename}", PathOnClient: filename, Description: description}.to_json
     auth = client.authenticate!
     url = auth.instance_url + path
