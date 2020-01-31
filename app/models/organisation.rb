@@ -4,12 +4,10 @@ class Organisation < ApplicationRecord
   has_many :legal_signatories
 
   attr_accessor :validate_org_type
-  attr_accessor :validate_company_number
   attr_accessor :validate_address
   attr_accessor :validate_mission
 
   validates :org_type, presence: true, if: :validate_org_type?
-  validates :company_number, numericality: {only_integer: true}, allow_blank: true, if: :validate_company_number?
   validate :validate_mission_array, if: :validate_mission?
   validates :name, presence: true, if: :validate_address?
   validates :line1, presence: true, if: :validate_address?
@@ -19,10 +17,6 @@ class Organisation < ApplicationRecord
 
   def validate_org_type?
     validate_org_type == true
-  end
-
-  def validate_company_number?
-    validate_company_number == true
   end
 
   def validate_address?
