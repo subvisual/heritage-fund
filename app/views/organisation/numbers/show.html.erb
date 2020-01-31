@@ -34,7 +34,7 @@
     %>
 
     <%=
-      f.number_field :company_number,
+      f.text_field :company_number,
                      class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if
                          @organisation.errors[:company_number].any?}"
     %>
