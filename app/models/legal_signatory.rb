@@ -15,7 +15,13 @@ class LegalSignatory < ApplicationRecord
   attr_accessor :validate_phone_number
 
   validates :name, presence: true, if: :validate_name?
-  validates :email_address, presence: true, is_not_same_as_main_contact: true, if: :validate_email_address?
+  # TODO: Abstract email address validation into a single place,
+  #       able to reference all email fields within the application
+  #       See: https://github.com/heritagefund/funding-frontend/issues/244
+  validates :email_address,
+            format: { with: URI::MailTo::EMAIL_REGEXP },
+            is_not_same_as_main_contact: true,
+            if: :validate_email_address?
   validates :phone_number, presence: true, if: :validate_phone_number?
 
   def validate_name?
