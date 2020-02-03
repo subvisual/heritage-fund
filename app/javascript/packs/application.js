@@ -5,7 +5,6 @@
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
-require("channels");
 require("govuk");
 require("../sentry/index")
 require("core-js/stable");
