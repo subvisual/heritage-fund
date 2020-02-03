@@ -9,7 +9,7 @@
     first_form_element: :project_capital_work_false
 } if @project.errors.any? %>
 
-<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: no_js ? false : true do |f| %>
+<%= form_for @project, url: three_to_ten_k_project_capital_works_put_path, method: :put, remote: true do |f| %>
 
   <div id="capital-works-form-group-main" class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>">
 
