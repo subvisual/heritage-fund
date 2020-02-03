@@ -91,7 +91,7 @@ en-GB:
             name:
               blank: "Enter the name of a legal signatory"
             email_address:
-              blank: "Enter the email address of a legal signatory"
+              invalid: "Enter a valid email address"
             phone_number:
               blank: "Enter the phone number of a legal signatory"
         project:
