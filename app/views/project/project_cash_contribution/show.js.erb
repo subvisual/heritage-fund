@@ -1,8 +1,5 @@
 <% if @project.errors.any? %>
 
-  <%# Add common AJAX error handling functions %>
-  <%= render "partials/common_js/common" %>
-
   document.title = "Error: Cash contributions";
 
   createSummaryErrorsSkeleton();
