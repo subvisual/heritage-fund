@@ -1,6 +1,10 @@
 class Project::ProjectCashContributionController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
+  def show
+    @has_file_upload = true
+  end
+
   # This method is used to control navigational flow after a user
   # has submitted the 'Are you getting any cash contributions?' form
   def question_update

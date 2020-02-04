@@ -1,6 +1,10 @@
 class Project::ProjectSupportEvidenceController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
+  def show
+    @has_file_upload = true
+  end
+
   def put
 
     logger.info "Adding evidence of support for project ID: #{@project.id}"
