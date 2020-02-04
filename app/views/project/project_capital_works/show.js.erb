@@ -1,62 +1,31 @@
 <% if @project.errors.any? %>
 
-document.title = "Error: Will capital work be part of your project?";
+  <%# Add common AJAX error handling functions %>
+  <%= render "partials/common_js/common" %>
 
-addSummaryErrors();
+  document.title = "Error: Will capital work be part of your project?";
 
-addFormGroupErrors();
-<% if @project.errors.include?(:capital_work_file) %>
-  addErrorToFileField();
+  createSummaryErrorsSkeleton();
+
+  <% @project.errors.each do |attr, msg| %>
+
+    addSummaryError(
+      false,
+      "<%= attr %>",
+      "<%= msg %>",
+      "project",
+      "capital_work_files"
+    );
+
+  <% end %>
+
+  addFormGroupErrors();
+
+  <% if @project.errors.include?(:capital_work_file) %>
+    addErrorToFileField();
+  <% end %>
+
 <% end %>
-
-<% end %>
-
-function addSummaryErrors() {
-
-    var summaryErrorsElement = document.getElementById("summary-errors");
-    var summaryErrorsBodyElement = createSummaryErrorsBody();
-
-    addSummaryErrorsClassAndAttributes(summaryErrorsElement);
-
-    if (summaryErrorsElement.innerHTML.includes("h2") === false) {
-        summaryErrorsElement.appendChild(createSummaryErrorsHeading());
-    }
-
-    if (summaryErrorsElement.innerHTML.includes("div") === false) {
-        summaryErrorsElement.appendChild(summaryErrorsBodyElement);
-    }
-
-    if (summaryErrorsElement.innerHTML.includes("ul") === false) {
-        var summaryErrorsList = createSummaryErrorsList();
-        summaryErrorsBodyElement.appendChild(summaryErrorsList);
-    } else {
-        var summaryErrorsList = document.getElementById("summary-errors-list");
-        summaryErrorsList.innerHTML = "";
-    }
-
-
-
-    <% @project.errors.each do |attr, msg| %>
-
-      addError(summaryErrorsElement,
-          summaryErrorsList,
-          false,
-          "<%= attr %>",
-          "<%= msg %>",
-          "project"
-      );
-
-    <% end %>
-
-}
-
-
-
-
-
-
-
-
 
 function addFormGroupErrors() {
 
