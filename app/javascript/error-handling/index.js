@@ -2,7 +2,7 @@
   Function used to create the skeleton code for the GOV.UK-styled
   summary errors element
  */
-window.createSummaryErrorsSkeleton = function() {
+createSummaryErrorsSkeleton = function() {
 
     var summaryErrorsElement = document.getElementById("summary-errors");
 
@@ -137,7 +137,7 @@ function createAndAppendListItem(message, attribute, modelName) {
 }
 
 
-window.addSummaryError = function(isNestedForm, attribute, message, modelName, childModelName) {
+addSummaryError = function(isNestedForm, attribute, message, modelName, childModelName) {
 
     var summaryErrorsElement = document.getElementById("summary-errors");
 
