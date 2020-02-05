@@ -15,7 +15,9 @@
         <% @legal_signatories.each do |signatory| %>
           <% signatory.errors.each do |attr, msg| %>
             <li>
-              <a data-turbolinks="false" href=<%="#legal_signatories_#{signatory.id}_#{attr}" %>><%= msg %></a>
+              <a href=<%="#legal_signatories_#{signatory.id}_#{attr}" %>>
+                <%= msg %>
+              </a>
             </li>
           <% end %>
         <% end %>

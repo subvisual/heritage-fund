@@ -14,7 +14,7 @@
 
         <% if @project.errors.size == 1 && @project.errors[:project_costs].any? %>
           <li>
-            <a data-turbolinks='false' href='#project_project_costs_attributes_0_cost_type'>
+            <a href='#project_project_costs_attributes_0_cost_type'>
               <%= @project.errors.messages[:project_costs][0] %>
             </a>
           </li>
@@ -24,10 +24,10 @@
 
           <% unless attr.to_s == "project_costs" %>
             <li>
-              <a data-turbolinks='false' href='#project_project_costs_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
+              <a href='#project_project_costs_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
                 <%= msg %>
               </a>
-            </li>
+            </li>w
           <% end %>
 
         <% end %>
@@ -100,8 +100,9 @@
                             method: :delete,
                             local: true do |f| %>
 
-                <%= f.submit "Delete", class: "govuk-button govuk-button--warning",
-                             "data-module" => "govuk-button", "data-turbolinks" => "false",
+                <%= f.submit "Delete",
+                             class: "govuk-button govuk-button--warning",
+                             "data-module" => "govuk-button",
                              "aria-label" => "Delete button"
                 %>
 

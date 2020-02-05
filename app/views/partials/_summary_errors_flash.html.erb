@@ -1,4 +1,5 @@
-<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+<div class="govuk-error-summary" aria-labelledby="error-summary-title"
+     role="alert" tabindex="-1" data-module="govuk-error-summary">
 
   <h2 class="govuk-error-summary__title" id="error-summary-title">
     There is a problem
@@ -10,7 +11,9 @@
 
       <% flash[:errors].each do |attr, msg| %>
         <li>
-          <a data-turbolinks="false" href="#<%= flash[:errors].size > 1 ? attr : first_form_element  %>"><%= msg %></a>
+          <a href="#<%= flash[:errors].size > 1 ? attr : first_form_element  %>">
+            <%= msg %>
+          </a>
         </li>
       <% end %>
 

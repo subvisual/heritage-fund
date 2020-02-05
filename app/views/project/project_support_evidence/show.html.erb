@@ -24,8 +24,7 @@
         <% @project.errors.each do |attr, msg| %>
           <% unless attr.to_s == "evidence_of_support" %>
             <li>
-              <a data-turbolinks='false'
-                 href='#project_evidence_of_support_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
+              <a href='#project_evidence_of_support_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
                 <%= msg %>
               </a>
             </li>
@@ -78,8 +77,9 @@
                             method: :delete,
                             local: true do |f| %>
 
-                <%= f.submit "Delete", class: "govuk-button govuk-button--warning",
-                             "data-module" => "govuk-button", "data-turbolinks" => "false",
+                <%= f.submit "Delete",
+                             class: "govuk-button govuk-button--warning",
+                             "data-module" => "govuk-button",
                              "aria-label" => "Delete button"
                 %>
 
