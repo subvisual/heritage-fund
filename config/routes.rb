@@ -211,7 +211,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'start-a-project', to: 'home#show', as: :start_a_project
-  get 'logout' => 'logout#logout'
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"
   end
