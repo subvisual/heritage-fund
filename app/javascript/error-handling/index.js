@@ -8,11 +8,11 @@ window.createSummaryErrorsSkeleton = function() {
 
     addSummaryErrorsClassAndAttributes(summaryErrorsElement);
 
-    if (summaryErrorsElement.innerHTML.includes("h2") === false) {
+    if (!summaryErrorsElement.innerHTML.includes("h2")) {
         summaryErrorsElement.appendChild(createSummaryErrorsHeading());
     }
 
-    if (summaryErrorsElement.innerHTML.includes("div") === false) {
+    if (!summaryErrorsElement.innerHTML.includes("div")) {
         var summaryErrorsBodyElement = createSummaryErrorsBody();
         summaryErrorsElement.appendChild(summaryErrorsBodyElement);
     } else {
@@ -20,7 +20,7 @@ window.createSummaryErrorsSkeleton = function() {
             document.getElementById("summary-errors-body");
     }
 
-    if (summaryErrorsElement.innerHTML.includes("ul") === false) {
+    if (!summaryErrorsElement.innerHTML.includes("ul")) {
         var summaryErrorsList = createSummaryErrorsList();
         summaryErrorsBodyElement.appendChild(summaryErrorsList);
     } else {
@@ -36,7 +36,7 @@ window.createSummaryErrorsSkeleton = function() {
 function addSummaryErrorsClassAndAttributes(summaryErrorsElement) {
 
     // Only add the govuk-error-summary class if it does not already exist
-    if (summaryErrorsElement.classList.contains("govuk-error-summary") === false) {
+    if (!summaryErrorsElement.classList.contains("govuk-error-summary")) {
         summaryErrorsElement.classList.add("govuk-error-summary");
     }
 
@@ -142,7 +142,14 @@ window.addSummaryError = function(isNestedForm, attribute, message,
 
     var summaryErrorsElement = document.getElementById("summary-errors");
 
-    if (summaryErrorsElement.innerHTML.includes(message) === false
+    /*
+        Checking here to ensure that the summary errors component
+        does not already include our message (so that we don't
+        unnecessarily add it again), and that the errors hash attribute
+        does not match the name of the nested model (to ensure that
+        we don't add the superfluous 'nested_model_name is invalid' error)
+     */
+    if (!summaryErrorsElement.innerHTML.includes(message)
         && attribute !== childModelName) {
 
         createAndAppendListItem(
