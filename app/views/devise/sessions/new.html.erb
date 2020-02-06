@@ -2,11 +2,21 @@
 
 <%= render "devise/shared/error_messages", resource: resource %>
 
-<h2 class="govuk-heading-l">Sign in</h2>
 
-<p class="govuk-body govuk-!-margin-bottom-6">
-  This is a new application form. If you haven't logged in here before, you might not have an account with us. You will need to <%= link_to "create a new account", new_registration_path(resource_name) %> to apply.
-</p>
+<div class="nlhf-banner">
+
+  <svg class="nlhf-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+  <path d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8
+  C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z" /></svg>
+
+  <div class="nlhf-banner__message">
+    <p class="govuk-heading-m">This is a new application form for grants of £3,000-£10,000 in Scotland.</p>
+    <p class="govuk-body"> If you’re applying from any other part of the UK, or for any other grant amount <a href="https://forms.hlf.org.uk/officeforms/HLF_Projects.ofml">go to the application portal</a></p>
+  </div>
+
+</div> 
+
+<h2 class="govuk-heading-l">Sign in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
@@ -27,11 +37,6 @@
 
 <h3 class="govuk-heading-m">Problems signing in?</h3>
 
-<div class="govuk-inset-text">
-<p class="govuk-body">If you started an application for a grant of £3,000 to £10,000 before 3 February 2020, sign in at <a href="https://forms.hlf.org.uk/officeforms/HLF_Projects.ofml">our application portal</a>.</p>
-
-</div>
-
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <p class="govuk-body govuk-!-margin-bottom-1"><%= link_to "Forgot your password", new_password_path(resource_name) %></p>
 <% end %>
@@ -39,6 +44,17 @@
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <p class="govuk-body"><%= link_to "Didn't receive confirmation instructions", new_confirmation_path(resource_name) %></p>
 <% end %>
+
+<div class="govuk-inset-text">
+
+<p class="govuk-body">
+This is a new application form. If you haven't logged in here before, you might not have an account with us. You will need to <%= link_to "create a new account", new_registration_path(resource_name) %> to apply.
+</p>
+</div>
+
+<p class="govuk-body">
+  If you started an application for a grant of £3,000 to £10,000 before 3 February 2020, sign in at <a href="https://forms.hlf.org.uk/officeforms/HLF_Projects.ofml">our application portal</a>.
+</p>
 
 <%= content_for :secondarycontent do %>
   <%= render "partials/signup-panel" %>
