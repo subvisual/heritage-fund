@@ -1,64 +1,28 @@
 <% if @project.errors.any? %>
 
-document.title = "Error: Will capital work be part of your project?";
+  document.title = "Error: Will capital work be part of your project?";
 
-addSummaryErrors();
-addFormGroupErrors();
-<% if @project.errors.include?(:capital_work_file) %>
-  addErrorToFileField();
+  createSummaryErrorsSkeleton();
+
+  <% @project.errors.each do |attr, msg| %>
+
+    addSummaryError(
+      false,
+      "<%= attr %>",
+      "<%= msg %>",
+      "project",
+      "capital_work_files"
+    );
+
+  <% end %>
+
+  addFormGroupErrors();
+
+  <% if @project.errors.include?(:capital_work_file) %>
+    addErrorToFileField();
+  <% end %>
+
 <% end %>
-
-<% end %>
-
-function addSummaryErrors() {
-
-    var summaryErrorsElement = document.getElementById("summary-errors");
-    summaryErrorsElement.classList.add("govuk-error-summary");
-    summaryErrorsElement.setAttribute("aria-labelledby", "error-summary-title");
-    summaryErrorsElement.setAttribute("role", "alert");
-    summaryErrorsElement.setAttribute("tabindex", "-1");
-    summaryErrorsElement.setAttribute("data-module", "govuk-error-summary");
-
-    if (!summaryErrorsElement.innerHTML.includes("h2")) {
-        var summaryErrorsHeading = document.createElement("h2");
-        summaryErrorsHeading.classList.add("govuk-error-summary__title");
-        summaryErrorsHeading.setAttribute("id", "error-summary-title");
-        summaryErrorsHeading.innerText = "There is a problem";
-        summaryErrorsElement.appendChild(summaryErrorsHeading);
-    }
-
-    if (!summaryErrorsElement.innerHTML.includes("div")) {
-        var summaryErrorsBodyElement = document.createElement("div");
-        summaryErrorsBodyElement.classList.add("govuk-error-summary__body");
-        summaryErrorsElement.appendChild(summaryErrorsBodyElement);
-    }
-
-    if (!summaryErrorsElement.innerHTML.includes("ul")) {
-        var summaryErrorsList = document.createElement("ul");
-        summaryErrorsList.classList.add("govuk-list")
-        summaryErrorsList.classList.add("govuk-error-summary__list");
-        summaryErrorsBodyElement.appendChild(summaryErrorsList);
-    }
-
-    <% @project.errors.each do |attr, msg| %>
-
-      if (!summaryErrorsElement.innerHTML.includes("<%= msg %>")) {
-
-          var listItemElement = document.createElement("li");
-          var linkElement = document.createElement("a");
-
-          linkElement.setAttribute("data-turbolinks", "false");
-          linkElement.setAttribute("href", "#<%= attr.to_s == "capital_work" ? "project_capital_work_false" : "project_capital_work_true" %>");
-          linkElement.innerText = "<%= msg %>";
-
-          listItemElement.appendChild(linkElement)
-          summaryErrorsList.appendChild(listItemElement);
-
-    }
-
-    <% end %>
-
-}
 
 function addFormGroupErrors() {
 
