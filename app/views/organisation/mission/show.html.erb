@@ -16,7 +16,7 @@
 
 <h1 class="govuk-heading-xl" aria-label="Heading">About your organisation</h1>
 
-<%= form_for @organisation, url: organisation_mission_path, method: :put, local: true do |f| %>
+<%= form_with model: @organisation, url: organisation_mission_path, method: :put, local: true do |f| %>
 
   <div class="govuk-form-group <%= "govuk-form-group--error" if @organisation.errors.any? %>">
 
