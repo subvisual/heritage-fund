@@ -394,7 +394,8 @@ class Project < ApplicationRecord
                 json.set!('organisationName', self.organisation.name)
                 json.set!('organisationMission',
                           self.organisation.mission.map!(&:dasherize).map { |m| m == 'lgbt-plus-led' ? 'lgbt+-led' : m })
-                json.set!('organisationType', self.organisation.org_type&.dasherize)
+                json.set!('organisationType',
+                          get_organisation_type_for_salesforce_json)
                 json.set!('companyNumber', self.organisation.company_number)
                 json.set!('charityNumber', self.organisation.charity_number)
                 json.organisationAddress do
@@ -424,4 +425,27 @@ class Project < ApplicationRecord
             end
         end
     end
+
+    private
+    def get_organisation_type_for_salesforce_json
+
+        formatted_org_type_value = case self.organisation.org_type
+        when 'registered_company', 'community_interest_company'
+            'registered-company-or-community-interest-company'
+        when 'faith_based_organisation', 'church_organisation'
+            'faith-based-or-church-organisation'
+        when 'community_group', 'voluntary_group'
+            'community-or-voluntary-group'
+        when 'individual_private_owner_of_heritage'
+            'private-owner-of-heritage'
+        when 'other'
+            'other-public-sector-organisation'
+        else
+            self.organisation.org_type&.dasherize
+        end
+
+        formatted_org_type_value
+
+    end
+
 end

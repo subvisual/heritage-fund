@@ -19,7 +19,7 @@ class ProjectTest < ActiveSupport::TestCase
 
      # Assert organisation parameters
      assert_equal 'test organisation', @project_salesforce_json_obj['application']['organisationName']
-     assert_equal 'registered-charity', @project_salesforce_json_obj['application']['organisationType']
+     assert_equal 'faith-based-or-church-organisation', @project_salesforce_json_obj['application']['organisationType']
      assert_equal 'line 1', @project_salesforce_json_obj['application']['organisationAddress']['line1']
      assert_equal 'town', @project_salesforce_json_obj['application']['organisationAddress']['townCity']
      assert_equal 'Jane Doe', @project_salesforce_json_obj['application']['authorisedSignatoryOneDetails']['name']

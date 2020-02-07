@@ -12,7 +12,7 @@ one: {
                  "lgbt_plus_led",
                  "female_led",
                  "young_people_led"],
-       org_type: 0,
+       org_type: 5,
        line1: 'line 1',
        charity_number: 12345,
        company_number: 54321,
