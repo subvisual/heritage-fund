@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'support/factory_bot'
+require_relative 'support/controller_macros'
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
@@ -63,4 +65,5 @@ RSpec.configure do |config|
 
   # Include access to Devise helper methods, such as sign_in
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.extend ControllerMacros, type: :controller
 end
