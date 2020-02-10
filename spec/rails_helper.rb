@@ -2,6 +2,8 @@
 require 'spec_helper'
 require 'support/factory_bot'
 require_relative 'support/controller_macros'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
