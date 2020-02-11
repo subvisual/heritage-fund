@@ -54,6 +54,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem "webmock", "~> 3.8"
+  gem "database_cleaner-active_record", "~> 1.8"
 end
 
 group :production, :staging do
@@ -90,3 +91,5 @@ gem "delayed_job_web", "~> 1.4"
 gem "lograge", "~> 0.11.2"
 
 gem "silencer", "~> 1.0"
+
+
