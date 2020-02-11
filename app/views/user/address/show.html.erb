@@ -55,7 +55,7 @@ Enter your address details
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :postcode, "Your postcode", class: "govuk-label" %>
+    <%= f.label :postcode, "Postcode", class: "govuk-label" %>
     <%= render partial: "partials/form_input_errors",
                locals: {form_object: current_user,
                         input_field_id: :postcode} if current_user.errors[:postcode].any? %>

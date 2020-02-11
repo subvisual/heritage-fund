@@ -54,4 +54,5 @@ Rails.application.configure do
   config.x.salesforce.client_secret = "test"
 
   config.x.support_email_address = "test@test.com"
+  config.x.ideal_postcodes.api_key = "test"
 end
