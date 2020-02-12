@@ -19,20 +19,14 @@
 
       <ul class="govuk-list govuk-error-summary__list">
 
-        <% @organisation.legal_signatories.first.errors.each do |attr, msg| %>
+        <% @organisation.legal_signatories.each_with_index do |ls, index| %>
+          <% ls.errors.each do |attr, msg| %>
             <li>
-              <a href='#organisation_legal_signatories_attributes_0_<%= attr %>'>
+              <a href='#organisation_legal_signatories_attributes_<%= index %>_<%= attr %>'>
                 <%= msg %>
               </a>
             </li>
-        <% end %>
-
-        <% @organisation.legal_signatories.second.errors.each do |attr, msg| %>
-          <li>
-            <a href='#organisation_legal_signatories_attributes_1_<%= attr %>'>
-              <%= msg %>
-            </a>
-          </li>
+          <% end %>
         <% end %>
 
       </ul>
@@ -144,13 +138,6 @@
 
   <% end %>
 
-  <%=
-    f.submit "Save and continue",
-             {
-                 class:'govuk-button',
-                 role: 'button',
-                 'aria-label' => 'save and continue button'
-             }
-  %>
+  <%= f.save_and_continue %>
 
 <% end %>

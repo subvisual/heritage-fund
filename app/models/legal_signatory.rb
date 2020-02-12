@@ -14,6 +14,10 @@ class LegalSignatory < ApplicationRecord
   attr_accessor :validate_email_address
   attr_accessor :validate_phone_number
 
+  after_validation do
+    self.delete if ignore_validation_for_empty_second_signatory?(self)
+  end
+
   validates :name, presence: true,
             unless: lambda {
                 |record| ignore_validation_for_empty_second_signatory?(record)
