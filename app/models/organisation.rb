@@ -3,9 +3,15 @@ class Organisation < ApplicationRecord
   has_many :users
   has_many :legal_signatories
 
+  accepts_nested_attributes_for :legal_signatories
+
   attr_accessor :validate_org_type
   attr_accessor :validate_address
   attr_accessor :validate_mission
+  attr_accessor :validate_legal_signatories
+
+  validates_associated :legal_signatories,
+                       if: :validate_legal_signatories?
 
   validates :org_type, presence: true, if: :validate_org_type?
   validate :validate_mission_array, if: :validate_mission?
@@ -25,6 +31,10 @@ class Organisation < ApplicationRecord
 
   def validate_mission?
     validate_mission == true
+  end
+
+  def validate_legal_signatories?
+    validate_legal_signatories == true
   end
 
   # Custom validator to determine whether any of the items in the incoming mission array
