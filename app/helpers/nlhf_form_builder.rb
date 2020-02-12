@@ -1,4 +1,9 @@
 class NlhfFormBuilder < ActionView::Helpers::FormBuilder
+
+  def save_and_continue(value = 'Save and continue', options = {})
+      options.with_defaults!({class:"govuk-button", role: "button", "aria-label" => "save and continue button", 'data-module' => 'govuk-button'})
+      self.submit(value, options)
+  end
   
   # Helper method to return 'name' attribute
   # e.g. f.name_for :description
