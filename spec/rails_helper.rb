@@ -2,9 +2,12 @@
 require 'spec_helper'
 require 'support/factory_bot'
 require_relative 'support/controller_macros'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
+include Warden::Test::Helpers
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -65,5 +68,16 @@ RSpec.configure do |config|
 
   # Include access to Devise helper methods, such as sign_in
   config.include Devise::Test::ControllerHelpers, type: :controller
+
   config.extend ControllerMacros, type: :controller
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
