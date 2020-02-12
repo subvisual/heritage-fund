@@ -64,6 +64,6 @@ Enter your address details
                      class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if current_user.errors[:postcode].any?}" %>
   </div>
 
-  <%= f.submit "Save and continue", class:"govuk-button", role: "button", "aria-label" => "save and continue button" %>
+  <%= f.save_and_continue %>
 
 <% end %>
