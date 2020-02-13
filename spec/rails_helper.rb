@@ -3,6 +3,7 @@ require 'spec_helper'
 require 'support/factory_bot'
 require_relative 'support/controller_macros'
 require 'webmock/rspec'
+require_relative './features/helpers'
 WebMock.disable_net_connect!(allow_localhost: true)
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -80,4 +81,6 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.include Helpers
 end
