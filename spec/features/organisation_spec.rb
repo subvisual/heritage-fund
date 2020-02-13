@@ -20,9 +20,21 @@ RSpec.feature 'Organisation', type: :feature do
   click_link_or_button 'Save and continue'
   expect(page).to have_text('Check your answers')
   expect(page).to have_text('Registered charity')
+  expect(page).to have_text('123')
+  expect(page).to have_text('test')
+  expect(page).to have_text('4 Barons Court Road')
+  expect(page).to have_text('London')
+  expect(page).to have_text('W14 9DT')
   expect(page).to have_text('Female led')
+  expect(page).to have_text('Jane Doe')
   organisation = User.find(user.id).organisation
   expect(organisation.org_type).to eq('registered_charity')
+  expect(organisation.charity_number).to eq('123')
+  expect(organisation.name).to eq('test')
+  expect(organisation.line1).to eq('4 Barons Court Road')
+  expect(organisation.townCity).to eq('LONDON')
+  expect(organisation.county).to eq('London')
+  expect(organisation.postcode).to eq('W14 9DT')
   expect(organisation.mission).to include('female_led')
   expect(organisation.legal_signatories.first.name).to eq('Jane Doe')
   end
