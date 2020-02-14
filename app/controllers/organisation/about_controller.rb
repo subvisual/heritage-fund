@@ -1,5 +1,5 @@
 class Organisation::AboutController < ApplicationController
-  include OrganisationContext, PostcodeLookup
+  include OrganisationContext, ObjectErrorsLogger, PostcodeLookup
 
   # Renders the initial postcode lookup view
   def show_postcode_lookup
@@ -20,7 +20,12 @@ class Organisation::AboutController < ApplicationController
 
   end
 
+  # This method updates the mission attribute of an organisation,
+  # redirecting to :organisation_mission if successful and re-rendering
+  # :about method if unsuccessful
   def update
+
+    logger.info "Updating address for organisation ID: #{@organisation.id}"
 
     @organisation.validate_address = true
 
@@ -28,12 +33,17 @@ class Organisation::AboutController < ApplicationController
 
     if @organisation.valid?
 
+      logger.info "Finished updating address for organisation ID: " \
+                  "#{@organisation.id}"
+
       redirect_to :organisation_mission
 
     else
 
-      logger.error "Organisation address invalid when attempting to update organisation ID: " +
-                       "#{@organisation.id}"
+      logger.info "Validation failed when attempting to update address for " \
+                  "organisation ID: #{@organisation.id}"
+
+      log_errors(@organisation)
 
       render :about
 
@@ -43,7 +53,9 @@ class Organisation::AboutController < ApplicationController
 
   private
   def organisation_about_params
-    params.require(:organisation).permit(:name, :line1, :line2, :line3, :townCity, :county, :postcode)
+    params.require(:organisation)
+        .permit(:name, :line1, :line2, :line3,
+                :townCity, :county, :postcode)
   end
 
 end
