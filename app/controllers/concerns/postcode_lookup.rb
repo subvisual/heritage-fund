@@ -92,8 +92,7 @@ module PostcodeLookup
 
       if @response.empty?
 
-        logger.debug "No results found when searching for postcode #{params['postcode']['lookup']} " +
-                         " for project ID: #{@project.id}"
+        logger.debug "No results found when searching for postcode #{params['postcode']['lookup']}"
 
         redirect_to(request.path, flash: {
             errors: {
