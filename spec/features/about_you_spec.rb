@@ -8,8 +8,13 @@ RSpec.feature 'Application', type: :feature do
   end
 
   scenario 'About you page' do
-    user = FactoryBot.create(:user)
-    login_as(user, :scope => :user)
+    user = FactoryBot.create(
+        :user,
+        name: nil,
+        date_of_birth: nil,
+        phone_number: nil
+    )
+    login_as(user, scope: :user)
     visit('/')
     expect(page).to have_content('About you')
     fill_in 'Full name', with: 'Jane Doe'
