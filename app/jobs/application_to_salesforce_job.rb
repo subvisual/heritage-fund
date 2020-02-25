@@ -18,6 +18,7 @@ class ApplicationToSalesforceJob < ApplicationJob
         api_version: '47.0'
     )
     @json = project.to_salesforce_json
+    logger.info "Payload JSON to be sent to Salesforce is: #{@json}"
     @response = client.post('/services/apexrest/PortalData', @json,  {'Content-Type'=>'application/json'})
     @response_body_obj = JSON.parse(@response&.body)
     is_successful = @response_body_obj&.dig('status') == 'Success'
