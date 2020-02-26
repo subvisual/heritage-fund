@@ -91,8 +91,8 @@ Rails.application.routes.draw do
       # redirects the user back to the search page
       get ':project_id/location/address-results', to: 'project_location#show_postcode_lookup'
 
-      get ':project_id/description', to: 'project_description#show', as: :description_get
-      put ':project_id/description', to: 'project_description#update', as: :description_put
+      get ':project_id/description', to: 'description#show', as: :description_get
+      put ':project_id/description', to: 'description#update', as: :description_put
 
       get ':project_id/capital-works', to: 'project_capital_works#show', as: :capital_works_get
       put ':project_id/capital-works', to: 'project_capital_works#update', as: :capital_works_put

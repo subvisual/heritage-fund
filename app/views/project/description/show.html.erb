@@ -5,7 +5,7 @@
     first_form_element: :project_description
 } if @project.errors.any? %>
 
-<%= form_for @project, url: three_to_ten_k_project_description_put_path, method: :put do |f| %>
+<%= form_for @project, url: :three_to_ten_k_project_description_put, method: :put do |f| %>
 
   <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="500">
 
