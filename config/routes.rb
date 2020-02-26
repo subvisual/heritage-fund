@@ -72,8 +72,8 @@ Rails.application.routes.draw do
     namespace :project do
       get 'create-new-project', to: 'new_project#create_new_project', as: :create
 
-      get ':project_id/title', to: 'project_title#show', as: :title_get
-      put ':project_id/title', to: 'project_title#update', as: :title_put
+      get ':project_id/title', to: 'title#show', as: :title_get
+      put ':project_id/title', to: 'title#update', as: :title_put
 
       get ':project_id/key-dates', to: 'project_dates#show', as: :dates_get
       put ':project_id/key-dates', to: 'project_dates#update', as: :dates_put
