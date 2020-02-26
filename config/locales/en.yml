@@ -5,6 +5,10 @@ en-GB:
   fair_processing_email: fair.processing@heritagefund.org.uk
   project_outcomes_link: "#"
   what_we_fund_link: "#"
+  buttons:
+    labels:
+      default: "Save and continue"
+      start_now: "Start now"
   views:
     project:
       check_your_answers:

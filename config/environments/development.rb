@@ -77,4 +77,7 @@ Rails.application.configure do
 
   config.x.support_email_address = 'test@example.com'
 
+  config.action_view_component.preview_path =
+      "#{Rails.root}/spec/components/previews"
+
 end
