@@ -56,6 +56,13 @@
   </div>
 </footer>
   <%= javascript_pack_tag 'application', 'data-turbolinks-suppress-warning':'true', 'data-turbolinks-eval': "false", 'data-turbolinks-track': 'reload' %>
-  <%= render "partials/tracking_tags" if Rails.env.production? %>
+  
+  <%# if this is production render the tracking partial %>
+  <%= render partial: "partials/tracking_tags", locals: {
+    # if the layout has been passed content for a custom tracking override pass that into the
+    # partial otherwise pass false
+    tracking_url_path: (yield(:tracking_override) if content_for? :tracking_override)
+  } if Rails.env.production? %>
+  
 </body>
 </html><!-- Thanks @Steiny -->
