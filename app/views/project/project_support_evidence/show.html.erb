@@ -109,7 +109,7 @@
         <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
           <div class="govuk-form-group <%= "govuk-form-group--error" if
                                                @project.errors['evidence_of_support.description'].any? %>"
-               id="evidence-description-form-group">
+               id="evidence_of_support.description-form-group">
 
             <%= render partial: "partials/form_input_errors",
                        locals: {
@@ -118,7 +118,7 @@
                     @project.errors['evidence_of_support.description'].any?
             %>
 
-            <div id="evidence-description-errors"></div>
+            <div id="evidence_of_support.description-errors"></div>
 
             <label class="govuk-label" for="evidence-description">
               Describe the evidence you are providing
@@ -142,9 +142,8 @@
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
-        <div class="govuk-form-group <%= "govuk-form-group--error" if
-                                             @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
-             id="file-upload-group">
+        <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
+             id="evidence_of_support.evidence_of_support_files-form-group">
 
           <%= render partial: "partials/form_input_errors",
                      locals: {
@@ -152,6 +151,8 @@
                          input_field_id: :'evidence_of_support.evidence_of_support_files'} if
                   @project.errors['evidence_of_support.evidence_of_support_files'].any?
           %>
+
+          <div id="evidence_of_support.evidence_of_support_files-errors"></div>
 
           <%= e.label :evidence_of_support_files, "Upload a file", class: "govuk-label" %>
           <%=
@@ -167,7 +168,8 @@
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
-        <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        <button class="govuk-button govuk-button--secondary"
+                data-module="govuk-button">
           Add evidence
         </button>
       </div>
@@ -206,7 +208,8 @@
 
 <p class="govuk-body">If you have finished adding all your evidence</p>
 
-<a href="<%= "#{three_to_ten_k_project_check_answers_get_url}" %>" role="button" draggable="false" class="govuk-button"
+<a href="<%= "#{three_to_ten_k_project_check_answers_get_url}" %>"
+   role="button" draggable="false" class="govuk-button"
    data-module="govuk-button" aria-label="Continue button">
   Save and continue
 </a>

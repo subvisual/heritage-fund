@@ -160,4 +160,58 @@ window.addSummaryError = function(isNestedForm, attribute, message,
 
     }
 
-}
+};
+
+window.addFormGroupError = function(formGroupElementId, formGroupErrorsElementId,
+                                    attribute, message, modelName, parentModel) {
+
+    if (attribute != modelName) {
+
+        var mainFormGroupElement = document.getElementById(formGroupElementId);
+        mainFormGroupElement.classList.add("govuk-form-group--error");
+
+        if (attribute.includes("file")) {
+
+            // We have a file input field and need to add the necessary
+            // govuk-file-upload--error class accordingly.
+
+            if (parentModel) {
+                var fileElement = document.getElementById(parentModel + "_" + modelName + "_attributes_0_" + attribute.replace(modelName + ".", ""));
+            } else {
+                var fileElement = document.getElementById(modelName + "_" + attribute);
+            }
+
+            fileElement.classList.add("govuk-file-upload--error");
+
+        }
+
+        var formGroupErrorsElement = document.getElementById(formGroupErrorsElementId);
+
+        // Only add the error message if it is not already present
+        if (!formGroupErrorsElement.innerHTML.includes(message)) {
+
+            var spanElement = document.createElement("span");
+            spanElement.setAttribute("id", "project[" + attribute + "]-error");
+            spanElement.classList.add("govuk-error-message");
+            spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span>" + message;
+
+            formGroupErrorsElement.appendChild(spanElement);
+
+        }
+
+    }
+
+};
+
+window.removeFormGroupErrors = function(model, attributeNames, errors) {
+
+    for(var i = 0; i < attributeNames.length; i++) {
+        if (errors.includes(model + "." + attributeNames[i]) === false) {
+            var formGroupElement = document.getElementById(model + "." + attributeNames[i] + "-form-group");
+            var formGroupErrorsElement = document.getElementById(model + "." + attributeNames[i] + "-errors");
+            formGroupElement.classList.remove("govuk-form-group--error");
+            formGroupErrorsElement.innerHTML = "";
+        }
+    }
+
+};

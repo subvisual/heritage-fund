@@ -4,7 +4,11 @@
 
   createSummaryErrorsSkeleton();
 
+  var errorKeys = [];
+
   <% @project.errors.each do |attr, msg| %>
+
+    errorKeys.push("<%= attr.to_s %>");
 
     addSummaryError(
       false,
@@ -14,100 +18,21 @@
       "cash_contributions"
     );
 
+    addFormGroupError(
+      "<%= attr %>-form-group",
+      "<%= attr %>-errors",
+      "<%= attr %>",
+      "<%= msg %>",
+      "cash_contributions",
+      "project"
+    );
+
   <% end %>
 
-  addFormGroupErrors(
-      "cash_contributions.description",
-      "description-form-group",
-      "description-errors"
+  removeFormGroupErrors(
+      "cash_contributions",
+      ["description", "secured", "amount", "cash_contribution_evidence_files"],
+      errorKeys
   );
-
-  addFormGroupErrors(
-      "cash_contributions.secured",
-      "secured-form-group",
-      "secured-errors"
-  );
-
-  addFormGroupErrors(
-      "cash_contributions.amount",
-      "amount-form-group",
-      "amount-errors"
-  );
-
-  addErrorToFileField();
 
 <% end %>
-
-function addFormGroupErrors(model_field, form_group, errors_element) {
-
-    var descriptionFormGroupElement = document.getElementById(form_group);
-    descriptionFormGroupElement.classList.add("govuk-form-group--error");
-
-    var descriptionFormGroupErrorsElement = document.getElementById(errors_element);
-
-    var errorKeys = []
-
-    <% @project.errors.each do |attr, msg| %>
-
-      errorKeys.push("<%= attr.to_s %>");
-
-      if (model_field == "<%= attr.to_s %>") {
-
-        if (descriptionFormGroupErrorsElement.innerHTML.includes("<%== escape_javascript(msg) %>") === false) {
-
-            var spanElement = document.createElement("span");
-            spanElement.setAttribute("id", "project[<%= attr %>]-error");
-            spanElement.classList.add("govuk-error-message");
-            spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span><%= msg %>";
-
-            descriptionFormGroupErrorsElement.appendChild(spanElement);
-
-        }
-
-      }
-
-    <% end %>
-
-    if (errorKeys.includes(model_field) === false) {
-
-        descriptionFormGroupElement.classList.remove("govuk-form-group--error");
-        descriptionFormGroupErrorsElement.innerHTML = "";
-
-    }
-
-}
-
-<%# TODO: Refactor this function so that it is reusable %>
-function addErrorToFileField() {
-
-    var fileUploadGroup = document.getElementById("file-upload-group");
-    var fileField = document.getElementById("project_cash_contributions_attributes_0_cash_contribution_evidence_files");
-
-    <% if @project.errors.key?("cash_contributions.cash_contribution_evidence_files") %>
-
-        var fileErrorMessage = "<%= escape_javascript(@project.errors["cash_contributions.cash_contribution_evidence_files"][0]) %>";
-
-        if (fileUploadGroup.innerHTML.includes(fileErrorMessage) === false) {
-
-              var spanElement = document.createElement("span");
-              spanElement.setAttribute("id", "cash_contribution_evidence_files-error");
-              spanElement.classList.add("govuk-error-message");
-              spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span>" + fileErrorMessage;
-
-              fileField.classList.add("govuk-file-upload--error");
-              fileField.setAttribute("aria-describedby", "cash_contribution_evidence_files-error");
-
-              fileUploadGroup.prepend(spanElement);
-
-        }
-
-    <% else %>
-
-        fileUploadGroup.removeChild(document.getElementById("cash_contribution_evidence_files-error"));
-
-        fileField.classList.remove("govuk-file-upload--error");
-        fileField.removeAttribute("aria-describedby");
-
-    <% end %>
-
-}

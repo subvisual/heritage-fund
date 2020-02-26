@@ -131,7 +131,7 @@
 
             <div class="govuk-form-group <%= "govuk-form-group--error" if
                                                  @project.errors['cash_contributions.description'].any? %>"
-                 id="description-form-group">
+                 id="cash_contributions.description-form-group">
 
               <%= render partial: "partials/form_input_errors",
                          locals: {
@@ -140,7 +140,7 @@
                       @project.errors['cash_contributions.description'].any?
               %>
 
-              <div id="description-errors"></div>
+              <div id="cash_contributions.description-errors"></div>
 
               <%= cc.label :description, class: 'govuk-label' %>
               <%=
@@ -163,7 +163,7 @@
 
           <div class="govuk-form-group <%= "govuk-form-group--error" if
                                                @project.errors['cash_contributions.secured'].any? %>"
-               id="secured-form-group">
+               id="cash_contributions.secured-form-group">
 
             <fieldset class="govuk-fieldset">
 
@@ -174,7 +174,7 @@
                       @project.errors['cash_contributions.secured'].any?
               %>
 
-              <div id="secured-errors"></div>
+              <div id="cash_contributions.secured-errors"></div>
 
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                 <h2 class="govuk-fieldset__heading">
@@ -190,9 +190,20 @@
                   <%= cc.label :secured_yes_with_evidence, 'Yes and I can provide evidence'.html_safe, class: "govuk-label govuk-radios__label" %>
                 </div>
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-cash-contribution-conditional">
-                  <div class="govuk-form-group" id="file-upload-group">
+                  <div class="govuk-form-group <%= 'govuk-form-group--error' if @project.errors['cash_contributions.cash_contribution_evidence_files'].any? %>"
+                       id="cash_contributions.cash_contribution_evidence_files-form-group">
+
+                    <%= render partial: "partials/form_input_errors",
+                               locals: {
+                                   form_object: @project,
+                                   input_field_id: :'cash_contributions.cash_contribution_evidence_files'} if
+                            @project.errors['cash_contributions.cash_contribution_evidence_files'].any?
+                    %>
+
+                    <div id="cash_contributions.cash_contribution_evidence_files-errors"></div>
+
                     <%= cc.label :cash_contribution_evidence_files, "Evidence could be a letter from the contributor, or a copy of bank statements to show the funds.", class: 'govuk-caption-m govuk-!-margin-bottom-3' %>
-                    <%= cc.file_field :cash_contribution_evidence_files, class: 'govuk-file-upload', multiple: false, direct_upload: true %>
+                    <%= cc.file_field :cash_contribution_evidence_files, class: "govuk-file-upload #{'govuk-file-upload--error' if @project.errors['cash_contributions.cash_contribution_evidence_files'].any?}", multiple: false, direct_upload: true %>
                   </div>
                 </div>
 
@@ -220,7 +231,7 @@
         <div class="nlhf-add-item__row">
           <div class="govuk-form-group <%= "govuk-form-group--error" if
                                                @project.errors['cash_contributions.amount'].any? %>"
-               id="amount-form-group">
+               id="cash_contributions.amount-form-group">
 
             <%= render partial: "partials/form_input_errors",
                        locals: {
@@ -229,7 +240,7 @@
                     @project.errors['cash_contributions.amount'].any?
             %>
 
-            <div id="amount-errors"></div>
+            <div id="cash_contributions.amount-errors"></div>
 
             <%= cc.label :amount, class: 'govuk-label' %>
             <div class="nlhf-currency-denote">

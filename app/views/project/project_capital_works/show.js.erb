@@ -4,6 +4,8 @@
 
   createSummaryErrorsSkeleton();
 
+  var errorKeys = [];
+
   <% @project.errors.each do |attr, msg| %>
 
     addSummaryError(
@@ -14,66 +16,19 @@
       "capital_work_files"
     );
 
+    addFormGroupError(
+        "capital-works-form-group-main",
+        "form-group-errors",
+        "<%= attr %>",
+        "<%= msg %>"
+    );
+
   <% end %>
 
-  addFormGroupErrors();
-
-  <% if @project.errors.include?(:capital_work_file) %>
-    addErrorToFileField();
-  <% end %>
+  removeFormGroupErrors(
+    "capital-works",
+    ["capital_work_files", "capital_work_file"],
+    errorKeys
+  );
 
 <% end %>
-
-function addFormGroupErrors() {
-
-    var mainFormGroupElement = document.getElementById("capital-works-form-group-main");
-    mainFormGroupElement.classList.add("govuk-form-group--error");
-
-    var formGroupErrorsElement = document.getElementById("form-group-errors");
-
-    <% @project.errors.each do |attr, msg| %>
-
-    // Only add the error message if it is not already present
-    if (!formGroupErrorsElement.innerHTML.includes("<%= msg %>")) {
-
-        var spanElement = document.createElement("span");
-        spanElement.setAttribute("id", "project[<%= attr %>]-error");
-        spanElement.classList.add("govuk-error-message");
-        spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span><%= msg %>";
-
-        formGroupErrorsElement.appendChild(spanElement);
-
-    }
-
-    <% end %>
-
-}
-
-function addErrorToFileField() {
-
-    var fileUploadGroup = document.getElementById("file-upload-group");
-
-    <% @project.errors.each do |attr, msg| %>
-
-      <% if attr.to_s == "capital_work_file" %>
-
-        if (!fileUploadGroup.innerHTML.includes("<%= msg %>")) {
-
-            var spanElement = document.createElement("span");
-            spanElement.setAttribute("id", "project_capital_work_file-error");
-            spanElement.classList.add("govuk-error-message");
-            spanElement.innerHTML = "<span class='govuk-visually-hidden'>Error: </span><%= msg %>";
-
-            var fileField = document.getElementById("project_capital_work_file");
-            fileField.classList.add("govuk-file-upload--error");
-            fileField.setAttribute("aria-describedby", "project_capital_work_file-error");
-
-            fileUploadGroup.prepend(spanElement);
-
-        }
-
-      <% end %>
-
-    <% end %>
-
-}
