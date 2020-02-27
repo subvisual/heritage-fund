@@ -117,7 +117,7 @@ class Project < ApplicationRecord
         validate_length(
             :description,
             500,
-            "Project description must be 500 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.description.too_long")
         ) if validate_description?
     end
 
