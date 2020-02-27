@@ -74,6 +74,29 @@ describe Project::DescriptionController do
 
     end
 
+    it "should re-render the page if project description param is over 500 " \
+       "words" do
+
+      expect(subject).to \
+         receive(:log_errors).with(project)
+
+      put :update, params: {
+          project_id: project.id,
+          project: {
+              description: "word " * 501
+          }
+      }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(
+          assigns(:project).errors.messages[:description][0]
+      ).to eq(I18n.t("activerecord.errors.models.project.attributes.description.too_long"))
+
+    end
+
     it "should successfully update if a valid param is passed" do
 
       put :update, params: {
