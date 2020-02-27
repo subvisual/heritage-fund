@@ -110,9 +110,9 @@ Rails.application.routes.draw do
       put ':project_id/your-project-heritage', to: 'project_heritage#update', as: :heritage_put
 
       get ':project_id/why-is-your-organisation-best-placed',
-          to: 'project_best_placed#show', as: :best_placed_get
+          to: 'best_placed#show', as: :best_placed_get
       put ':project_id/why-is-your-organisation-best-placed',
-          to: 'project_best_placed#update', as: :best_placed_put
+          to: 'best_placed#update', as: :best_placed_put
 
       get ':project_id/how-will-your-project-involve-people',
           to: 'project_involvement#show', as: :involvement_get

@@ -165,7 +165,7 @@ class Project < ApplicationRecord
         validate_length(
             :best_placed_description,
             500,
-            "Description of why your organisation is best placed to deliver your project must be 500 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.best_placed_description.too_long")
         ) if validate_best_placed_description?
     end
 
