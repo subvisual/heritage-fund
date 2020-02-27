@@ -129,6 +129,7 @@ en-GB:
               blank: "Enter the postcode where your project is located"
             description:
               blank: "Enter a description of your project"
+              too_long: "Project description must be 500 words or fewer"
             involvement_description:
               blank: "Enter a description of how your project will involve a wider range of people"
             confirm_declaration:

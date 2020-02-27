@@ -17,7 +17,7 @@ class Project::ProjectLocationController < ApplicationController
 
       logger.debug "Finished updating address for project ID: #{@project.id}"
 
-      redirect_to three_to_ten_k_project_description_get_path(@project.id)
+      redirect_to :three_to_ten_k_project_description_get
 
     else
 
@@ -65,7 +65,7 @@ class Project::ProjectLocationController < ApplicationController
 
         logger.debug "Finished updating location for project ID: #{@project.id}"
 
-        redirect_to three_to_ten_k_project_description_get_path(@project.id)
+        redirect_to :three_to_ten_k_project_description_get
 
       else
 
