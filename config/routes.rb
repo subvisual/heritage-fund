@@ -103,8 +103,8 @@ Rails.application.routes.draw do
       get ':project_id/difference', to: 'project_difference#show', as: :difference_get
       put ':project_id/difference', to: 'project_difference#update', as: :difference_put
 
-      get ':project_id/how-does-your-project-matter', to: 'project_matters#show', as: :matter_get
-      put ':project_id/how-does-your-project-matter', to: 'project_matters#update', as: :matter_put
+      get ':project_id/how-does-your-project-matter', to: 'matter#show', as: :matter_get
+      put ':project_id/how-does-your-project-matter', to: 'matter#update', as: :matter_put
 
       get ':project_id/your-project-heritage', to: 'project_heritage#show', as: :heritage_get
       put ':project_id/your-project-heritage', to: 'project_heritage#update', as: :heritage_put
