@@ -149,7 +149,7 @@ class Project < ApplicationRecord
         validate_length(
             :matter,
             500,
-            "Description of why your project matters to you and your community must be 500 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.matter.too_long")
         ) if validate_matter?
     end
 

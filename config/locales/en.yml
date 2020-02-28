@@ -136,6 +136,8 @@ en-GB:
               too_long: "Description of why your organisation is best placed to deliver your project must be 500 words or fewer"
             involvement_description:
               blank: "Enter a description of how your project will involve a wider range of people"
+            matter:
+              too_long: "Description of why your project matters to you and your community must be 500 words or fewer"
             confirm_declaration:
               blank: "Confirm that you have read and agreed with the declaration"
             permission_type:
