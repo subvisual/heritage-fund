@@ -100,8 +100,8 @@ Rails.application.routes.draw do
       get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
       put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
 
-      get ':project_id/difference', to: 'project_difference#show', as: :difference_get
-      put ':project_id/difference', to: 'project_difference#update', as: :difference_put
+      get ':project_id/difference', to: 'difference#show', as: :difference_get
+      put ':project_id/difference', to: 'difference#update', as: :difference_put
 
       get ':project_id/how-does-your-project-matter', to: 'project_matters#show', as: :matter_get
       put ':project_id/how-does-your-project-matter', to: 'project_matters#update', as: :matter_put

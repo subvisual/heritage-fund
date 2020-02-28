@@ -141,7 +141,7 @@ class Project < ApplicationRecord
         validate_length(
             :difference,
             500,
-            "Description of the difference your project will make must be 500 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.difference.too_long")
         ) if validate_difference?
     end
 
