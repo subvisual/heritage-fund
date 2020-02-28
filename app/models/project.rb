@@ -157,7 +157,7 @@ class Project < ApplicationRecord
         validate_length(
             :heritage_description,
             500,
-            "Description of your project heritage must be 500 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.heritage_description.too_long")
         ) if validate_heritage_description?
     end
 
