@@ -106,8 +106,8 @@ Rails.application.routes.draw do
       get ':project_id/how-does-your-project-matter', to: 'matter#show', as: :matter_get
       put ':project_id/how-does-your-project-matter', to: 'matter#update', as: :matter_put
 
-      get ':project_id/your-project-heritage', to: 'project_heritage#show', as: :heritage_get
-      put ':project_id/your-project-heritage', to: 'project_heritage#update', as: :heritage_put
+      get ':project_id/your-project-heritage', to: 'heritage#show', as: :heritage_get
+      put ':project_id/your-project-heritage', to: 'heritage#update', as: :heritage_put
 
       get ':project_id/why-is-your-organisation-best-placed',
           to: 'best_placed#show', as: :best_placed_get
