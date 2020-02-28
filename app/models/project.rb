@@ -104,9 +104,11 @@ class Project < ApplicationRecord
     validates_inclusion_of :non_cash_contributions_question,
                            in: ["true", "false"],
                            if: :validate_non_cash_contributions_question?
-    validates :is_partnership, inclusion: [true, false], if: :validate_is_partnership?
+    validates_inclusion_of :is_partnership, in: [true, false], if: :validate_is_partnership?
     validates :partnership_details, presence: true, if: :validate_partnership_details?
-    validates :confirm_declaration, presence: true, if: :validate_confirm_declaration?
+    validates_inclusion_of :confirm_declaration,
+                           in: ["true"],
+                           if: :validate_confirm_declaration?
 
     # Mandatory validation on 'Check your answers' page
     validates :description, presence: true, if: :validate_check_your_answers?

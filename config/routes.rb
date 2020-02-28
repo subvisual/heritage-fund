@@ -180,14 +180,14 @@ Rails.application.routes.draw do
       put ':project_id/check-your-answers',
           to: 'project_check_answers#update', as: :check_answers_update
 
-      get ':project_id/declaration', to: 'project_declaration#show_declaration', as: :declaration_get
-      put ':project_id/declaration', to: 'project_declaration#update_declaration', as: :declaration_put
+      get ':project_id/declaration', to: 'declaration#show_declaration', as: :declaration_get
+      put ':project_id/declaration', to: 'declaration#update_declaration', as: :declaration_put
 
       get ':project_id/confirm-declaration',
-          to: 'project_declaration#show_confirm_declaration',
+          to: 'declaration#show_confirm_declaration',
           as: :confirm_declaration_get
       put ':project_id/confirm-declaration',
-          to: 'project_declaration#update_confirm_declaration',
+          to: 'declaration#update_confirm_declaration',
           as: :confirm_declaration_put
 
       get ':project_id/application-submitted',

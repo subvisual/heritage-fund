@@ -139,7 +139,7 @@ en-GB:
             matter:
               too_long: "Description of why your project matters to you and your community must be 500 words or fewer"
             confirm_declaration:
-              blank: "Confirm that you have read and agreed with the declaration"
+              inclusion: "Confirm that you have read and agreed with the declaration"
             permission_type:
               blank: "Select an option to tell us whether you need permission from others to do your project"
             permission_description_yes:
