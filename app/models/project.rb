@@ -173,7 +173,7 @@ class Project < ApplicationRecord
         validate_length(
             :involvement_description,
             300,
-            "Description of how your project will involve a wider range of people must be 300 words or fewer"
+            I18n.t("activerecord.errors.models.project.attributes.involvement_description.too_long")
         ) if validate_involvement_description?
     end
 

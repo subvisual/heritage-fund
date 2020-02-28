@@ -115,9 +115,9 @@ Rails.application.routes.draw do
           to: 'best_placed#update', as: :best_placed_put
 
       get ':project_id/how-will-your-project-involve-people',
-          to: 'project_involvement#show', as: :involvement_get
+          to: 'involvement#show', as: :involvement_get
       put ':project_id/how-will-your-project-involve-people',
-          to: 'project_involvement#update', as: :involvement_put
+          to: 'involvement#update', as: :involvement_put
 
       get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
       put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
