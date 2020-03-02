@@ -147,7 +147,9 @@ Rails.application.routes.draw do
              to: 'project_cash_contribution#delete',
              as: :cash_contribution_delete
 
-      get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
+      get ':project_id/your-grant-request',
+          to: 'grant_request#show',
+          as: :grant_request_get
 
       get ':project_id/are-you-getting-non-cash-contributions',
           to: 'project_non_cash_contributions#question',
