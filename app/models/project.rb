@@ -14,6 +14,8 @@ class Project < ApplicationRecord
     has_many :evidence_of_support
 
     has_one_attached :capital_work_file
+    has_one_attached :governing_document_file
+
 
     accepts_nested_attributes_for :cash_contributions,
                                   :non_cash_contributions,
@@ -51,6 +53,7 @@ class Project < ApplicationRecord
     attr_accessor :validate_cash_contributions_question
     attr_accessor :validate_non_cash_contributions_question
     attr_accessor :validate_check_your_answers
+    attr_accessor :validate_governing_document_file
     attr_accessor :validate_confirm_declaration
     attr_accessor :validate_is_partnership
     attr_accessor :validate_partnership_details
@@ -189,6 +192,13 @@ class Project < ApplicationRecord
         end
     end
 
+    validate do
+        validate_file_attached(
+            :governing_document_file,
+            I18n.t("activerecord.errors.models.project.attributes.governing_document_file.inclusion")
+        ) if validate_governing_document_file?
+    end
+
     def validate_title?
         validate_title == true
     end
@@ -287,6 +297,10 @@ class Project < ApplicationRecord
 
     def validate_check_your_answers?
         validate_check_your_answers == true
+    end
+
+    def validate_governing_document_file?
+        validate_governing_document_file == true
     end
 
     def validate_confirm_declaration?

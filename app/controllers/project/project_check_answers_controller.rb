@@ -13,7 +13,16 @@ class Project::ProjectCheckAnswersController < ApplicationController
       logger.info "All mandatory fields completed for project ID: #{@project.id}, " \
                     "proceeding to declaration route"
 
-      redirect_to :three_to_ten_k_project_confirm_declaration_get
+      if current_user.organisation.org_type == "registered_company" ||
+          current_user.organisation.org_type == "individual_private_owner_of_heritage"
+
+        redirect_to :three_to_ten_k_project_confirm_declaration_get
+
+      else
+
+        redirect_to :three_to_ten_k_project_governing_docs_get
+
+      end
 
     else
 

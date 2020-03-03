@@ -1,7 +1,7 @@
 require 'rails_helper'
 include ActionView::Helpers::NumberHelper
 
-RSpec.feature 'Organisation', type: :feature do
+RSpec.feature 'Project', type: :feature do
 
   # This tests for the successful creation of a generic project application,
   # which has almost all fields filled in.
@@ -13,7 +13,7 @@ RSpec.feature 'Organisation', type: :feature do
 
     user.organisation.update(
         name: "Test Organisation",
-        org_type: "local_authority",
+        org_type: "church_organisation",
         line1: "10 Downing Street",
         line2: "Westminster",
         townCity: "London",
@@ -199,6 +199,10 @@ RSpec.feature 'Organisation', type: :feature do
     expect(page).to have_text "Test non-cash contribution"
     expect(page).to have_text "Test volunteer"
     expect(page).to have_text "Test evidence"
+
+    click_save_and_continue_button
+
+    expect(page).to have_text "Upload your organisation's governing document"
 
     click_save_and_continue_button
 
