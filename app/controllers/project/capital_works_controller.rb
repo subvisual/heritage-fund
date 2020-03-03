@@ -2,7 +2,8 @@ class Project::CapitalWorksController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
   # This method is used to set the @has_file_upload instance variable before
-  # rendering the :show template
+  # rendering the :show template. This is used within the
+  # _direct_file_upload_hooks partial
   def show
     @has_file_upload = true
   end
@@ -23,6 +24,9 @@ class Project::CapitalWorksController < ApplicationController
       logger.info "Finished updating capital_work for project ID: " \
                    "#{@project.id}"
 
+      # Redirect the user back to the same page if they were uploading a
+      # capital work file - this is so that we can display the file back to
+      # the user so they can check that they have uploaded the correct file
       if params[:project][:capital_work_file].present?
         redirect_to :three_to_ten_k_project_capital_works_get
       else

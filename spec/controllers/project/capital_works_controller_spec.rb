@@ -7,8 +7,7 @@ describe Project::CapitalWorksController do
   describe "GET #show" do
 
     it "should render the page successfully for a valid project" do
-      get :show,
-          params: { project_id: project.id }
+      get :show, params: { project_id: project.id }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
       expect(assigns(:project).errors.empty?).to eq(true)
@@ -24,7 +23,7 @@ describe Project::CapitalWorksController do
 
   describe "PUT #update" do
 
-    it "should redirect to the next page if no params are passed" do
+    it "should re-render the page if no params are passed" do
 
       expect(subject).to \
          receive(:log_errors).with(project)
@@ -109,7 +108,9 @@ describe Project::CapitalWorksController do
           project_id: project.id,
           project: {
               capital_work: "true",
-              capital_work_file: Rack::Test::UploadedFile.new(Rails.root + "spec/fixtures/files/example.txt")
+              capital_work_file: Rack::Test::UploadedFile.new(
+                  Rails.root + "spec/fixtures/files/example.txt"
+              )
           }
       }
 
