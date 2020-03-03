@@ -1,43 +1,61 @@
-<% content_for :page_title, "Project dashboard" %>
+<% content_for :page_title, I18n.t("dashboard.title") %>
 
-<h1 class="govuk-heading-xl">Your projects</h1>
+<h1 class="govuk-heading-xl">
+  <%= I18n.t("dashboard.heading") %>
+</h1>
 
 <% unless @projects.present? %>
 
   <div class="nlhf-panel nlhf-alert nlhf-alert--slim govuk-!-margin-bottom-8">
-   <h2 class="govuk-heading-m">No projects</h2>
-   <p class="govuk-body">This account currently has no active projects with The National Lottery Heritage Fund</p>
+
+    <h2 class="govuk-heading-m">
+      <%= I18n.t("dashboard.no_projects_sub_heading") %>
+    </h2>
+
+    <p class="govuk-body">
+      <%= I18n.t("dashboard.no_projects_text") %>
+    </p>
+
   </div>
 
 <% else %>
 
-  <p class="govuk-body">The following projects are associated with your account:</p>
+  <p class="govuk-body">
+    <%= I18n.t("dashboard.associated_projects_text") %>
+  </p>
 
-  <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links govuk-!-margin-bottom-8">
+  <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links
+   govuk-!-margin-bottom-8">
+
     <% @projects.each do| project | %>
-    <li class="nlhf-list__item">
-      <%= link_to_unless(project.submitted_on.present?, project.project_title.present? ? project.project_title : "Untitled project", three_to_ten_k_project_title_get_url(project_id: project.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
-        "#{name} - Submitted#{' - Reference: ' + project.project_reference_number if project.project_reference_number.present?}"
-      end
-      %>
 
-    </li>
+      <li class="nlhf-list__item">
+
+        <%= link_to_unless(project.submitted_on.present?, project.project_title.present? ? project.project_title : "Untitled project", three_to_ten_k_project_title_get_url(project_id: project.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
+          "#{name} - #{I18n.t("dashboard.submitted")}#{' - ' + I18n.t("dashboard.reference") + ': '  + project.project_reference_number if project.project_reference_number.present?}"
+        end
+        %>
+
+      </li>
+
     <% end %>
   </ul>
 
-  <p class="govuk-body">You can also:</p>
+  <p class="govuk-body">
+    <%= I18n.t("dashboard.you_can_also") %>
+  </p>
 
 <% end %>
 
-<a href="<%= start_a_project_url %>" role="button" draggable="false"
-   class="govuk-button govuk-button--start" data-module="govuk-button"
-   aria-label="Start a new project">
-  Start a new project
-  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg"
-       width="17.5" height="19" viewBox="0 0 33 40"
-       role="presentation" focusable="false">
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-  </svg>
-</a>
+<%=
+  render(
+      ButtonComponent.new(
+          element: "a",
+          "href": start_a_project_url,
+          is_start_button: true,
+          text: I18n.t("dashboard.start_a_new_project_button")
+      )
+  )
+%>
 
 <%= content_for :tracking_override do %>/project-dashboard<% end %>

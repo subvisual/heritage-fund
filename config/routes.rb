@@ -70,6 +70,7 @@ Rails.application.routes.draw do
 
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
+
       get 'create-new-project', to: 'new_project#create_new_project', as: :create
 
       get ':project_id/title', to: 'title#show', as: :title_get
@@ -151,7 +152,9 @@ Rails.application.routes.draw do
              to: 'project_cash_contribution#delete',
              as: :cash_contribution_delete
 
-      get ':project_id/your-grant-request' => 'project_grant_request#show', as: :grant_request_get
+      get ':project_id/your-grant-request',
+          to: 'grant_request#show',
+          as: :grant_request_get
 
       get ':project_id/are-you-getting-non-cash-contributions',
           to: 'project_non_cash_contributions#question',
@@ -200,8 +203,15 @@ Rails.application.routes.draw do
 
       get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
+      get ':project_id/governing-documents',
+          to: 'governing_documents#show',
+          as: :governing_docs_get
+      put ':project_id/governing-documents',
+          to: 'governing_documents#update',
+          as: :governing_docs_put
 
     end
+
   end
 
   get 'health' => 'health#get_status'

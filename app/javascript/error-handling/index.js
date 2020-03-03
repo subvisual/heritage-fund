@@ -123,9 +123,13 @@ function createAndAppendListItem(message, attribute, modelName) {
 
     } else {
 
-        // Specific to the Capital work page
-        linkElement.setAttribute("href", attribute === "capital_work" ?
-            "#project_capital_work_false" : "#project_capital_work_true");
+        if (attribute === "governing_document_file") {
+            linkElement.setAttribute("href", "#project_governing_document_file")
+        } else {
+            // Specific to the Capital work page
+            linkElement.setAttribute("href", attribute === "capital_work" ?
+                "#project_capital_work_false" : "#project_capital_work_true");
+        }
 
     }
 

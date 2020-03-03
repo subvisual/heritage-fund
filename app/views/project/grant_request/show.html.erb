@@ -137,10 +137,14 @@
 
 <% if @grant_request_is_valid %>
 <p>
-  <a href="<%= "#{three_to_ten_k_project_non_cash_contributions_get_url}" %>" role="button" draggable="false"
-    class="govuk-button" data-module="govuk-button" aria-label="Continue button">
-    Save and continue
-  </a>
+  <%=
+    render(
+        ButtonComponent.new(
+            element: "a",
+            href: three_to_ten_k_project_non_cash_contributions_get_url
+        )
+    )
+  %>
 </p>
 
 <% end %>
