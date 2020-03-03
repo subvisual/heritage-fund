@@ -1,0 +1,11 @@
+en-GB:
+  dashboard:
+    title: "Project dashboard"
+    heading: "Your projects"
+    no_projects_sub_heading: "No projects"
+    no_projects_text: "This account currently has no active projects with The National Lottery Heritage Fund"
+    associated_projects_text: "The following projects are associated with your account:"
+    submitted: "Submitted"
+    reference: "Reference"
+    you_can_also: "You can also:"
+    start_a_new_project_button: "Start a new project"

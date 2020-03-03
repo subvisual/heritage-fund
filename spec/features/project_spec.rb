@@ -32,9 +32,9 @@ RSpec.feature 'Organisation', type: :feature do
 
     visit '/'
 
-    expect(page).to have_text 'Start a new project'
+    expect(page).to have_text I18n.t("dashboard.start_a_new_project_button")
 
-    click_link_or_button 'Start a new project'
+    click_link_or_button I18n.t("dashboard.start_a_new_project_button")
 
     expect(page).to have_text 'Start Now'
 
