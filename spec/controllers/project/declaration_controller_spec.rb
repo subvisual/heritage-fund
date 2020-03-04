@@ -115,6 +115,7 @@ describe Project::DeclarationController do
           params: {
               project_id: project.id,
               project: {
+                  user_research_declaration: "true",
                   confirm_declaration: "true"
               }
           }
@@ -126,6 +127,7 @@ describe Project::DeclarationController do
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).confirm_declaration).to eq("true")
+      expect(assigns(:project).user_research_declaration).to eq(true)
 
     end
 
@@ -195,7 +197,6 @@ describe Project::DeclarationController do
               project: {
                   declaration_reasons_description: "Test",
                   keep_informed_declaration: "false",
-                  user_research_declaration: "true",
                   is_partnership: "false"
               }
           }
@@ -208,7 +209,6 @@ describe Project::DeclarationController do
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).declaration_reasons_description).to eq("Test")
       expect(assigns(:project).keep_informed_declaration).to eq(false)
-      expect(assigns(:project).user_research_declaration).to eq(true)
       expect(assigns(:project).is_partnership).to eq(false)
 
     end
@@ -225,7 +225,6 @@ describe Project::DeclarationController do
               project: {
                   declaration_reasons_description: "Test",
                   keep_informed_declaration: "false",
-                  user_research_declaration: "true",
                   is_partnership: "true"
               }
           }
@@ -248,7 +247,6 @@ describe Project::DeclarationController do
               project: {
                   declaration_reasons_description: "Test",
                   keep_informed_declaration: "true",
-                  user_research_declaration: "false",
                   is_partnership: "true",
                   partnership_details: "Testing"
               }
@@ -262,7 +260,6 @@ describe Project::DeclarationController do
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).declaration_reasons_description).to eq("Test")
       expect(assigns(:project).keep_informed_declaration).to eq(true)
-      expect(assigns(:project).user_research_declaration).to eq(false)
       expect(assigns(:project).is_partnership).to eq(true)
       expect(assigns(:project).partnership_details).to eq("Testing")
 

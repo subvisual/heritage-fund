@@ -48,8 +48,6 @@ class Project::DeclarationController < ApplicationController
 
     @project.validate_is_partnership = true
 
-    logger.debug @project.is_partnership
-
     if params[:project].present?
       if params[:project][:is_partnership].present?
         @project.validate_partnership_details = true if
@@ -87,7 +85,10 @@ class Project::DeclarationController < ApplicationController
       params.merge!({project: {confirm_declaration: ""}})
     end
 
-    params.require(:project).permit(:confirm_declaration)
+    params.require(:project).permit(
+        :confirm_declaration,
+        :user_research_declaration
+    )
 
   end
 
@@ -95,7 +96,6 @@ class Project::DeclarationController < ApplicationController
 
     params.require(:project).permit(
         :declaration_reasons_description,
-        :user_research_declaration,
         :keep_informed_declaration,
         :is_partnership,
         :partnership_details
