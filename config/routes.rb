@@ -194,7 +194,7 @@ Rails.application.routes.draw do
           as: :confirm_declaration_put
 
       get ':project_id/application-submitted',
-          to: 'project_application_submitted#show',
+          to: 'application_submitted#show',
           as: :application_submitted_get
 
       get 'project-list' => 'project_list#project_list'
