@@ -131,38 +131,6 @@
 
   </ul>
 
-  <p class="govuk-body">
-    We run qualitative user research to help us to develop our products and
-    services. This could be from a 20 minute survey to a 2 hour interview.
-  </p>
-
-  <div class="govuk-form-group">
-
-    <div class="govuk-checkboxes govuk-checkboxes--small">
-
-      <div class="govuk-checkboxes__item">
-
-        <%=
-          f.check_box :user_research_declaration,
-                      {
-                          id: :project_user_research_declaration,
-                          class: "govuk-checkboxes__input"
-                      },
-                      'true', 'false'
-        %>
-
-        <%=
-          f.label :user_research_declaration,
-                  "Tick this box if you would like to be involved in our research, or find out more.",
-                  class: "govuk-label govuk-checkboxes__label"
-        %>
-
-      </div>
-
-    </div>
-
-  </div>
-
   <div class="govuk-form-group">
 
     <p class="govuk-body">
