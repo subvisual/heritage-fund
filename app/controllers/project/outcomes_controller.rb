@@ -1,9 +1,9 @@
-class Project::ProjectOutcomesController < ApplicationController
-  include ProjectContext
+class Project::OutcomesController < ApplicationController
+  include ProjectContext, ObjectErrorsLogger
 
   def update
 
-    logger.debug "Updating other outcomes for project ID: #{@project.id}"
+    logger.info "Updating outcome attributes for project ID: #{@project.id}"
 
     remove_outcome_descriptions
 
@@ -13,13 +13,17 @@ class Project::ProjectOutcomesController < ApplicationController
 
     if @project.valid?
 
-      logger.debug "Finished updating other outcomes for project ID: #{@project.id}"
+      logger.info "Finished updating outcome attributes for project " \
+                  "ID: #{@project.id}"
 
-      redirect_to three_to_ten_k_project_project_costs_path
+      redirect_to :three_to_ten_k_project_project_costs
 
     else
 
-      logger.debug "Validation failed when updating other outcomes for project ID: #{@project.id}"
+      logger.info "Validation failed when attempting to update outcome " \
+                  "attributes for project ID: #{@project.id}"
+
+      log_errors(@project)
 
       render :show
 
@@ -51,7 +55,6 @@ class Project::ProjectOutcomesController < ApplicationController
     )
 
   end
-
 
   # This method sets outcome description parameters to an empty string
   # if the outcome has been unchecked on the page. This is necessary

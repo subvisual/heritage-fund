@@ -187,7 +187,7 @@ class Project < ApplicationRecord
             validate_length(
                 "outcome_#{i}_description",
                 300,
-                "Description of how you will meet this outcome must be 300 words or fewer"
+                I18n.t("activerecord.errors.models.project.attributes.outcome_description.too_long")
             ) if validate_other_outcomes?
         end
     end
