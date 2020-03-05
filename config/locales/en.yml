@@ -161,6 +161,8 @@ en-GB:
               blank: "Enter details about the organisation(s) you will be delivering your project in partnership with"
             governing_document_file:
               inclusion: "Add a governing document"
+            outcome_description:
+              too_long: "Description of how you will meet this outcome must be 300 words or fewer"
         cash_contribution:
           attributes:
             description:

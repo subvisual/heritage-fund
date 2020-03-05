@@ -124,8 +124,12 @@ Rails.application.routes.draw do
       put ':project_id/how-will-your-project-involve-people',
           to: 'involvement#update', as: :involvement_put
 
-      get ':project_id/our-other-outcomes', to: 'project_outcomes#show', as: :other_outcomes_get
-      put ':project_id/our-other-outcomes', to: 'project_outcomes#update', as: :other_outcomes_put
+      get ':project_id/our-other-outcomes',
+          to: 'outcomes#show',
+          as: :other_outcomes_get
+      put ':project_id/our-other-outcomes',
+          to: 'outcomes#update',
+          as: :other_outcomes_put
 
       get ':project_id/costs', to: 'project_costs#show', as: :project_costs
       put ':project_id/costs', to: 'project_costs#update'

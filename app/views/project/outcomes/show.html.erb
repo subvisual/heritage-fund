@@ -1,11 +1,24 @@
-<% content_for :page_title, @project.errors.any? ? "Error: Will your project achieve any of our other outcomes?" : "Will your project achieve any of our other outcomes?" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: "Will your project achieve any of our other outcomes?"
+         }
+%>
 
-<%= render partial: "partials/summary_errors", locals: {
-    form_object: @project,
-    first_form_element: :project_other_outcome_2
-} if @project.errors.any? %>
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @project,
+             first_form_element: :project_other_outcome_2
+         } if @project.errors.any?
+%>
 
-<%= form_for @project, url: three_to_ten_k_project_other_outcomes_put_path, method: :put do |f| %>
+<%=
+  form_for @project,
+           url: :three_to_ten_k_project_other_outcomes_put,
+           method: :put do |f|
+%>
 
   <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors[:description].any? %>">
 
@@ -377,6 +390,6 @@
 
   </div>
 
-  <%= f.save_and_continue %>
+  <%= render(ButtonComponent.new(element: "input")) %>
 
 <% end %>
