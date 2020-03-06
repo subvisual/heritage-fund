@@ -1,0 +1,259 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: nil,
+             page_title: I18n.t("accessibility_statement.title")
+         }
+%>
+
+<h1 class="govuk-heading-l">
+  <%= I18n.t("accessibility_statement.heading") %>
+</h1>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.beta_application_portal") %>
+  – funding.heritagefund.org.uk
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.this_website_is_run_by") %>
+</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    <%= I18n.t("accessibility_statement.list_1_item_1") %>
+  </li>
+  <li>
+    <%= I18n.t("accessibility_statement.list_1_item_2") %>
+  </li>
+  <li>
+    <%= I18n.t("accessibility_statement.list_1_item_3") %>
+  </li>
+</ul>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.made_simple") %>
+</p>
+
+<p class="govuk-body">
+  <%= t(
+          "accessibility_statement.ability_net_html",
+          href: link_to(
+              t("accessibility_statement.ability_net_href_text"),
+              "https://mcmw.abilitynet.org.uk/",
+              target: "_blank",
+              class: "govuk-link"
+          )
+      )
+  %>
+</p>
+
+<h2 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_how_accessible") %>
+</h2>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.not_fully_accessible") %>
+</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+    <%= I18n.t("accessibility_statement.list_2_item_1") %>
+  </li>
+  <li>
+    <%= I18n.t("accessibility_statement.list_2_item_2") %>
+  </li>
+  <li>
+    <%= I18n.t("accessibility_statement.list_2_item_3") %>
+  </li>
+  <li>
+    <%= I18n.t("accessibility_statement.list_2_item_4") %>
+  </li>
+</ul>
+
+
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_what_to_do") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.if_you_need_info") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.email") %>
+  <a href="mailto:enquire@heritagefund.org.uk">enquire@heritagefund.org.uk</a>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.info_call") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.contact_london_head_office") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.info_fax") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.info_textphone") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.consider_request") %>
+</p>
+
+<p class="govuk-body">
+  <%= t(
+          "accessibility_statement.cannot_view_map_html",
+          contact_us: link_to(
+              t("accessibility_statement.cannot_view_map_contact_us_text"),
+              "https://www.heritagefund.org.uk/about/contact-us",
+              class: "govuk-link"
+          ),
+          email_us: link_to(
+              t("accessibility_statement.cannot_view_map_email_us_text"),
+              "mailto:enquire@heritagefund.org.uk?subject=Cannot view map",
+              class: "govuk-link"
+          )
+      )
+  %>
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_reporting_problems") %>
+</h3>
+
+<p class="govuk-body">
+  <%= t(
+          "accessibility_statement.body_reporting_problems_html",
+          href: link_to(
+              t("accessibility_statement.body_reporting_probems_href_text"),
+              "mailto:enquire@heritagefund.org.uk",
+              class: "govuk-link"
+              )
+      )
+  %>
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_enforcement_procedure") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.body_enforcement_procedure") %>
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_contacting_us") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.text_relay") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.bsl_interpreter") %>
+</p>
+
+<p class="govuk-body">
+  <%=
+    link_to(
+        t("accessibility_statement.find_out_how"),
+        "https://www.heritagefund.org.uk/about/contact-us",
+        class: "govuk-link"
+    )
+  %>
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_technical_information") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.committed_to_accessibility") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.not_compliant") %>
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_non_accessible") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.content_below_nonaccessible") %>
+</p>
+
+<h4 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_non_compliance") %>
+</h4>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_item_1") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_date_1") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_item_2") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_date_2") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_item_3") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_date_3") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_item_4") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.non_compliant_date_4") %>
+</p>
+
+<h3 class="govuk-heading-l">
+  <%= I18n.t("accessibility_statement.sub_heading_how_we_tested") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.last_tested") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.body_how_we_tested") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.what_we_tested") %>
+  https://funding.heritagefund.org.uk
+</p>
+
+<h3 class="govuk-heading-m">
+  <%= I18n.t("accessibility_statement.sub_heading_what_we_are_doing") %>
+</h3>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.body_what_we_are_doing") %>
+</p>
+
+<p class="govuk-body">
+  <%= I18n.t("accessibility_statement.statement_prepared") %>
+</p>
+
+<p class="govuk-inset-text">
+  <%= I18n.t("accessibility_statement.statement_last_updated") %>
+</p>

@@ -1,4 +1,7 @@
 <%
+  # If no model object exists, or if the model object is present but has no
+  # errors present, then the page title will be appended to an empty string,
+  # otherwise it will be appended to 'Error: '
   content_for :page_title,
-              model_object.errors.any? ? "Error: #{page_title}" : page_title
+              (local_assigns[:model_object] ? (model_object.errors.any? ? "Error: " : "") : "") + page_title
 %>

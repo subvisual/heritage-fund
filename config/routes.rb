@@ -218,6 +218,10 @@ Rails.application.routes.draw do
 
   end
 
+  get '/accessibility-statement',
+      to: 'static_pages#show_accessibility_statement',
+      as: :accessibility_statement
+
   get 'health' => 'health#get_status'
 
   get 'support', to: 'support#show'

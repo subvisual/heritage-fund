@@ -1,4 +1,10 @@
-<% content_for :page_title, @project.errors.any? ? "Error: Project title" : "Project title" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: "Project title"
+         }
+%>
 
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @project,
