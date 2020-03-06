@@ -102,8 +102,12 @@ Rails.application.routes.draw do
           to: 'capital_works#update',
           as: :capital_works_put
 
-      get ':project_id/do-you-need-permission', to: 'project_permission#show', as: :permission_get
-      put ':project_id/do-you-need-permission', to: 'project_permission#update', as: :permission_put
+      get ':project_id/do-you-need-permission',
+          to: 'permission#show',
+          as: :permission_get
+      put ':project_id/do-you-need-permission',
+          to: 'permission#update',
+          as: :permission_put
 
       get ':project_id/difference', to: 'difference#show', as: :difference_get
       put ':project_id/difference', to: 'difference#update', as: :difference_put
