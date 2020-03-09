@@ -221,20 +221,13 @@ describe Project::VolunteersController do
 
     it "should fail to find an invalid volunteer and redirect back" do
 
-      allow(Rails.logger).to receive(:info)
-      expect(Rails.logger).to receive(:info).ordered
-      expect(Rails.logger)
-          .to receive(:info).at_least(:once)
-                  .with("No volunteer found with ID: invalid, no deletion carried out")
-
-      delete :delete,
-             params: {
-                 project_id: project.id,
-                 volunteer_id: "invalid"
-             }
-
-      expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_volunteers)
+      expect {
+        delete :delete,
+               params: {
+                   project_id: project.id,
+                   volunteer_id: "invalid"
+               }
+      }.to raise_error(ActiveRecord::RecordNotFound)
 
     end
 

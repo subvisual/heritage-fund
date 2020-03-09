@@ -47,22 +47,13 @@ class Project::VolunteersController < ApplicationController
     logger.info "User has selected to delete volunteer ID: " \
                 "#{params[:volunteer_id]} from project ID: #{@project.id}"
 
-    volunteer = Volunteer.find_by(id: params[:volunteer_id])
+    volunteer = @project.volunteers.find(params[:volunteer_id])
 
-    if volunteer.present?
+    logger.info "Deleting volunteer ID: #{volunteer.id}"
 
-      logger.info "Deleting volunteer ID: #{volunteer.id}"
+    volunteer.destroy
 
-      volunteer.destroy if volunteer.project_id == @project.id
-
-      logger.info "Finished deleting volunteer ID: #{volunteer.id}"
-
-    else
-
-      logger.info "No volunteer found with ID: #{params[:volunteer_id]}, " \
-                  "no deletion carried out"
-
-    end
+    logger.info "Finished deleting volunteer ID: #{volunteer.id}"
 
     redirect_to :three_to_ten_k_project_volunteers
 
