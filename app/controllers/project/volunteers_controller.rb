@@ -47,7 +47,7 @@ class Project::VolunteersController < ApplicationController
     logger.info "User has selected to delete volunteer ID: " \
                 "#{params[:volunteer_id]} from project ID: #{@project.id}"
 
-    volunteer = Volunteer.find_by_id(params[:volunteer_id])
+    volunteer = Volunteer.find_by(id: params[:volunteer_id])
 
     if volunteer.present?
 
