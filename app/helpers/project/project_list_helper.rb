@@ -1,2 +1,0 @@
-module Project::ProjectListHelper
-end
