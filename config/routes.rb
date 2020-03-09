@@ -209,7 +209,6 @@ Rails.application.routes.draw do
           to: 'application_submitted#show',
           as: :application_submitted_get
 
-      get 'project-list' => 'project_list#project_list'
       get 'location' => 'project_location#project_location'
       get ':project_id/governing-documents',
           to: 'governing_documents#show',
