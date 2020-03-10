@@ -1,4 +1,10 @@
-<% content_for :page_title, I18n.t("dashboard.title") %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: nil,
+             page_title: I18n.t("dashboard.title")
+         }
+%>
 
 <h1 class="govuk-heading-xl">
   <%= I18n.t("dashboard.heading") %>

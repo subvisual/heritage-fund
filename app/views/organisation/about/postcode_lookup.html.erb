@@ -1,3 +1,11 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @organisation,
+             page_title: "Find your organisation address"
+         }
+%>
+
 <%= render partial: "partials/summary_errors_flash", locals: {
     first_form_element: :postcode_lookup
 } if flash[:errors] %>
