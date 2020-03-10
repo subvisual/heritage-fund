@@ -21,7 +21,7 @@ class EvidenceOfSupport < ApplicationRecord
     validate_length(
         :description,
         50,
-        "Description of your evidence of support must be 50 words or fewer"
+        I18n.t("activerecord.errors.models.evidence_of_support.attributes.description.too_long")
     )
 
   end

@@ -184,11 +184,13 @@ Rails.application.routes.draw do
              to: 'volunteers#delete',
              as: :volunteer_delete
 
-      get ':project_id/evidence-of-support', to: 'project_support_evidence#show', as: :project_support_evidence
-      put ':project_id/evidence-of-support', to: 'project_support_evidence#put'
-
+      get ':project_id/evidence-of-support',
+          to: 'evidence_of_support#show',
+          as: :project_support_evidence
+      put ':project_id/evidence-of-support',
+          to: 'evidence_of_support#update'
       delete ':project_id/evidence-of-support/:supporting_evidence_id',
-             to: 'project_support_evidence#delete',
+             to: 'evidence_of_support#delete',
              as: :supporting_evidence_delete
 
       get ':project_id/check-your-answers',
