@@ -84,5 +84,5 @@ RSpec.configure do |config|
   end
 
   config.include Helpers
-  config.include ActionView::Component::TestHelpers
+  config.include ActionView::Component::TestHelpers, type: :component
 end
