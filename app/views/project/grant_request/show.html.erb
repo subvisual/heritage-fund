@@ -1,4 +1,10 @@
-<% content_for :page_title, "Your grant request" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: "Your grant request"
+         }
+%>
 
 <h1 class="govuk-heading-xl">
   <span class="govuk-caption-xl">About your project</span>

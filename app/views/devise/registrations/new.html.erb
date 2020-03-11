@@ -1,4 +1,10 @@
-<% content_for :page_title, "Create an account" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: resource,
+             page_title: "Create an account"
+         }
+%>
 
 <h2 class="govuk-heading-l">Create an account</h2>
 
