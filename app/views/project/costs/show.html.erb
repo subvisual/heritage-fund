@@ -38,7 +38,7 @@
               <a href='#project_project_costs_attributes_0_<%= "#{attr.to_s.split('.')[1]}" %>'>
                 <%= msg %>
               </a>
-            </li>w
+            </li>
           <% end %>
 
         <% end %>
@@ -290,7 +290,7 @@
 
           <%=
             pc.text_field :amount,
-                          required: 'true',
+                          "autocomplete" => "off",
                           class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if @project.errors['project_costs.amount'].any?}",
                           value: "#{flash[:amount] if flash[:amount].present?}"
           %>

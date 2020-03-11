@@ -184,6 +184,7 @@ en-GB:
           attributes:
             description:
               blank: "Enter a description of the project cost you are adding"
+              too_long: "Description of your cost must be 50 words or fewer"
             amount:
               not_a_number: "Amount must be a number, like 500"
             cost_type:

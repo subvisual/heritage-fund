@@ -12,7 +12,7 @@ class ProjectCost < ApplicationRecord
     validate_length(
         :description,
         50,
-        "Description of your cost must be 50 words or fewer"
+        I18n.t("activerecord.errors.models.project_cost.attributes.description.too_long")
     )
   end
 
