@@ -3,7 +3,6 @@ applications:
   - name: funding-frontend
     env:
       RAILS_ENV: production
-      RUBYOPT: -W:no-deprecated
     services:
       - funding-frontend
       - log-drain
