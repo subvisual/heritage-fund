@@ -57,6 +57,7 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
+          RUBYOPT: -W:no-deprecated
         run: |
           bin/rails db:setup
           bundle exec rspec
