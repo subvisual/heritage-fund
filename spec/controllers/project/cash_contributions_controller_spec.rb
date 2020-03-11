@@ -354,7 +354,7 @@ describe Project::CashContributionsController do
 
     end
 
-    it "should fail to find an invalid volunteer and redirect back" do
+    it "should fail to find an invalid cash contribution and redirect back" do
 
       expect {
         delete :delete,
