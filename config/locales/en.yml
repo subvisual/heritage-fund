@@ -167,10 +167,13 @@ en-GB:
           attributes:
             description:
               blank: "Enter a description of your cash contribution"
+              too_long: "Description of your cash contribution must be 50 words or fewer"
             amount:
               not_a_number: "Amount must be a number, like 500"
             secured:
               inclusion: "Select whether or not your cash contribution is secured"
+            cash_contribution_evidence_files:
+              inclusion: "Add supporting evidence for a secured cash contribution with evidence"
         non_cash_contribution:
           attributes:
             description:
