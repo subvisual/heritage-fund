@@ -195,3 +195,4 @@ en-GB:
           attributes:
             description:
               blank: "Enter a description of your evidence of support"
+              too_long: "Description of your evidence of support must be 50 words or fewer"
