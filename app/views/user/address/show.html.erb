@@ -1,3 +1,11 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: current_user,
+             page_title: "Enter your address details"
+         }
+%>
+
 <%= render partial: "partials/summary_errors", locals: {
     form_object: current_user,
     first_form_element: :user_line1

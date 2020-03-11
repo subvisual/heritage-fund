@@ -1,4 +1,10 @@
-<% content_for :page_title, 'Select an address' %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: current_user,
+             page_title: "Select an address"
+         }
+%>
 
 <h1 class="govuk-heading-xl">
   <span class="govuk-caption-xl">Add your details</span>

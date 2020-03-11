@@ -13,13 +13,13 @@ class CashContribution < ApplicationRecord
 
     validate_file_attached(
         :cash_contribution_evidence_files,
-        "Add supporting evidence for a secured cash contribution with evidence"
+        I18n.t("activerecord.errors.models.cash_contribution.attributes.cash_contribution_evidence_files.inclusion")
     ) if self[:secured] == "yes_with_evidence"
 
     validate_length(
         :description,
         50,
-        "Description of your cash contribution must be 50 words or fewer"
+        I18n.t("activerecord.errors.models.cash_contribution.attributes.description.too_long")
     )
 
   end

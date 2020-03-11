@@ -1,4 +1,10 @@
-<% content_for :page_title, "Your account" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: resource,
+             page_title: "Your account"
+         }
+%>
 
 <p class="govuk-body"><%= link_to "Back", "javascript:history.back();", class: "govuk-back-link" %></p>
 

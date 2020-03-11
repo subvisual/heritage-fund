@@ -146,19 +146,19 @@ Rails.application.routes.draw do
           as: :project_costs_validate_and_redirect
 
       get ':project_id/are-you-getting-cash-contributions',
-          to: 'project_cash_contribution#question',
+          to: 'cash_contributions#question',
           as: :cash_contributions_question_get
       put ':project_id/are-you-getting-cash-contributions',
-          to: 'project_cash_contribution#question_update',
+          to: 'cash_contributions#question_update',
           as: :cash_contributions_question_put
 
       get ':project_id/cash-contributions',
-          to: 'project_cash_contribution#show',
+          to: 'cash_contributions#show',
           as: :project_cash_contribution
-      put ':project_id/cash-contributions', to: 'project_cash_contribution#put'
-
+      put ':project_id/cash-contributions',
+          to: 'cash_contributions#update'
       delete ':project_id/cash-contributions/:cash_contribution_id',
-             to: 'project_cash_contribution#delete',
+             to: 'cash_contributions#delete',
              as: :cash_contribution_delete
 
       get ':project_id/your-grant-request',
@@ -188,11 +188,13 @@ Rails.application.routes.draw do
              to: 'volunteers#delete',
              as: :volunteer_delete
 
-      get ':project_id/evidence-of-support', to: 'project_support_evidence#show', as: :project_support_evidence
-      put ':project_id/evidence-of-support', to: 'project_support_evidence#put'
-
+      get ':project_id/evidence-of-support',
+          to: 'evidence_of_support#show',
+          as: :project_support_evidence
+      put ':project_id/evidence-of-support',
+          to: 'evidence_of_support#update'
       delete ':project_id/evidence-of-support/:supporting_evidence_id',
-             to: 'project_support_evidence#delete',
+             to: 'evidence_of_support#delete',
              as: :supporting_evidence_delete
 
       get ':project_id/check-your-answers',
