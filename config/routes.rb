@@ -197,9 +197,9 @@ Rails.application.routes.draw do
              as: :supporting_evidence_delete
 
       get ':project_id/check-your-answers',
-          to: 'project_check_answers#show', as: :check_answers_get
+          to: 'check_answers#show', as: :check_answers_get
       put ':project_id/check-your-answers',
-          to: 'project_check_answers#update', as: :check_answers_update
+          to: 'check_answers#update', as: :check_answers_update
 
       get ':project_id/declaration', to: 'declaration#show_declaration', as: :declaration_get
       put ':project_id/declaration', to: 'declaration#update_declaration', as: :declaration_put
