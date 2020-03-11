@@ -3,7 +3,8 @@ applications:
 - name: funding-frontend-research
   memory: 256M
   instances: 2
-  buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+  buildpacks:
+    - https://github.com/cloudfoundry/ruby-buildpack.git#v1.8.13
   health-check-type: http
   health-check-http-endpoint: /health
   services:
