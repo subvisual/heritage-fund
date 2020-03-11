@@ -1,4 +1,10 @@
-<% content_for :page_title, current_user.errors.any? ? "Error: Add your details" : "Add your details" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: current_user,
+             page_title: "Add your details"
+         }
+%>
 
 <%= render partial: "partials/summary_errors_flash", locals: {
     first_form_element: :postcode_lookup
