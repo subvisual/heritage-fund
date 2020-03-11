@@ -1,4 +1,10 @@
-<h2 class="govuk-heading-l">Forgot your password?</h2>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: resource,
+             page_title: "Forgot your password?"
+         }
+%>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   

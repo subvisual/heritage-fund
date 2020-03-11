@@ -42,40 +42,69 @@
 
 <span class="govuk-caption-xl">Support for your project</span>
 <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">Evidence of support</h1>
-<p class="govuk-body-l govuk-!-margin-bottom-9">Send us evidence to support the commitments made to your project.</p>
+
+<p class="govuk-body-l govuk-!-margin-bottom-9">
+  Send us evidence to support the commitments made to your project.
+</p>
 
 <section class="nlhf-summary nlhf-summary--evidence govuk-!-margin-bottom-9">
+
   <header class="nlhf-summary__header">
     <h2 class="govuk-heading-m">Your evidence of support</h2>
   </header>
+
   <div class="nlhf-summary__body">
+
     <% unless @project.evidence_of_support.first&.id.present? %>
-        <h3 class="govuk-heading-m govuk-!-margin-bottom-0">You have not added any evidence</h3>
+
+        <h3 class="govuk-heading-m govuk-!-margin-bottom-0">
+          You have not added any evidence
+        </h3>
+
     <% else %>
+
       <table class="govuk-table govuk-!-margin-bottom-0">
+
         <thead class="govuk-table__head">
+
           <tr class="govuk-table__row">
+
             <th scope="col" class="govuk-table__header">Description</th>
             <th scope="col" class="govuk-table__header">Files</th>
             <th scope="col" class="govuk-table__header"></th>
+
           </tr>
+
         </thead>
+
         <tbody class="govuk-table__body">
-            <% @project.evidence_of_support.filter { |eos| eos.id.present? }.each do |eos|  %>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
+
+          <% @project.evidence_of_support.filter { |eos| eos.id.present? }.each do |eos|  %>
+
+            <tr class="govuk-table__row">
+
+              <td class="govuk-table__cell">
                 <%= eos.description %>
-            </td>
-            <td class="govuk-table__cell">
-                <%= link_to(eos.evidence_of_support_files.blob.filename,
-                            rails_blob_path(eos.evidence_of_support_files.blob, disposition: "attachment"))
+              </td>
+
+              <td class="govuk-table__cell">
+                <%=
+                  link_to(eos.evidence_of_support_files.blob.filename,
+                          rails_blob_path(
+                              eos.evidence_of_support_files.blob,
+                              disposition: "attachment"
+                          )
+                  )
                 %>
             </td>
+
             <td class="govuk-table__cell">
-              <%= form_with model: @project,
-                            url: three_to_ten_k_project_supporting_evidence_delete_path(supporting_evidence_id: eos.id),
-                            method: :delete,
-                            local: true do |f| %>
+              <%=
+                form_with model: @project,
+                          url: three_to_ten_k_project_supporting_evidence_delete_path(supporting_evidence_id: eos.id),
+                          method: :delete,
+                          local: true do |f|
+              %>
 
                 <%= f.submit "Delete",
                              class: "govuk-button govuk-button--warning",
@@ -84,18 +113,34 @@
                 %>
 
               <% end %>
+
             </td>
+
           </tr>
+
           <% end %>
+
         </tbody>
+
       </table>
+
     <% end %>
+
   </div>
+
 </section>
 
-<%= form_with model: @project, url: three_to_ten_k_project_project_support_evidence_path, method: :put, remote: no_js ? false : true do |f| %>
+<%=
+  form_with model: @project,
+            url: :three_to_ten_k_project_project_support_evidence,
+            method: :put,
+            remote: no_js ? false : true do |f|
+%>
 
-  <% f.fields_for :evidence_of_support, @project.evidence_of_support.build do |e| %>
+  <%
+    f.fields_for :evidence_of_support,
+                 @project.evidence_of_support.build do |e|
+  %>
 
   <div class="nlhf-add-item govuk-!-margin-bottom-9">
     
@@ -106,16 +151,20 @@
     <div class="nlhf-add-item__body">
 
       <div class="nlhf-add-item__row">
-        <div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="50">
+
+        <div class="govuk-character-count" data-module="govuk-character-count"
+             data-maxwords="50">
+
           <div class="govuk-form-group <%= "govuk-form-group--error" if
                                                @project.errors['evidence_of_support.description'].any? %>"
                id="evidence_of_support.description-form-group">
 
-            <%= render partial: "partials/form_input_errors",
-                       locals: {
-                           form_object: @project,
-                           input_field_id: :'evidence_of_support.description'} if
-                    @project.errors['evidence_of_support.description'].any?
+            <%=
+              render partial: "partials/form_input_errors",
+                     locals: {
+                         form_object: @project,
+                         input_field_id: :'evidence_of_support.description'} if
+                  @project.errors['evidence_of_support.description'].any?
             %>
 
             <div id="evidence_of_support.description-errors"></div>
@@ -133,28 +182,39 @@
             %>
 
             <span id="project_evidence_of_support_attributes_0_description-info"
-                  class="govuk-hint govuk-character-count__message" aria-live="polite">
+                  class="govuk-hint govuk-character-count__message"
+                  aria-live="polite">
               You have 50 words remaining
             </span>
+
           </div>
+
         </div>
+
       </div>
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
+
         <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
              id="evidence_of_support.evidence_of_support_files-form-group">
 
-          <%= render partial: "partials/form_input_errors",
-                     locals: {
-                         form_object: @project,
-                         input_field_id: :'evidence_of_support.evidence_of_support_files'} if
-                  @project.errors['evidence_of_support.evidence_of_support_files'].any?
+          <%=
+            render partial: "partials/form_input_errors",
+                   locals: {
+                       form_object: @project,
+                       input_field_id: :'evidence_of_support.evidence_of_support_files'} if
+                @project.errors['evidence_of_support.evidence_of_support_files'].any?
           %>
 
           <div id="evidence_of_support.evidence_of_support_files-errors"></div>
 
-          <%= e.label :evidence_of_support_files, "Upload a file", class: "govuk-label" %>
+          <%=
+            e.label :evidence_of_support_files,
+                    "Upload a file",
+                    class: "govuk-label"
+          %>
+
           <%=
             e.file_field :evidence_of_support_files,
                          multiple: false,
@@ -164,33 +224,41 @@
           %>
 
         </div>
+
       </div>
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
+
         <button class="govuk-button govuk-button--secondary"
                 data-module="govuk-button">
           Add evidence
         </button>
+
       </div>
       <!-- / nlhf-add-item__row -->
 
     </div>
+
   </div>
     <% end %>
 <% end %>
 
 <details class="govuk-details" data-module="govuk-details">
+
   <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">
       Help with evidence of support
     </span>
   </summary>
+
   <div class="govuk-details__text">
+
     <h4 class="govuk-heading-m">What do we mean by evidence of support?</h4>
 
     <p class="govuk-body">
-      Evidence could be letters, emails or videos from people that support your project.
+      Evidence could be letters, emails or videos from people that support
+      your project.
     </p> 
 
     <p class="govuk-body">For example:</p>
@@ -202,14 +270,18 @@
     </ul>
 
   </div>
+
 </details>
 
 <hr class="govuk-section-break--l govuk-section-break--visible">
 
 <p class="govuk-body">If you have finished adding all your evidence</p>
 
-<a href="<%= "#{three_to_ten_k_project_check_answers_get_url}" %>"
-   role="button" draggable="false" class="govuk-button"
-   data-module="govuk-button" aria-label="Continue button">
-  Save and continue
-</a>
+<%=
+  render(
+      ButtonComponent.new(
+          element: "a",
+          href: three_to_ten_k_project_check_answers_get_url
+      )
+  )
+%>

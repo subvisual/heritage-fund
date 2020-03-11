@@ -1,3 +1,11 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @organisation,
+             page_title: "About your organisation"
+         }
+%>
+
 <%= render partial: "partials/summary_errors", locals: {
     form_object: @organisation,
     first_form_element: :organisation_name

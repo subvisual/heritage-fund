@@ -1,4 +1,10 @@
-<% content_for :page_title, "Resend confirmation instructions" %>
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: resource,
+             page_title: "Resend confirmation instructions"
+         }
+%>
 
 <h2 class="govuk-heading-l">Resend confirmation instructions</h2>
 

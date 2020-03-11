@@ -1,5 +1,4 @@
 require "rails_helper"
-require_relative '../support/fake_salesforce_webhook'
 
 describe ReleasedFormController do
 
