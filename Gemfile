@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.7.0'
+ruby '~> 2.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -92,4 +92,4 @@ gem "lograge", "~> 0.11.2"
 
 gem "silencer", "~> 1.0"
 
-gem "actionview-component", "~> 1.15"
+gem "actionview-component", "~> 1.10.0"

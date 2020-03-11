@@ -3,7 +3,6 @@ applications:
 - name: funding-frontend-staging
   env:
     RAILS_ENV: staging
-    RUBYOPT: -W:no-deprecated
   services:
     - funding-frontend-staging
     - log-drain

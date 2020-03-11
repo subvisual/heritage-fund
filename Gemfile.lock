@@ -37,8 +37,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    actionview-component (1.15.0)
-      capybara (>= 3)
+    actionview-component (1.10.0)
     activejob (6.0.2.1)
       activesupport (= 6.0.2.1)
       globalid (>= 0.3.6)
@@ -354,7 +353,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionview-component (~> 1.15)
+  actionview-component (~> 1.10.0)
   aws-sdk-s3
   bootsnap (>= 1.4.2)
   byebug
@@ -395,7 +394,7 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 RUBY VERSION
-   ruby 2.7.0p0
+   ruby 2.6.4p104
 
 BUNDLED WITH
    2.1.4
