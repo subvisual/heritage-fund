@@ -12,8 +12,6 @@ module OrganisationContext
   # If the user's organisation id and the organisation id param
   # do not match, then the user is redirected to the projects
   # dashboard
-  #
-  # TODO: Write tests for this.
   def set_organisation
 
     unless params[:organisation_id] == current_user.organisation&.id

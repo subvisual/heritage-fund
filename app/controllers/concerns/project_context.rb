@@ -11,15 +11,13 @@ module ProjectContext
   #
   # If no project object matching the parameters is found,
   # then the user is redirected to the projects dashboard.
-  #
-  # TODO: Write tests for this.
   def set_project
 
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
 
     if !@project.present? || ( @project.submitted_on.present? &&
         !request.path.include?("/application-submitted"))
-      redirect_to authenticated_root_path
+      redirect_to :authenticated_root
     end
 
   end
