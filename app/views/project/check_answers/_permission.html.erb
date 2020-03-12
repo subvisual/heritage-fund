@@ -24,7 +24,7 @@
     <% end %>
   </dd>
 
-  <%= render partial: 'project/project_check_answers/change_link',
+  <%= render partial: 'project/check_answers/change_link',
              locals: {
                  link_url: three_to_ten_k_project_permission_get_path,
                  link_hidden_label: t('views.project.check_your_answers.permission')
@@ -45,7 +45,7 @@
       <%= @project.permission_description.nil? ? t('views.project.check_your_answers.not_answered') : @project.permission_description %>
     </dd>
 
-    <%= render partial: 'project/project_check_answers/change_link',
+    <%= render partial: 'project/check_answers/change_link',
                locals: {
                    link_url: three_to_ten_k_project_permission_get_path,
                    link_hidden_label: t('views.project.check_your_answers.permission')
