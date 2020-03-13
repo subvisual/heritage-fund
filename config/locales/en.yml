@@ -111,12 +111,20 @@ en-GB:
               blank: "Enter the month your project will start on"
             start_date_year:
               blank: "Enter the year your project will start on"
+            start_date:
+              invalid: "Enter a valid project start date"
+              after_end_date: "Start date cannot be after end date"
+              in_past: "Start date cannot be in past"
             end_date_day:
               blank: "Enter the day your project will end on"
             end_date_month:
               blank: "Enter the month your project will end on"
             end_date_year:
               blank: "Enter the year your project will end on"
+            end_date:
+              invalid: "Enter a valid project end date"
+              before_start_date: "End date cannot be before start date"
+              in_past: "End date cannot be in past"
             same_location:
               blank: "Select whether or not your project will take place at the same location as your organisation"
             line1:
