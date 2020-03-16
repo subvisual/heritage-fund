@@ -135,13 +135,14 @@ Rails.application.routes.draw do
           to: 'outcomes#update',
           as: :other_outcomes_put
 
-      get ':project_id/costs', to: 'project_costs#show', as: :project_costs
-      put ':project_id/costs', to: 'project_costs#update'
-
-      delete ':project_id/costs/:project_cost_id', to: 'project_costs#delete', as: :cost_delete
+      get ':project_id/costs', to: 'costs#show', as: :project_costs
+      put ':project_id/costs', to: 'costs#update'
+      delete ':project_id/costs/:project_cost_id',
+             to: 'costs#delete',
+             as: :cost_delete
 
       put ':project_id/confirm-costs',
-          to: 'project_costs#validate_and_redirect',
+          to: 'costs#validate_and_redirect',
           as: :project_costs_validate_and_redirect
 
       get ':project_id/are-you-getting-cash-contributions',
