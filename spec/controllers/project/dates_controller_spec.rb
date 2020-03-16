@@ -224,8 +224,7 @@ describe Project::DatesController do
       expect(assigns(:project).errors.empty?).to eq(true)
 
       expect(subject.request.flash[:date_warning])
-          .to eq("You can still submit your application if the start and end " \
-                 "dates are over one year but this can affect assessment.")
+          .to eq(I18n.t("project.dates.flash_warning"))
 
     end
 
