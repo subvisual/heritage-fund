@@ -39,21 +39,19 @@ class User::DetailsController < ApplicationController
   end
 
   private
+
   # Temporarily stores values in FlashHash to redisplay if there
   # have been any errors - this is necessary as we don't have
   # model attributes that are persistent for the individual date
   # items.
-  # TODO: Handle empty inputs in a cleaner way than piping a 0
-  #       back into the input field
   def store_values_in_flash
 
     params[:user].each do | key, value |
-      flash[key] = value.empty? ? 0 : value
+      flash[key] = value.empty? ? "" : value
     end
 
   end
 
-  private
   def user_params
     params.require(:user).permit(:name, :dob_day, :dob_month, :dob_year, :phone_number)
   end
