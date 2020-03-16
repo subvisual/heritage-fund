@@ -623,20 +623,6 @@ RSpec.feature 'Project', type: :feature do
   # unless we stub the request, which this method does
   def salesforce_stub
     stub_request(:post, "https://test.salesforce.com/services/oauth2/token").
-        with(
-            body: {
-                client_id: "test",
-                client_secret: "test",
-                grant_type: "password",
-                password: "testtest",
-                username: "test"
-            },
-            headers: {
-                Accept: "*/*",
-                "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-                "Content-Type": "application/x-www-form-urlencoded",
-                "User-Agent": "Faraday v0.17.3"
-            }).
         to_return(status: 200, body: "", headers: {})
   end
 
