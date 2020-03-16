@@ -6,6 +6,17 @@ class IsNotSameAsMainContactValidator < ActiveModel::EachValidator
   end
 end
 
+class DoesNotMatchOtherSignatoryValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    if record == record.organisation.legal_signatories.second && value == record.organisation.legal_signatories.first.email_address
+      record.errors[attribute] << (options[:message] || "must be different to first signatory email address")
+    end
+  end
+end
+
+
+
+
 class LegalSignatory < ApplicationRecord
   belongs_to :organisation
   self.implicit_order_column = "created_at"
@@ -28,6 +39,7 @@ class LegalSignatory < ApplicationRecord
   validates :email_address,
             format: { with: URI::MailTo::EMAIL_REGEXP },
             is_not_same_as_main_contact: true,
+            does_not_match_other_signatory: true,
             unless: lambda {
                 |record| ignore_validation_for_empty_second_signatory?(record)
             }

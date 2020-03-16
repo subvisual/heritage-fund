@@ -303,6 +303,33 @@ describe Organisation::SignatoriesController do
 
     end
 
+    it "should not allow first signatory email to match second signatory email" do
+      put :update,
+          params: {
+              organisation_id: subject.current_user.organisation.id,
+              organisation: {
+                  legal_signatories_attributes: {
+                      "0": {
+                          name: "Joe Bloggs",
+                          email_address: "joe@bloggs.com",
+                          phone_number: "07123456789"
+                      },
+                      "1": {
+                          name: "Joe Bloggs",
+                          email_address: "joe@bloggs.com",
+                          phone_number: "07987654321"
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+      expect(assigns(:organisation)
+                 .legal_signatories.second.errors[:email_address][0])
+          .to eq("must be different to first signatory email address")
+    end
+
   end
 
 end
