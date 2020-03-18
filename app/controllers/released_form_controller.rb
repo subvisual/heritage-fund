@@ -1,4 +1,6 @@
 class ReleasedFormController < ApplicationController
+  http_basic_authenticate_with name: Rails.configuration.x.consumer.username, password: Rails.configuration.x.consumer.password
+
     protect_from_forgery with: :null_session
     def receive
        @project = Project.find(params[:ApplicationId])
