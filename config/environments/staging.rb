@@ -127,5 +127,7 @@ Rails.application.configure do
   config.x.salesforce.host = "test.salesforce.com"
   config.lograge.enabled = true
   config.assets.quiet = true
+  config.x.consumer.username = ENV.fetch("CONSUMER_USERNAME")
+  config.x.consumer.password = ENV.fetch("CONSUMER_PASSWORD")
 
 end

@@ -55,4 +55,6 @@ Rails.application.configure do
 
   config.x.support_email_address = "test@test.com"
   config.x.ideal_postcodes.api_key = "test"
+  config.x.consumer.username = 'test'
+  config.x.consumer.password = 'test'
 end

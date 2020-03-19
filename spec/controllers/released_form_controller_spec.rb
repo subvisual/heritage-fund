@@ -1,6 +1,11 @@
 require "rails_helper"
 
 describe ReleasedFormController do
+  before(:each) do
+    username = Rails.configuration.x.consumer.username
+    password = Rails.configuration.x.consumer.password
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
+  end
 
   describe "POST #receive" do
 

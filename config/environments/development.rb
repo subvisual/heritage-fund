@@ -79,5 +79,6 @@ Rails.application.configure do
 
   config.action_view_component.preview_path =
       "#{Rails.root}/spec/components/previews"
-
+  config.x.consumer.username = 'test'
+  config.x.consumer.password = 'test'
 end
