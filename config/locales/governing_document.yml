@@ -5,7 +5,7 @@ en-GB:
     before_we_assess: "Before we assess your application, we need to see a copy of your organisation's governing document."
     we_do_not_need: "You do not need to upload your governing document if you are:"
     a_public_org: "a public organisation, for example, a local authority,"
-    a_charity: "a charity registered with the Charity Commission."
+    a_charity: "a charity registered with the Charity Commissions for England, Scotland or Northern Ireland."
     one_of_the_following: "one of the following church organisations:"
     church_types:
       baptist_church: "Baptist Church"
