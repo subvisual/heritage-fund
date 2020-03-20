@@ -79,7 +79,7 @@ Rails.application.routes.draw do
       get ':project_id/key-dates', to: 'dates#show', as: :dates_get
       put ':project_id/key-dates', to: 'dates#update', as: :dates_put
 
-      get ':project_id/location', to: 'project_location#project_location', as: :location_get
+      get ':project_id/location', to: 'project_location#show', as: :location_get
       put ':project_id/location', to: 'project_location#update', as: :location_put
 
       # TODO: Refactor this into a single place for both organisation and projects

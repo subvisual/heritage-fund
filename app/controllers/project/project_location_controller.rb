@@ -77,7 +77,7 @@ class Project::ProjectLocationController < ApplicationController
 
     else
 
-      render :project_location
+      render :show
 
     end
 
