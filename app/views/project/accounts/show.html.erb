@@ -90,6 +90,11 @@
                            direct_upload: true,
                            class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}"
             %>
+
+            <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html
+            for the reasoning behind this workaround %>
+            <input type="hidden" name="ieworkaround">
+
           </div>
 
           <div class="govuk-form-group">

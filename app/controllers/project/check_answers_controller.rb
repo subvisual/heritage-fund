@@ -23,9 +23,9 @@ class Project::CheckAnswersController < ApplicationController
 
         logger.info "Organisation is either a registered company or an " \
                     "individual private owner of heritage, redirecting to " \
-                    "declaration page"
+                    "accounts page"
 
-        redirect_to :three_to_ten_k_project_confirm_declaration_get
+        redirect_to :three_to_ten_k_project_accounts_get
 
       else
 

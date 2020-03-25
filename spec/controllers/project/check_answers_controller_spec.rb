@@ -73,7 +73,7 @@ describe Project::CheckAnswersController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_confirm_declaration_get)
+          .to redirect_to(:three_to_ten_k_project_accounts_get)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -106,7 +106,7 @@ describe Project::CheckAnswersController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_confirm_declaration_get)
+          .to redirect_to(:three_to_ten_k_project_accounts_get)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 

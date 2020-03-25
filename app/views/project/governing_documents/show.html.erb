@@ -118,6 +118,10 @@
                 %>
               </div>
 
+              <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html
+            for the reasoning behind this workaround %>
+              <input type="hidden" name="ieworkaround">
+
               <div class="govuk-form-group">
               <%=
                 render(ButtonComponent.new(

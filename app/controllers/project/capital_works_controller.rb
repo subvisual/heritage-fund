@@ -40,10 +40,7 @@ class Project::CapitalWorksController < ApplicationController
 
       log_errors(@project)
 
-      respond_to do |format|
-        format.html { render :show }
-        format.js { render :show }
-      end
+      render :show
 
     end
 
