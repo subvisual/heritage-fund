@@ -31,7 +31,9 @@ class ApplicationAttachmentsToSalesforceJob < ApplicationJob
   # @param record [ActiveRecord]
   # @param attachment_field [Symbol]
   # @param description [String] file description
-  def perform(salesforce_case_id, record, attachment_field, description)
+  # @param attachment_index [Integer] index of file attachment when attachment_field
+  #                                   refers to a collection of files
+  def perform(salesforce_case_id, record, attachment_field, description, attachment_index = nil)
 
     client = Restforce.new(
         username: Rails.configuration.x.salesforce.username,
@@ -43,7 +45,14 @@ class ApplicationAttachmentsToSalesforceJob < ApplicationJob
         api_version: SALESFORCE_API_VERSION
     )
 
-    file = record.send(attachment_field)
+    # If an attachment_index parameter is found, then we should perform
+    # record.send on the element within the array, else simply perform
+    # record.send on the passed in attachment_field
+    if attachment_index
+      file = record.send(attachment_field)[attachment_index]
+    else
+      file = record.send(attachment_field)
+    end
 
     filename = file.filename.to_s
     path = "/services/data/v#{SALESFORCE_API_VERSION}/sobjects/ContentVersion"

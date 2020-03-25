@@ -1,0 +1,12 @@
+en-GB:
+  accounts:
+    title: "Upload your organisation's accounts"
+    heading: "Upload your organisation's accounts"
+    before_we_assess: "Before we assess your application, we need to see your organisation's most recently audited or verified accounts."
+    we_do_not_need: "You do not need upload your accounts if you are:"
+    do_not_need:
+      public_org: "a public organisation. For example, a local authority."
+    if_new_org: "If you are a new organisation and do not have audited accounts, you can submit your last 3 bank statements, or a letter from your bank confirming that you have opened an account."
+    make_sure_verified: "Make sure your accounts are recently audited or verified by an accountant."
+    no_accounts_file: "You have not added accounts"
+    accounts_file: "Accounts Files"

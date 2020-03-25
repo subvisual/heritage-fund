@@ -123,12 +123,16 @@ function createAndAppendListItem(message, attribute, modelName) {
 
     } else {
 
-        if (attribute === "governing_document_file") {
-            linkElement.setAttribute("href", "#project_governing_document_file")
-        } else {
-            // Specific to the Capital work page
-            linkElement.setAttribute("href", attribute === "capital_work" ?
-                "#project_capital_work_false" : "#project_capital_work_true");
+        switch (attribute) {
+            case "governing_document_file":
+                linkElement.setAttribute("href", "#project_governing_document_file");
+                break;
+            case "accounts_files":
+                linkElement.setAttribute("href", "#project_accounts_files");
+                break;
+            default:
+                linkElement.setAttribute("href", attribute === "capital_work" ?
+                    "#project_capital_work_false" : "#project_capital_work_true");
         }
 
     }

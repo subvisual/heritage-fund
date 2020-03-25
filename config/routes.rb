@@ -224,6 +224,9 @@ Rails.application.routes.draw do
           to: 'governing_documents#update',
           as: :governing_docs_put
 
+      get ':project_id/accounts', to: 'accounts#show', as: :accounts_get
+      put ':project_id/accounts', to: 'accounts#update', as: :accounts_put
+
     end
 
   end

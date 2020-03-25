@@ -1,0 +1,34 @@
+<% if @project.errors.any? %>
+
+document.title = "Error: <%== I18n.t('accounts.title') %>";
+
+createSummaryErrorsSkeleton();
+
+var errorKeys = [];
+
+<% @project.errors.each do |attr, msg| %>
+
+addSummaryError(
+    false,
+    "<%= attr %>",
+    "<%= msg %>",
+    "project"
+);
+
+addFormGroupError(
+    "accounts-form-group-main",
+    "form-group-errors",
+    "<%= attr %>",
+    "<%= msg %>",
+    "project"
+);
+
+<% end %>
+
+removeFormGroupErrors(
+    "project",
+    ["accounts_files"],
+    errorKeys
+);
+
+<% end %>

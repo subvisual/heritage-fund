@@ -37,6 +37,11 @@ class ApplicationToSalesforceJob < ApplicationJob
 
       ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project, :capital_work_file, "capital work attachment") if project.capital_work_file.attached?
       ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project, :governing_document_file, "governing document attachment") if project.governing_document_file.attached?
+
+      project.accounts_files.each_with_index do |af, idx|
+        ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project, :accounts_files, "accounts attachment ##{idx}", idx)
+      end
+
       project.evidence_of_support.each do |eos|
         ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, eos, :evidence_of_support_files, eos.description)
       end

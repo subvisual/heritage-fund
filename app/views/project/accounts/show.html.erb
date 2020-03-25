@@ -1,0 +1,161 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @project,
+             page_title: I18n.t("accounts.title")
+         }
+%>
+
+<noscript><% no_js = true %></noscript>
+
+<div id="summary-errors"></div>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @project,
+             first_form_element: :project_accounts_files
+         } if @project.errors.any?
+%>
+
+<%=
+  form_with model: @project,
+            url: :three_to_ten_k_project_accounts_put,
+            method: :put,
+            remote: no_js ? false : true do |f|
+%>
+
+<div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-margin-bottom-6">
+            <h1 class="govuk-fieldset__heading">
+                <%= I18n.t("accounts.heading") %>
+            </h1>
+        </legend>
+
+        <p class="govuk-body">
+            <%= I18n.t("accounts.before_we_assess") %>
+        </p>
+
+        <p class="govuk-body">
+            <%= I18n.t("accounts.we_do_not_need") %>
+        </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li><%= I18n.t("accounts.do_not_need.public_org") %></li>
+        </ul>
+
+        <p class="govuk-body">
+            <%= I18n.t("accounts.if_new_org") %>
+        </p>
+
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Important </span>
+            <%= I18n.t("accounts.make_sure_verified") %>
+          </strong>
+        </div>
+
+      <div id="project.accounts_files-form-group"></div>
+
+      <div id="accounts-form-group-main"
+           class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
+
+        <div class="govuk-form-group" id="file-upload-group">
+
+          <div id="form-group-errors"></div>
+
+          <%=
+            render partial: "partials/form_group_errors",
+                   locals: {
+                       form_object: @project
+                   } if @project.errors.any?
+          %>
+
+          <div id="project.accounts_files-errors"></div>
+
+          <div class="govuk-form-group">
+            <%=
+              f.label :accounts_files,
+                      "Add your accounts",
+                      class: "govuk-heading-m nlhf-content-highlight__title"
+            %>
+
+            <%=
+              f.file_field :accounts_files,
+                           multiple: true,
+                           direct_upload: true,
+                           class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}"
+            %>
+          </div>
+
+          <div class="govuk-form-group">
+            <%=
+              render(ButtonComponent.new(
+                  text: 'Add accounts',
+                  classes: "govuk-button--secondary",
+                  ))
+            %>
+          </div>
+
+        </div>
+
+        <% unless @project.accounts_files.attached? %>
+
+          <p class="govuk-body">
+            <%= I18n.t("accounts.no_accounts_file") %>
+          </p>
+
+        <% else %>
+
+          <table class="govuk-table">
+
+            <thead class="govuk-table__head">
+
+            <tr class="govuk-table__row">
+
+              <th scope="col" class="govuk-table__header">
+                <%= I18n.t("accounts.accounts_file") %>
+              </th>
+
+            </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+
+            <% @project.accounts_files.each do |af| %>
+
+              <tr>
+                <td>
+                  <%= link_to(af.blob.filename,
+                              rails_blob_path(af, disposition: "attachment"))
+                  %>
+                </td>
+              </tr>
+
+            <% end %>
+
+            </tbody>
+          </table>
+
+        <% end %>
+
+      </div>
+
+    </fieldset>
+
+<% end %>
+
+  <%=
+    render(
+        ButtonComponent.new(
+            element: "a",
+            href: three_to_ten_k_project_confirm_declaration_get_url
+        )
+    )
+  %>
+
+</div>
+<!-- /# accounts-form-group-main -->

@@ -49,4 +49,33 @@ describe ApplicationAttachmentsToSalesforceJob, type: :job do
     expect(Rails.logger).to receive(:info).with('Successfully uploaded file example.txt on Salesforce Case ID NS-XXX')
     expect { ApplicationAttachmentsToSalesforceJob.perform_now('NS-XXX', project_with_attachment, :capital_work_file, 'description') }.not_to raise_exception
   end
+
+  it 'succeeds with multiple files given success response from Salesforce' do
+    stub_request(:post, request_url).
+        with(
+            headers: request_headers).
+        to_return(status: 201, body: '{
+    "id" : "068D00000000pgOIAQ",
+    "errors" : [ ],
+    "success" : true
+}')
+
+    project_with_multiple_attachments = create(:project)
+    project_with_multiple_attachments.accounts_files.attach(
+        [
+            io: File.open(Rails.root.join 'spec/fixtures/files/example.txt'),
+            filename: 'example.txt',
+            content_type: 'text/plain'
+        ],
+        [
+            io: File.open(Rails.root.join 'spec/fixtures/files/example.txt'),
+            filename: 'example.txt',
+            content_type: 'text/plain'
+        ]
+    )
+
+    allow(Rails.logger).to receive(:info)
+    expect(Rails.logger).to receive(:info).with('Successfully uploaded file example.txt on Salesforce Case ID NS-XXX')
+    expect { ApplicationAttachmentsToSalesforceJob.perform_now('NS-XXX', project_with_multiple_attachments, :accounts_files, 'description', 0) }.not_to raise_exception
+  end
 end
