@@ -119,3 +119,21 @@ underscore camel-cased names here, such as where we've used `MyPage`).
 
 For more on the Ruby on Rails `generate` command, [see the documentation](
 https://guides.rubyonrails.org/command_line.html#rails-generate).
+
+## Toggling the BAU Flipper feature
+
+To turn on business as usual functionality, a BAU Flipper needs to exist.
+
+This flipper value should be `true` for BAU functionality to work.
+
+The app will initially start with the row missing. It can be inserted with:
+
+```postgresql
+insert into flipper_gates (feature_key, key, value, created_at, updated_at) Values('bau', 'boolean', true, NOW(), NOW());
+```
+
+Update the flipper row with:
+
+```postgresql
+update flipper_gates set value = false;
+```

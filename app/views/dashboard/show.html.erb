@@ -6,6 +6,19 @@
          }
 %>
 
+<% unless Flipper.enabled?(:bau) %>
+  <div class="nlhf-banner">
+    <svg class="nlhf-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+      <path d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8
+  C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z" /></svg>
+    <div class="nlhf-banner__message">
+      <p class="govuk-heading-m">Important announcement</p>
+      <p class="govuk-body">You will not be able to submit an application until at least October 2020. The service is temporarily closed because of the coronavirus outbreak. </p>
+      <p class="govuk-body govuk-!-margin-bottom-3"><a href="https://www.heritagefund.org.uk/news/coronavirus-update">Find out more about our COVID-19 response</a></p>
+    </div>
+  </div>
+<% end %>
+
 <h1 class="govuk-heading-xl">
   <%= I18n.t("dashboard.heading") %>
 </h1>
@@ -47,12 +60,16 @@
     <% end %>
   </ul>
 
-  <p class="govuk-body">
-    <%= I18n.t("dashboard.you_can_also") %>
-  </p>
+  <%# TODO: remove bau flipper %>
+  <% if  Flipper.enabled?(:bau) %>
+    <p class="govuk-body">
+        <%= I18n.t("dashboard.you_can_also") %>
+    </p>
+  <% end %>
 
 <% end %>
 
+<%# TODO: remove bau flipper %>
 <%=
   render(
       ButtonComponent.new(
@@ -61,7 +78,7 @@
           is_start_button: true,
           text: I18n.t("dashboard.start_a_new_project_button")
       )
-  )
+  ) if Flipper.enabled?(:bau)
 %>
 
 <%= content_for :tracking_override do %>/project-dashboard<% end %>

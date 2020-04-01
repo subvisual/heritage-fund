@@ -3,218 +3,229 @@ include ActionView::Helpers::NumberHelper
 
 RSpec.feature 'Project', type: :feature do
 
+  # TODO remove bau flipper
   # This tests for the successful creation of a generic project application,
   # which has almost all fields filled in.
   scenario 'Successful submission of an application' do
 
-    salesforce_stub
+    begin
 
-    user = create(:user)
+      Flipper[:bau].enable
 
-    user.organisation.update(
-        name: "Test Organisation",
-        org_type: "church_organisation",
-        line1: "10 Downing Street",
-        line2: "Westminster",
-        townCity: "London",
-        county: "London",
-        postcode: "SW1A 2AA"
-    )
+      salesforce_stub
 
-    legal_signatory = build(:legal_signatory)
-    legal_signatory.name = "Joe Bloggs"
-    legal_signatory.email_address = "joe@bloggs.com"
-    legal_signatory.phone_number = "07123456789"
+      user = create(:user)
 
-    user.organisation.legal_signatories.append(legal_signatory)
+      user.organisation.update(
+          name: "Test Organisation",
+          org_type: "church_organisation",
+          line1: "10 Downing Street",
+          line2: "Westminster",
+          townCity: "London",
+          county: "London",
+          postcode: "SW1A 2AA"
+      )
 
-    login_as(user, scope: :user)
+      legal_signatory = build(:legal_signatory)
+      legal_signatory.name = "Joe Bloggs"
+      legal_signatory.email_address = "joe@bloggs.com"
+      legal_signatory.phone_number = "07123456789"
 
-    visit '/'
+      user.organisation.legal_signatories.append(legal_signatory)
 
-    expect(page).to have_text I18n.t("dashboard.start_a_new_project_button")
+      login_as(user, scope: :user)
 
-    click_link_or_button I18n.t("dashboard.start_a_new_project_button")
+      visit '/'
 
-    expect(page).to have_text 'Start Now'
+      expect(page).to have_text I18n.t("dashboard.start_a_new_project_button")
 
-    click_link_or_button 'Start Now'
+      click_link_or_button I18n.t("dashboard.start_a_new_project_button")
 
-    expect(page)
-        .to have_text 'Give your project a title or name that we can refer ' \
+      expect(page).to have_text 'Start Now'
+
+      click_link_or_button 'Start Now'
+
+      expect(page)
+          .to have_text 'Give your project a title or name that we can refer ' \
                       'to it by'
 
-    enter_and_save_project_title("Test project")
+      enter_and_save_project_title("Test project")
 
-    expect(page).to have_text "When will your project happen?"
+      expect(page).to have_text "When will your project happen?"
 
-    fill_in 'project[start_date_day]', with: '31'
-    fill_in 'project[start_date_month]', with: '1'
-    fill_in 'project[start_date_year]', with: '2031'
-    fill_in 'project[end_date_day]', with: '31'
-    fill_in 'project[end_date_month]', with: '1'
-    fill_in 'project[end_date_year]', with: '2032'
+      fill_in 'project[start_date_day]', with: '31'
+      fill_in 'project[start_date_month]', with: '1'
+      fill_in 'project[start_date_year]', with: '2031'
+      fill_in 'project[end_date_day]', with: '31'
+      fill_in 'project[end_date_month]', with: '1'
+      fill_in 'project[end_date_year]', with: '2032'
 
-    click_link_or_button 'Save and continue'
+      click_link_or_button 'Save and continue'
 
-    expect(page).to have_text "Is the project taking place at the same " \
+      expect(page).to have_text "Is the project taking place at the same " \
                               "location as your organisation's address?"
 
-    choose "Yes, the project is taking place at the same location as my " \
+      choose "Yes, the project is taking place at the same location as my " \
            "organisation's address"
 
-    click_link_or_button 'Save and continue'
+      click_link_or_button 'Save and continue'
 
-    expect(page).to have_text "Describe your idea"
+      expect(page).to have_text "Describe your idea"
 
-    enter_and_save_project_description("A description of my project")
+      enter_and_save_project_description("A description of my project")
 
-    expect(page).to have_text "Will capital work be part of your project?"
+      expect(page).to have_text "Will capital work be part of your project?"
 
-    enter_and_save_capital_work(false, false)
+      enter_and_save_capital_work(false, false)
 
-    expect(page).to have_text "Do you need permission from anyone else to " \
+      expect(page).to have_text "Do you need permission from anyone else to " \
                               "do your project?"
 
-    enter_and_save_project_permission("No, I do not need permission")
+      enter_and_save_project_permission("No, I do not need permission")
 
-    expect(page).to have_text "What difference will your project make?"
+      expect(page).to have_text "What difference will your project make?"
 
-    enter_and_save_project_difference("Description of difference")
+      enter_and_save_project_difference("Description of difference")
 
-    expect(page).to have_text "Why is your project important to your community?"
+      expect(page).to have_text "Why is your project important to your community?"
 
-    enter_and_save_project_importance("Description of importance")
+      enter_and_save_project_importance("Description of importance")
 
-    expect(page).to have_text "The heritage of your project: how do you plan " \
+      expect(page).to have_text "The heritage of your project: how do you plan " \
                               "to make it available once the project is over?"
 
-    enter_and_save_project_heritage("Description of heritage")
+      enter_and_save_project_heritage("Description of heritage")
 
-    expect(page).to have_text "Why is your organisation best placed to " \
+      expect(page).to have_text "Why is your organisation best placed to " \
                               "deliver this project?"
 
-    enter_and_save_project_best_placed("Description of best placed")
+      enter_and_save_project_best_placed("Description of best placed")
 
-    expect(page).to have_text "How will your project involve a wider range " \
+      expect(page).to have_text "How will your project involve a wider range " \
                               "of people?"
 
-    enter_and_save_project_involvement("Description of involvement")
+      enter_and_save_project_involvement("Description of involvement")
 
-    expect(page).to have_text "Will your project achieve any of our other " \
+      expect(page).to have_text "Will your project achieve any of our other " \
                               "outcomes?"
 
-    choose_and_save_project_outcomes([2,4,6])
+      choose_and_save_project_outcomes([2,4,6])
 
-    expect(page).to have_text "How much will your project cost"
+      expect(page).to have_text "How much will your project cost"
 
-    add_and_save_project_costs(
-        [
-            {
-                cost_type: "Professional fees",
-                description: "Costing for professional fees",
-                amount: 500
-            },
-            {
-                cost_type: "Recruitment",
-                description: "Costing for recruitment",
-                amount: 1000
-            }
-        ]
-    )
+      add_and_save_project_costs(
+          [
+              {
+                  cost_type: "Professional fees",
+                  description: "Costing for professional fees",
+                  amount: 500
+              },
+              {
+                  cost_type: "Recruitment",
+                  description: "Costing for recruitment",
+                  amount: 1000
+              }
+          ]
+      )
 
-    expect(page).to have_text "Are you getting any cash contributions " \
+      expect(page).to have_text "Are you getting any cash contributions " \
                               "to your project?"
 
-    choose_and_save_cash_contributions(true)
+      choose_and_save_cash_contributions(true)
 
-    expect(page).to have_text "Cash contributions"
+      expect(page).to have_text "Cash contributions"
 
-    add_and_save_cash_contributions(
-        [
-            {
-                description: "Test cash contribution",
-                secured: "no",
-                amount: 250
-            }
-        ]
-    )
+      add_and_save_cash_contributions(
+          [
+              {
+                  description: "Test cash contribution",
+                  secured: "no",
+                  amount: 250
+              }
+          ]
+      )
 
-    expect(page).to have_text "Your grant request"
+      expect(page).to have_text "Your grant request"
 
-    click_save_and_continue_button
+      click_save_and_continue_button
 
-    expect(page).to have_text "Non-cash contributions"
+      expect(page).to have_text "Non-cash contributions"
 
-    add_and_save_non_cash_contributions(
-        [
-            {
-                description: "Test non-cash contribution",
-                amount: 250
-            }
-        ]
-    )
+      add_and_save_non_cash_contributions(
+          [
+              {
+                  description: "Test non-cash contribution",
+                  amount: 250
+              }
+          ]
+      )
 
-    expect(page).to have_text "Volunteers"
+      expect(page).to have_text "Volunteers"
 
-    add_and_save_volunteers(
-        [
-            {
-                description: "Test volunteer",
-                hours: 25
-            }
-        ]
-    )
+      add_and_save_volunteers(
+          [
+              {
+                  description: "Test volunteer",
+                  hours: 25
+              }
+          ]
+      )
 
-    expect(page).to have_text "Evidence of support"
+      expect(page).to have_text "Evidence of support"
 
-    add_and_save_multiple_evidence_of_support(
-        [
-            {
-                description: "Test evidence"
-            }
-        ]
-    )
+      add_and_save_multiple_evidence_of_support(
+          [
+              {
+                  description: "Test evidence"
+              }
+          ]
+      )
 
-    expect(page).to have_text "Check your answers"
-    expect(page).to have_text "Test project"
-    expect(page).to have_text "31 Jan 2031"
-    expect(page).to have_text "31 Jan 2032"
-    expect(page).to have_text "10 Downing Street"
-    expect(page).to have_text "Westminster"
-    expect(page).to have_text "London"
-    expect(page).to have_text "SW1A 2AA"
-    expect(page).to have_text "A description of my project"
-    expect(page).to have_text "Description of difference"
-    expect(page).to have_text "Description of importance"
-    expect(page).to have_text "Description of heritage"
-    expect(page).to have_text "Description of best placed"
-    expect(page).to have_text "Description of involvement"
-    expect(page).to have_text "Heritage will be in a better condition"
-    expect(page).to have_text "People will have developed skills"
-    expect(page).to have_text "People will have a greater wellbeing"
-    expect(page).to have_text "Costing for professional fees"
-    expect(page).to have_text "Costing for recruitment"
-    expect(page).to have_text "Test cash contribution"
-    expect(page).to have_text "Test non-cash contribution"
-    expect(page).to have_text "Test volunteer"
-    expect(page).to have_text "Test evidence"
+      expect(page).to have_text "Check your answers"
+      expect(page).to have_text "Test project"
+      expect(page).to have_text "31 Jan 2031"
+      expect(page).to have_text "31 Jan 2032"
+      expect(page).to have_text "10 Downing Street"
+      expect(page).to have_text "Westminster"
+      expect(page).to have_text "London"
+      expect(page).to have_text "SW1A 2AA"
+      expect(page).to have_text "A description of my project"
+      expect(page).to have_text "Description of difference"
+      expect(page).to have_text "Description of importance"
+      expect(page).to have_text "Description of heritage"
+      expect(page).to have_text "Description of best placed"
+      expect(page).to have_text "Description of involvement"
+      expect(page).to have_text "Heritage will be in a better condition"
+      expect(page).to have_text "People will have developed skills"
+      expect(page).to have_text "People will have a greater wellbeing"
+      expect(page).to have_text "Costing for professional fees"
+      expect(page).to have_text "Costing for recruitment"
+      expect(page).to have_text "Test cash contribution"
+      expect(page).to have_text "Test non-cash contribution"
+      expect(page).to have_text "Test volunteer"
+      expect(page).to have_text "Test evidence"
 
-    click_save_and_continue_button
+      click_save_and_continue_button
 
-    expect(page).to have_text "Upload your organisation's governing document"
+      expect(page).to have_text "Upload your organisation's governing document"
 
-    click_save_and_continue_button
+      click_save_and_continue_button
 
-    expect(page).to have_text "Upload your organisation's accounts"
+      expect(page).to have_text "Upload your organisation's accounts"
 
-    click_save_and_continue_button
+      click_save_and_continue_button
 
-    expect(page).to have_text "Confirm declaration"
+      expect(page).to have_text "Confirm declaration"
 
-    confirm_and_save_declaration
+      confirm_and_save_declaration
 
-    expect(page).to have_text "Your application has been submitted"
+      expect(page).to have_text "Your application has been submitted"
+
+    ensure
+
+      Flipper[:bau].disable
+
+    end
 
   end
 

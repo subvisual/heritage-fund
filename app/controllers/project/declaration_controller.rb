@@ -21,9 +21,13 @@ class Project::DeclarationController < ApplicationController
       logger.info "Triggering ApplicationToSalesforceJob for project " \
                   "ID: #{@project.id}"
 
-      ApplicationToSalesforceJob.perform_later(@project)
-
-      redirect_to :three_to_ten_k_project_application_submitted_get
+      # TODO: Remove bau flipper
+      if Flipper.enabled?(:bau)
+        ApplicationToSalesforceJob.perform_later(@project)
+        redirect_to :three_to_ten_k_project_application_submitted_get
+      else
+        redirect_to :three_to_ten_k_project_confirm_declaration_get
+      end
 
     else
 

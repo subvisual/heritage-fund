@@ -244,8 +244,19 @@ Rails.application.routes.draw do
   get 'support/question-or-feedback', to: 'support#question_or_feedback'
   post 'support/question-or-feedback', to: 'support#process_question'
 
+  # TODO: Remove bau flipper
+  constraints lambda { !Flipper.enabled?(:bau) } do
+      devise_scope :user do
+        get "/users/sign_up",  :to => "devise/sessions#new"
+      end
+  end
+
   devise_for :users
-  get 'start-a-project', to: 'home#show', as: :start_a_project
+
+  # TODO: Remove bau flipper
+  get 'start-a-project', to: 'home#show', constraints: lambda { Flipper.enabled?(:bau) }
+  get 'start-a-project', to: 'dashboard#show', constraints: lambda { !Flipper.enabled?(:bau) }
+
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"
   end

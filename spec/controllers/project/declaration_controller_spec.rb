@@ -105,10 +105,46 @@ describe Project::DeclarationController do
 
     end
 
+    # TODO remove bau flipper
     it "should successfully update if a valid confirm_declaration param is " \
        "passed" do
 
-      expect(ApplicationToSalesforceJob).to \
+      begin
+
+        Flipper[:bau].enable
+
+        expect(ApplicationToSalesforceJob).to \
+         receive(:perform_later).with(project)
+
+        put :update_confirm_declaration,
+            params: {
+                project_id: project.id,
+                project: {
+                    user_research_declaration: "true",
+                    confirm_declaration: "true"
+                }
+            }
+
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(
+                                :three_to_ten_k_project_application_submitted_get
+                            )
+
+        expect(assigns(:project).errors.empty?).to eq(true)
+        expect(assigns(:project).confirm_declaration).to eq("true")
+        expect(assigns(:project).user_research_declaration).to eq(true)
+
+      ensure
+        Flipper[:bau].disable
+      end
+
+    end
+
+  # TODO remove bau flipper
+  it "should successfully update based on Flipper[:bau] if a valid " \
+     "confirm_declaration param is passed" do
+
+      expect(ApplicationToSalesforceJob).not_to \
          receive(:perform_later).with(project)
 
       put :update_confirm_declaration,
@@ -122,16 +158,16 @@ describe Project::DeclarationController do
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
-                              :three_to_ten_k_project_application_submitted_get
+                              :three_to_ten_k_project_confirm_declaration_get
                           )
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).confirm_declaration).to eq("true")
       expect(assigns(:project).user_research_declaration).to eq(true)
 
-    end
-
   end
+
+end
 
   describe "PUT #update_declaration" do
 

@@ -93,3 +93,5 @@ gem "lograge", "~> 0.11.2"
 gem "silencer", "~> 1.0"
 
 gem "actionview-component", "~> 1.10.0"
+
+gem "flipper-active_record", "~> 0.17.2"
