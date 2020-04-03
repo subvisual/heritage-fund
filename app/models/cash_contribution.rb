@@ -6,7 +6,10 @@ class CashContribution < ApplicationRecord
   has_one_attached :cash_contribution_evidence_files
 
   validates :description, presence: true
-  validates :amount, numericality: { only_integer: true }
+  validates :amount, numericality: {
+      only_integer: true,
+      greater_than: 0
+  }
   validates_inclusion_of :secured, in: ["yes_with_evidence", "no", "x_not_sure", "yes_no_evidence_yet"]
 
   validate do

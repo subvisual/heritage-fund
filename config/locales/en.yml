@@ -180,6 +180,7 @@ en-GB:
               too_long: "Description of your cash contribution must be 50 words or fewer"
             amount:
               not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
             secured:
               inclusion: "Select whether or not your cash contribution is secured"
             cash_contribution_evidence_files:
@@ -190,6 +191,7 @@ en-GB:
               blank: "Enter a description of your non-cash contribution"
             amount:
               not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
         project_cost:
           attributes:
             description:
@@ -197,6 +199,7 @@ en-GB:
               too_long: "Description of your cost must be 50 words or fewer"
             amount:
               not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
             cost_type:
               blank: "Select the cost type for the project cost you are adding"
         volunteer:
@@ -205,6 +208,7 @@ en-GB:
               blank: "Enter a description of your project volunteer"
             hours:
               not_a_number: "Hours must be a number, like 5"
+              greater_than: "Hours must be greater than 0"
         evidence_of_support:
           attributes:
             description:
