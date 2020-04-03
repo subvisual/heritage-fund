@@ -1,51 +1,5 @@
-require 'ideal_postcodes'
-
-class Project::ProjectLocationController < ApplicationController
-  include ProjectContext, PostcodeLookup
-
-  # This method is used to update the project address when the project address
-  # is not located at the same place as the organisation address
-  def different_location
-
-    logger.debug "Updating address for project ID: #{@project.id}"
-
-    @project.validate_address = true
-
-    @project.update(project_params)
-
-    if @project.valid?
-
-      logger.debug "Finished updating address for project ID: #{@project.id}"
-
-      redirect_to :three_to_ten_k_project_description_get
-
-    else
-
-      logger.error "Project address invalid when attempting to update project ID: #{@project.id}"
-
-      render :entry
-
-    end
-
-  end
-
-  # Renders the initial postcode lookup view
-  # TODO: Refactor this into a single place for both
-  #       organisation and projects
-  def show_postcode_lookup
-    render :postcode_lookup
-  end
-
-  def other_location
-  end
-
-
-  def assign_address_attributes
-    assign_attributes(@project)
-
-    render :entry
-
-  end
+class Project::LocationController < ApplicationController
+  include ProjectContext
 
   def update
 
@@ -71,7 +25,7 @@ class Project::ProjectLocationController < ApplicationController
 
         logger.debug "Different location to organisation selected for project ID: #{@project.id}"
 
-        redirect_to three_to_ten_k_project_location_postcode_get_path(@project.id)
+        redirect_to postcode_path 'project', @project.id
 
       end
 

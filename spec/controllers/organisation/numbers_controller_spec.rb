@@ -64,7 +64,10 @@ describe Organisation::NumbersController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:organisation_about)
+      expect(response).to redirect_to(
+                              postcode_path 'organisation',
+                                            subject.current_user.organisation.id
+                          )
       expect(assigns(:organisation).errors.empty?).to eq(true)
 
     end
@@ -81,7 +84,10 @@ describe Organisation::NumbersController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:organisation_about)
+      expect(response).to redirect_to(
+                              postcode_path 'organisation',
+                                            subject.current_user.organisation.id
+                          )
       expect(assigns(:organisation).errors.empty?).to eq(true)
       expect(assigns(:organisation).charity_number).to eq("CHNO12345")
       expect(assigns(:organisation).company_number).to eq("CONO54321")

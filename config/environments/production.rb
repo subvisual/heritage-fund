@@ -57,7 +57,18 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store, {
+      url: CF::App::Credentials.find_by_service_label('redis')['uri'],
+      connect_timeout:    30,
+      read_timeout:       0.2,
+      write_timeout:      0.2,
+      reconnect_attempts: 1,
+      error_handler: -> (method:, returning:, exception:) {
+        # Report errors to Sentry as warnings
+        Raven.capture_exception exception, level: 'warning',
+                                tags: { method: method, returning: returning }
+      }
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :delayed_job

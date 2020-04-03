@@ -18,22 +18,25 @@ Rails.application.routes.draw do
     get 'details', to: 'details#show'
     put 'details', to: 'details#update'
 
-    get 'address', to: 'address#show_postcode_lookup'
-    put 'address', to: 'address#update'
+  end
 
-    post 'address/results',
-         to: 'address#display_address_search_results',
-         as: :search_results
-    get 'address/show',
-        to: 'address#show',
-        as: :user_address_get
-    put 'address/show',
-        to: 'address#assign_address_attributes',
-        as: :assign_address_attributes
+  scope '/:type/:id/address' do
+    get '/postcode', to: 'address#postcode_lookup'
+    post '/address-results',
+         to: 'address#display_address_search_results'
+    put '/address-details',
+        to: 'address#assign_address_attributes'
+    get '/address',
+        to: 'address#show'
+    put '/address',
+        to: 'address#update'
     # This route ensures that attempting to navigate back to the list of address results
     # redirects the user back to the search page
-    get 'address/results', to: 'address#show_postcode_lookup'
-
+    get '/address-results',
+        to: 'address#postcode_lookup'
+    # This route ensures that users can navigate back to the address details page
+    get '/address-details',
+        to: 'address#show'
   end
 
   namespace :organisation do
@@ -42,23 +45,6 @@ Rails.application.routes.draw do
       put '/type', to: 'type#update'
       get '/numbers', to: 'numbers#show'
       put '/numbers', to: 'numbers#update'
-
-      # The following routes relate to the address lookup flow for an organisation
-      # TODO: Refactor these into a reusable component for address lookup
-      get '/about', to: 'about#show_postcode_lookup'
-      put '/about', to: 'about#update'
-      post '/about/address-results',
-           to: 'about#display_address_search_results',
-           as: :about_search_results
-      get '/about/address',
-          to: 'about#show',
-          as: :about_address_get
-      put '/about/address',
-          to: 'about#assign_address_attributes',
-          as: :about_assign_address_attributes
-      # This route ensures that attempting to navigate back to the list of address results
-      # redirects the user back to the search page
-      get '/about/address-results', to: 'about#show_postcode_lookup'
 
       get '/mission', to: 'mission#show'
       put '/mission', to: 'mission#update'
@@ -79,18 +65,8 @@ Rails.application.routes.draw do
       get ':project_id/key-dates', to: 'dates#show', as: :dates_get
       put ':project_id/key-dates', to: 'dates#update', as: :dates_put
 
-      get ':project_id/location', to: 'project_location#show', as: :location_get
-      put ':project_id/location', to: 'project_location#update', as: :location_put
-
-      # TODO: Refactor this into a single place for both organisation and projects
-      get ':project_id/location/postcode', to: 'project_location#show_postcode_lookup', as: :location_postcode_get
-      post ':project_id/location/address-results', to: 'project_location#display_address_search_results', as: :location_search_results
-      put ':project_id/location/address', to: 'project_location#assign_address_attributes', as: :location_assign_address_attributes
-      get ':project_id/location/address', to: 'project_location#entry', as: :location_address_get
-      put ':project_id/location/address/add', to: 'project_location#different_location', as: :location_address_put
-      # This route ensures that attempting to navigate back to the list of address results
-      # redirects the user back to the search page
-      get ':project_id/location/address-results', to: 'project_location#show_postcode_lookup'
+      get ':project_id/location', to: 'location#show', as: :location_get
+      put ':project_id/location', to: 'location#update', as: :location_put
 
       get ':project_id/description', to: 'description#show', as: :description_get
       put ':project_id/description', to: 'description#update', as: :description_put
@@ -246,12 +222,16 @@ Rails.application.routes.draw do
 
   # TODO: Remove bau flipper
   constraints lambda { !Flipper.enabled?(:bau) } do
-      devise_scope :user do
-        get "/users/sign_up",  :to => "devise/sessions#new"
-      end
+    devise_scope :user do
+      get "/users/sign_up",  :to => "devise/sessions#new"
+    end
   end
 
-  devise_for :users
+  # Override the Devise registration controller
+  devise_for :users,
+             :controllers  => {
+                 :registrations => 'user/registrations'
+             }
 
   # TODO: Remove bau flipper
   get 'start-a-project', to: 'home#show', constraints: lambda { Flipper.enabled?(:bau) }

@@ -1,2 +1,0 @@
-module Project::ProjectPermissionHelper
-end

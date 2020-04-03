@@ -1,0 +1,109 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @model_object,
+             page_title: "Address details"
+         }
+%>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @model_object,
+    first_form_element: @type == "organisation" ? :organisation_name : :"#{@type}_line1"
+} if @model_object.errors.any? %>
+
+<%# todo: Move this to a _partial when headers are consistent across the service %>
+<% if @type == "organisation" || @type == "project" %>
+  <h1 class="govuk-heading-l" aria-label="Heading">About your <%= @type %></h1>
+<% else %>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">Add your details</span>
+    Enter your address details
+  </h1>
+<% end %>
+
+
+<% if @type == "organisation" %>
+  <p class="govuk-body" aria-label="information">Your organisation must be based in the UK</p>
+<% end %>
+
+<% if @type == "organisation" || @type == "project" %>
+  <h2 class="govuk-heading-m" aria-label="Heading">Enter
+    your <%= "#{@type}" %> address details</h2>
+<% end%>
+
+<%= form_for @model_object, url: :address, method: :put do |f|  %>
+
+  <% if @type == "organisation" %>
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error'}" if
+                                         @model_object.errors[:name].any? %>">
+      <%= f.label :name, "Organisation name", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @model_object,
+                          input_field_id: :name} if @model_object.errors[:name].any? %>
+      <%= f.text_field :name,
+                       autocomplete: 'organization',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @model_object.errors[:name].any?}" %>
+    </div>
+  <% end %>
+
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error'}" if
+                                         @model_object.errors[:line1].any? %>">
+      <%= f.label :line1, "Address line 1", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @model_object,
+                          input_field_id: :line1} if @model_object.errors[:line1].any? %>
+      <%= f.text_field :line1,
+                       autocomplete: 'address-line1',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @model_object.errors[:line1].any?}" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :line2, "Address line 2", class: "govuk-label" %>
+      <%= f.text_field :line2,
+                       autocomplete: 'address-line2',
+                       class: "govuk-input govuk-input--width-20" %>
+    </div>
+
+    <div class="govuk-form-group">
+      <%= f.label :line3, "Address line 3", class: "govuk-label" %>
+      <%= f.text_field :line3,
+                       autocomplete: 'address-line3',
+                       class: "govuk-input govuk-input--width-20" %>
+    </div>
+
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error'}" if
+                                         @model_object.errors[:townCity].any? %>">
+      <%= f.label :townCity, "Town", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @model_object,
+                          input_field_id: :townCity} if @model_object.errors[:townCity].any? %>
+      <%= f.text_field :townCity,
+                       autocomplete: 'address-level2',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @model_object.errors[:townCity].any?}" %>
+    </div>
+
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error'}" if
+                                         @model_object.errors[:county].any? %>">
+      <%= f.label :county, "County", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @model_object,
+                          input_field_id: :county} if @model_object.errors[:county].any? %>
+      <%= f.text_field :county,
+                       autocomplete: 'address-level1',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @model_object.errors[:county].any?}" %>
+    </div>
+
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error'}" if
+                                         @model_object.errors[:postcode].any? %>">
+      <%= f.label :postcode, "Postcode", class: "govuk-label" %>
+      <%= render partial: "partials/form_input_errors",
+                 locals: {form_object: @model_object,
+                          input_field_id: :postcode} if @model_object.errors[:postcode].any? %>
+      <%= f.text_field :postcode,
+                       autocomplete: 'postal-code',
+                       class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @model_object.errors[:postcode].any?}" %>
+    </div>
+
+    <%= f.save_and_continue %>
+
+<% end %>

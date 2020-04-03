@@ -24,7 +24,8 @@ RSpec.feature 'Application', type: :feature do
     fill_in 'Month', with: '01'
     fill_in 'Year', with: '1970'
     click_button 'Save and continue'
-    expect(page).to have_current_path('/user/address')
+    expect(page)
+        .to have_current_path("/user/#{user.organisation_id}/address/postcode")
   end
 
 end

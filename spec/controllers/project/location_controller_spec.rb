@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Project::ProjectLocationController do
+describe Project::LocationController do
   login_user
   let(:organisation) { create(:organisation, line1: 'line1', line2: 'line2', line3: 'line3', townCity: 'townCity', county: 'county', postcode: 'postcode') }
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id, organisation: organisation) }
@@ -64,7 +64,9 @@ describe Project::ProjectLocationController do
       put :update,
           params: {project_id: project.id, project: {same_location: 'no'}}
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_location_postcode_get)
+      expect(response).to redirect_to(
+                              redirect_to postcode_path 'project', project.id
+                          )
     end
 
   end

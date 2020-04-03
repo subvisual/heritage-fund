@@ -14,7 +14,7 @@ class Organisation::NumbersController < ApplicationController
 
       logger.info "Finished updating company_number/charity_number for organisation ID: #{@organisation.id}"
 
-      redirect_to :organisation_about
+      redirect_to postcode_path 'organisation', @organisation.id
 
     else
 

@@ -120,6 +120,13 @@ underscore camel-cased names here, such as where we've used `MyPage`).
 For more on the Ruby on Rails `generate` command, [see the documentation](
 https://guides.rubyonrails.org/command_line.html#rails-generate).
 
+## Caching
+Addresses are cached from the postcode lookup, so that they can be referred to later in the user journey.
+In order to see caching work in development - run this command in the terminal:
+```
+rails dev:cache
+``` 
+
 ## Toggling the BAU Flipper feature
 
 To turn on business as usual functionality, a BAU Flipper needs to exist.

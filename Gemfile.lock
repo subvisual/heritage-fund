@@ -245,6 +245,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.1.3)
     regexp_parser (1.6.0)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -324,6 +325,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
+    uk_postcode (2.1.5)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
@@ -383,6 +385,7 @@ DEPENDENCIES
   rails (~> 6.0.0)
   rails-controller-testing (~> 1.0.4)
   rails-i18n (~> 6.0)
+  redis (~> 4.1.3)
   restforce (~> 4.2)
   rspec-rails (~> 4.0.0.beta3)
   sass-rails (< 6)
@@ -393,6 +396,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
   tzinfo-data
+  uk_postcode (~> 2.1.5)
   web-console (>= 3.3.0)
   webdrivers
   webmock (~> 3.8)

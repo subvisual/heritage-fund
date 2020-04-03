@@ -1,0 +1,34 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: nil,
+             page_title: "Select an address"
+         }
+%>
+
+<%# todo: Move this to a _partial when headers are consistent across the service %>
+<% if @type == "organisation" || @type == "project" %>
+  <h1 class="govuk-heading-l" aria-label="Heading">About your <%= @type %></h1>
+<% else %>
+  <h1 class="govuk-heading-xl">
+    <span class="govuk-caption-xl">Add your details</span>
+    Select an address
+  </h1>
+<% end %>
+
+<% if @type == "organisation" %>
+  <p class="govuk-body" aria-label="information">Your organisation must be based in the UK</p>
+<% end %>
+
+<% if @type == "organisation" || @type == "project" %>
+  <h2 class="govuk-heading-m">Select an address</h2>
+<% end %>
+
+<%= form_with(url: address_details_path, method: :put, local: true) do |p| %>
+
+  <%= select_tag "address", options_for_select(@response_array.map { |p| result_formatter(p) }) , class: 'govuk-select' %>
+
+  <%# TODO: Use ActionView Component %>
+  <%= p.submit "Select", class: 'govuk-button govuk-button--secondary' %>
+
+<% end %>

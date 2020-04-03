@@ -5,16 +5,27 @@ RSpec.feature 'Application', type: :feature do
     ideal_postcode_stub_requests
   end
   scenario 'Address Lookup' do
-    user = FactoryBot.create(:user, name: 'Jane Doe', phone_number: '123', date_of_birth: Date.new)
+
+    organisation = FactoryBot.create(:organisation)
+    user = FactoryBot.create(
+        :user,
+        name: 'Jane Doe',
+        phone_number: '123',
+        date_of_birth: Date.new,
+        organisation_id: organisation.id
+    )
+
     login_as(user, :scope => :user)
-    visit '/user/address'
+    visit "/user/#{organisation.id}/address/postcode"
     expect(page).to have_text 'Find your address'
     fill_in('Postcode', with: 'ID1 1QD')
     click_button 'Find address'
-    expect(page).to have_current_path('/user/address/results')
+    expect(page)
+        .to have_current_path("/user/#{organisation.id}/address/address-results")
     select('4 Barons Court Road', from: 'address')
     click_button 'Select'
-    expect(page).to have_current_path('/user/address/show')
+    expect(page)
+        .to have_current_path("/user/#{organisation.id}/address/address-details")
     expect(page).to have_field('Address line 1', with: '4 Barons Court Road')
     expect(page).to have_field('Town', with: 'LONDON')
     expect(page).to have_field('County', with: 'London')
