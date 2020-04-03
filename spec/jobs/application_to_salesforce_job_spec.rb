@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ApplicationToSalesforceJob, type: :job do
+RSpec.describe ApplicationToSalesforceJob, type: :job do
 
   before(:each) do
     stub_request(:post, "https://test.salesforce.com/services/oauth2/token")

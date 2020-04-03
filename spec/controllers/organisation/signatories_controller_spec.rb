@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organisation::SignatoriesController do
+RSpec.describe Organisation::SignatoriesController do
   login_user
 
   describe "GET #show" do

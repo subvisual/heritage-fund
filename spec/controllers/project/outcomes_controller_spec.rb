@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::OutcomesController do
+RSpec.describe Project::OutcomesController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

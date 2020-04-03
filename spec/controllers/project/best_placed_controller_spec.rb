@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::BestPlacedController do
+RSpec.describe Project::BestPlacedController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

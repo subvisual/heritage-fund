@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::HeritageController do
+RSpec.describe Project::HeritageController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

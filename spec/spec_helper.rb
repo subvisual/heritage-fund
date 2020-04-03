@@ -93,4 +93,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Avoid exposing the DSL globally, as this pollutes the global namespace
+  config.expose_dsl_globally = false
 end

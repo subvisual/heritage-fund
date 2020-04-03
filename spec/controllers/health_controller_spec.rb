@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe HealthController do
+RSpec.describe HealthController do
 
   describe "GET #health" do
 

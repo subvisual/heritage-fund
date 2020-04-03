@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Project::LocationController do
+RSpec.describe Project::LocationController do
   login_user
   let(:organisation) { create(:organisation, line1: 'line1', line2: 'line2', line3: 'line3', townCity: 'townCity', county: 'county', postcode: 'postcode') }
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id, organisation: organisation) }

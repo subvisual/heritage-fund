@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe OrganisationContext do
+RSpec.describe OrganisationContext do
 
   # To test our controller concerns, we use the concept of an anonymous
   # controller, which allows us to access RSpec methods and helpers.

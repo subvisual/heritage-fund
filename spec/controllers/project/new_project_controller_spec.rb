@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::NewProjectController do
+RSpec.describe Project::NewProjectController do
   login_user
 
   describe "GET #create_new_project" do

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::DeclarationController do
+RSpec.describe Project::DeclarationController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id, is_partnership: false) }
 

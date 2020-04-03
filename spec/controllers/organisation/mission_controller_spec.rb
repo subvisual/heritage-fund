@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organisation::MissionController do
+RSpec.describe Organisation::MissionController do
   login_user
 
   describe "GET #show" do
