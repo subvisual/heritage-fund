@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::DescriptionController do
+RSpec.describe Project::DescriptionController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

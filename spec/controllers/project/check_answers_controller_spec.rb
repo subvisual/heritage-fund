@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::CheckAnswersController do
+RSpec.describe Project::CheckAnswersController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

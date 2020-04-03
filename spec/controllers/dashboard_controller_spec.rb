@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe DashboardController do
+RSpec.describe DashboardController do
 
   describe "GET #health" do
     login_user

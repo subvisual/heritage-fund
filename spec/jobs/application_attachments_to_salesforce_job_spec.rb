@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ApplicationAttachmentsToSalesforceJob, type: :job do
+RSpec.describe ApplicationAttachmentsToSalesforceJob, type: :job do
   let(:project_with_attachment) {
     project = create(:project)
     project.capital_work_file.attach(io: File.open(Rails.root.join 'spec/fixtures/files/example.txt'), filename: 'example.txt', content_type: 'text/plain')

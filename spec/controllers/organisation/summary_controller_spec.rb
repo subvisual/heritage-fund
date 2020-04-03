@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organisation::SummaryController do
+RSpec.describe Organisation::SummaryController do
   login_user
 
   describe "GET #show" do

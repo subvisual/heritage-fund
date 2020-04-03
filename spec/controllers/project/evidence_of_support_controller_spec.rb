@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::EvidenceOfSupportController do
+RSpec.describe Project::EvidenceOfSupportController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 

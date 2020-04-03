@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PostcodeHelper do
+RSpec.describe PostcodeHelper do
 
   describe "#result_formatter" do
 

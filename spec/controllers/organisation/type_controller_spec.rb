@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organisation::TypeController do
+RSpec.describe Organisation::TypeController do
   login_user
 
   describe "GET #show" do

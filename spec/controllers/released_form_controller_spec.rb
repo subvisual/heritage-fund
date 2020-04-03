@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe ReleasedFormController do
+RSpec.describe ReleasedFormController do
   before(:each) do
     username = Rails.configuration.x.consumer.username
     password = Rails.configuration.x.consumer.password

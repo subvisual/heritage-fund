@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Project::CalculateTotalHelper do
+RSpec.describe Project::CalculateTotalHelper do
 
   describe '#calculate_total' do
     it 'adds costs' do

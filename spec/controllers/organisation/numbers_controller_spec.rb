@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Organisation::NumbersController do
+RSpec.describe Organisation::NumbersController do
   login_user
 
   describe "GET #show" do

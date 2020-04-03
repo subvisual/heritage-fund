@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe StaticPagesController do
+RSpec.describe StaticPagesController do
 
   describe "GET #show_accessibility_statement" do
     login_user

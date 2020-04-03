@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe ProjectContext do
+RSpec.describe ProjectContext do
 
   # To test our controller concerns, we use the concept of an anonymous
   # controller, which allows us to access RSpec methods and helpers.

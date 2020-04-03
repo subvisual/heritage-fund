@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Project::CashContributionsController do
+RSpec.describe Project::CashContributionsController do
   login_user
   let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 
