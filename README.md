@@ -133,14 +133,10 @@ To turn on business as usual functionality, a BAU Flipper needs to exist.
 
 This flipper value should be `true` for BAU functionality to work.
 
-The app will initially start with the row missing. It can be inserted with:
-
-```postgresql
-insert into flipper_gates (feature_key, key, value, created_at, updated_at) Values('bau', 'boolean', true, NOW(), NOW());
-```
-
 Update the flipper row with:
 
+`rails dbconsole`
+
 ```postgresql
-update flipper_gates set value = false;
+UPDATE flipper_gates SET value = true WHERE feature_key = 'bau';   
 ```
