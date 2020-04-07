@@ -231,6 +231,7 @@
 
             <%=
               v.text_field :hours,
+                           "autocomplete" => "off",
                            class: "govuk-input govuk-input govuk-input--width-10 #{'govuk-input--error' if @project.errors['volunteers.hours'].any?}",
                            value: "#{flash[:hours] if flash[:hours].present?}"
             %>

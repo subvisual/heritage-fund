@@ -5,7 +5,10 @@ class ProjectCost < ApplicationRecord
   belongs_to :project
 
   validates :cost_type, presence: true
-  validates :amount, numericality: {only_integer: true}
+  validates :amount, numericality: {
+      only_integer: true,
+      greater_than: 0
+  }
   validates :description, presence: true
 
   validate do

@@ -176,6 +176,39 @@ RSpec.describe Project::VolunteersController do
 
     end
 
+    it "should re-render the page with a flash message if populated " \
+       "description and an hours attribute containing a negative number are " \
+       "passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  volunteers_attributes: {
+                      "0": {
+                          description: "Test",
+                          hours: "-50"
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(subject.request.flash[:description]).to eq("Test")
+      expect(subject.request.flash[:hours]).to eq("-50")
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).volunteers.first.errors.empty?).to eq(false)
+      expect(assigns(:project).volunteers.first.errors.messages[:hours][0])
+          .to eq(I18n.t("activerecord.errors.models.volunteer.attributes.hours.greater_than"))
+
+    end
+
     it "should successfully update if valid description and hours attributes " \
        "are passed" do
 

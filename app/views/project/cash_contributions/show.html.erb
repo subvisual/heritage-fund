@@ -422,7 +422,8 @@
               <div class="nlhf-currency-denote__capture">
 
                 <%=
-                  cc.number_field :amount,
+                  cc.text_field :amount,
+                                "autocomplete" => "off",
                                   class: "govuk-input govuk-input--width-10 #{'govuk-input--error' if
                                       @project.errors['cash_contributions.amount'].any?}"
                 %>

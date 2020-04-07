@@ -174,6 +174,37 @@ RSpec.describe Project::CostsController do
 
     end
 
+    it "should re-render the page if an amount attribute which contains a " \
+       "negative number is passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  project_costs_attributes: {
+                      "0": {
+                          cost_type: "new_staff",
+                          description: "Test",
+                          amount: "-50"
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).project_costs.first.errors.empty?)
+          .to eq(false)
+      expect(assigns(:project).project_costs.first.errors.messages[:amount][0])
+          .to eq(I18n.t("activerecord.errors.models.project_cost.attributes.amount.greater_than"))
+
+    end
+
     it "should re-render the page with a flash message if empty " \
        "description and populated amount attributes are passed" do
 
