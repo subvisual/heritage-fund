@@ -231,6 +231,76 @@ describe Project::CashContributionsController do
 
     end
 
+    it "should re-render the page if amount param which is not an integer is " \
+       "passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  cash_contributions_attributes: {
+                      "0": {
+                          description: "",
+                          amount: "string",
+                          secured: ""
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).cash_contributions.first.errors.empty?)
+          .to eq(false)
+      expect(assigns(:project).cash_contributions.first.errors.messages[:amount][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.amount.not_a_number"))
+      expect(assigns(:project).cash_contributions.first.errors.messages[:description][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.description.blank"))
+      expect(assigns(:project).cash_contributions.first.errors.messages[:secured][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.secured.inclusion"))
+
+    end
+
+    it "should re-render the page if amount param which contains a negative " \
+       "number is passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  cash_contributions_attributes: {
+                      "0": {
+                          description: "",
+                          amount: "-50",
+                          secured: ""
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).cash_contributions.first.errors.empty?)
+          .to eq(false)
+      expect(assigns(:project).cash_contributions.first.errors.messages[:amount][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.amount.greater_than"))
+      expect(assigns(:project).cash_contributions.first.errors.messages[:description][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.description.blank"))
+      expect(assigns(:project).cash_contributions.first.errors.messages[:secured][0])
+          .to eq(I18n.t("activerecord.errors.models.cash_contribution.attributes.secured.inclusion"))
+
+    end
+
     it "should re-render the page if secured param of 'yes_with_evidence' is " \
        "passed without a file" do
 

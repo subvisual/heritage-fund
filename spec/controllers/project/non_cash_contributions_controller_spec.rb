@@ -256,6 +256,72 @@ describe Project::NonCashContributionsController do
 
     end
 
+    it "should re-render the page with a flash message if an amount param " \
+       "containing a string is passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  non_cash_contributions_attributes: {
+                      "0": {
+                          description: "",
+                          amount: "string"
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(subject.request.flash[:amount]).to eq("string")
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).non_cash_contributions.first.errors.empty?).to eq(false)
+      expect(assigns(:project).non_cash_contributions.first.errors.messages[:amount][0])
+          .to eq(I18n.t("activerecord.errors.models.non_cash_contribution.attributes.amount.not_a_number"))
+      expect(assigns(:project).non_cash_contributions.first.errors.messages[:description][0])
+          .to eq(I18n.t("activerecord.errors.models.non_cash_contribution.attributes.description.blank"))
+
+    end
+
+    it "should re-render the page with a flash message if an amount param " \
+       "containing a negative number is passed" do
+
+      expect(subject).to \
+        receive(:log_errors).with(project)
+
+      put :update,
+          params: {
+              project_id: project.id,
+              project: {
+                  non_cash_contributions_attributes: {
+                      "0": {
+                          description: "",
+                          amount: "-50"
+                      }
+                  }
+              }
+          }
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(subject.request.flash[:amount]).to eq("-50")
+
+      expect(assigns(:project).errors.empty?).to eq(false)
+      expect(assigns(:project).non_cash_contributions.first.errors.empty?).to eq(false)
+      expect(assigns(:project).non_cash_contributions.first.errors.messages[:amount][0])
+          .to eq(I18n.t("activerecord.errors.models.non_cash_contribution.attributes.amount.greater_than"))
+      expect(assigns(:project).non_cash_contributions.first.errors.messages[:description][0])
+          .to eq(I18n.t("activerecord.errors.models.non_cash_contribution.attributes.description.blank"))
+
+    end
+
     it "should successfully update if valid description and amount " \
        "attributes are passed" do
 
