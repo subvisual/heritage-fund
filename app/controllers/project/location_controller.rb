@@ -19,7 +19,7 @@ class Project::LocationController < ApplicationController
 
         logger.debug "Finished updating location for project ID: #{@project.id}"
 
-        redirect_to :three_to_ten_k_project_description_get
+        redirect_to :three_to_ten_k_project_description
 
       else
 

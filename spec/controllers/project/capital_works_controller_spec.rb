@@ -94,7 +94,7 @@ RSpec.describe Project::CapitalWorksController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_permission_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_do_you_need_permission)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).capital_work).to eq(true)
@@ -115,7 +115,7 @@ RSpec.describe Project::CapitalWorksController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_capital_works_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_capital_works)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).capital_work).to eq(true)

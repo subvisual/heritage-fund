@@ -193,7 +193,7 @@
 
 <%=
   form_with model: @project,
-            url: :three_to_ten_k_project_project_costs,
+            url: :three_to_ten_k_project_costs,
             class: "govuk-!-margin-bottom-3",
             method: :put, local: true do |f|
 %>
@@ -514,7 +514,7 @@
 <p class="govuk-body">If you have finished adding all your costs</p>
 
 <%=
-  form_with url: :three_to_ten_k_project_project_costs_validate_and_redirect,
+  form_with url: :three_to_ten_k_project_confirm_costs,
             method: :put, local: true do
 %>
 

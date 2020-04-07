@@ -30,7 +30,7 @@ RSpec.describe Project::HeritageController do
           params: { project_id: project.id }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_best_placed_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_why_is_your_organisation_best_placed)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -46,7 +46,7 @@ RSpec.describe Project::HeritageController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_best_placed_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_why_is_your_organisation_best_placed)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -85,7 +85,7 @@ RSpec.describe Project::HeritageController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_best_placed_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_why_is_your_organisation_best_placed)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).heritage_description).to eq("Test")

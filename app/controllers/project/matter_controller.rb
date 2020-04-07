@@ -13,7 +13,7 @@ class Project::MatterController < ApplicationController
 
       logger.info "Finished updating matter for project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_heritage_get
+      redirect_to :three_to_ten_k_project_your_project_heritage
 
     else
 

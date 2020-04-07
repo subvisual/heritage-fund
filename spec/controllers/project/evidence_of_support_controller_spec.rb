@@ -135,7 +135,7 @@ RSpec.describe Project::EvidenceOfSupportController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_support_evidence)
+          .to redirect_to(:three_to_ten_k_project_evidence_of_support)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).evidence_of_support.first.errors.empty?)
@@ -206,7 +206,7 @@ RSpec.describe Project::EvidenceOfSupportController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_support_evidence)
+          .to redirect_to(:three_to_ten_k_project_evidence_of_support)
 
     end
 

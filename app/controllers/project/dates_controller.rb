@@ -48,7 +48,7 @@ class Project::DatesController < ApplicationController
         logger.info "Successfully update start_date and end_date for project " \
                     "ID: #{@project.id}"
 
-        redirect_to :three_to_ten_k_project_location_get
+        redirect_to :three_to_ten_k_project_location
 
       end
 

@@ -107,7 +107,7 @@ RSpec.describe Project::TitleController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_dates_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_key_dates)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).project_title).to eq("Test project title")

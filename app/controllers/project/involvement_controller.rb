@@ -18,7 +18,7 @@ class Project::InvolvementController < ApplicationController
       logger.info "Finished updating project involvement_description for " \
                   "project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_other_outcomes_get
+      redirect_to :three_to_ten_k_project_our_other_outcomes
 
     else
 

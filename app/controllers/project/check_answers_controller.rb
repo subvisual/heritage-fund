@@ -25,13 +25,13 @@ class Project::CheckAnswersController < ApplicationController
                     "individual private owner of heritage, redirecting to " \
                     "accounts page"
 
-        redirect_to :three_to_ten_k_project_accounts_get
+        redirect_to :three_to_ten_k_project_accounts
 
       else
 
         logger.info "Redirecting to governing documents page"
 
-        redirect_to :three_to_ten_k_project_governing_docs_get
+        redirect_to :three_to_ten_k_project_governing_documents
 
       end
 

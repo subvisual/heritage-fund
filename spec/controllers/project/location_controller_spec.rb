@@ -49,7 +49,7 @@ RSpec.describe Project::LocationController do
       put :update,
           params: {project_id: project.id, project: {same_location: 'yes'}}
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_description_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_description)
       Project.find(project.id) do |p|
         expect(p.line1).to eq('line1')
         expect(p.line2).to eq('line2')

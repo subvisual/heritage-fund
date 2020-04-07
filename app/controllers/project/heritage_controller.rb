@@ -2,8 +2,8 @@ class Project::HeritageController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
   # This method updates the heritage_description attribute of a project,
-  # redirecting to :three_to_ten_k_project_best_placed_get if successful and
-  # re-rendering :show method if unsuccessful
+  # redirecting to :three_to_ten_k_project_why_is_your_organisation_best_placed
+  # if successful and re-rendering :show method if unsuccessful
   def update
 
     logger.info "Updating heritage_description for project ID: #{@project.id}"
@@ -17,7 +17,7 @@ class Project::HeritageController < ApplicationController
       logger.debug "Finished updating heritage_description for project " \
                    "ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_best_placed_get
+      redirect_to :three_to_ten_k_project_why_is_your_organisation_best_placed
 
     else
 

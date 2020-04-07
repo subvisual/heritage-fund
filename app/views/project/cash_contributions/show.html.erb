@@ -192,7 +192,7 @@
 
 <%=
   form_with model: @project,
-            url: :three_to_ten_k_project_project_cash_contribution,
+            url: :three_to_ten_k_project_cash_contributions,
             method: :put,
             remote: no_js ? false : true do |f|
 %>
@@ -521,7 +521,7 @@
 
 <hr class="govuk-section-break--l govuk-section-break--visible">
 
-<form action="<%= three_to_ten_k_project_grant_request_get_url %>"
+<form action="<%= three_to_ten_k_project_your_grant_request_url %>"
       method="get">
 
   <p class="govuk-body">

@@ -119,7 +119,7 @@ RSpec.describe Project::InvolvementController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_other_outcomes_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_our_other_outcomes)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).involvement_description).to eq("Test")

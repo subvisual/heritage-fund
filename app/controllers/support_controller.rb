@@ -125,13 +125,13 @@ class SupportController < ApplicationController
 
         logger.info "Validation of POST /support form successful, redirecting user to /report-a-problem"
 
-        redirect_to :support_report_a_problem
+        redirect_to :report_a_problem
 
       elsif params[:support_type] == "ask_a_question"
 
         logger.info "Validation of POST /support form successful, redirecting user to /question-or-feedback"
 
-        redirect_to :support_question_or_feedback
+        redirect_to :question_or_feedback
 
       else
 

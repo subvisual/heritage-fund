@@ -30,7 +30,7 @@ RSpec.describe Project::BestPlacedController do
           params: { project_id: project.id }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_involvement_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_will_your_project_involve_people)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -46,7 +46,7 @@ RSpec.describe Project::BestPlacedController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_involvement_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_will_your_project_involve_people)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -85,7 +85,7 @@ RSpec.describe Project::BestPlacedController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_involvement_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_will_your_project_involve_people)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).best_placed_description).to eq("Test")

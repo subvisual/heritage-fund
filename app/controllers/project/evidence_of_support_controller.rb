@@ -9,7 +9,7 @@ class Project::EvidenceOfSupportController < ApplicationController
   end
 
   # This method adds evidence of support to a project, redirecting back to
-  # :three_to_ten_k_project_project_support_evidence if successful and
+  # :three_to_ten_k_project_evidence_of_support if successful and
   # re-rendering :show method if unsuccessful
   def update
 
@@ -24,7 +24,7 @@ class Project::EvidenceOfSupportController < ApplicationController
       logger.info "Finished adding evidence of support for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_project_support_evidence
+      redirect_to :three_to_ten_k_project_evidence_of_support
 
     else
 
@@ -42,7 +42,7 @@ class Project::EvidenceOfSupportController < ApplicationController
   end
 
   # This method deletes evidence of support, redirecting back to
-  # :three_to_ten_k_project_project_support_evidence once completed
+  # :three_to_ten_k_project_evidence_of_support once completed
   def delete
 
     logger.info "User has selected to delete evidence_of_support ID: " \
@@ -59,7 +59,7 @@ class Project::EvidenceOfSupportController < ApplicationController
     logger.info "Finished deleting supporting evidence ID: " \
                 "#{evidence_of_support.id}"
 
-    redirect_to :three_to_ten_k_project_project_support_evidence
+    redirect_to :three_to_ten_k_project_evidence_of_support
 
   end
 

@@ -30,7 +30,7 @@ RSpec.describe Project::MatterController do
           params: { project_id: project.id }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_heritage_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_your_project_heritage)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -46,7 +46,7 @@ RSpec.describe Project::MatterController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_heritage_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_your_project_heritage)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -85,7 +85,7 @@ RSpec.describe Project::MatterController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_heritage_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_your_project_heritage)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).matter).to eq("Test")

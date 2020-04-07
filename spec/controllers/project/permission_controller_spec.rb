@@ -131,7 +131,7 @@ RSpec.describe Project::PermissionController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_difference_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_difference)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).permission_type).to eq("no")
@@ -150,7 +150,7 @@ RSpec.describe Project::PermissionController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_difference_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_difference)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).permission_type).to eq("yes")
@@ -170,7 +170,7 @@ RSpec.describe Project::PermissionController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_difference_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_difference)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).permission_type).to eq("x_not_sure")

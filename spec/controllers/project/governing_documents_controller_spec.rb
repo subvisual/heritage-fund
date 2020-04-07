@@ -85,7 +85,7 @@ RSpec.describe Project::GoverningDocumentsController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_governing_docs_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_governing_documents)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(project.governing_document_file.present?).to eq(true)

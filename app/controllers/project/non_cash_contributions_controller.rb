@@ -21,7 +21,7 @@ class Project::NonCashContributionsController < ApplicationController
 
       if @project.non_cash_contributions_question == "true"
 
-        redirect_to :three_to_ten_k_project_non_cash_contributions_get
+        redirect_to :three_to_ten_k_project_non_cash_contributions
 
       else
 
@@ -43,7 +43,7 @@ class Project::NonCashContributionsController < ApplicationController
   end
 
   # This method adds a non-cash contribution to a project, redirecting back to
-  # :three_to_ten_k_project_non_cash_contributions_get if successful and
+  # :three_to_ten_k_project_non_cash_contributions if successful and
   # re-rendering :show method if unsuccessful
   def update
 
@@ -62,7 +62,7 @@ class Project::NonCashContributionsController < ApplicationController
       logger.info "Successfully added non-cash contribution for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_non_cash_contributions_get
+      redirect_to :three_to_ten_k_project_non_cash_contributions
 
     else
 
@@ -84,7 +84,7 @@ class Project::NonCashContributionsController < ApplicationController
   end
 
   # This method deletes a project non-cash contribution, redirecting back to
-  # :three_to_ten_k_project_non_cash_contributions_get once completed.
+  # :three_to_ten_k_project_non_cash_contributions once completed.
   # If no non-cash contribution is found, then an ActiveRecord::RecordNotFound
   # exception is raised
   def delete
@@ -103,7 +103,7 @@ class Project::NonCashContributionsController < ApplicationController
     logger.debug "Finished deleting non-cash contribution ID: " \
                  "#{non_cash_contribution.id}"
 
-    redirect_to :three_to_ten_k_project_non_cash_contributions_get
+    redirect_to :three_to_ten_k_project_non_cash_contributions
 
   end
 

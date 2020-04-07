@@ -30,7 +30,7 @@ RSpec.describe Project::DifferenceController do
           params: { project_id: project.id }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_matter_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_does_your_project_matter)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -46,7 +46,7 @@ RSpec.describe Project::DifferenceController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_matter_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_does_your_project_matter)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -85,7 +85,7 @@ RSpec.describe Project::DifferenceController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_matter_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_how_does_your_project_matter)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).difference).to eq("Test")
