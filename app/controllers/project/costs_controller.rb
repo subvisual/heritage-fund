@@ -15,7 +15,7 @@ class Project::CostsController < ApplicationController
 
       logger.info "Costs found for project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_cash_contributions_question_get
+      redirect_to :three_to_ten_k_project_are_you_getting_cash_contributions
 
     else
 
@@ -48,7 +48,7 @@ class Project::CostsController < ApplicationController
       logger.info "Succesfully added project cost for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_project_costs
+      redirect_to :three_to_ten_k_project_costs
 
     else
 
@@ -89,7 +89,7 @@ class Project::CostsController < ApplicationController
 
       logger.info "Finished deleting cost ID: #{cost.id}"
 
-      redirect_to :three_to_ten_k_project_project_costs
+      redirect_to :three_to_ten_k_project_costs
 
   end
 

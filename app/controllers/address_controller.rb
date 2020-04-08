@@ -28,7 +28,7 @@ class AddressController < ApplicationController
       if @type == "organisation"
         redirect_to organisation_mission_path(params['id'])
       elsif @type == "project"
-        redirect_to three_to_ten_k_project_description_get_path(params['id'])
+        redirect_to three_to_ten_k_project_description_path(params['id'])
       elsif @type == "user"
         redirect_to :authenticated_root
       end

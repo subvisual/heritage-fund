@@ -85,7 +85,7 @@ RSpec.describe Project::AccountsController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_accounts_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_accounts)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(project.accounts_files.present?).to eq(true)
@@ -111,7 +111,7 @@ RSpec.describe Project::AccountsController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_accounts_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_accounts)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(project.accounts_files.present?).to eq(true)

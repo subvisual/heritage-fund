@@ -45,7 +45,7 @@ class Project::PermissionController < ApplicationController
       logger.info "Finished updating project permission attributes for " \
                   "project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_difference_get
+      redirect_to :three_to_ten_k_project_difference
 
     else
 

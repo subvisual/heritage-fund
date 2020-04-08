@@ -2,8 +2,8 @@ class Project::DifferenceController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
   # This method updates the difference attribute of a project, redirecting to
-  # :three_to_ten_k_project_matter_get if successful and re-rendering :show
-  # method if unsuccessful
+  # :three_to_ten_k_project_how_does_your_project_matter if successful and
+  # re-rendering :show method if unsuccessful
   def update
 
     logger.info "Updating difference for project ID: #{@project.id}"
@@ -16,7 +16,7 @@ class Project::DifferenceController < ApplicationController
 
       logger.info "Finished updating difference for project ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_matter_get
+      redirect_to :three_to_ten_k_project_how_does_your_project_matter
 
     else
 

@@ -14,7 +14,7 @@ class Project::AccountsController < ApplicationController
       logger.info "Finished updating accounts_files for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_accounts_get
+      redirect_to :three_to_ten_k_project_accounts
 
     else
 

@@ -2,7 +2,7 @@ class Project::TitleController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
   # This method updates the project_title attribute of a project,
-  # redirecting to :three_to_ten_k_project_dates_get if successful and
+  # redirecting to :three_to_ten_k_project_key_dates if successful and
   # re-rendering :show method if unsuccessful
   def update
 
@@ -17,7 +17,7 @@ class Project::TitleController < ApplicationController
       logger.info "Finished updating project_title for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_dates_get
+      redirect_to :three_to_ten_k_project_key_dates
 
     else
 

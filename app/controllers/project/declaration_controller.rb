@@ -24,9 +24,9 @@ class Project::DeclarationController < ApplicationController
       # TODO: Remove bau flipper
       if Flipper.enabled?(:bau)
         ApplicationToSalesforceJob.perform_later(@project)
-        redirect_to :three_to_ten_k_project_application_submitted_get
+        redirect_to :three_to_ten_k_project_application_submitted
       else
-        redirect_to :three_to_ten_k_project_confirm_declaration_get
+        redirect_to :three_to_ten_k_project_confirm_declaration
       end
 
     else
@@ -66,7 +66,7 @@ class Project::DeclarationController < ApplicationController
       logger.info "Finished updating declaration attributes for project ID: " \
                    "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_confirm_declaration_get
+      redirect_to :three_to_ten_k_project_confirm_declaration
 
     else
 

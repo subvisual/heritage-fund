@@ -16,7 +16,7 @@
 
 <%=
   form_for @project,
-           url: :three_to_ten_k_project_confirm_declaration_put,
+           url: :three_to_ten_k_project_confirm_declaration,
            method: :put do |f|
 %>
 
@@ -94,7 +94,7 @@
 
         <%=
           f.label :confirm_declaration,
-                    "I have read and agreed with the #{link_to 'declaration', :three_to_ten_k_project_declaration_get}".html_safe,
+                    "I have read and agreed with the #{link_to 'declaration', :three_to_ten_k_project_declaration}".html_safe,
                     class: "govuk-label govuk-checkboxes__label"
         %>
 

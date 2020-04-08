@@ -20,7 +20,7 @@
 
 <%=
   form_with model: @project,
-            url: :three_to_ten_k_project_accounts_put,
+            url: :three_to_ten_k_project_accounts,
             method: :put,
             remote: no_js ? false : true do |f|
 %>
@@ -157,7 +157,7 @@
     render(
         ButtonComponent.new(
             element: "a",
-            href: three_to_ten_k_project_confirm_declaration_get_url
+            href: three_to_ten_k_project_confirm_declaration_url
         )
     )
   %>

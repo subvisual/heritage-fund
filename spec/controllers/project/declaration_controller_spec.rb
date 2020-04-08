@@ -127,7 +127,7 @@ RSpec.describe Project::DeclarationController do
 
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(
-                                :three_to_ten_k_project_application_submitted_get
+                                :three_to_ten_k_project_application_submitted
                             )
 
         expect(assigns(:project).errors.empty?).to eq(true)
@@ -158,7 +158,7 @@ RSpec.describe Project::DeclarationController do
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
-                              :three_to_ten_k_project_confirm_declaration_get
+                              :three_to_ten_k_project_confirm_declaration
                           )
 
       expect(assigns(:project).errors.empty?).to eq(true)
@@ -216,7 +216,7 @@ end
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
-                              :three_to_ten_k_project_confirm_declaration_get
+                              :three_to_ten_k_project_confirm_declaration
                           )
 
       expect(assigns(:project).errors.empty?).to eq(true)
@@ -239,7 +239,7 @@ end
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
-                              :three_to_ten_k_project_confirm_declaration_get
+                              :three_to_ten_k_project_confirm_declaration
                           )
 
       expect(assigns(:project).errors.empty?).to eq(true)
@@ -290,7 +290,7 @@ end
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
-                              :three_to_ten_k_project_confirm_declaration_get
+                              :three_to_ten_k_project_confirm_declaration
                           )
 
       expect(assigns(:project).errors.empty?).to eq(true)

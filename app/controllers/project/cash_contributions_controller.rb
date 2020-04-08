@@ -28,11 +28,11 @@ class Project::CashContributionsController < ApplicationController
 
       if @project.cash_contributions_question == "true"
 
-        redirect_to :three_to_ten_k_project_project_cash_contribution
+        redirect_to :three_to_ten_k_project_cash_contributions
 
       else
 
-        redirect_to :three_to_ten_k_project_grant_request_get
+        redirect_to :three_to_ten_k_project_your_grant_request
 
       end
 
@@ -65,7 +65,7 @@ class Project::CashContributionsController < ApplicationController
       logger.info "Successfully added cash contribution for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_project_cash_contribution
+      redirect_to :three_to_ten_k_project_cash_contributions
 
     else
 
@@ -81,7 +81,7 @@ class Project::CashContributionsController < ApplicationController
   end
 
   # This method deletes a project cash contribution, redirecting back to
-  # :three_to_ten_k_project_project_cash_contribution once completed.
+  # :three_to_ten_k_project_cash_contributions once completed.
   # If no cash contribution is found, then an ActiveRecord::RecordNotFound
   # exception is raised
   def delete
@@ -100,7 +100,7 @@ class Project::CashContributionsController < ApplicationController
     logger.info "Finished deleting cash contribution ID: " \
                 "#{cash_contribution.id}"
 
-    redirect_to :three_to_ten_k_project_project_cash_contribution
+    redirect_to :three_to_ten_k_project_cash_contributions
 
   end
 

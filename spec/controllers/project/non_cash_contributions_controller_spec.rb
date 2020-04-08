@@ -124,7 +124,7 @@ RSpec.describe Project::NonCashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_non_cash_contributions_get)
+          .to redirect_to(:three_to_ten_k_project_non_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -340,7 +340,7 @@ RSpec.describe Project::NonCashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_non_cash_contributions_get)
+          .to redirect_to(:three_to_ten_k_project_non_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).non_cash_contributions.first.errors.empty?)
@@ -406,7 +406,7 @@ RSpec.describe Project::NonCashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_non_cash_contributions_get)
+          .to redirect_to(:three_to_ten_k_project_non_cash_contributions)
 
     end
 

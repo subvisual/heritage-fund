@@ -9,8 +9,8 @@ class Project::CapitalWorksController < ApplicationController
   end
 
   # This method updates the capital_work and capital_work_file attributes of a
-  # project, redirecting to :three_to_ten_k_project_permission_get if successful
-  # and re-rendering :show method if unsuccessful
+  # project, redirecting to :three_to_ten_k_project_do_you_need_permission if
+  # successful and re-rendering :show method if unsuccessful
   def update
 
     logger.info "Updating capital_work for project ID: #{@project.id}"
@@ -28,9 +28,9 @@ class Project::CapitalWorksController < ApplicationController
       # capital work file - this is so that we can display the file back to
       # the user so they can check that they have uploaded the correct file
       if params[:project][:capital_work_file].present?
-        redirect_to :three_to_ten_k_project_capital_works_get
+        redirect_to :three_to_ten_k_project_capital_works
       else
-        redirect_to :three_to_ten_k_project_permission_get
+        redirect_to :three_to_ten_k_project_do_you_need_permission
       end
 
     else

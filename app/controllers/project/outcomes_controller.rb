@@ -16,7 +16,7 @@ class Project::OutcomesController < ApplicationController
       logger.info "Finished updating outcome attributes for project " \
                   "ID: #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_project_costs
+      redirect_to :three_to_ten_k_project_costs
 
     else
 

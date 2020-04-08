@@ -290,7 +290,7 @@ RSpec.describe Project::CostsController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_project_costs)
+      expect(response).to redirect_to(:three_to_ten_k_project_costs)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).project_costs.first.errors.empty?)
@@ -338,7 +338,7 @@ RSpec.describe Project::CostsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_cash_contributions_question_get)
+          .to redirect_to(:three_to_ten_k_project_are_you_getting_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -400,7 +400,7 @@ RSpec.describe Project::CostsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_costs)
+          .to redirect_to(:three_to_ten_k_project_costs)
 
     end
 

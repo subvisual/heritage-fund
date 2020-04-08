@@ -244,7 +244,7 @@ RSpec.describe Project::DatesController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_location_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_location)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 

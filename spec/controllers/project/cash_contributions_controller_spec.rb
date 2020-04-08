@@ -105,7 +105,7 @@ RSpec.describe Project::CashContributionsController do
           }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_grant_request_get)
+      expect(response).to redirect_to(:three_to_ten_k_project_your_grant_request)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -124,7 +124,7 @@ RSpec.describe Project::CashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_cash_contribution)
+          .to redirect_to(:three_to_ten_k_project_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -354,7 +354,7 @@ RSpec.describe Project::CashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_cash_contribution)
+          .to redirect_to(:three_to_ten_k_project_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).cash_contributions.first.errors.empty?)
@@ -390,7 +390,7 @@ RSpec.describe Project::CashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_cash_contribution)
+          .to redirect_to(:three_to_ten_k_project_cash_contributions)
 
       expect(assigns(:project).errors.empty?).to eq(true)
       expect(assigns(:project).cash_contributions.first.errors.empty?)
@@ -463,7 +463,7 @@ RSpec.describe Project::CashContributionsController do
 
       expect(response).to have_http_status(:redirect)
       expect(response)
-          .to redirect_to(:three_to_ten_k_project_project_cash_contribution)
+          .to redirect_to(:three_to_ten_k_project_cash_contributions)
 
     end
 

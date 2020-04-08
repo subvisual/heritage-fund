@@ -17,7 +17,7 @@ class Project::DescriptionController < ApplicationController
       logger.info "Finished updating project description for project ID: " \
                   " #{@project.id}"
 
-      redirect_to :three_to_ten_k_project_capital_works_get
+      redirect_to :three_to_ten_k_project_capital_works
 
     else
 

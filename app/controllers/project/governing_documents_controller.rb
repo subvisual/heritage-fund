@@ -15,7 +15,7 @@ class Project::GoverningDocumentsController < ApplicationController
       logger.info "Finished updating governing_document_file for project ID: " \
                   "#{@project.id}"
 
-      redirect_to :three_to_ten_k_project_governing_docs_get
+      redirect_to :three_to_ten_k_project_governing_documents
 
     else
 

@@ -107,7 +107,7 @@ RSpec.describe Project::OutcomesController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_project_costs)
+      expect(response).to redirect_to(:three_to_ten_k_project_costs)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
@@ -145,7 +145,7 @@ RSpec.describe Project::OutcomesController do
       }
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(:three_to_ten_k_project_project_costs)
+      expect(response).to redirect_to(:three_to_ten_k_project_costs)
 
       expect(assigns(:project).errors.empty?).to eq(true)
 
