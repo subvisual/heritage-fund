@@ -6,7 +6,6 @@ class SupportController < ApplicationController
 
   def report_a_problem
     clear_flash("report_a_problem")
-
   end
 
   def question_or_feedback
@@ -51,7 +50,7 @@ class SupportController < ApplicationController
 
       logger.debug "Finished calling NotifyMailer.report_a_problem_email"
 
-      clear_flash("report_a_problem")
+      clear_flash("problem")
 
       flash[:success] = true
 
