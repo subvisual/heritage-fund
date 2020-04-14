@@ -53,7 +53,7 @@ RSpec.describe Project, type: :model do
       legal_signatory_one = build(
           :legal_signatory,
           name: "Joe Bloggs",
-          email_address: "joe@bloggs.com",
+          email_address: @project.user.email,
           phone_number: "07123456789"
       )
 
@@ -121,13 +121,17 @@ RSpec.describe Project, type: :model do
       expect(project_salesforce_json['application']['authorisedSignatoryOneDetails']['name'])
           .to eq("Joe Bloggs")
       expect(project_salesforce_json['application']['authorisedSignatoryOneDetails']['email'])
-          .to eq("joe@bloggs.com")
+          .to eq(@project.user.email)
+      expect(project_salesforce_json['application']['authorisedSignatoryOneDetails']['isAlsoApplicant'])
+          .to eq(true)
       expect(project_salesforce_json['application']['authorisedSignatoryOneDetails']['phone'])
           .to eq("07123456789")
       expect(project_salesforce_json['application']['authorisedSignatoryTwoDetails']['name'])
           .to eq("Jane Bloggs")
       expect(project_salesforce_json['application']['authorisedSignatoryTwoDetails']['email'])
           .to eq("jane@bloggs.com")
+      expect(project_salesforce_json['application']['authorisedSignatoryTwoDetails']['isAlsoApplicant'])
+          .to eq(false)
       expect(project_salesforce_json['application']['authorisedSignatoryTwoDetails']['phone'])
           .to eq("07987654321")
 

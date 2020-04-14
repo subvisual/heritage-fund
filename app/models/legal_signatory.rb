@@ -1,11 +1,3 @@
-class IsNotSameAsMainContactValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    if value == User.find_by(organisation_id: record.organisation).email
-      record.errors[attribute] << (options[:message] || "must be different to your email address")
-    end
-  end
-end
-
 class DoesNotMatchOtherSignatoryValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if record == record.organisation.legal_signatories.second && value == record.organisation.legal_signatories.first.email_address
@@ -13,9 +5,6 @@ class DoesNotMatchOtherSignatoryValidator < ActiveModel::EachValidator
     end
   end
 end
-
-
-
 
 class LegalSignatory < ApplicationRecord
   belongs_to :organisation
@@ -38,7 +27,6 @@ class LegalSignatory < ApplicationRecord
   #       See: https://github.com/heritagefund/funding-frontend/issues/244
   validates :email_address,
             format: { with: URI::MailTo::EMAIL_REGEXP },
-            is_not_same_as_main_contact: true,
             does_not_match_other_signatory: true,
             unless: lambda {
                 |record| ignore_validation_for_empty_second_signatory?(record)
