@@ -42,6 +42,9 @@ en-GB:
           outcome_8: "The local area will be a better place to live, work or visit"
           outcome_9: "The local economy will be boosted"
         evidence_of_support: "Evidence of support"
+  activestorage:
+    errors:
+      file_upload_error_message: "The upload of this file has failed"
   activerecord:
     attributes:
       legal_signatory:
@@ -53,8 +56,6 @@ en-GB:
         company_number: "Company number"
         charity_number: "Charity number"
     errors:
-      views:
-        file_upload_error_message: "The upload of this file has failed"
       models:
         user:
           attributes:
