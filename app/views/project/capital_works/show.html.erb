@@ -103,32 +103,33 @@
           </span>
 
           <div id="capital-works.capital_work_files-errors"></div>
+          <div id="file-upload-form-group">
+              <div class="govuk-form-group" id="capital-works.capital_work_files-form-group">
 
-          <div class="govuk-form-group" id="capital-works.capital_work_files-form-group">
+                <%=
+                  f.label :capital_work_file,
+                          "Upload a file",
+                          class: "govuk-label"
+                %>
 
-            <%=
-              f.label :capital_work_file,
-                      "Upload a file",
-                      class: "govuk-label"
-            %>
+                <%=
+                  f.file_field :capital_work_file,
+                               multiple: false,
+                               direct_upload: true,
+                               class: "govuk-file-upload"
+                %>
 
-            <%=
-              f.file_field :capital_work_file,
-                           multiple: false,
-                           direct_upload: true,
-                           class: "govuk-file-upload"
-            %>
-
-            <%=
-              render(
-                  ButtonComponent.new(
-                      type: "button",
-                      text: "Add condition survey",
-                      classes: "govuk-button--secondary"
+                <%=
+                  render(
+                      ButtonComponent.new(
+                          type: "button",
+                          text: "Add condition survey",
+                          classes: "govuk-button--secondary"
+                      )
                   )
-              )
-            %>
+                %>
 
+              </div>
           </div>
 
           <% unless @project.capital_work_file.present? == true %>

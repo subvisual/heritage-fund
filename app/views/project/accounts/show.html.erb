@@ -64,7 +64,7 @@
       <div id="accounts-form-group-main"
            class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
 
-        <div class="govuk-form-group" id="file-upload-group">
+        <div class="govuk-form-group" id="file-upload-form-group">
 
           <div id="form-group-errors"></div>
 
@@ -76,7 +76,6 @@
           %>
 
           <div id="project.accounts_files-errors"></div>
-
           <div class="govuk-form-group">
             <%=
               f.label :accounts_files,
@@ -96,17 +95,16 @@
             <input type="hidden" name="ieworkaround">
 
           </div>
-
-          <div class="govuk-form-group">
-            <%=
-              render(ButtonComponent.new(
-                  text: 'Add accounts',
-                  classes: "govuk-button--secondary",
-                  ))
-            %>
-          </div>
-
         </div>
+        <div class="govuk-form-group">
+          <%=
+            render(ButtonComponent.new(
+                text: 'Add accounts',
+                classes: "govuk-button--secondary",
+                ))
+          %>
+        </div>
+
 
         <% unless @project.accounts_files.attached? %>
 

@@ -195,36 +195,36 @@
       <!-- / nlhf-add-item__row -->
 
       <div class="nlhf-add-item__row">
+        <div id="file-upload-form-group">
+          <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
+               id="evidence_of_support.evidence_of_support_files-form-group">
 
-        <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
-             id="evidence_of_support.evidence_of_support_files-form-group">
+            <%=
+              render partial: "partials/form_input_errors",
+                     locals: {
+                         form_object: @project,
+                         input_field_id: :'evidence_of_support.evidence_of_support_files'} if
+                  @project.errors['evidence_of_support.evidence_of_support_files'].any?
+            %>
 
-          <%=
-            render partial: "partials/form_input_errors",
-                   locals: {
-                       form_object: @project,
-                       input_field_id: :'evidence_of_support.evidence_of_support_files'} if
-                @project.errors['evidence_of_support.evidence_of_support_files'].any?
-          %>
+            <div id="evidence_of_support.evidence_of_support_files-errors"></div>
 
-          <div id="evidence_of_support.evidence_of_support_files-errors"></div>
+            <%=
+              e.label :evidence_of_support_files,
+                      "Upload a file",
+                      class: "govuk-label"
+            %>
 
-          <%=
-            e.label :evidence_of_support_files,
-                    "Upload a file",
-                    class: "govuk-label"
-          %>
+            <%=
+              e.file_field :evidence_of_support_files,
+                           multiple: false,
+                           direct_upload: true,
+                           class: "govuk-file-upload #{'govuk-file-upload--error' if
+                               @project.errors['evidence_of_support.evidence_of_support_files'].any?}"
+            %>
 
-          <%=
-            e.file_field :evidence_of_support_files,
-                         multiple: false,
-                         direct_upload: true,
-                         class: "govuk-file-upload #{'govuk-file-upload--error' if
-                             @project.errors['evidence_of_support.evidence_of_support_files'].any?}"
-          %>
-
+          </div>
         </div>
-
       </div>
       <!-- / nlhf-add-item__row -->
 

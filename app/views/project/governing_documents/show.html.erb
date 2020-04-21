@@ -90,7 +90,7 @@
         <div id="governing-documents-form-group-main"
              class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
 
-            <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>" id="file-upload-group">
+            <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>" id="file-upload-form-group">
 
               <div id="form-group-errors"></div>
 
@@ -102,8 +102,7 @@
               %>
 
               <div id="project.governing_document_file-errors"></div>
-
-              <div class="govuk-form-group">
+                <div class="govuk-form-group">
                 <%=
                   f.label :governing_document_file,
                           "Add your governing document",
@@ -117,7 +116,6 @@
                               class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}"
                 %>
               </div>
-
               <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html
             for the reasoning behind this workaround %>
               <input type="hidden" name="ieworkaround">

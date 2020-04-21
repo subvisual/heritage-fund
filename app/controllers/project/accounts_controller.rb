@@ -1,6 +1,13 @@
 class Project::AccountsController < ApplicationController
   include ProjectContext, ObjectErrorsLogger
 
+  # This method is used to set the @has_file_upload instance variable before
+  # rendering the :show template. This is used within the
+  # _direct_file_upload_hooks partial
+  def show
+    @has_file_upload = true
+  end
+
   def update
 
     logger.info "Updating accounts_files for project ID: #{@project.id}"
