@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template nlhf-template">
 <head>
+  <%= Gon::Base.render_data %>
   <title><%= yield(:page_title) %> - National Lottery Heritage Fund</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +22,7 @@
 <body class="govuk-template__body nlhf-template__body" data-turbolinks="false">
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+  <%= render "partials/cookie_banner" %>
   <%= render "partials/header" %>
   <%= render "partials/toolbar" %>
   <div class="govuk-width-container">
@@ -49,6 +51,9 @@
             <li class="govuk-footer__inline-list-item">
               <%= link_to("Accessibility statement", :accessibility_statement, class: "govuk-footer__link") %>
             </li>
+          <li class="govuk-footer__inline-list-item">
+              <%= link_to("Cookie settings", help_cookies_path, class: "govuk-footer__link") %>
+            </li>
         </ul>
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         <div class="govuk-footer__meta-custom">
@@ -59,13 +64,5 @@
   </div>
 </footer>
   <%= javascript_pack_tag 'application', 'data-turbolinks-suppress-warning':'true', 'data-turbolinks-eval': "false", 'data-turbolinks-track': 'reload' %>
-  
-  <%# if this is production render the tracking partial %>
-  <%= render partial: "partials/tracking_tags", locals: {
-    # if the layout has been passed content for a custom tracking override pass that into the
-    # partial otherwise pass false
-    tracking_url_path: (yield(:tracking_override) if content_for? :tracking_override)
-  } if Rails.env.production? %>
-  
 </body>
 </html><!-- Thanks Tom (@Steiny) & Sue (@SueBow94) -->

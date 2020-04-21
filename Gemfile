@@ -84,15 +84,15 @@ gem "rails-i18n", "~> 6.0"
 
 gem "nilify_blanks", "~> 1.3"
 
-
 gem "delayed_job_web", "~> 1.4"
-
 
 gem "lograge", "~> 0.11.2"
 
 gem "silencer", "~> 1.0"
 
 gem "actionview-component", "~> 1.10.0"
+
+gem "gon", "~> 6.3"
 
 gem "uk_postcode", "~> 2.1.5"
 

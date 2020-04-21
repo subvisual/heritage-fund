@@ -1,0 +1,106 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: nil,
+             page_title: "Cookies"
+         }
+%>
+
+<h1 class="govuk-heading-l">
+  How cookies are used on Apply for Funding (funding.heritagefund.org.uk)
+</h1>
+
+<p class="govuk-body">
+  Cookies are files saved on your phone, tablet or computer when you visit a website.
+</p>
+
+<p class="govuk-body">
+  We use cookies to make the service work and collect information about how you use our service.
+</p>
+
+<h2 class="govuk-heading-m">
+  Cookie policy settings
+</h2>
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header">Name</th>
+    <th scope="col" class="govuk-table__header">Purpose</th>
+    <th scope="col" class="govuk-table__header">Expires</th>
+  </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+  <tr class="govuk-table__row">
+    <td class="govuk-table__cell">nlhf_policy</th>
+    <td class="govuk-table__cell">Stores your cookie preferences</td>
+    <td class="govuk-table__cell">1 year</td>
+  </tr>
+  </tbody>
+</table>
+
+<h2 class="govuk-heading-m">
+  Cookie policy settings
+</h2>
+<p class="govuk-body">
+  We store session cookies on your computer to help keep your information secure while you use the service.
+</p>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header">Name</th>
+    <th scope="col" class="govuk-table__header">Purpose</th>
+    <th scope="col" class="govuk-table__header">Expires</th>
+  </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+  <tr class="govuk-table__row">
+    <td class="govuk-table__cell">_funding_frontend_ruby_session</th>
+    <td class="govuk-table__cell">Stores encrypted session data</td>
+    <td class="govuk-table__cell">When you close your browser</td>
+  </tr>
+  </tbody>
+</table>
+
+<h2 class="govuk-heading-m">Measuring website usage</h2>
+<p class="govuk-body">With your permission, we use Hotjar to collect data about how you use Apply for Funding. This information helps us to improve our service.</p>
+<p class="govuk-body">Hotjar is not allowed to use or share our analytics data with anyone. </p>
+<p class="govuk-body">Hotjar stores anonymised information about:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>
+  the pages you visit on Apply for Funding and how long you spend on each page,
+</li>
+  <li>how you navigate around the pages you look at on Apply for Funding,</li>
+  <li>what you click on while you’re using the service,</li>
+  <li>how you fill in the form in Apply for Funding,</li>
+  <ul>
+   <li>
+    your keystrokes, and any address or financial data you input, are not recorded or stored.
+   </li>
+  </ul>
+</li>
+</ul>
+<table class="govuk-table">
+<tbody class="govuk-table__body">
+<thead class="govuk-table__head">
+  <tr class="govuk-table__row">
+    <th scope="col" class="govuk-table__header">Name</th>
+    <th scope="col" class="govuk-table__header">Purpose</th>
+    <th scope="col" class="govuk-table__header">Expires</th>
+  </tr>
+  </thead>
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell">_hjid</th>
+  <td class="govuk-table__cell">Tells us if you’ve used the service before</td>
+  <td class="govuk-table__cell">1 year</td>
+</tr>
+<tr class="govuk-table__row">
+  <td class="govuk-table__cell">_hjIncludedInSample</th>
+  <td class="govuk-table__cell">Tells us which activity is related to an individual session</td>
+  <td class="govuk-table__cell">When you close your browser</td>
+</tr>
+</tbody>
+</table>
+
+<h2 class="govuk-heading-m">Change your settings</h2>
+<p class="govuk-body">You can <%=link_to 'change which cookies you’re happy for us to use', help_cookies_path %>.</p>

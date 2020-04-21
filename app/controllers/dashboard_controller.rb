@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     unless user_details_complete
       redirect_to user_details_path
     else
+      gon.push({tracking_url_path: '/project-dashboard'})
       @projects = current_user.projects
     end
 

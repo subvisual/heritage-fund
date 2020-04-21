@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # and unauthenticated root pages
   devise_scope :user do
     unauthenticated do
-      root to: "devise/sessions#new"
+      root to: "user/sessions#new"
     end
     authenticated :user do
       root to: "dashboard#show", as: :authenticated_root
@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   # to create an organisation when a user is created
   devise_for :users,
              :controllers  => {
-                 :registrations => 'user/registrations'
+                 registrations: 'user/registrations',
+                 sessions: 'user/sessions'
              }
 
   # Account section of the service
@@ -174,7 +175,6 @@ Rails.application.routes.draw do
     get 'question-or-feedback', to: 'support#question_or_feedback'
     post 'question-or-feedback', to: 'support#process_question'
   end
-
   # Endpoint for released forms webhook
   post 'consumer' => 'released_form#receive' do
     header "Content-Type", "application/json"
@@ -182,6 +182,11 @@ Rails.application.routes.draw do
 
   # Health check route for GOV.UK PaaS
   get 'health' => 'health#get_status'
+
+  namespace :help do
+    get 'cookies'
+    get 'cookie-details'
+  end
 
   # DelayedJob dashboard
   match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
