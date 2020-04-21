@@ -4,9 +4,6 @@ class NotifyMailer < Mail::Notify::Mailer
 
   include Devise::Controllers::UrlHelpers
 
-  def default_url_options
-    Rails.configuration.action_mailer.default_url_options
-  end
 
   def confirmation_instructions(record, token, opts = {})
     template_mail('a44293b7-7263-42b4-8905-44bbedaf1dfa',
