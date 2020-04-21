@@ -50,14 +50,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.current_user(user_id)
-      @user = User.find_by(uid: user_id)
-  end
-
-  # Override the send_devise_notification method to allow for
-  # non-blocking sending using ActiveJob
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
-
+    def self.current_user(user_id)
+        @user = User.find_by(uid: user_id)
+    end
 end
