@@ -32,6 +32,12 @@ class User < ApplicationRecord
 
   validate :date_of_birth_is_date_and_in_past?, if: :validate_details?
 
+  # Override the send_devise_notification method to allow for
+  # non-blocking sending using ActiveJob
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
   def validate_details?
     validate_details == true
   end
