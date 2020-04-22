@@ -4,7 +4,7 @@ class NotifyMailer < Mail::Notify::Mailer
 
   include Devise::Controllers::UrlHelpers
 
-  def default_url_options
+  def self.default_url_options
     Rails.application.config.action_mailer.default_url_options
   end
 
