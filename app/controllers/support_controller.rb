@@ -5,7 +5,7 @@ class SupportController < ApplicationController
   end
 
   def report_a_problem
-    clear_flash("report_a_problem")
+    clear_flash("problem")
   end
 
   def question_or_feedback
@@ -13,7 +13,6 @@ class SupportController < ApplicationController
   end
 
   def process_problem
-
     logger.info "User submitted POST /report-a-problem form"
 
     flash[:errors] = {}
@@ -50,6 +49,7 @@ class SupportController < ApplicationController
 
       logger.debug "Finished calling NotifyMailer.report_a_problem_email"
 
+      # Flash Hash contains populated fields
       clear_flash("problem")
 
       flash[:success] = true
@@ -59,6 +59,9 @@ class SupportController < ApplicationController
     logger.info "Finished processing of POST /report-a-problem form, re-rendering page"
 
     render :report_a_problem
+
+    # Flash Hash could contain populated fields, errors, or success key
+    clear_flash("problem")
 
   end
 
@@ -102,6 +105,9 @@ class SupportController < ApplicationController
     logger.info "Finished processing of POST /question-or-feedback form, re-rendering page"
 
     render :question_or_feedback
+
+    # Flash Hash could contain populated fields, errors, or success key
+    clear_flash("question_or_feedback")
 
   end
 
@@ -151,7 +157,7 @@ class SupportController < ApplicationController
 
   end
 
-  private
+
   def clear_flash(page_type)
     flash[:errors] = nil
     flash[:success] = nil

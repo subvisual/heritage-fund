@@ -7,7 +7,7 @@
   render partial: "partials/summary_errors_flash",
          locals: {
              first_form_element: :support_type_report_a_problem
-         } if flash[:errors]
+         } if flash[:errors].present?
 %>
 
 <% if flash[:success] %>
@@ -38,13 +38,13 @@
       </div>
 
       <div class="govuk-form-group <%= "govuk-form-group--error" if
-                                           flash[:errors] && flash[:errors][:support_problem_message] %>">
+                                           flash[:errors].present? && flash[:errors][:support_problem_message].present? %>">
 
         <%=
           render partial: "partials/form_input_errors_flash",
                  locals: {
                      input_field_id: :support_problem_message
-                 } if flash[:errors] && flash[:errors][:support_problem_message].present?
+                 } if flash[:errors].present? && flash[:errors][:support_problem_message].present?
         %>
 
         <%= label_tag :support_problem_message, "Your message", class: "govuk-label" %>
@@ -53,18 +53,18 @@
                         flash[:support_problem_message].present? ? flash[:support_problem_message] : nil,
                         rows: 10,
                         class: "govuk-textarea #{'govuk-textarea--error' if
-                            flash[:errors] && flash[:errors][:support_problem_message].present?}"
+                            flash[:errors].present? && flash[:errors][:support_problem_message].present?}"
         %>
       </div>
 
       <div class="govuk-form-group <%= "govuk-form-group--error" if
-                                           flash[:errors] && flash[:errors][:support_problem_name] %>">
+                                           flash[:errors].present? && flash[:errors][:support_problem_name].present? %>">
 
         <%=
           render partial: "partials/form_input_errors_flash",
                  locals: {
                      input_field_id: :support_problem_name
-                 } if flash[:errors] && flash[:errors][:support_problem_name].present?
+                 } if flash[:errors].present? && flash[:errors][:support_problem_name].present?
         %>
 
         <%= label_tag :support_problem_name, "Your name", class: "govuk-label" %>
@@ -72,18 +72,18 @@
           text_field_tag :support_problem_name,
                          flash[:support_problem_name].present? ? flash[:support_problem_name] : nil,
                          class: "govuk-input #{'govuk-input--error' if
-                             flash[:errors] && flash[:errors][:support_problem_name].present?}"
+                             flash[:errors].present? && flash[:errors][:support_problem_name].present?}"
         %>
       </div>
 
       <div class="govuk-form-group <%= "govuk-form-group--error" if
-                                           flash[:errors] && flash[:errors][:support_problem_email]%>">
+                                           flash[:errors].present? && flash[:errors][:support_problem_email].present? %>">
 
         <%=
           render partial: "partials/form_input_errors_flash",
                  locals: {
                      input_field_id: :support_problem_email
-                 } if flash[:errors] && flash[:errors][:support_problem_email].present?
+                 } if flash[:errors].present? && flash[:errors][:support_problem_email].present?
         %>
 
         <%= label_tag :support_problem_email, "Your email address", class: "govuk-label" %>
@@ -91,7 +91,7 @@
           text_field_tag :support_problem_email,
                           flash[:support_problem_email].present? ? flash[:support_problem_email] : nil,
                           class: "govuk-input #{'govuk-input--error' if
-                              flash[:errors] && flash[:errors][:support_problem_email].present?}"
+                              flash[:errors].present? && flash[:errors][:support_problem_email].present?}"
         %>
       </div>
 
