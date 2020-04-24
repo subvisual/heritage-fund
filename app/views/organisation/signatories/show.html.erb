@@ -62,15 +62,15 @@
   <%= f.fields_for :legal_signatories do |ls| %>
 
     <fieldset class="govuk-fieldset govuk-!-margin-bottom-6">
-
-      <h2 class="govuk-heading-m" aria-label="Heading">
-        <%#
+      <legend>
+        <h2 class="govuk-heading-m" aria-label="Heading">
+          <%#
             We are using ls.index + 1 here to display '1' and '2'
             as :legal_signatories is zero-indexed
-        %>
-        Legal signatory <%= ls.index + 1 %>
-      </h2>
-
+          %>
+          Legal signatory <%= ls.index + 1 %>
+        </h2>
+      </legend>
       <div class="govuk-form-group <%= "#{'govuk-form-group--error' if
           @organisation.legal_signatories[ls.index].errors[:name].any?}" %>">
 
