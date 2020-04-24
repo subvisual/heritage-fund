@@ -1,4 +1,4 @@
-class ButtonComponent < ActionView::Component::Base
+class ButtonComponent < ViewComponent::Base
 
   # See examples of this component at:
   # /rails/components/button_component/
