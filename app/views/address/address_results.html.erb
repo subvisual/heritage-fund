@@ -12,7 +12,9 @@
 <% else %>
   <h1 class="govuk-heading-xl">
     <span class="govuk-caption-xl">Add your details</span>
+    <label for="address">
     Select an address
+    </label>
   </h1>
 <% end %>
 
@@ -20,10 +22,12 @@
   <p class="govuk-body" aria-label="information">Your organisation must be based in the UK</p>
 <% end %>
 
-<% if @type == "organisation" || @type == "project" %>
-  <h2 class="govuk-heading-m">Select an address</h2>
-<% end %>
 
+<% if @type == "organisation" || @type == "project" %>
+  <label for="address">
+  <h2 class="govuk-heading-m">Select an address</h2>
+  </label>
+<% end %>
 <%= form_with(url: address_details_path, method: :put, local: true) do |p| %>
 
   <%= select_tag "address", options_for_select(@response_array.map { |p| result_formatter(p) }) , class: 'govuk-select' %>
