@@ -57,7 +57,7 @@ group :test do
   gem "database_cleaner-active_record", "~> 1.8"
 end
 
-group :production, :staging do
+group :production, :uat, :staging do
   gem "aws-sdk-s3", require: false
   gem 'cf-app-utils'
   gem "delayed_job_active_record", "~> 4.1"
