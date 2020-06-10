@@ -127,16 +127,18 @@ In order to see caching work in development - run this command in the terminal:
 rails dev:cache
 ``` 
 
-## Toggling the BAU Flipper feature
+## Toggling the Flipper features
 
-To turn on business as usual functionality, a BAU Flipper needs to exist.
+To toggle functionality, a Flipper needs to exist. Flipper rows exist within the `flipper_features` and 
+`flipper_gates` tables on the database. The `flipper_gates` are populated with a migration. The `flipper_features` 
+are populated at app runtime, provided rows exist in flipper.rb.
 
-This flipper value should be `true` for BAU functionality to work.
+This `flipper_gates` `value` should be `true` for it to work.
 
-Update the flipper row with:
+Update the `flipper_gates` row with:
 
 `rails dbconsole`
 
 ```postgresql
-UPDATE flipper_gates SET value = true WHERE feature_key = 'bau';   
+UPDATE flipper_gates SET value = true WHERE feature_key = '<key_name>';   
 ```

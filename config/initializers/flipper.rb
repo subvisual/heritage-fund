@@ -7,8 +7,14 @@ if ActiveRecord::Base.connection.table_exists? :flipper_features
       adapter = Flipper::Adapters::ActiveRecord.new
       Flipper.new(adapter)
     end
-    # We start the app with business as usual functionality disabled.
-    # To enable, insert a bau flipper as per README.
+    # Flipper gates toggle app features on and off. Adding the flippers 
+    # here creates a row in flipper_features.
+    # To control toggles - see README
     Flipper[:bau].add
+    Flipper[:covid_banner_enabled].add
+    Flipper[:grant_programme_hef_loan].add
+    Flipper[:registration_enabled].add
+    Flipper[:new_applications_enabled].add
+    Flipper[:grant_programme_sff_small].add
   end
 end
