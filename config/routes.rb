@@ -82,6 +82,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: Wire up implementation
+  namespace :funding_application do
+    namespace :hef_loan do
+      get 'form', to: 'form#show'
+    end
+  end
+
   # Project section of the service (for small grants)
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do

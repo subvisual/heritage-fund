@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_123655) do
+ActiveRecord::Schema.define(version: 2020_06_02_083559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 2020_04_01_123655) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "line1"
+    t.string "line2"
+    t.string "line3"
+    t.string "town_city"
+    t.string "county"
+    t.string "postcode"
+    t.string "udprn"
+    t.string "lat"
+    t.string "long"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cash_contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -85,6 +99,30 @@ ActiveRecord::Schema.define(version: 2020_04_01_123655) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
+  end
+
+  create_table "funding_application_addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "address_id", null: false
+    t.uuid "funding_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_funding_application_addresses_on_address_id"
+    t.index ["funding_application_id"], name: "index_funding_application_addresses_on_funding_application_id"
+  end
+
+  create_table "funding_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "declaration"
+    t.text "declaration_description"
+    t.boolean "declaration_keep_informed"
+    t.boolean "declaration_user_research"
+    t.string "project_reference_number"
+    t.string "salesforce_case_id"
+    t.string "salesforce_case_number"
+    t.datetime "submitted_on"
+    t.uuid "organisation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organisation_id"], name: "index_funding_applications_on_organisation_id"
   end
 
   create_table "legal_signatories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -233,6 +271,9 @@ ActiveRecord::Schema.define(version: 2020_04_01_123655) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_contributions", "projects"
   add_foreign_key "evidence_of_support", "projects"
+  add_foreign_key "funding_application_addresses", "addresses"
+  add_foreign_key "funding_application_addresses", "funding_applications"
+  add_foreign_key "funding_applications", "organisations"
   add_foreign_key "non_cash_contributions", "projects"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"

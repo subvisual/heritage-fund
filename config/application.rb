@@ -30,6 +30,11 @@ module FundingFrontendRuby
       require 'rails/generators/generated_attribute'
       Rails::Generators::GeneratedAttribute.prepend hacker
     end
+
+    # Autoload models from subdirectories in the models/application/common directory
+    # For each additional subdirectory, we will need to appened to config.autoload_paths
+    config.autoload_paths += Dir[Rails.root.join("app", "models", "application", "common")]
+    
     # config.active_record.schema_format = :sql
 
     # Settings in config/environments/* take precedence over those specified here.
