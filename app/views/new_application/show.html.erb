@@ -1,0 +1,114 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: nil,
+             page_title: "Create a new application"
+         }
+%>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @application,
+             first_form_element: :new_application_application_type_sff_small
+         } if @application.errors.any?
+%>
+
+<%= form_with model: @application, url: :start_an_application, method: :put, local: true do |f|  %>
+
+    <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          Which type of application would you like to start?
+        </h1>
+      </legend>
+
+      <span id="project-title-hint" class="govuk-hint">
+        We provide different levels of funding to heritage of all shapes and sizes. Select the 
+        level of funding that you wish to apply for.
+      </span>
+
+      <%=
+        render partial: "partials/form_group_errors",
+              locals: {
+                  form_object: @application
+              } if @application.errors.any?
+      %>
+
+      <% if Flipper[:grant_programme_sff_small].enabled? %>
+
+        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+            <%=
+                f.radio_button :application_type,
+                "sff_small",
+                class: "govuk-radios__input",
+                "data-aria-controls" => "conditional-application_type_sff_small"
+            %>
+            <%= f.label :sff_small, "Grants of £3,000 to £10,000", class: "govuk-label govuk-radios__label govuk-label--s" %>
+            <span id="application_type_sff_small-hint" class="govuk-hint govuk-radios__hint">
+                This grant level is for a project that can last up to one year.
+            </span>
+            </div>
+
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                id="conditional-application_type_sff_small">
+
+            <p class="govuk-body">
+                You can apply for a grant of £3,000 to £10,000 if you are a:
+            </p>
+
+            <ul class="govuk-list govuk-list--bullet">
+                <li>not-for-profit organisation</li>
+                <li>private owner of heritage</li>
+            </ul>
+
+            </div>
+
+        </div>
+
+      <% end %>
+
+      <% if Flipper[:grant_programme_hef_loan].enabled? %>
+
+        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+            <div class="govuk-radios__item">
+            <%=
+                f.radio_button :application_type,
+                "hef_loan",
+                class: "govuk-radios__input",
+                "data-aria-controls" => "conditional-application_type_hef_loan"
+            %>
+            <%= f.label :hef_loan, "Heritage Emergency Fund Loan", class: "govuk-label govuk-radios__label govuk-label--s" %>
+            <span id="application_type_hef_loan-hint" class="govuk-hint govuk-radios__hint">
+                This grant level is for essential costs for the next 4 months to help organisations deal
+                with immediate risks and become more stable.
+            </span>
+            </div>
+
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                id="conditional-application_type_hef_loan">
+
+            <p class="govuk-body">
+                This level of funding may also include some costs that help organisations look towards
+                longer-term recovery.
+            </p>
+
+            </div>
+
+        </div>
+
+      <% end %>
+
+    </fieldset>
+
+  </div>
+
+ <%= render(ButtonComponent.new(element: "input", is_start_button: true, text: "Start a new application")) %>
+
+<% end %>

@@ -3,14 +3,14 @@ include ActionView::Helpers::NumberHelper
 
 RSpec.feature 'Project', type: :feature do
 
-  # TODO remove bau flipper
   # This tests for the successful creation of a generic project application,
   # which has almost all fields filled in.
   scenario 'Successful submission of an application' do
 
     begin
 
-      Flipper[:bau].enable
+      Flipper[:grant_programme_sff_small].enable
+      Flipper[:new_applications_enabled].enable
 
       salesforce_stub
 
@@ -37,9 +37,17 @@ RSpec.feature 'Project', type: :feature do
 
       visit '/'
 
-      expect(page).to have_text I18n.t("dashboard.start_a_new_project_button")
+      expect(page).to have_text I18n.t("dashboard.start_a_new_application_button")
 
-      click_link_or_button I18n.t("dashboard.start_a_new_project_button")
+      click_link_or_button I18n.t("dashboard.start_a_new_application_button")
+
+      expect(page).to have_text "Which type of application would you like to start?"
+
+      expect(page).to have_text "Grants of £3,000 to £10,000"
+
+      choose "new_application_application_type_sff_small"
+
+      click_link_or_button "Start a new application"
 
       expect(page).to have_text 'Start Now'
 
@@ -223,7 +231,8 @@ RSpec.feature 'Project', type: :feature do
 
     ensure
 
-      Flipper[:bau].disable
+      Flipper[:grant_programme_sff_small].disable
+      Flipper[:new_applications_enabled].disable
 
     end
 

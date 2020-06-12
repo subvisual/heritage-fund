@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'Organisation', type: :feature do
 
-  # TODO remove bau flipper
   scenario 'Successful creation of an organisation with a single legal ' \
            'signatory' do
 
     begin
 
-      Flipper[:bau].enable
+      Flipper[:new_applications_enabled].enable
 
       user = FactoryBot.create(
           :user,
@@ -24,14 +23,10 @@ RSpec.feature 'Organisation', type: :feature do
       login_as(user, :scope => :user)
 
       visit '/'
-      expect(page).to have_text I18n.t("dashboard.start_a_new_project_button")
+      expect(page).to have_text I18n.t("dashboard.start_a_new_application_button")
 
-      click_link_or_button I18n.t("dashboard.start_a_new_project_button")
-
-      expect(page).to have_text 'Start Now'
-
-      click_link_or_button 'Start Now'
-
+      click_link_or_button I18n.t("dashboard.start_a_new_application_button")
+          
       expect(page)
           .to have_text 'What type of organisation will be running your project'
 
@@ -92,18 +87,17 @@ RSpec.feature 'Organisation', type: :feature do
 
     ensure
 
-      Flipper[:bau].disable
+      Flipper[:new_applications_enabled].disable
 
     end
 
   end
 
-  # TODO remove bau flipper
   scenario 'Non-selection of an organisation type should return an error' do
 
     begin
 
-      Flipper[:bau].enable
+      Flipper[:new_applications_enabled].enable
 
       user = FactoryBot.create(
           :user,
@@ -119,13 +113,9 @@ RSpec.feature 'Organisation', type: :feature do
       login_as(user, :scope => :user)
 
       visit '/'
-      expect(page).to have_text 'Start a new project'
+      expect(page).to have_text 'Start a new application'
 
-      click_link_or_button 'Start a new project'
-
-      expect(page).to have_text 'Start Now'
-
-      click_link_or_button 'Start Now'
+      click_link_or_button 'Start a new application'
 
       expect(page)
           .to have_text 'What type of organisation will be running your project'
@@ -138,14 +128,13 @@ RSpec.feature 'Organisation', type: :feature do
 
     ensure
 
-      Flipper[:bau].disable
+      Flipper[:new_applications_enabled].disable
 
     end
 
   end
 
-  # TODO remove bau flipper
-  scenario 'BAU Flipper turned off should not show Start a new project button' do
+  scenario 'New Applications Enabled Flipper turned off should not show Start a new project button' do
     user = FactoryBot.create(
         :user,
         name: 'Jane Doe',

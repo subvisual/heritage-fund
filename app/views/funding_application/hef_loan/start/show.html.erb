@@ -1,0 +1,8 @@
+<h1> Start Page </h1>
+<h2> This will contain some helpful content, then direct to the application page</h2>
+
+<%= form_tag(url: :funding_application_hef_loan_start, method: :put, local: true) do |f| %>
+
+    <%= render(ButtonComponent.new(element: "input", is_start_button: true, text: "Start Now")) %>
+
+<% end %>

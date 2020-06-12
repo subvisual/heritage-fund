@@ -6,11 +6,12 @@
          }
 %>
 
-<% unless Flipper.enabled?(:bau) %>
+<% if Flipper.enabled?(:covid_banner_enabled) %>
   <div class="nlhf-banner">
     <svg class="nlhf-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
       <path d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8
-  C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z" /></svg>
+  C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z" />
+    </svg>
     <div class="nlhf-banner__message">
       <p class="govuk-heading-m">Important announcement</p>
       <p class="govuk-body">You will not be able to submit an application until at least October 2020. The service is temporarily closed because of the coronavirus outbreak. </p>
@@ -28,11 +29,11 @@
   <div class="nlhf-panel nlhf-alert nlhf-alert--slim govuk-!-margin-bottom-8">
 
     <h2 class="govuk-heading-m">
-      <%= I18n.t("dashboard.no_projects_sub_heading") %>
+      <%= I18n.t("dashboard.no_applications_sub_heading") %>
     </h2>
 
     <p class="govuk-body">
-      <%= I18n.t("dashboard.no_projects_text") %>
+      <%= I18n.t("dashboard.no_applications_text") %>
     </p>
 
   </div>
@@ -40,7 +41,7 @@
 <% else %>
 
   <p class="govuk-body">
-    <%= I18n.t("dashboard.associated_projects_text") %>
+    <%= I18n.t("dashboard.associated_applications_text") %>
   </p>
 
   <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links
@@ -50,7 +51,7 @@
 
       <li class="nlhf-list__item">
 
-        <%= link_to_unless(project.submitted_on.present?, project.project_title.present? ? project.project_title : "Untitled project", three_to_ten_k_project_title_path(project_id: project.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
+        <%= link_to_unless(project.submitted_on.present?, project.project_title.present? ? project.project_title : "Untitled application", three_to_ten_k_project_title_path(project_id: project.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
           "#{name} - #{I18n.t("dashboard.submitted")}#{' - ' + I18n.t("dashboard.reference") + ': '  + project.project_reference_number if project.project_reference_number.present?}"
         end
         %>
@@ -60,8 +61,7 @@
     <% end %>
   </ul>
 
-  <%# TODO: remove bau flipper %>
-  <% if  Flipper.enabled?(:bau) %>
+  <% if  Flipper.enabled?(:new_applications_enabled) %>
     <p class="govuk-body">
         <%= I18n.t("dashboard.you_can_also") %>
     </p>
@@ -69,14 +69,13 @@
 
 <% end %>
 
-<%# TODO: remove bau flipper %>
 <%=
   render(
       ButtonComponent.new(
           element: "a",
-          "href": start_a_project_url,
+          "href": orchestrate_dashboard_journey_url,
           is_start_button: true,
-          text: I18n.t("dashboard.start_a_new_project_button")
+          text: I18n.t("dashboard.start_a_new_application_button")
       )
-  ) if Flipper.enabled?(:bau)
+  ) if Flipper.enabled?(:new_applications_enabled)
 %>

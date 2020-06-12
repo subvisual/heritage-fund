@@ -45,6 +45,13 @@ en-GB:
   activestorage:
     errors:
       file_upload_error_message: "The upload of this file has failed"
+  activemodel:
+    errors:
+      models:
+        new_application:
+          attributes:
+            application_type:
+              blank: "Select the type of application you wish to start"
   activerecord:
     attributes:
       legal_signatory:

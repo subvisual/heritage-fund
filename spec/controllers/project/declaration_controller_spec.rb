@@ -105,13 +105,12 @@ RSpec.describe Project::DeclarationController do
 
     end
 
-    # TODO remove bau flipper
     it "should successfully update if a valid confirm_declaration param is " \
        "passed" do
 
       begin
 
-        Flipper[:bau].enable
+        Flipper[:grant_programme_sff_small].enable
 
         expect(ApplicationToSalesforceJob).to \
          receive(:perform_later).with(project)
@@ -135,13 +134,12 @@ RSpec.describe Project::DeclarationController do
         expect(assigns(:project).user_research_declaration).to eq(true)
 
       ensure
-        Flipper[:bau].disable
+        Flipper[:grant_programme_sff_small].disable
       end
 
     end
 
-  # TODO remove bau flipper
-  it "should successfully update based on Flipper[:bau] if a valid " \
+  it "should successfully update based on Flipper[:grant_programme_sff_small] if a valid " \
      "confirm_declaration param is passed" do
 
       expect(ApplicationToSalesforceJob).not_to \

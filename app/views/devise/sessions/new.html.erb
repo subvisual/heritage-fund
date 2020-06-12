@@ -16,7 +16,7 @@
 
   <div class="nlhf-banner__message">
 
-    <% if Flipper.enabled?(:bau) %>
+    <% if Flipper.enabled?(:grant_programme_sff_small) %>
       <p class="govuk-heading-m">This is a new application form for grants of £3,000-£10,000 in:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>Scotland</li>
@@ -62,27 +62,25 @@
   <p class="govuk-body govuk-!-margin-bottom-1"><%= link_to "Forgot your password", new_password_path(resource_name) %></p>
 <% end %>
 
-<%# TODO remove bau flipper %>
-<% if Flipper.enabled?(:bau) %>
+<% if Flipper.enabled?(:registration_enabled) %>
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p class="govuk-body"><%= link_to "Didn't receive confirmation instructions", new_confirmation_path(resource_name) %></p>
   <% end %>
-
 
   <div class="govuk-inset-text">
 
     <p class="govuk-body">
       This is a new application form. If you haven't logged in here before, you might not have an account with us. You will need to <%= link_to "create a new account", new_registration_path(resource_name) %> to apply.
     </p>
-  </div>
 
-  <p class="govuk-body">
-    If you started an application for a grant of £3,000 to £10,000 before 3 February 2020, sign in at <a href="https://forms.hlf.org.uk/officeforms/HLF_Projects.ofml">our application portal</a>.
-  </p>
+  </div>
 <% end %>
 
-<%# TODO remove bau flipper %>
-<% if Flipper.enabled?(:bau) %>
+<p class="govuk-body">
+  If you started an application for a grant of £3,000 to £10,000 before 3 February 2020, sign in at <a href="https://forms.hlf.org.uk/officeforms/HLF_Projects.ofml">our application portal</a>.
+</p>
+
+<% if Flipper.enabled?(:registration_enabled) %>
   <%= content_for :secondarycontent do %>
     <%= render "partials/signup-panel" %>
   <% end %>

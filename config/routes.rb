@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  # Lambdas are used in this file where we conditionally want to redirect routes
+  # based on Flipper configuration settings. The use of lambdas is so that the 
+  # corresponding Flipper.enabled check happens dynamically when the route is 
+  # accessed, rather than when the routes are first initialised at runtime.
+
   # Devise root scope - used to determine the authenticated
   # and unauthenticated root pages
   devise_scope :user do
@@ -11,8 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # TODO: Remove bau flipper
-  constraints lambda { !Flipper.enabled?(:bau) } do
+  constraints lambda { !Flipper.enabled?(:registration_enabled) } do
     devise_scope :user do
       get "/users/sign_up",  :to => "devise/sessions#new"
     end
@@ -39,11 +43,15 @@ Rails.application.routes.draw do
   end
 
   # Dashboard section of the service
-  # TODO: Remove bau flipper
-  get 'start-a-project', to: 'home#show',
-      constraints: lambda { Flipper.enabled?(:bau) }
-  get 'start-a-project', to: 'dashboard#show',
-      constraints: lambda { !Flipper.enabled?(:bau) }
+  get '/orchestrate-dashboard-journey', to: 'dashboard#orchestrate_dashboard_journey', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+  get '/orchestrate-dashboard-journey', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+
+  # Start an Application section of the service
+  get 'start-an-application', to: 'new_application#show', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+  get 'start-an-application', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+
+  put 'start-an-application', to: 'new_application#update', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+  put 'start-an-application', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
 
   # Modular address section of the service
   # Used in /user, /organisation and /3-10k/project
@@ -82,16 +90,30 @@ Rails.application.routes.draw do
     end
   end
 
-  # TODO: Wire up implementation
-  namespace :funding_application do
-    namespace :hef_loan do
-      get 'form', to: 'form#show'
+  # Application section of the service
+  scope '/application', module: 'funding_application', as: :funding_application do
+    scope 'hef-loan', module: 'hef_loan', as: :hef_loan do
+
+      # Not scoped under /application_id, as the application does not yet exist
+      get 'start', to: 'start#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+      get 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+
+      post 'start', to: 'start#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+      post 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+
+      scope '/:application_id' do
+        get 'form', to: 'form#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'form', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+      end
+
     end
   end
 
   # Project section of the service (for small grants)
   scope "/3-10k", as: :three_to_ten_k do
     namespace :project do
+
+      get 'start', to: 'start#show'
 
       # Not scoped under /:project_id, as the project does not yet exist
       get 'create-new-project', to: 'new_project#create_new_project', as: :create

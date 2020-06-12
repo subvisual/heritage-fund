@@ -4,8 +4,8 @@ RSpec.feature 'Application', type: :feature do
   scenario 'Signed out user' do
     visit('/')
     expect(page.status_code).to eq(200)
-    # TODO remove flipper bau
-    expect(page).not_to have_content("sign in")
+    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Problems signing in?')
   end
 
   scenario 'About you page' do
