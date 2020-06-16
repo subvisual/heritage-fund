@@ -9,6 +9,7 @@ class NewApplicationController < ApplicationController
     redirect_based_on_organisation_presence_and_completeness(current_user)
 
     @application = NewApplication.new
+
   end
 
   # This method creates a new NewApplication object and then uses this to 
@@ -21,7 +22,7 @@ class NewApplicationController < ApplicationController
 
     @application = NewApplication.new
 
-    @application.validate_application_type = true
+    @application.validate_application_type_presence = true
 
     @application.update(new_application_params)
 
@@ -93,9 +94,8 @@ class NewApplicationController < ApplicationController
         redirect_to :three_to_ten_k_project_start
 
     else
-
         logger.info 'Method redirect_to_application_start_page called with ' \
-                    "an application object (ID: #{application.id}) containing an " \
+                    "an application object containing an " \
                     "application_type of #{application.application_type}"
 
         # If the user has managed to hit this route with an invalid 

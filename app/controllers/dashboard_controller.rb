@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   def show
 
     unless user_details_complete(current_user)
-      redirect_to user_details_path
+      redirect_to(:user_details)
     else
       gon.push({tracking_url_path: '/project-dashboard'})
       @projects = current_user.projects
@@ -96,7 +96,7 @@ class DashboardController < ApplicationController
 
       logger.info "Organisation details complete for #{organisation.id}"
 
-      redirect_to start_an_application_path
+      redirect_to(:start_an_application)
 
     else
 

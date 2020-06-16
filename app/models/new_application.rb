@@ -5,12 +5,12 @@ class NewApplication
 
     attr_accessor :application_type
 
-    attr_accessor :validate_application_type
+    attr_accessor :validate_application_type_presence
 
-    validates :application_type, presence: true, if: :validate_application_type?
+    validates :application_type, presence: true, if: :validate_application_type_presence?
 
-    def validate_application_type?
-        validate_application_type == true
+    def validate_application_type_presence?
+        validate_application_type_presence == true
     end
 
     def update(attributes)
