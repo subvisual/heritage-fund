@@ -7,7 +7,6 @@ class User::RegistrationsController < Devise::RegistrationsController
         # Check that the user model is valid so that we do not create an empty
         # Organisation or an empty Person if validation fails
         if resource.valid?
-
           person = Person.create(email: resource.email)
           organisation = Organisation.create
 

@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_many :projects
 
-  belongs_to :person
+  belongs_to :person, optional: true
 
   attr_accessor :validate_details
   attr_accessor :validate_address
