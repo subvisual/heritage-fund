@@ -1,0 +1,2 @@
+class PeopleAddress < ApplicationRecord
+end
