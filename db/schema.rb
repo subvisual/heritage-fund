@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_140500) do
+ActiveRecord::Schema.define(version: 2020_06_23_152611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -162,6 +162,20 @@ ActiveRecord::Schema.define(version: 2020_06_11_140500) do
     t.string "salesforce_account_id"
   end
 
+  create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.date "date_of_birth"
+    t.string "email"
+    t.string "phone_number"
+  end
+
+  create_table "people_addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "address_id", null: false
+    t.uuid "person_id", null: false
+    t.index ["address_id"], name: "index_people_addresses_on_address_id"
+    t.index ["person_id"], name: "index_people_addresses_on_person_id"
+  end
+
   create_table "project_costs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "cost_type"
     t.integer "amount"
@@ -253,10 +267,19 @@ ActiveRecord::Schema.define(version: 2020_06_11_140500) do
     t.string "county"
     t.string "postcode"
     t.string "phone_number"
+    t.uuid "person_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organisation_id"], name: "index_users_on_organisation_id"
+    t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "address_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["address_id"], name: "index_users_addresses_on_address_id"
+    t.index ["user_id"], name: "index_users_addresses_on_user_id"
   end
 
   create_table "volunteers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -275,8 +298,13 @@ ActiveRecord::Schema.define(version: 2020_06_11_140500) do
   add_foreign_key "funding_application_addresses", "funding_applications"
   add_foreign_key "funding_applications", "organisations"
   add_foreign_key "non_cash_contributions", "projects"
+  add_foreign_key "people_addresses", "addresses"
+  add_foreign_key "people_addresses", "people"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"
+  add_foreign_key "users", "people"
+  add_foreign_key "users_addresses", "addresses"
+  add_foreign_key "users_addresses", "users"
   add_foreign_key "volunteers", "projects"
 end
