@@ -11,6 +11,10 @@ class User::DetailsController < ApplicationController
 
     if current_user.valid?
 
+      # As current_user is valid, we can now merge the individual date of 
+      # birth fields into an individual Date object and store this in the 
+      # current_user's date_of_birth attribute
+
       current_user.date_of_birth = Date.new(
           params[:user][:dob_year].to_i,
           params[:user][:dob_month].to_i,
@@ -22,7 +26,9 @@ class User::DetailsController < ApplicationController
       logger.debug "Finished updating user details for user ID: " \
                    "#{current_user.id}"
 
-      check_and_set_organisation
+      check_and_set_organisation(current_user)
+
+      replicate_user_attributes_to_associated_person(current_user) if current_user.person_id
 
       redirect_to postcode_path 'user', current_user.organisation_id
 
@@ -59,11 +65,29 @@ class User::DetailsController < ApplicationController
   # not. This caters to a case where the user has been registered but the
   # organisation has not been created yet (prior to organisation creation
   # being moved to the User::RegistrationsController)
-  def check_and_set_organisation
-    unless current_user.organisation_id.present?
+  #
+  # @param [User] user An instance of User
+  def check_and_set_organisation(user)
+    unless user.organisation_id.present?
       organisation = Organisation.create
-      current_user.update(organisation_id: organisation.id)
+      user.update(organisation_id: organisation.id)
     end
+  end
+
+  # Replicates a subset of attributes from the passed in User object 
+  # to the associated Person
+  #
+  # @param [User] user An instance of User
+  def replicate_user_attributes_to_associated_person(user)
+
+    person = Person.find(user.person_id)
+
+    person.update(
+      name: user.name,
+      date_of_birth: user.date_of_birth,
+      phone_number: user.phone_number
+    )
+
   end
 
   def user_params
