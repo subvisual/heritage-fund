@@ -6,14 +6,18 @@ RSpec.feature 'Application', type: :feature do
   end
   scenario 'Address Lookup' do
 
+    person = FactoryBot.create(:person)
     organisation = FactoryBot.create(:organisation)
+
     user = FactoryBot.create(
-        :user,
-        name: 'Jane Doe',
-        phone_number: '123',
-        date_of_birth: Date.new,
-        organisation_id: organisation.id
-    )
+      :user,
+      name: 'Jane Doe',
+      phone_number: '123',
+      email: 'test@test.com',
+      date_of_birth: Date.new,
+      person_id: person.id,
+      organisation_id: organisation.id
+  )
 
     login_as(user, :scope => :user)
     visit "/user/#{organisation.id}/address/postcode"

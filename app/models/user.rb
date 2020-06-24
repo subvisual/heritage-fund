@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   has_many :projects
 
+  belongs_to :person
+
   attr_accessor :validate_details
   attr_accessor :validate_address
 

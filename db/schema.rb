@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_152611) do
+ActiveRecord::Schema.define(version: 2020_06_19_105103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -125,6 +125,58 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
     t.index ["organisation_id"], name: "index_funding_applications_on_organisation_id"
   end
 
+  create_table "gp_hef_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "previous_nlhf_funding"
+    t.boolean "can_legally_take_on_debt"
+    t.boolean "any_debt_restrictions"
+    t.text "debt_description"
+    t.boolean "can_provide_security"
+    t.boolean "security_restrictions"
+    t.text "security_description"
+    t.boolean "has_had_an_average_yearly_cash_surplus"
+    t.integer "average_yearly_cash_surplus"
+    t.boolean "has_had_a_surplus_in_last_reporting_year"
+    t.integer "cash_surplus_in_last_year"
+    t.boolean "can_use_direct_bank_transfer"
+    t.boolean "bankruptcy_or_administration"
+    t.boolean "state_aid"
+    t.boolean "considers_state_aid"
+    t.boolean "has_applied_for_grant_or_loan"
+    t.text "other_funding_details"
+    t.text "efforts_to_reduce_borrowing"
+    t.text "plans_for_loan_description"
+    t.text "time_to_repay_loan"
+    t.text "cashflow_understanding"
+    t.integer "loan_amount_requested"
+    t.bigint "gp_hef_loans_org_income_type_id"
+    t.bigint "gp_hef_loans_plans_for_loan_id"
+    t.bigint "gp_hef_loans_repayment_frequency_id"
+    t.index ["gp_hef_loans_org_income_type_id"], name: "index_gp_hef_loans_on_gp_hef_loans_org_income_type_id"
+    t.index ["gp_hef_loans_plans_for_loan_id"], name: "index_gp_hef_loans_on_gp_hef_loans_plans_for_loan_id"
+    t.index ["gp_hef_loans_repayment_frequency_id"], name: "index_gp_hef_loans_on_gp_hef_loans_repayment_frequency_id"
+  end
+
+  create_table "gp_hef_loans_org_income_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "gp_hef_loan_id"
+    t.bigint "org_income_type_id"
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_org_income_types_on_gp_hef_loan_id"
+    t.index ["org_income_type_id"], name: "index_gp_hef_loans_org_income_types_on_org_income_type_id"
+  end
+
+  create_table "gp_hef_loans_plans_for_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "gp_hef_loan_id"
+    t.bigint "plans_for_loan_id"
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_plans_for_loans_on_gp_hef_loan_id"
+    t.index ["plans_for_loan_id"], name: "index_gp_hef_loans_plans_for_loans_on_plans_for_loan_id"
+  end
+
+  create_table "gp_hef_loans_repayment_freq", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "gp_hef_loan_id"
+    t.bigint "repayment_frequency_id"
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_repayment_freq_on_gp_hef_loan_id"
+    t.index ["repayment_frequency_id"], name: "index_gp_hef_loans_repayment_freq_on_repayment_frequency_id"
+  end
+
   create_table "legal_signatories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email_address"
@@ -135,6 +187,10 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
     t.index ["organisation_id"], name: "index_legal_signatories_on_organisation_id"
   end
 
+  create_table "loans_repayment_frequencies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "frequency"
+  end
+
   create_table "non_cash_contributions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "amount"
     t.string "description"
@@ -142,6 +198,10 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "project_id", null: false
     t.index ["project_id"], name: "index_non_cash_contributions_on_project_id"
+  end
+
+  create_table "org_income_type", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "organisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -174,6 +234,17 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
     t.uuid "person_id", null: false
     t.index ["address_id"], name: "index_people_addresses_on_address_id"
     t.index ["person_id"], name: "index_people_addresses_on_person_id"
+  end
+
+  create_table "people_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "funding_application_id"
+    t.bigint "person_id"
+    t.index ["funding_application_id"], name: "index_people_applications_on_funding_application_id"
+    t.index ["person_id"], name: "index_people_applications_on_person_id"
+  end
+
+  create_table "plans_for_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "plan"
   end
 
   create_table "project_costs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -275,13 +346,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "address_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["address_id"], name: "index_users_addresses_on_address_id"
-    t.index ["user_id"], name: "index_users_addresses_on_user_id"
-  end
-
   create_table "volunteers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "description"
     t.integer "hours"
@@ -304,7 +368,5 @@ ActiveRecord::Schema.define(version: 2020_06_23_152611) do
   add_foreign_key "projects", "users"
   add_foreign_key "users", "organisations"
   add_foreign_key "users", "people"
-  add_foreign_key "users_addresses", "addresses"
-  add_foreign_key "users_addresses", "users"
   add_foreign_key "volunteers", "projects"
 end
