@@ -30,6 +30,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # debase and ruby-debug-ide allow for debugging in Visual Studio Code
+  gem 'debase', '~> 0.2.4.1'
+  gem 'ruby-debug-ide', '~> 0.7.2'
   gem "pry", "~> 0.12.2"
   # Pinned to beta version due to the bug described in this GitHub issue:
   # https://github.com/rspec/rspec-rails/issues/2086
