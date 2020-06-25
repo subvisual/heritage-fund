@@ -103,6 +103,7 @@ class AddressController < ApplicationController
   # Creates and returns a new Address object based on the 
   # attributes stored against the User argument
   #
+  # @param [uuid] id The unique identifier of an Address
   # @param [User] user An instance of User
   def replicate_address_from_current_user_details(id, user)
 
