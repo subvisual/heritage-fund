@@ -6,3 +6,8 @@
         width: to-rem(150px);
     }
 }
+
+// IE10 to fix SVG height issue
+_:-ms-input-placeholder, :root .nlhf-header-global__logo-image {
+    height: 100%;
+}

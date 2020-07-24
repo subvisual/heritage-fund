@@ -102,8 +102,20 @@ Rails.application.routes.draw do
       post 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
 
       scope '/:application_id' do
-        get 'form', to: 'form#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'form', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'application-form', to: 'form#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'application-form', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'application-form', to: 'form#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'application-form', to: redirect('/', status: 302), constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'supporting-documents', to: 'supporting_documents#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'supporting-documents', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'supporting-documents', to: 'supporting_documents#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'supporting-documents', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'declaration', to: 'declaration#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'declaration', to: 'declaration#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        put 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'application-submitted', to: 'application_submitted#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
+        get 'application-submitted', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
       end
 
     end

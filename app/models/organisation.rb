@@ -1,11 +1,20 @@
 class Organisation < ApplicationRecord
   self.implicit_order_column = "created_at"
+
   has_many :users
   has_many :legal_signatories
+  has_many :funding_applications
+  has_many :organisations_org_types, inverse_of: :organisation
+  has_many :org_types, through: :organisations_org_types
 
   accepts_nested_attributes_for :legal_signatories
+  accepts_nested_attributes_for :organisations_org_types, allow_destroy: true
 
+  attr_accessor :has_custom_org_type
+
+  attr_accessor :validate_name
   attr_accessor :validate_org_type
+  attr_accessor :validate_custom_org_type
   attr_accessor :validate_address
   attr_accessor :validate_mission
   attr_accessor :validate_legal_signatories
@@ -14,15 +23,25 @@ class Organisation < ApplicationRecord
                        if: :validate_legal_signatories?
 
   validates :org_type, presence: true, if: :validate_org_type?
+  validates :custom_org_type, presence: true, if: :validate_custom_org_type?
   validate :validate_mission_array, if: :validate_mission?
+  validates :name, presence: true, if: :validate_name?
   validates :name, presence: true, if: :validate_address?
   validates :line1, presence: true, if: :validate_address?
   validates :townCity, presence: true, if: :validate_address?
   validates :county, presence: true, if: :validate_address?
   validates :postcode, presence: true, if: :validate_address?
 
+  def validate_name?
+    validate_name == true
+  end
+
   def validate_org_type?
     validate_org_type == true
+  end
+
+  def validate_custom_org_type?
+    validate_custom_org_type == true
   end
 
   def validate_address?

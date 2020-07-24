@@ -32,7 +32,10 @@ class AddressController < ApplicationController
         redirect_to three_to_ten_k_project_description_path(params['id'])
       elsif @type == "user"
 
-        check_and_set_person_address(@model_object)
+        # Caters to a situation where original applicants have no person assigned to the user.
+        if @model_object.person.present?
+          check_and_set_person_address(@model_object)
+        end
 
         redirect_to :authenticated_root
 

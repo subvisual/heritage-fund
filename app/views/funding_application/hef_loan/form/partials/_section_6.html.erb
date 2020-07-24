@@ -1,0 +1,549 @@
+<h2 class="govuk-heading-l">Your loan application</h2>
+
+<%= form_object.fields_for :gp_hef_loan, @funding_application.gp_hef_loan ? @funding_application.gp_hef_loan : @funding_application.build_gp_hef_loan do | loan | %>
+
+<div class="govuk-form-group <%= 'govuk-form-group--error' if 
+  @funding_application.gp_hef_loan.errors[:efforts_to_reduce_borrowing].any? %>">
+
+  <%=
+    loan.label :efforts_to_reduce_borrowing,
+            I18n.t("hef_loan_form.questions.efforts_to_reduce_borrowing"),
+            class: "govuk-label govuk-label--m"
+  %>
+
+  <%=
+    render partial: "partials/form_input_errors",
+          locals: {
+              form_object: @funding_application.gp_hef_loan,
+              input_field_id: :efforts_to_reduce_borrowing
+          } if @funding_application.gp_hef_loan.errors[:efforts_to_reduce_borrowing].any?
+  %>
+
+  <%=
+    loan.text_area :efforts_to_reduce_borrowing,
+                rows: 10,
+                class: "govuk-textarea #{'govuk-textarea--error' if 
+                  @funding_application.gp_hef_loan.errors[:efforts_to_reduce_borrowing].any?}"
+  %>
+
+</div>
+
+<div class="govuk-form-group">
+
+  <fieldset class="govuk-fieldset" aria-describedby="plans_for_loan-hint">
+
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <h3 class="govuk-fieldset__heading">
+        <%= I18n.t("hef_loan_form.questions.plans_for_loans") %>
+      </h3>
+    </legend>
+    
+    <span id="plans_for_loan-hint" class="govuk-hint">
+
+      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_1") %>
+
+      <br /> <br />
+
+      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_2") %>
+
+      <br /><br />
+
+      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_3") %>
+
+      <br /><br />
+
+      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_4") %>
+
+    </span>
+
+    <div class="govuk-checkboxes">
+
+      <% 
+        associate_cashflow_row = 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.find_by(
+            plans_for_loan_id: @plans_for_loan_cashflow.id
+          )
+      %>
+
+      <%= 
+        loan.fields_for :gp_hef_loans_plans_for_loans, 
+        (associate_cashflow_row.present? ? associate_cashflow_row : 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.select { |p| p.plans_for_loan_id == @plans_for_loan_cashflow.id }) do | plans_for_loan |
+      %>
+
+        <%# Cashflow checkbox %>
+        <div class="govuk-checkboxes__item">
+
+          <%=
+            plans_for_loan.check_box :plans_for_loan_id,
+              {
+                multiple: false,
+                id: :cashflow,
+                class: "govuk-checkboxes__input",
+                checked: GpHefLoansPlansForLoan.find_by(
+                  gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                  plans_for_loan_id: @plans_for_loan_cashflow.id
+                  ) ? true : false
+              },
+              @plans_for_loan_cashflow.id,
+              nil
+          %>
+
+          <%=
+            plans_for_loan.label :cashflow,
+            "Cashflow",
+            for: :cashflow,
+            class: "govuk-label govuk-checkboxes__label"
+          %>
+
+        </div>
+
+      <% end %>
+
+      <% 
+        associate_staff_salaries_row = 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.find_by(
+            plans_for_loan_id: @plans_for_loan_staff_salaries.id
+          )
+      %>
+
+      <%= 
+        loan.fields_for :gp_hef_loans_plans_for_loans, 
+        (associate_staff_salaries_row.present? ? associate_staff_salaries_row : 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.select { |p| p.plans_for_loan_id == @plans_for_loan_staff_salaries.id }) do | plans_for_loan |
+      %>
+
+        <%# Staff salaries checkbox %>
+        <div class="govuk-checkboxes__item">
+
+          <%=
+            plans_for_loan.check_box :plans_for_loan_id,
+              {
+                multiple: false,
+                id: :staff_salaries,
+                class: "govuk-checkboxes__input",
+                checked: GpHefLoansPlansForLoan.find_by(
+                  gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                  plans_for_loan_id: @plans_for_loan_staff_salaries.id
+                  ) ? true : false
+              },
+              @plans_for_loan_staff_salaries.id,
+              nil
+          %>
+
+          <%=
+            plans_for_loan.label :staff_salaries,
+            "Staff salaries",
+            for: :staff_salaries,
+            class: "govuk-label govuk-checkboxes__label"
+          %>
+
+        </div>
+
+      <% end %>
+
+      <% 
+        associate_working_capital_row = 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.find_by(
+            plans_for_loan_id: @plans_for_loan_working_capital.id
+          )
+      %>
+
+      <%= 
+        loan.fields_for :gp_hef_loans_plans_for_loans, 
+        (associate_working_capital_row.present? ? associate_working_capital_row : 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.select { |p| p.plans_for_loan_id == @plans_for_loan_working_capital.id }) do | plans_for_loan |
+      %>
+
+        <%# Staff salaries checkbox %>
+        <div class="govuk-checkboxes__item">
+
+          <%=
+            plans_for_loan.check_box :plans_for_loan_id,
+              {
+                multiple: false,
+                id: :working_capital,
+                class: "govuk-checkboxes__input",
+                checked: GpHefLoansPlansForLoan.find_by(
+                  gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                  plans_for_loan_id: @plans_for_loan_working_capital.id
+                  ) ? true : false
+              },
+              @plans_for_loan_working_capital.id,
+              nil
+          %>
+
+          <%=
+            plans_for_loan.label :working_capital,
+            "Working capital",
+            for: :working_capital,
+            class: "govuk-label govuk-checkboxes__label"
+          %>
+
+        </div>
+
+      <% end %>
+
+      <% 
+        associate_recovering_planning_row = 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.find_by(
+            plans_for_loan_id: @plans_for_loan_recovering_planning.id
+          )
+      %>
+
+      <%= 
+        loan.fields_for :gp_hef_loans_plans_for_loans, 
+        (associate_recovering_planning_row.present? ? associate_recovering_planning_row : 
+          @funding_application.gp_hef_loan.gp_hef_loans_plans_for_loans.select { |p| p.plans_for_loan_id == @plans_for_loan_recovering_planning.id }) do | plans_for_loan |
+      %>
+
+        <%# Staff salaries checkbox %>
+        <div class="govuk-checkboxes__item">
+
+          <%=
+            plans_for_loan.check_box :plans_for_loan_id,
+              {
+                multiple: false,
+                id: :recovering_planning,
+                class: "govuk-checkboxes__input",
+                checked: GpHefLoansPlansForLoan.find_by(
+                  gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                  plans_for_loan_id: @plans_for_loan_recovering_planning.id
+                  ) ? true : false
+              },
+              @plans_for_loan_recovering_planning.id,
+              nil
+          %>
+
+          <%=
+            plans_for_loan.label :recovering_planning,
+            "Recovering planning",
+            for: :recovering_planning,
+            class: "govuk-label govuk-checkboxes__label"
+          %>
+
+        </div>
+
+      <% end %>
+
+    </div>   
+
+  </fieldset>
+
+</div>
+
+<div class="govuk-form-group <%= 'govuk-form-group--error' if 
+  @funding_application.gp_hef_loan.errors[:plans_for_loan_description].any? %>">
+
+  <%=
+    loan.label :plans_for_loan_description,
+            I18n.t("hef_loan_form.questions.plans_for_loan_description"),
+            class: "govuk-label govuk-label--m"
+  %>
+
+  <span id="plans_for_loan_description-hint" class="govuk-hint">
+    <%= I18n.t("hef_loan_form.questions.plans_for_loan_description_hint") %>
+  </span>
+
+  <%=
+    render partial: "partials/form_input_errors",
+          locals: {
+              form_object: @funding_application.gp_hef_loan,
+              input_field_id: :plans_for_loan_description
+          } if @funding_application.gp_hef_loan.errors[:plans_for_loan_description].any?
+  %>
+
+  <%=
+    loan.text_area :plans_for_loan_description,
+                rows: 10,
+                class: "govuk-textarea #{'govuk-textarea--error' if 
+                  @funding_application.gp_hef_loan.errors[:plans_for_loan_description].any?}",
+                  "aria-describedby" => "plans_for_loan_description-hint "
+  %>
+
+</div>
+
+<div class="govuk-form-group <%= 'govuk-form-group--error' if 
+  @funding_application.gp_hef_loan.errors[:loan_amount_requested].any? %>">
+
+  <h3 class="govuk-label-wrapper">
+    <%= 
+      loan.label I18n.t("hef_loan_form.questions.loan_amount_requested"), 
+      class: 'govuk-label govuk-label--m' 
+    %>
+  </h3>
+
+  <span id="loan_amount_requested-hint" class="govuk-hint">
+    <%= I18n.t("hef_loan_form.questions.loan_amount_requested_hint") %>
+  </span>
+
+  <%=
+    render partial: "partials/form_input_errors",
+          locals: {
+              form_object: @funding_application.gp_hef_loan,
+              input_field_id: :loan_amount_requested
+          } if @funding_application.gp_hef_loan.errors[:loan_amount_requested].any?
+  %>
+
+  <div class="nlhf-currency-denote">
+    <div class="nlhf-currency-denote__symbol">
+      &pound;
+    </div>
+    <div class="nlhf-currency-denote__capture">
+
+  <%=
+    loan.text_field :loan_amount_requested,
+                  class: "govuk-input govuk-!-width-one-half #{'govuk-input--error' if 
+                    @funding_application.gp_hef_loan.errors[:loan_amount_requested].any?}",
+                  "aria-describedby" => "loan_amount_requested-hint"
+  %>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="govuk-form-group <%= 'govuk-form-group--error' if 
+  @funding_application.gp_hef_loan.errors[:time_to_repay_loan].any? %>">
+
+  <%= 
+    loan.label I18n.t("hef_loan_form.questions.time_to_repay_loan"),
+    for: :time_to_repay_loan,
+    class: 'govuk-label govuk-label--m' 
+  %>
+
+  <span id="time_to_repay_loan-hint" class="govuk-hint">
+    <%= I18n.t("hef_loan_form.questions.time_to_repay_loan_hint") %>
+  </span>
+
+  <%=
+    render partial: "partials/form_input_errors",
+          locals: {
+              form_object: @funding_application.gp_hef_loan,
+              input_field_id: :time_to_repay_loan
+          } if @funding_application.gp_hef_loan.errors[:time_to_repay_loan].any?
+  %>
+
+  <%=
+    loan.text_field :time_to_repay_loan,
+    id: :time_to_repay_loan,
+                  class: "govuk-input  govuk-!-width-one-third #{'govuk-input--error' if 
+                    @funding_application.gp_hef_loan.errors[:time_to_repay_loan].any?}",
+                  "aria-describedby" => "time_to_repay_loan-hint"
+  %>
+
+</div>
+
+      <!-- TODO: Checkboxes  to capture Q35 -->
+
+    <div class="govuk-form-group">
+
+      <fieldset class="govuk-fieldset" aria-describedby="repayment_frequency-hint">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h1 class="govuk-fieldset__heading">
+          How often would you like to make repayments?
+        </h1>
+      </legend>
+    
+      <span id="repayment_frequency-hint" class="govuk-hint">
+        You can select more than one option. Read the guidance for details on repayment options. 
+      </span>
+
+      <div class="govuk-checkboxes">
+
+        <% 
+          associate_monthly_row = 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.find_by(
+              repayment_frequency_id: @repayment_frequency_monthly.id
+            )
+        %>
+
+        <%= 
+          loan.fields_for :gp_hef_loans_repayment_freqs, 
+          (associate_monthly_row.present? ? associate_monthly_row : 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.select { |rf| rf.repayment_frequency_id == @repayment_frequency_monthly.id }) do | repayment_freq |
+        %>
+
+          <%# Monthly checkbox %>
+          <div class="govuk-checkboxes__item">
+
+            <%=
+              repayment_freq.check_box :repayment_frequency_id,
+                {
+                  multiple: false,
+                  id: :monthly,
+                  class: "govuk-checkboxes__input",
+                  checked: GpHefLoansRepaymentFreq.find_by(
+                    gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                    repayment_frequency_id: @repayment_frequency_monthly
+                    ) ? true : false
+                },
+                @repayment_frequency_monthly.id,
+                nil
+            %>
+
+            <%=
+              repayment_freq.label :monthly,
+              "Monthly",
+              for: :monthly,
+              class: "govuk-label govuk-checkboxes__label"
+            %>
+
+          </div>
+
+        <% end %>
+
+        <% 
+          associate_quarterly_row = 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.find_by(
+              repayment_frequency_id: @repayment_frequency_quarterly.id
+            )
+        %>
+
+        <%= 
+          loan.fields_for :gp_hef_loans_repayment_freqs, 
+          (associate_quarterly_row.present? ? associate_quarterly_row : 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.select { |rf| rf.repayment_frequency_id == @repayment_frequency_quarterly.id }) do | repayment_freq |
+        %>
+
+          <%# Quarterly checkbox %>
+          <div class="govuk-checkboxes__item">
+
+            <%=
+              repayment_freq.check_box :repayment_frequency_id,
+                {
+                  multiple: false,
+                  id: :quarterly,
+                  class: "govuk-checkboxes__input",
+                  checked: GpHefLoansRepaymentFreq.find_by(
+                    gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                    repayment_frequency_id: @repayment_frequency_quarterly
+                    ) ? true : false
+                },
+                @repayment_frequency_quarterly.id,
+                nil
+            %>
+
+            <%=
+              repayment_freq.label :quarterly,
+              "Quarterly",
+              for: :quarterly,
+              class: "govuk-label govuk-checkboxes__label"
+            %>
+
+          </div>
+
+        <% end %>
+
+        <% 
+          associate_yearly_row = 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.find_by(
+              repayment_frequency_id: @repayment_frequency_yearly.id
+            )
+        %>
+
+        <%= 
+          loan.fields_for :gp_hef_loans_repayment_freqs, 
+          (associate_yearly_row.present? ? associate_yearly_row : 
+            @funding_application.gp_hef_loan.gp_hef_loans_repayment_freqs.select { |rf| rf.repayment_frequency_id == @repayment_frequency_yearly.id }) do | repayment_freq |
+        %>
+
+          <%# Yearly checkbox %>
+          <div class="govuk-checkboxes__item">
+
+            <%=
+              repayment_freq.check_box :repayment_frequency_id,
+                {
+                  multiple: false,
+                  id: :yearly,
+                  class: "govuk-checkboxes__input",
+                  checked: GpHefLoansRepaymentFreq.find_by(
+                    gp_hef_loan_id: @funding_application.gp_hef_loan.id,
+                    repayment_frequency_id: @repayment_frequency_yearly
+                    ) ? true : false
+                },
+                @repayment_frequency_yearly.id,
+                nil
+            %>
+
+            <%=
+              repayment_freq.label :yearly,
+              "Yearly",
+              for: :yearly,
+              class: "govuk-label govuk-checkboxes__label"
+            %>
+
+          </div>
+
+        <% end %>
+
+      </div>   
+
+      </fieldset>
+    </div>
+
+      <div class="govuk-form-group <%= 'govuk-form-group--error' if
+        @funding_application.gp_hef_loan.errors[:cashflow_understanding].any? %>">
+
+        <fieldset class="govuk-fieldset" aria-describedby="cashflow_understanding-hint">
+
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            
+            <h3 class="govuk-fieldset__heading">
+              Do you understand the things your cashflow needs to demonstrate?
+            </h3>
+          
+          </legend>
+
+          <span id="cashflow_understanding-hint" class="govuk-hint">
+            As part of your application, after you have submitted your application form, we will contact you to request a cashflow forecast for your organisation.
+
+            Things we will look for:
+
+            <ul>
+              <li>That your organisation has adjusted their cashflow forecast to deal with the new post-coronavirus world</li>
+              <li>Repayment option is viable and can withstand a degree of disruption, for example, an amount of sensitivity to a reduction in income or rise in expenditure.</li>
+            </ul>
+
+          </span>
+
+          <%=
+            render partial: "partials/form_input_errors",
+                  locals: {
+                      form_object: @funding_application.gp_hef_loan,
+                      input_field_id: :cashflow_understanding
+                  } if @funding_application.gp_hef_loan.errors[:cashflow_understanding].any?
+          %>
+
+      <div class="govuk-checkboxes">
+
+        <%# Cashflow understanding checkbox %>
+        <div class="govuk-checkboxes__item">
+
+            <%=
+              loan.check_box :cashflow_understanding,
+                {
+                  multiple: false,
+                  id: :cashflow_understanding,
+                  checked: @funding_application.gp_hef_loan.cashflow_understanding.present? ? true : false,
+                  class: "govuk-checkboxes__input"
+                },
+                true,  
+                nil
+            %>
+
+            <%=
+              loan.label :cashflow_understanding,
+              "Yes, I understand what the cashflow for the organisation applying for a loan needs to demonstrate.",
+              for: :cashflow_understanding,
+              class: "govuk-label govuk-checkboxes__label"
+            %>
+
+        </div>
+
+    </div>
+
+    <% end %>
+
+</div>

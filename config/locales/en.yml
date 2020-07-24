@@ -1,5 +1,8 @@
 ---
 en-GB:
+  funding_programmes:
+    open_small_three_to_ten_k: "£3-10k"
+    covid_19_recovery_loan: "COVID-19 Recovery Loan"
   account_created_continue_link: "/organisation/type"
   application_guidance_link: "#"
   fair_processing_email: fair.processing@heritagefund.org.uk
@@ -64,6 +67,69 @@ en-GB:
         charity_number: "Charity number"
     errors:
       models:
+        person:
+          attributes:
+            name:
+              blank: "Enter the name of a person"
+            position:
+              blank: "Enter the person's position at their organisation"
+            email:
+              blank: "Enter the person's email address"
+            phone_number:
+              blank: "Enter the person's phone number"
+        gp_hef_loan:
+          attributes:
+            previous_project_reference:
+              blank: "Enter your most recent National Lottery Heritage Fund project reference number"
+            can_legally_take_on_debt:
+              inclusion: "Select yes if your organisation can legally take on debt"
+            any_debt_restrictions:
+              inclusion: "Select yes if your organisation has any debt restrictions"
+            debt_description:
+              blank: "Enter the restrictions on the size or type of debt your organisation can take on"
+            can_provide_security:
+              inclusion: "Select yes if your organisation can legally provide security for a loan"
+            security_restrictions:
+              inclusion: "Select yes if your organisation has any restrictions on the type of security it can provide"
+            security_description:
+              blank: "Enter the restrictions on the type of security your organisation can provide"
+            has_had_an_average_yearly_cash_surplus:
+              inclusion: "Select yes if your organisation has had an average yearly cash surplus in the last 3 reporting years"
+            average_yearly_cash_surplus:
+              not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+            has_had_a_surplus_in_last_reporting_year:
+              inclusion: "Select yes if your organisation has had a cash surplus in the last reporting year"
+            cash_surplus_in_last_year:
+              not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+            custom_org_income_type:
+              blank: "Specify other ways your organisation earns income"
+            bankruptcy_or_administration:
+              inclusion: "Select yes if you are aware of any impending bankruptcy or administration against your organisation"
+            bankruptcy_or_administration_description:
+              blank: "Enter details about any impending bankruptcy or administration against your organisation"
+            considers_state_aid:
+              inclusion: "Select yes if you are satisfied that this loan request would not breach state aid rules"
+            has_applied_for_grant_or_loan:
+              inclusion: "Select whether your organisation has applied for a grant, loan or other type of funding during the coronavirus (COVID-19) crisis"
+            other_funding_details:
+              blank: "Enter details about the outcome of any grant or loan applications"
+            efforts_to_reduce_borrowing:
+              blank: "Enter details about the efforts your organisation has made to reduce borrowing"
+            plans_for_loan_description:
+              blank: "Enter details about how you plan to spend the money"
+            loan_amount_requested:
+              not_a_number: "Loan amount being requested must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+            time_to_repay_loan:
+              not_a_number: "How long you need to repay this loan must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+            cashflow_understanding:
+              inclusion: "You must state that you understand what the cashflow for the organisation applying for a loan needs to demonstrate"
+            supporting_documents_files:
+              inclusion: "Add a supporting document"
+
         user:
           attributes:
             name:
@@ -86,6 +152,8 @@ en-GB:
           attributes:
             org_type:
               blank: "Select the type of organisation that will be running your project"
+            custom_org_type:
+              blank: "Specify your organisation type"
             company_number:
               not_a_number: "Company number must be a number, like 12345678"
             name:

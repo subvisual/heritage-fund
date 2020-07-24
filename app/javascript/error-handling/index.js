@@ -182,9 +182,12 @@ window.addFormGroupError = function(formGroupElementId, formGroupErrorsElementId
 
             // We have a file input field and need to add the necessary
             // govuk-file-upload--error class accordingly.
-
+                
             if (parentModel) {
-                var fileElement = document.getElementById(parentModel + "_" + modelName + "_attributes_0_" + attribute.replace(modelName + ".", ""));
+                if (parentModel === "funding_application")
+                    var fileElement = document.getElementById(parentModel + "_" + modelName + "_attributes_supporting_documents_files");
+                else
+                    var fileElement = document.getElementById(parentModel + "_" + modelName + "_attributes_0_" + attribute.replace(modelName + ".", ""));
             } else {
                 var fileElement = document.getElementById(modelName + "_" + attribute);
             }

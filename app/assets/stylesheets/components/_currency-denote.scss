@@ -1,10 +1,15 @@
 .nlhf-currency-denote {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     &__symbol {
-        text-align: right;
+        border: 2px solid #000;
+        background-color: govuk-colour("light-grey");
+        border-right: 0;
         padding: 0 govuk-spacing(3);
         font-family: $govuk-font-family;
-        @include govuk-font($size: 27, $weight: bold);
+        @include govuk-font($size: 19, $weight: bold, $line-height: 1.75);
+    }
+    &__capture {
+        width: 100%;
     }
 }

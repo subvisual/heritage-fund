@@ -1,0 +1,35 @@
+<% if @funding_application.gp_hef_loan.errors.any? %>
+
+document.title = "Error: Upload your supporting documents %>";
+
+createSummaryErrorsSkeleton();
+
+var errorKeys = [];
+
+<% @funding_application.gp_hef_loan.errors.each do |attr, msg| %>
+
+addSummaryError(
+    false,
+    "<%= attr %>",
+    "<%= msg %>",
+    "funding_application.gp_hef_loan"
+);
+
+addFormGroupError(
+    "supporting-documents-form-group-main",
+    "form-group-errors",
+    "<%= attr %>",
+    "<%= msg %>",
+    "gp_hef_loan",
+    "funding_application"
+);
+
+<% end %>
+
+removeFormGroupErrors(
+    "funding_application.gp_hef_loan",
+    ["supporting_documents_files"],
+    errorKeys
+);
+
+<% end %>

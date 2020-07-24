@@ -133,6 +133,16 @@ Rails.application.configure do
   config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
   # TODO: update this with production host once credentials available
   config.x.salesforce.host = "test.salesforce.com"
+
+  config.x.sharepoint.app_reg_client_id = ENV.fetch("SHAREPOINT_APP_REG_CLIENT_ID")
+  config.x.sharepoint.app_reg_client_secret = ENV.fetch("SHAREPOINT_APP_REG_CLIENT_SECRET")
+  config.x.sharepoint.target_host = ENV.fetch("SHAREPOINT_TARGET_HOST")
+  config.x.sharepoint.principal = ENV.fetch("SHAREPOINT_PRINCIPAL")
+  config.x.sharepoint.realm = ENV.fetch("SHAREPOINT_REALM")
+  config.x.sharepoint.site_name = ENV.fetch("ALTERNATIVE_FINANCE_SHAREPOINT_SITE_NAME")
+  config.x.sharepoint.list_id = ENV.fetch("ALTERNATIVE_FINANCE_SHAREPOINT_LIST_ID")
+  config.x.sharepoint.list_item_entity_type = ENV.fetch("ALTERNATIVE_FINANCE_LIST_ITEM_ENTITY_TYPE")
+
   config.lograge.enabled = true
   config.assets.quiet = true
   config.x.consumer.username = ENV.fetch("CONSUMER_USERNAME")

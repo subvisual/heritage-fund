@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
     else
       gon.push({tracking_url_path: '/project-dashboard'})
       @projects = current_user.projects
+      @funding_applications = current_user.organisation.funding_applications
     end
 
   end

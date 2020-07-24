@@ -28,7 +28,7 @@ RSpec.describe FundingApplication::HefLoan::StartController do
       expect(assigns(:application)).to be_an_instance_of FundingApplication
 
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(funding_application_hef_loan_form_path(assigns(:application).id))
+      expect(response).to redirect_to(funding_application_hef_loan_application_form_path(assigns(:application).id))
 
     end
 

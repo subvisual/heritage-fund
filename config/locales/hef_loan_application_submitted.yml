@@ -1,0 +1,8 @@
+en-GB:
+  hef_loan_application_submitted:
+    list_1: 
+      item_1: "We will send you an email to let you know that your application has been submitted."
+      item_2: "We will send you a template for the loan repayment schedule as part of this email. Please see the guidance for an example of this template, which you will need to complete."
+      item_3: "We will send you instructions to upload your cash flow and other supporting documents as part of this email. We recommend you do this as soon as you receive instructions, to help us process your application."
+      item_4: "We will check your application details are correct."
+      item_5: "We will consider your application and give you a decision on average within two to four weeks."

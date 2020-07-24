@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_105103) do
+ActiveRecord::Schema.define(version: 2020_07_10_091711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "project_id", null: false
     t.index ["project_id"], name: "index_cash_contributions_on_project_id"
+  end
+
+  create_table "declarations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "grant_programme"
+    t.string "declaration_type"
+    t.jsonb "json"
+    t.integer "version"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -125,6 +134,80 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
     t.index ["organisation_id"], name: "index_funding_applications_on_organisation_id"
   end
 
+  create_table "funding_applications_dclrtns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "declaration_id", null: false
+    t.uuid "funding_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["declaration_id"], name: "index_funding_applications_dclrtns_on_declaration_id"
+    t.index ["funding_application_id"], name: "index_funding_applications_dclrtns_on_funding_application_id"
+  end
+
+  create_table "funding_applications_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.uuid "funding_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["funding_application_id"], name: "index_funding_applications_people_on_funding_application_id"
+    t.index ["person_id"], name: "index_funding_applications_people_on_person_id"
+  end
+
+  create_table "gp_hef_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "previous_project_reference"
+    t.boolean "can_legally_take_on_debt"
+    t.boolean "any_debt_restrictions"
+    t.text "debt_description"
+    t.boolean "can_provide_security"
+    t.boolean "security_restrictions"
+    t.text "security_description"
+    t.boolean "has_had_an_average_yearly_cash_surplus"
+    t.integer "average_yearly_cash_surplus"
+    t.boolean "has_had_a_surplus_in_last_reporting_year"
+    t.integer "cash_surplus_in_last_year"
+    t.boolean "bankruptcy_or_administration"
+    t.text "bankruptcy_or_administration_description"
+    t.boolean "considers_state_aid"
+    t.boolean "has_applied_for_grant_or_loan"
+    t.text "other_funding_details"
+    t.text "efforts_to_reduce_borrowing"
+    t.text "plans_for_loan_description"
+    t.text "time_to_repay_loan"
+    t.text "cashflow_understanding"
+    t.integer "loan_amount_requested"
+    t.text "custom_org_income_type"
+    t.uuid "funding_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["funding_application_id"], name: "index_gp_hef_loans_on_funding_application_id"
+  end
+
+  create_table "gp_hef_loans_org_income_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "gp_hef_loan_id", null: false
+    t.uuid "org_income_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_org_income_types_on_gp_hef_loan_id"
+    t.index ["org_income_type_id"], name: "index_gp_hef_loans_org_income_types_on_org_income_type_id"
+  end
+
+  create_table "gp_hef_loans_plans_for_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "gp_hef_loan_id", null: false
+    t.uuid "plans_for_loan_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_plans_for_loans_on_gp_hef_loan_id"
+    t.index ["plans_for_loan_id"], name: "index_gp_hef_loans_plans_for_loans_on_plans_for_loan_id"
+  end
+
+  create_table "gp_hef_loans_repayment_freqs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "gp_hef_loan_id", null: false
+    t.uuid "repayment_frequency_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gp_hef_loan_id"], name: "index_gp_hef_loans_repayment_freqs_on_gp_hef_loan_id"
+    t.index ["repayment_frequency_id"], name: "index_gp_hef_loans_repayment_freqs_on_repayment_frequency_id"
+  end
+
   create_table "legal_signatories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email_address"
@@ -144,6 +227,18 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
     t.index ["project_id"], name: "index_non_cash_contributions_on_project_id"
   end
 
+  create_table "org_income_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "org_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "organisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -160,20 +255,41 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
     t.integer "org_type"
     t.string "mission", default: [], array: true
     t.string "salesforce_account_id"
+    t.string "custom_org_type"
+  end
+
+  create_table "organisations_org_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organisation_id", null: false
+    t.uuid "org_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["org_type_id"], name: "index_organisations_org_types_on_org_type_id"
+    t.index ["organisation_id"], name: "index_organisations_org_types_on_organisation_id"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.date "date_of_birth"
     t.string "email"
+    t.string "position"
     t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "people_addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "address_id", null: false
     t.uuid "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_people_addresses_on_address_id"
     t.index ["person_id"], name: "index_people_addresses_on_person_id"
+  end
+
+  create_table "plans_for_loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "plan"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "project_costs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -245,6 +361,12 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
     t.index ["project_id"], name: "index_released_forms_on_project_id"
   end
 
+  create_table "repayment_frequencies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "frequency"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -290,7 +412,20 @@ ActiveRecord::Schema.define(version: 2020_06_19_105103) do
   add_foreign_key "funding_application_addresses", "addresses"
   add_foreign_key "funding_application_addresses", "funding_applications"
   add_foreign_key "funding_applications", "organisations"
+  add_foreign_key "funding_applications_dclrtns", "declarations"
+  add_foreign_key "funding_applications_dclrtns", "funding_applications"
+  add_foreign_key "funding_applications_people", "funding_applications"
+  add_foreign_key "funding_applications_people", "people"
+  add_foreign_key "gp_hef_loans", "funding_applications"
+  add_foreign_key "gp_hef_loans_org_income_types", "gp_hef_loans"
+  add_foreign_key "gp_hef_loans_org_income_types", "org_income_types"
+  add_foreign_key "gp_hef_loans_plans_for_loans", "gp_hef_loans"
+  add_foreign_key "gp_hef_loans_plans_for_loans", "plans_for_loans"
+  add_foreign_key "gp_hef_loans_repayment_freqs", "gp_hef_loans"
+  add_foreign_key "gp_hef_loans_repayment_freqs", "repayment_frequencies"
   add_foreign_key "non_cash_contributions", "projects"
+  add_foreign_key "organisations_org_types", "org_types"
+  add_foreign_key "organisations_org_types", "organisations"
   add_foreign_key "people_addresses", "addresses"
   add_foreign_key "people_addresses", "people"
   add_foreign_key "project_costs", "projects"
