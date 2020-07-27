@@ -34,6 +34,11 @@ module FundingFrontendRuby
     # Autoload models from subdirectories in the models/application/common directory
     # For each additional subdirectory, we will need to appened to config.autoload_paths
     config.autoload_paths += Dir[Rails.root.join("app", "models", "application", "common")]
+
+    # Load locale dictionaries from subdirectories in the config/locales directory. We 
+    # have to apply this setting, as the default locale loading mechanism in Rails does not 
+    # load locale dictionaries in nested directories
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     
     # config.active_record.schema_format = :sql
 
