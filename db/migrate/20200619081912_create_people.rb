@@ -4,10 +4,7 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string    :name
       t.date      :date_of_birth
       t.string    :email
-      t.string    :position
       t.string    :phone_number
-
-      t.timestamps
     end
   end
 end

@@ -98,9 +98,10 @@ class GpHefLoan < ApplicationRecord
 
   validates :loan_amount_requested, 
     numericality: {
-      only_integer: true,
-      greater_than: 0
-    }, if: :validate_loan_amount_requested?
+      only_integer: true
+    }, 
+    :inclusion => 50000..250000,
+    if: :validate_loan_amount_requested?
 
   validates :time_to_repay_loan, 
     numericality: {

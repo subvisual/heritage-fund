@@ -121,7 +121,7 @@ en-GB:
               blank: "Enter details about how you plan to spend the money"
             loan_amount_requested:
               not_a_number: "Loan amount being requested must be a number, like 500"
-              greater_than: "Enter an amount greater than 0"
+              inclusion: "Loan amount being requested must be between 50000 and 250000"
             time_to_repay_loan:
               not_a_number: "How long you need to repay this loan must be a number, like 500"
               greater_than: "Enter an amount greater than 0"
