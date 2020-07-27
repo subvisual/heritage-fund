@@ -19,7 +19,22 @@ class FundingApplication::HefLoan::SupportingDocumentsController < ApplicationCo
 
     @funding_application.gp_hef_loan.validate_supporting_documents_files = true
 
-    @funding_application.update(funding_application_params)
+    # If a 'complete' param has been passed, then there is no need to update the 
+    # model object
+    @funding_application.update(funding_application_params) unless params.key? 'complete'
+
+    validate_funding_application_and_orchestrate_journey(
+      @funding_application,
+      params.key?('complete') ? 'progress_journey' : 'add_file'
+    )
+  
+  end
+
+  private
+
+  # Method to validate the model object and dictate the next steps of the journey
+  # based on whether or not the model object was valid
+  def validate_funding_application_and_orchestrate_journey(funding_application, user_action)
 
     if @funding_application.valid?
 
@@ -27,7 +42,11 @@ class FundingApplication::HefLoan::SupportingDocumentsController < ApplicationCo
                   "funding_application ID: #{@funding_application.id}" \
                   "and gp_hef_loan ID: #{@funding_application.gp_hef_loan.id}"
 
-      redirect_to :funding_application_hef_loan_supporting_documents
+      # If the user was adding a file, then they should be redirected back to 
+      # the same page, otherwise continue on to the next page of the journey
+      redirect_to (user_action == 'add_file') ? 
+        :funding_application_hef_loan_supporting_documents : 
+        :funding_application_hef_loan_declaration
 
     else
 
@@ -41,7 +60,7 @@ class FundingApplication::HefLoan::SupportingDocumentsController < ApplicationCo
       render :show
 
     end
-  
+
   end
 
   def funding_application_params
@@ -54,7 +73,7 @@ class FundingApplication::HefLoan::SupportingDocumentsController < ApplicationCo
         {
           funding_application: {
             gp_hef_loan_attributes: {
-              supporting_documents_files: nil 
+              supporting_documents_files: nil
             }
           }
         }

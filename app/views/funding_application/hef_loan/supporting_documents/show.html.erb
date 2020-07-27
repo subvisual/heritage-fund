@@ -135,13 +135,24 @@
 
 <% end %>
 
+<%=
+  form_with model: @funding_application,
+            url: :funding_application_hef_loan_supporting_documents,
+            method: :put,
+            remote: no_js ? false : true do |f|
+%>
+
+  <%= hidden_field(:complete, true) %>
+
   <%=
     render(
         ButtonComponent.new(
-            element: "a",
-            href: funding_application_hef_loan_declaration_path
+            element: "input",
+            text: "Save and continue"
         )
     )
   %>
+
+<% end %>
 
 </div>
