@@ -39,6 +39,9 @@ module FundingFrontendRuby
     # have to apply this setting, as the default locale loading mechanism in Rails does not 
     # load locale dictionaries in nested directories
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    # Specify available locales for the application
+    config.i18n.available_locales = [:en, :"en-GB", :cy]
     
     # config.active_record.schema_format = :sql
 

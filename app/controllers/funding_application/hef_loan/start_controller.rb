@@ -1,5 +1,6 @@
 class FundingApplication::HefLoan::StartController < ApplicationController
   before_action :authenticate_user!
+  around_action :switch_locale
 
   # Method used to create new FundingApplication and GpHefLoan objects
   # before redirecting the user to :funding_application_hef_loan_application_form
