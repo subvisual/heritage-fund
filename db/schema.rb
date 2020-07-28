@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_135222) do
+ActiveRecord::Schema.define(version: 2020_07_28_071129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2020_07_24_135222) do
     t.text "other_funding_details"
     t.text "efforts_to_reduce_borrowing"
     t.text "plans_for_loan_description"
-    t.text "time_to_repay_loan"
+    t.integer "time_to_repay_loan"
     t.text "cashflow_understanding"
     t.integer "loan_amount_requested"
     t.text "custom_org_income_type"

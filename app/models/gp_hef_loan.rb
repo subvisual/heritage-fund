@@ -105,9 +105,10 @@ class GpHefLoan < ApplicationRecord
 
   validates :time_to_repay_loan, 
     numericality: {
-      only_integer: true,
-      greater_than: 0
-    }, if: :validate_time_to_repay_loan?
+      only_integer: true
+    }, 
+    :inclusion => 1..72,
+    if: :validate_time_to_repay_loan?
 
   validates_inclusion_of :cashflow_understanding, in: ["true"], 
     if: :validate_cashflow_understanding?
