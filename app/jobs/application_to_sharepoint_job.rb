@@ -21,7 +21,7 @@ class ApplicationToSharepointJob < ApplicationJob
   # needs to add to the list item.
   def perform(funding_application)
 
-    logger.info "Submitting funding application (ID: #{funding_application.id} to Microsoft SharePoint"
+    logger.info "Submitting funding application (ID: #{funding_application.id}) to Microsoft SharePoint"
 
     # Mark the application as being submitted by updating the submitted_on attribute
     funding_application.update(submitted_on: DateTime.now)
@@ -32,7 +32,8 @@ class ApplicationToSharepointJob < ApplicationJob
 
     unless response.status == 201
       raise MicrosoftSharePointError.new(
-        "Received HTTP status code #{response.status} when creating new Microsoft SharePoint list item"
+        "Received HTTP status code #{response.status} when creating new Microsoft SharePoint list item. " \
+        "Response body received: #{response.body}"
       )
     end
 
@@ -61,7 +62,7 @@ class ApplicationToSharepointJob < ApplicationJob
   # requests to the Microsoft SharePoint REST API
   def get_authentication_token()
 
-    logger.debug "Retrieving authentication token for Microsoft integration"
+    logger.info "Retrieving authentication token for Microsoft integration"
 
     get_authentication_token_uri = URI(
       "https://accounts.accesscontrol.windows.net/#{Rails.configuration.x.sharepoint.realm}/tokens/OAuth/2"
@@ -83,7 +84,8 @@ class ApplicationToSharepointJob < ApplicationJob
     else
 
       raise MicrosoftAuthentication.new(
-        "Received HTTP status code #{response.status} when retrieving authentication token"
+        "Received HTTP status code #{response.status} when retrieving authentication token. " \
+        "Response body received: #{response.body}"
       )
 
     end
@@ -120,7 +122,7 @@ class ApplicationToSharepointJob < ApplicationJob
       "(guid'#{Rails.configuration.x.sharepoint.list_id}')/items"
     )
 
-    logger.debug "Creating new Microsoft SharePoint list item"
+    logger.info "Creating new Microsoft SharePoint list item"
 
     response = Faraday.post(create_new_list_item_uri, json_payload) do |request|
 
@@ -149,7 +151,8 @@ class ApplicationToSharepointJob < ApplicationJob
       unless response.status == 200
         raise MicrosoftSharePointError.new(
           "Received HTTP status code #{response.status} when attaching file to " \
-          "Microsoft SharePoint list item ID: #{list_item_id}"
+          "Microsoft SharePoint list item ID: #{list_item_id}. Response body " \
+          "received: #{response.body}"
         )
       end
 
@@ -177,7 +180,7 @@ class ApplicationToSharepointJob < ApplicationJob
       "#{list_item_id})/AttachmentFiles/add(FileName='#{url_escaped_filename}')"
     )
 
-    logger.debug "Attaching file to Microsoft SharePoint list item ID: #{list_item_id}"
+    logger.info "Attaching file to Microsoft SharePoint list item ID: #{list_item_id}"
 
     conn = Faraday.new(url: attach_file_to_list_item_uri) do |c|
       c.authorization :Bearer, authentication_token
