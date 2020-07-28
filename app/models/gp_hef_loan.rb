@@ -215,4 +215,25 @@ class GpHefLoan < ApplicationRecord
     ) if validate_supporting_documents_files?
   end
 
+  # Custom setter method for :loan_amount_requested, which allows us
+  # to remove commas entered by a user
+  def loan_amount_requested=(value)
+    value = value.gsub(/,/,'') if value.is_a?(String)
+    write_attribute(:loan_amount_requested, value)
+  end
+
+  # Custom setter method for :average_yearly_cash_surplus, which allows us
+  # to remove commas entered by a user
+  def average_yearly_cash_surplus=(value)
+    value = value.gsub(/,/,'') if value.is_a?(String)
+    write_attribute(:average_yearly_cash_surplus, value)
+  end
+
+  # Custom setter method for :cash_surplus_in_last_year, which allows us
+  # to remove commas entered by a user
+  def cash_surplus_in_last_year=(value)
+    value = value.gsub(/,/,'') if value.is_a?(String)
+    write_attribute(:cash_surplus_in_last_year, value)
+  end
+
 end
