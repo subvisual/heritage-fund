@@ -1,5 +1,5 @@
 class FundingApplication::HefLoan::FormController < ApplicationController
-    include FundingApplicationContext, FundingApplication::HefLoan::FormHelper
+    include FundingApplicationContext
 
     def show
 
