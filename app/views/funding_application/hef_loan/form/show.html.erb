@@ -12,6 +12,11 @@
   </h1>
 
   <%= 
+    render partial: "funding_application/hef_loan/form/partials/summary_of_errors" if 
+      @funding_application.errors.any?
+  %>
+
+  <%= 
     render partial: "funding_application/hef_loan/form/partials/section_2",
            locals: {
              form_object: f

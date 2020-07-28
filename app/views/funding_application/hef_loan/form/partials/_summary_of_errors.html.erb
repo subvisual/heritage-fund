@@ -1,0 +1,80 @@
+<% if @funding_application.errors.any? %>
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title"
+      role="alert" tabindex="-1" data-module="govuk-error-summary">
+
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      There is a problem
+    </h2>
+
+    <div class="govuk-error-summary__body">
+
+      <ul class="govuk-list govuk-error-summary__list">
+
+        <% @funding_application.errors.each do |attr, msg| %>
+
+          <%#
+              If the attr is either 'gp_hef_loan' or 'organisation', then we need
+              to render errors for each nested model object, hence looping again 
+              over the nested model errors
+          %>
+
+          <% if attr.to_s == 'gp_hef_loan' %>
+            <% @funding_application.gp_hef_loan.errors.each do |a, m| %>
+              <li>
+                <a href='#funding_application_gp_hef_loan_attributes_<%= "#{a}" %>'>
+                  <%= m %>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
+
+          <% if attr.to_s == 'organisation' %>
+            <% @funding_application.organisation.errors.each do |a, m| %>
+              <li>
+                <a href='#funding_application_organisation_attributes_<%= "#{a}" %>'>
+                  <%= m %>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
+
+          <%# 
+              If the attr is 'people', then we need to look at each Person object
+              in the :people collection and render errors which link to the 
+              correct Person on the view
+          %>
+          <% if attr.to_s == 'people' %>
+            <% @funding_application.people.each_with_index do |p, i| %>
+              <% p.errors.each do |a, m| %>
+                <li>
+                  <a href='#funding_application_people_attributes_<%= "#{i}_#{a}" %>'>
+                    <%= m %>
+                  </a>
+                </li>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <%# 
+              If the attr is not a nested model object, then we can use the attr 
+              to link directly to the input field
+          %>
+          <% unless attr.to_s.split('.')[0] == 'gp_hef_loan' || 
+            attr.to_s.split('.')[0] == 'organisation' || 
+            attr.to_s.split('.')[0] == 'people' 
+          %>
+            <li>
+              <a href='#funding_application_attributes_<%= "#{attr}" %>'>
+                <%= msg %>
+              </a>
+            </li>
+          <% end %>
+
+        <% end %>
+
+      </ul>
+
+    </div>
+
+  </div>
+<% end %>
