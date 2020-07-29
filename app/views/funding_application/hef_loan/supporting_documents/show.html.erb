@@ -2,12 +2,11 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @funding_application,
-             page_title: "Upload your supporting documents"
+             page_title: t("supporting_documents.page_title")
          }
 %>
 
 <noscript><% no_js = true %></noscript>
-
 <div id="summary-errors"></div>
 
 <%=
@@ -31,15 +30,22 @@
 
     <fieldset class="govuk-fieldset">
 
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-margin-bottom-6">
-            <h1 class="govuk-fieldset__heading">
-                Upload your supporting documents
-            </h1>
-        </legend>
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-!-margin-bottom-6">
+        <h1 class="govuk-fieldset__heading">
+          <%= t("supporting_documents.page_heading") %>
+        </h1>
+      </legend>
 
-        <p class="govuk-body">
-            Please upload your supporting documents.
-        </p>
+      <p class="govuk-body">
+        <%= t("supporting_documents.what_you_need_to_send") %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><%= t("supporting_documents.what_you_need_to_send_list_item_1") %></li>
+        <li><%= t("supporting_documents.what_you_need_to_send_list_item_2") %></li>
+        <li><%= t("supporting_documents.what_you_need_to_send_list_item_3") %></li>
+        <li><%= t("supporting_documents.what_you_need_to_send_list_item_4") %></li>
+      </ul>
 
       <div id="funding_application.gp_hef_loan.supporting_documents_files-form-group"></div>
 
@@ -61,7 +67,7 @@
           <div class="govuk-form-group">
             <%=
               loan.label :supporting_documents_files,
-                      "Add your supporting documents",
+                      t("supporting_documents.add_your_supporting_documents_label"),
                       class: "govuk-heading-m nlhf-content-highlight__title"
             %>
 
@@ -81,7 +87,7 @@
         <div class="govuk-form-group">
           <%=
             render(ButtonComponent.new(
-                text: 'Add supporting documents',
+                text: t("supporting_documents.add_supporting_documents_button"),
                 classes: "govuk-button--secondary",
                 ))
           %>
@@ -91,7 +97,7 @@
         <% unless @funding_application.gp_hef_loan.supporting_documents_files.attached? %>
 
           <p class="govuk-body">
-            You have not added supporting documents
+            <%= t("supporting_documents.no_supporting_documents_added") %>
           </p>
 
         <% else %>
@@ -148,7 +154,7 @@
     render(
         ButtonComponent.new(
             element: "input",
-            text: "Save and continue"
+            text: t("buttons.labels.default")
         )
     )
   %>
