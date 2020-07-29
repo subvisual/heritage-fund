@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'support/factory_bot'
 require_relative 'support/controller_macros'
+require_relative 'support/fake_objects'
 require 'webmock/rspec'
 require_relative './features/helpers'
 WebMock.disable_net_connect!(allow_localhost: true)
@@ -72,6 +73,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.extend ControllerMacros, type: :controller
+  config.extend FakeObjects
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)

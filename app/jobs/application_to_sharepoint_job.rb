@@ -56,8 +56,6 @@ class ApplicationToSharepointJob < ApplicationJob
 
   end
 
-  private
-
   # Method to retrieve the authentication token necessary for authenticating
   # requests to the Microsoft SharePoint REST API
   def get_authentication_token()
@@ -83,7 +81,7 @@ class ApplicationToSharepointJob < ApplicationJob
 
     else
 
-      raise MicrosoftAuthentication.new(
+      raise MicrosoftAuthenticationError.new(
         "Received HTTP status code #{response.status} when retrieving authentication token. " \
         "Response body received: #{response.body}"
       )
@@ -187,14 +185,21 @@ class ApplicationToSharepointJob < ApplicationJob
       c.adapter :net_http
     end
 
-    # Read the file so that we can pass it into the subsequent POST request
-    data = File.read(ActiveStorage::Blob.service.path_for(file.blob.key))
+    data = read_file_from_activestorage_blob(file)
 
     response = conn.post(attach_file_to_list_item_uri, data) do |request|
         request.headers['Authorization'] = "Bearer #{authentication_token}"
-
     end
 
+  end
+
+  private
+
+  # Method to read a file so that we can pass it into a subsequent POST request
+  #
+  # @param [ActiveStorage] file A given ActiveStorage attachment
+  def read_file_from_activestorage_blob(file)
+    File.read(ActiveStorage::Blob.service.path_for(file.blob.key))
   end
 
 end
