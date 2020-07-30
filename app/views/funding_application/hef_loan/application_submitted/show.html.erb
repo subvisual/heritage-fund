@@ -2,40 +2,40 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @project,
-             page_title: I18n.t("application_submitted.title")
+             page_title: t("application_submitted.page_title")
          }
 %>
 
 <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-9">
   <h1 class="govuk-panel__title">
-    <%= I18n.t("application_submitted.heading") %>
+    <%= t("application_submitted.page_heading") %>
   </h1>
 </div>
 
 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
-  <%= I18n.t("application_submitted.sub_heading_1") %>
+  <%= t("application_submitted.what_happens_next") %>
 </h2>
+
+<p class="govuk-body">
+  <%= t("application_submitted.we_will") %>
+</p>
 
 <ul class="govuk-list govuk-list--number">
 
   <li>
-    <%= I18n.t("hef_loan_application_submitted.list_1.item_1") %>
+    <%= t("application_submitted.we_will_list_item_1") %>
   </li>
 
   <li>
-    <%= I18n.t("hef_loan_application_submitted.list_1.item_2") %>
+    <%= t("application_submitted.we_will_list_item_2") %>
   </li>
 
   <li>
-    <%= I18n.t("hef_loan_application_submitted.list_1.item_3") %>
+    <%= t("application_submitted.we_will_list_item_3") %>
   </li>
 
   <li>
-    <%= I18n.t("hef_loan_application_submitted.list_1.item_4") %>
-  </li>
-
-  <li>
-    <%= I18n.t("hef_loan_application_submitted.list_1.item_5") %>
+    <%= t("application_submitted.we_will_list_item_4") %>
   </li>
 
 </ul>

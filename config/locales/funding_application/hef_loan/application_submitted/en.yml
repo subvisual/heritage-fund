@@ -1,0 +1,10 @@
+en-GB:
+  application_submitted:
+    page_title: "Your application has been submitted!"
+    page_heading: "Your application has been submitted!"
+    what_happens_next: "What happens next?"
+    we_will: "We will:"
+    we_will_list_item_1: "Send you an email to let you know that your application has been received."
+    we_will_list_item_2: "Check your application details are correct."
+    we_will_list_item_3: "Contact you to discuss your application."
+    we_will_list_item_4: "Consider your application and give you a decision on average within two to four weeks."
