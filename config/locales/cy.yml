@@ -1,4 +1,5 @@
 cy:
   buttons:
     labels:
+      default: "Arbed a pharhau"
       start_now: "Dechrau nawr"
