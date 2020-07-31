@@ -1,0 +1,10 @@
+cy:
+  application_submitted:
+    page_title: "Cyflwynwyd eich cais!"
+    page_heading: "Cyflwynwyd eich cais!"
+    what_happens_next: "Beth sy’n digwydd nesaf?"
+    we_will: "Byddwn yn:"
+    we_will_list_item_1: "Anfon e-bost atoch i gadarnhau bod eich cais wedi ein cyrraedd."
+    we_will_list_item_2: "Gwirio fod manylion eich cais yn gywir."
+    we_will_list_item_3: "Cysylltu â chi i drafod eich cais."
+    we_will_list_item_4: "Ystyried eich cais a rhoi penderfyniad i chi o fewn tua pythefnos i bedair wythnos."
