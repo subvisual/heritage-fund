@@ -1,6 +1,5 @@
 class FundingApplication::HefLoan::SupportingDocumentsController < ApplicationController
     include FundingApplicationContext, ObjectErrorsLogger
-    around_action :switch_locale
 
   # This method is used to set the @has_file_upload instance variable before
   # rendering the :show template. This is used within the

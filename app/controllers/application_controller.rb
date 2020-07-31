@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   default_form_builder(NlhfFormBuilder)
   include LocaleHelper
+  around_action :switch_locale
 
   # Appends the locale URL parameter to all URLs, where the
   # argument is the current I18n.locale value
