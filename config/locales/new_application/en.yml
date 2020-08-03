@@ -1,0 +1,15 @@
+en-GB:
+  new_application:
+    page_title: "Which type of application would you like to start?"
+    page_heading: "Which type of application would you like to start?"
+    page_sub_heading: "We provide different types of funding to heritage of all shapes and sizes. Select the funding programme that you wish to apply for."
+    types:
+      gp_oss_small:
+        name: "Grants of £3,000 to £10,000"
+        info: "This grant level is for a project that can last up to one year."
+        info_conditional: "You can apply for a grant of £3,000 to £10,000 if you are a:"
+        info_conditional_li_1: "not-for-profit organisation"
+        info_conditional_li_2: "private owner of heritage"
+      covid_19_response_loan:
+        name: "COVID-19 Response Loans"
+        info: "This programme is for a loan of between £50,000 and £250,000, to help organisations recover from the impact of COVID-19."
