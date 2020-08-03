@@ -10,7 +10,6 @@
     first_form_element: :postcode_lookup
 } if flash[:errors] %>
 
-<%# todo: Move this to a _partial when headers are consistent across the service %>
 <% if @type == "organisation" || @type == "project" %>
   <h1 class="govuk-heading-l" aria-label="Heading">About your <%= @type %></h1>
 <% else %>
@@ -45,7 +44,6 @@
 
   </div>
 
-  <%# TODO: Use ActionView component %>
   <%= p.submit "Find address",
                class:"govuk-button govuk-button",
                role: "button",

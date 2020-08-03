@@ -131,7 +131,6 @@ Rails.application.configure do
     config.x.salesforce.security_token = ENV.fetch("SALESFORCE_SECURITY_TOKEN")
     config.x.salesforce.client_id = ENV.fetch("SALESFORCE_CLIENT_ID")
     config.x.salesforce.client_secret = ENV.fetch("SALESFORCE_CLIENT_SECRET")
-    # TODO: update this with production host once credentials available
     config.x.salesforce.host = "test.salesforce.com"
 
     config.x.sharepoint.app_reg_client_id = ENV.fetch("SHAREPOINT_APP_REG_CLIENT_ID")

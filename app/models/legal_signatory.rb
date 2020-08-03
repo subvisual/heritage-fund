@@ -22,9 +22,6 @@ class LegalSignatory < ApplicationRecord
             unless: lambda {
                 |record| ignore_validation_for_empty_second_signatory?(record)
             }
-  # TODO: Abstract email address validation into a single place,
-  #       able to reference all email fields within the application
-  #       See: https://github.com/heritagefund/funding-frontend/issues/244
   validates :email_address,
             format: { with: URI::MailTo::EMAIL_REGEXP },
             does_not_match_other_signatory: true,

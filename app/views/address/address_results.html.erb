@@ -6,7 +6,6 @@
          }
 %>
 
-<%# todo: Move this to a _partial when headers are consistent across the service %>
 <% if @type == "organisation" || @type == "project" %>
   <h1 class="govuk-heading-l" aria-label="Heading">About your <%= @type %></h1>
 <% else %>
@@ -32,7 +31,6 @@
 
   <%= select_tag "address", options_for_select(@response_array.map { |p| result_formatter(p) }) , class: 'govuk-select' %>
 
-  <%# TODO: Use ActionView Component %>
   <%= p.submit "Select", class: 'govuk-button govuk-button--secondary' %>
 
 <% end %>

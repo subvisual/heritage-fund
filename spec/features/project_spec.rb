@@ -363,7 +363,6 @@ RSpec.feature 'Project', type: :feature do
   # Abstracted method for checking project outcome checkboxes
   # and then submitting the form
   # @param [Array] outcomes Array of integers which map to project outcomes
-  # TODO: Expand this method to also include ability to pass descriptions
   def choose_and_save_project_outcomes(outcomes)
 
     check "Heritage will be in a better condition" if outcomes.include?(2)
