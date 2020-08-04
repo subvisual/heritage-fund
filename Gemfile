@@ -39,6 +39,9 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.0.beta3"
   gem "factory_bot_rails", "~> 5.1"
   gem "rails-controller-testing", "~> 1.0.4"
+  gem 'rubocop', '~> 0.88.0'
+  gem 'rubocop-rspec', '~> 1.42.0'
+  gem 'rubocop-rails', '~> 2.7.1'
 end
 
 group :development do
