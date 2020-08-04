@@ -2,57 +2,145 @@
   render partial: "partials/page_title",
          locals: {
              model_object: resource,
-             page_title: "Your account"
+             page_title: t('registrations.edit.page_title')
          }
 %>
 
-<p class="govuk-body"><%= link_to "Back", "javascript:history.back();", class: "govuk-back-link" %></p>
+<p class="govuk-body">
+  <%= 
+    link_to t('registrations.edit.buttons.back'),
+    "javascript:history.back();",
+    class: "govuk-back-link"
+  %>
+</p>
 
-<h2 class="govuk-heading-l">Your account</h2>
+<h1 class="govuk-heading-l">
+  <%= t('registrations.edit.page_heading') %>
+</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= 
+  form_for(
+    resource,
+    as: resource_name,
+    url: registration_path(resource_name),
+    html: { method: :put }
+  ) do |f| 
+%>
 
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= 
+    render "devise/shared/error_messages",
+    resource: resource
+  %>
 
   <div class="govuk-form-group">
-    <%= f.label :email, "Email", class: "govuk-label" %>
+
+    <%=
+      f.label :email,
+      t('registrations.edit.label_email'),
+      class: "govuk-label" 
+    %>
+
     <span id="email-hint" class="govuk-hint">
-      This is the email address associated with your account.
+      <%= t('registrations.edit.label_email_hint') %>
     </span>
-    <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.text_field :email,
+      autofocus: true,
+      autocomplete: "email",
+      class: "govuk-input govuk-input--width-20" 
+    %>
+
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+
     <div class="govuk-form-group">
-      <p class="govuk-body">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+
+      <p class="govuk-body">
+        <%= 
+          "#{t('registrations.edit.awaiting_confirmation')} #{resource.unconfirmed_email}" 
+        %>
+      </p>
+
     </div>
+
   <% end %>
 
   <div class="govuk-form-group">
-    <%= f.label :password, class: "govuk-label" %>
+
+    <%= 
+      f.label :password,
+      t('registrations.edit.label_password'),
+      class: "govuk-label"
+    %>
+
     <span id="password-hint" class="govuk-hint">
-      Leave blank if you don't want to change it
+      <%= t('registrations.edit.label_password_hint') %>
     </span>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.password_field :password,
+      autocomplete: "new-password",
+      class: "govuk-input govuk-input--width-20" 
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :password_confirmation, class: "govuk-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.label :password_confirmation,
+      t('registrations.edit.label_password'),
+      class: "govuk-label" 
+    %>
+
+    <%= 
+      f.password_field :password_confirmation,
+      autocomplete: "new-password",
+      class: "govuk-input govuk-input--width-20" 
+    %>
+  
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :current_password, class: "govuk-label" %>
+
+    <%= 
+      f.label :current_password, 
+      t('registrations.edit.label_current_password'),
+      class: "govuk-label" 
+    %>
+
     <span id="password-hint" class="govuk-hint">
-      We need your current password to confirm your changes
+      <%= t('registrations.edit.label_current_password_hint') %>
     </span>
-    <%= f.password_field :current_password, autofocus: true, autocomplete: "current-password", class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.password_field :current_password,
+      autocomplete: "current-password",
+      class: "govuk-input govuk-input--width-20" 
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= f.submit "Update account", class: "govuk-button"  %>
+
+    <%= 
+      render(
+        ButtonComponent.new(
+          text: t('registrations.edit.buttons.update')
+        )
+      )
+    %>
+  
   </div>
 
-  <p class="govuk-body"><%= link_to "Back", "javascript:history.back();", class: "govuk-back-link" %></p>
+  <p class="govuk-body">
+    <%= 
+      link_to t('registrations.edit.buttons.back'),
+      "javascript:history.back();",
+      class: "govuk-back-link"
+    %>
+  </p>
 
 <% end %>

@@ -2,33 +2,98 @@
   render partial: "partials/page_title",
          locals: {
              model_object: resource,
-             page_title: "Change your password"
+             page_title: t('passwords.edit.page_title')
          }
 %>
 
-<h1 class="govuk-heading-l">Change your password</h1>
+<h1 class="govuk-heading-l">
+  <%= t('passwords.edit.page-heading') %>
+</h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+<%= 
+  form_for(
+    resource,
+    as: resource_name,
+    url: password_path(resource_name),
+    html: { method: :put }
+  ) do |f| 
+%>
+
+  <%= 
+    render "devise/shared/error_messages",
+    resource: resource 
+  %>
+
+  <%=
+    f.hidden_field :reset_password_token 
+  %>
 
   <div class="govuk-form-group">
-    <%= f.label :password, "New password", class: "govuk-label" %>
-    <% if @minimum_password_length %><div class="govuk-hint">Must be at least <%= @minimum_password_length %> characters</div><% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "govuk-input" %>
+
+    <%= 
+      f.label :password,
+      t('passwords.edit.label_password'),
+      class: "govuk-label"
+    %>
+
+    <% if @minimum_password_length %>
+
+      <div class="govuk-hint">
+        <%=
+          t(
+            'passwords.edit.label_password_hint_html',
+            pw_length: @minimum_password_length
+          )
+        %>
+      </div>
+
+    <% end %>
+
+    <%= 
+      f.password_field :password,
+      autofocus: true,
+      autocomplete: "new-password",
+      class: "govuk-input"
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= f.label :password_confirmation, "Confirm new password", class: "govuk-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "govuk-input" %>
+
+    <%=
+      f.label :password_confirmation,
+      t('passwords.edit.label_password_confirmation'),
+      class: "govuk-label"
+    %>
+
+    <%=
+      f.password_field :password_confirmation,
+      autocomplete: "new-password",
+      class: "govuk-input"
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= render(ButtonComponent.new(element: "input", text: "Change my password")) %>
+
+    <%=
+      render(
+        ButtonComponent.new(
+          element: "input", 
+          text: t('passwords.edit.buttons.change')
+        )
+      )
+    %>
+
   </div>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+
+    <%= 
+      link_to t('passwords.edit.no_confirmation_instructions'),
+      new_confirmation_path(resource_name) 
+    %>
+
   <% end %>
 
 <% end %>

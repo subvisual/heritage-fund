@@ -1,0 +1,9 @@
+en-GB:
+  confirmations:
+    new:
+      page_title: "Resend confirmation instructions"
+      page_heading: "Resend confirmation instructions"
+      label_email: "Enter your email address"
+      label_email_hint: "The email address associated with your account."
+      buttons:
+        resend: "Resend confirmation instructions"

@@ -1,7 +1,7 @@
 en-GB:
   dashboard:
-    title: "Application dashboard"
-    heading: "Your applications"
+    page_title: "Application dashboard"
+    page_heading: "Your applications"
     no_applications_sub_heading: "No applications"
     no_applications_text: "This account currently has no active applications with The National Lottery Heritage Fund"
     associated_applications_text: "The following applications are associated with your account:"

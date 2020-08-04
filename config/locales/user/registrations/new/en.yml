@@ -1,0 +1,17 @@
+en-GB:
+  registrations:
+    new:
+      page_title: "Create an account"
+      page_heading: "Create an account"
+      label_email: "Email"
+      label_password: "Password"
+      label_password_confirmation: "Password confirmation"
+      problems_creating_account: "Problems creating an account?"
+      no_confirmation_instructions: "Didn't receive confirmation instructions?"
+      existing_account_pullout:
+        heading: "Already have an account?"
+        content_html: "You can %{href}"
+        content_href: "sign in"
+      buttons:
+        create:
+          "Create an account"

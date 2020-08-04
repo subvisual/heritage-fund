@@ -2,26 +2,53 @@
   render partial: "partials/page_title",
          locals: {
              model_object: resource,
-             page_title: "Forgot your password?"
+             page_title: t('passwords.new.page_heading')
          }
 %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+<%= 
+  form_for(
+    resource,
+    as: resource_name,
+    url: password_path(resource_name),
+    html: { method: :post }
+  ) do |f| 
+%>
   
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= 
+    render "devise/shared/error_messages",
+    resource: resource 
+  %>
 
   <div class="govuk-form-group">
-    <%= f.label :email, "Enter your email address", class: "govuk-label" %>
+
+    <%= 
+      f.label :email,
+      t('passwords.new.label_email'),
+      class: "govuk-label" 
+    %>
+
     <span id="email-hint" class="govuk-hint">
-      The email address associated with your account.
+      <%= t('passwords.new.label_email_hint') %>
     </span>
-    <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.text_field :email,
+      autofocus: true,
+      autocomplete: "email",
+      class: "govuk-input govuk-input--width-20" 
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= f.submit "Reset my password", class: "govuk-button"  %>
+    <%= 
+      render(
+        ButtonComponent.new(
+          text: t('passwords.new.buttons.reset_password')
+        )
+      )
+    %>
   </div>
 
 <% end %>
-
-

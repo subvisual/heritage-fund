@@ -1,0 +1,6 @@
+en-GB:
+  covid_banner:
+    heading: "Important announcement"
+    content_1: "Use this form to create an account with the National Lottery Heritage Fund."
+    content_2_html: "We are currently running a reduced range of funding programmes, to focus on responding to the COVID-19 crisis, and this form is currently closed. %{href}."
+    content_2_href: "Find out more about our funding programmes"

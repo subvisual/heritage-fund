@@ -1,0 +1,16 @@
+en-GB:
+  details:
+    page_title: "Add your details"
+    page_heading: "About you"
+    page_heading_caption: "Add your details"
+    label_name: "Full name"
+    label_phone_number: "Telephone number"
+    label_dob: "What is your date of birth?"
+    label_dob_hint: "For example, 31 3 1980"
+    label_day: "Day"
+    label_month: "Month"
+    label_year: "Year"
+    fair_processing_1: "The personal information we collect from you will be shared with fraud prevention agencies who will use it to prevent fraud and money-laundering and to verify your identity. If fraud is detected, you could be refused a grant or loan."
+    fair_processing_2_html: "Further details of how your information will be used by us and these fraud prevention agencies, and your data protection rights, can be found by contacting %{href}."
+    fair_processing_2_href: "fair.processing@heritagefund.org.uk"
+    error: "Error:"

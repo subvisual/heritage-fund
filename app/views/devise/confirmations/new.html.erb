@@ -2,25 +2,62 @@
   render partial: "partials/page_title",
          locals: {
              model_object: resource,
-             page_title: "Resend confirmation instructions"
+             page_title: t('confirmations.new.page_title')
          }
 %>
 
-<h2 class="govuk-heading-l">Resend confirmation instructions</h2>
+<h1 class="govuk-heading-l">
+  <%= t('confirmations.new.page_heading') %>
+</h1>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= 
+  form_for(
+    resource,
+    as: resource_name,
+    url: confirmation_path(resource_name),
+    html: { method: :post }
+  ) do |f| 
+%>
+
+  <%= 
+    render "devise/shared/error_messages",
+    resource: resource 
+  %>
 
   <div class="govuk-form-group">
-    <%= f.label :email, "Enter your email address", class: "govuk-label" %>
+
+    <%= 
+      f.label :email,
+      t('confirmations.new.label_email'),
+      class: "govuk-label" 
+    %>
+
     <span id="email-hint" class="govuk-hint">
-      The email address associated with your account.
+      <%= t('confirmations.new.label_email_hint') %>
     </span>
-    <%= f.text_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "govuk-input govuk-input--width-20" %>
+
+    <%= 
+      f.text_field :email,
+      autofocus: true,
+      autocomplete: "email",
+      value: (
+        resource.pending_reconfirmation? ? 
+          resource.unconfirmed_email : 
+          resource.email
+        ),
+      class: "govuk-input govuk-input--width-20" 
+    %>
+
   </div>
 
   <div class="govuk-form-group">
-    <%= f.submit "Resend confirmation instructions", class: "govuk-button"  %>
+    <%= 
+      render(
+        ButtonComponent.new(
+          text: t('confirmations.new.buttons.resend')
+        )
+      )
+    %>
   </div>
 
 <% end %>

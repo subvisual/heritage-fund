@@ -1,5 +1,19 @@
-  <div class="nlhf-panel">
-    <h2 class="govuk-heading-m">Don't have an account yet?</h2>
-    <p class="govuk-body">Our online account makes filling in your funding applications quicker and easier. And it only takes a couple of minutes to set up.</p>
-    <p class="govuk-body govuk-!-margin-bottom-0"><%= link_to "Create an account", new_registration_path(resource_name), class: "nlhf-cta-link" %></p>
-  </div>
+<div class="nlhf-panel">
+
+  <h2 class="govuk-heading-m">
+    <%= t('sessions.new.signup_panel.heading') %>
+  </h2>
+
+  <p class="govuk-body">
+    <%= t('sessions.new.signup_panel.content') %>
+  </p>
+
+  <p class="govuk-body govuk-!-margin-bottom-0">
+    <%= 
+      link_to t('sessions.new.signup_panel.create_an_account'),
+      new_registration_path(resource_name),
+      class: "nlhf-cta-link" 
+    %>
+  </p>
+
+</div>

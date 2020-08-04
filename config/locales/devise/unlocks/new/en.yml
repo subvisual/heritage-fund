@@ -1,0 +1,8 @@
+en-GB:
+  unlocks:
+    new:
+      page_title: "Resend unlock instructions"
+      page_heading: "Resend unlock instructions"
+      label_email: "Email"
+      buttons:
+        resend: "Resend unlock instructions"

@@ -1,0 +1,11 @@
+en-GB:
+  passwords:
+    edit:
+      page_title: "Change your password"
+      page_heading: "Change your password"
+      label_password: "New password"
+      label_password_hint_html: "Must be at least %{pw_length} characters"
+      label_password_confirmation: "Confirm new password"
+      no_confirmation_instructions: "Didn't receive confirmation instructions?"
+      buttons:
+        change: "Change my password"

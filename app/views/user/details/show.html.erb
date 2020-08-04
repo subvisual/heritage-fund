@@ -2,75 +2,121 @@
   render partial: "partials/page_title",
          locals: {
              model_object: current_user,
-             page_title: "Add your details"
+             page_title: t('details.page_title')
          }
 %>
 
-<%= render partial: "partials/summary_errors", locals: {
+<%= 
+  render partial: "partials/summary_errors",
+  locals: {
     form_object: current_user,
     first_form_element: :user_name
-} if current_user.errors.any? %>
+  } if current_user.errors.any? 
+%>
 
 <h1 class="govuk-heading-xl">
-  <span class="govuk-caption-xl">Add your details</span>
-  About you
+
+  <span class="govuk-caption-xl">
+    <%= t('details.page_heading_caption') %>
+  </span>
+
+  <%= t('details.page_heading') %>
+
 </h1>
 
-<%= form_with model: current_user, url: user_details_path, method: :put, local: true do |f| %>
+<%= 
+  form_with model: current_user,
+  url: user_details_path,
+  method: :put,
+  local: true do |f| 
+%>
 
   <fieldset class="govuk-fieldset">
 
-    <div class="govuk-form-group <%= "#{'govuk-form-group--error' if current_user.errors[:name].any?}" %>">
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error' if 
+      current_user.errors[:name].any?}" %>">
 
-      <%= render partial: "partials/form_input_errors",
-                 locals: {form_object: current_user,
-                          input_field_id: :name} if current_user.errors[:name].any? %>
+      <%=
+        render partial: "partials/form_input_errors",
+               locals: {
+                 form_object: current_user,
+                 input_field_id: :name
+                } if current_user.errors[:name].any? 
+      %>
 
-      <%= f.label :name, "Full name", class: "govuk-label" %>
-      <%= f.text_field :name,
-                       class:"govuk-input #{'govuk-input--error' if current_user.errors[:name].any?}",
-                       "autocomplete" => "name",
-                       "spellcheck" => "false"
+      <%=
+        f.label :name,
+        t('details.label_name'),
+        class: "govuk-label"
+      %>
+
+      <%= 
+        f.text_field :name,
+        class:"govuk-input #{'govuk-input--error' if
+          current_user.errors[:name].any?}",
+        "autocomplete" => "name",
+        "spellcheck" => "false"
       %>
 
     </div>
 
-    <div class="govuk-form-group <%= "#{'govuk-form-group--error' if current_user.errors[:phone_number].any?}" %>">
+    <div class="govuk-form-group <%= "#{'govuk-form-group--error' if
+      current_user.errors[:phone_number].any?}" %>">
 
-      <%= render partial: "partials/form_input_errors",
-                 locals: {form_object: current_user,
-                          input_field_id: :phone_number} if current_user.errors[:phone_number].any? %>
+      <%= 
+        render partial: "partials/form_input_errors",
+               locals: {
+                 form_object: current_user,
+                 input_field_id: :phone_number
+               } if current_user.errors[:phone_number].any?
+      %>
 
-      <%= f.label :phone_number, "Telephone number", class: "govuk-label" %>
-      <%= f.text_field :phone_number,
-                            class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if current_user.errors[:phone_number].any?}",
-                            "autocomplete" => "tel"
+      <%= 
+        f.label :phone_number,
+        t('details.label_phone_number'),
+        class: "govuk-label" 
+      %>
+
+      <%= 
+        f.text_field :phone_number,
+        class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if
+          current_user.errors[:phone_number].any?}",
+        "autocomplete" => "tel"
       %>
 
     </div>
 
     <div
       class="govuk-form-group <%= "govuk-form-group--error" if
-                                        current_user.errors.keys.find {|k| "dob".in? k.to_s or "date_of_birth".in? k.to_s} %>"
+        current_user.errors.keys.find {|k| "dob".in? k.to_s or "date_of_birth".in? k.to_s} %>"
       id="user_date_of_birth">
 
       <% current_user.errors.each do |attr, msg| %>
+
         <% if "dob".in? attr.to_s or "date_of_birth".in? attr.to_s %>
+
             <span id="user[<%= attr %>]-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> <%= msg %></span>
+
+              <span class="govuk-visually-hidden">
+                <%= t('details.error') %>
+              </span> <%= msg %>
+              
+            </span>
+
         <% end %>
+
       <% end %>
 
       <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
 
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
           <h1 class="govuk-fieldset__heading">
-            What is your date of birth?
+            <%= t('details.label_dob') %>
           </h1>
         </legend>
 
         <span id="dob-hint" class="govuk-hint">
-          For example, 31 3 1980
+          <%= t('details.label_dob_hint') %>
         </span>
 
         <div class="govuk-date-input" id="start-date">
@@ -79,7 +125,12 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :dob_day, "Day", class: "govuk-label govuk-date-input__label" %>
+              <%= 
+                f.label :dob_day,
+                t('details.label_day'),
+                class: "govuk-label govuk-date-input__label" 
+              %>
+
               <%= render partial: "partials/date_input", locals: {
                   form_object: current_user,
                   form_for_object: f,
@@ -97,7 +148,11 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :dob_month, "Month", class: "govuk-label govuk-date-input__label" %>
+              <%= 
+                f.label :dob_month,
+                t('details.label_month'),
+                class: "govuk-label govuk-date-input__label" 
+              %>
 
               <%= render partial: "partials/date_input", locals: {
                   form_object: current_user,
@@ -116,7 +171,12 @@
 
             <div class="govuk-form-group">
 
-              <%= f.label :dob_year, "Year", class: "govuk-label govuk-date-input__label" %>
+              <%= 
+                f.label :dob_year,
+                t('details.label_year'),
+                class: "govuk-label govuk-date-input__label" 
+              %>
+
               <%= render partial: "partials/date_input", locals: {
                   form_object: current_user,
                   form_for_object: f,
@@ -139,18 +199,36 @@
   </fieldset>
 
   <div class="govuk-inset-text govuk-!-margin-top-0">
+
     <p class="govuk-body-s">
-      The personal information we collect from you will be shared with fraud prevention agencies who will
-      use it to prevent fraud and money-laundering and to verify your identity. If fraud is detected, you
-      could be refused a grant or loan. 
+
+      <%= t('details.fair_processing_1') %>
+
     </p>
+
     <p class="govuk-body-s">
-      Further details of how your information will be used by us and these
-      fraud prevention agencies, and your data protection rights, can be found by contacting
-      <%=mail_to 'fair.processing@heritagefund.org.uk' %>.
+
+      <%= 
+        t(
+          'details.fair_processing_2_html',
+          href:
+            mail_to(
+              'fair.processing@heritagefund.org.uk',
+              t('details.fair_processing_2_href')
+            )
+        ) 
+      %>
+
     </p>
+
   </div>
 
-  <%= f.save_and_continue %>
+  <%= 
+    render(
+      ButtonComponent.new(
+        text: t('buttons.labels.default')
+      )
+    )
+  %>
 
 <% end %>

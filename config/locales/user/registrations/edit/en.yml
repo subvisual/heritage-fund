@@ -1,0 +1,16 @@
+en-GB:
+  registrations:
+    edit:
+      page_title: "Your account"
+      page_heading: "Your account"
+      label_email: "Email"
+      label_email_hint: "This is the email address associated with your account"
+      label_password: "Password"
+      label_password_hint: "Leave blank if you don't want to change it"
+      label_password_confirmation: "Password confirmation"
+      label_current_password: "Current password"
+      label_current_password_hint: "We need your current password to confirm your changes"
+      awaiting_confirmation: "Currently awaiting confirmation for:"
+      buttons:
+        update: "Update account"
+        back: "Back"
