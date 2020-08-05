@@ -2,13 +2,13 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @funding_application,
-             page_title: "Apply for a COVID-19 Response Loan"
+             page_title: t("form.page_title")
          }
 %>
 <%= form_for @funding_application, url: :funding_application_hef_loan_application_form, method: :put, local: true do |f| %>
 
   <h1 class="govuk-heading-xl">
-    Apply for a COVID-19 Response Loan
+    <%= t("form.page_heading") %>
   </h1>
 
   <%= 

@@ -1,7 +1,9 @@
-<h2 class="govuk-heading-l">Your organisation details</h2>
+<h2 class="govuk-heading-l">
+  <%= t("form.organisation_details.heading") %>
+</h2>
 
 <p class="govuk-body">
-  Use this section to tell us about the organisation applying for a loan.
+  <%= t("form.organisation_details.sub_heading") %>
 </p>
 
 <%= form_object.fields_for :organisation, @funding_application.organisation do | o | %>
@@ -10,7 +12,7 @@
     @funding_application.organisation.errors[:name].any? %>">
 
     <%= 
-      o.label I18n.t("hef_loan_form.questions.organisation_name"), 
+      o.label t("form.organisation_details.name_of_organisation"), 
       class: 'govuk-label govuk-label--m' 
     %>
 
@@ -36,12 +38,12 @@
 
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h2 class="govuk-fieldset__heading">
-          <%= I18n.t("hef_loan_form.questions.organisation_type") %>
+          <%= t("form.organisation_details.organisation_type") %>
         </h2>
       </legend>
 
       <span id="organisation-type-hint" class="govuk-hint">
-        Select all that apply.
+        <%= t("generic.choose_all_that_apply") %>
       </span>
 
       <%=
@@ -87,7 +89,7 @@
 
           <%=
             org_type.label :registered_charity,
-            "Registered charity",
+            t("form.organisation_details.registered_charity"),
             for: :registered_charity,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -129,7 +131,7 @@
 
           <%=
             org_type.label :registered_company,
-            "Registered company",
+            t("form.organisation_details.registered_company"),
             for: :registered_company,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -171,7 +173,7 @@
 
           <%=
             org_type.label :community_interest_company,
-            "Community Interest company",
+            t("form.organisation_details.community_interest_company"),
             for: :community_interest_company,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -213,7 +215,7 @@
 
           <%=
             org_type.label :faith_based_organisation,
-            "Faith-based organisation",
+            t("form.organisation_details.faith_based_organisation"),
             for: :faith_based_organisation,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -255,7 +257,7 @@
 
           <%=
             org_type.label :church_organisation,
-            "Church organisation",
+            t("form.organisation_details.church_organistaion"),
             for: :church_organisation,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -297,7 +299,7 @@
 
           <%=
             org_type.label :community_group,
-            "Community group",
+            t("form.organisation_details.community_group"),
             for: :community_group,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -339,7 +341,7 @@
 
           <%=
             org_type.label :voluntary_group,
-            "Voluntary group",
+            t("form.organisation_details.voluntary_group"),
             for: :voluntary_group,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -407,7 +409,7 @@
 
         <%=
           o.label :has_custom_org_type,
-          "Other",
+          t("form.organisation_details.other"),
           for: :other,
           class: "govuk-label govuk-checkboxes__label"
         %>
@@ -419,7 +421,7 @@
         <div class="govuk-form-group">
 
           <h3 class="govuk-label-wrapper">
-            <%= o.label I18n.t("hef_loan_form.questions.organisation_type_other"), class: 'govuk-label govuk-label--s' %>
+            <%= o.label t("form.organisation_details.other_hint"), class: 'govuk-label govuk-label--s' %>
           </h3>
 
           <%=
@@ -446,11 +448,11 @@
 
     <h3 class="govuk-label-wrapper">
       <%# Presence of 'nil' in loan.label below stops .humanize being called on the text value to be displayed %>
-      <%= loan.label nil, I18n.t("hef_loan_form.questions.previous_project_reference"), class: 'govuk-label govuk-label--m' %>
+      <%= loan.label nil, t("form.organisation_details.project_reference_number"), class: 'govuk-label govuk-label--m' %>
     </h3>
 
     <span id="previous_project_reference-hint" class="govuk-hint">
-      <%= I18n.t("hef_loan_form.questions.previous_project_reference_hint") %>
+      <%= t("form.organisation_details.project_reference_number_hint") %>
     </span>
 
     <%=

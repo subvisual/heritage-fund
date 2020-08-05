@@ -12,6 +12,10 @@ en-GB:
     labels:
       default: "Save and continue"
       start_now: "Start now"
+  generic:
+    x_yes: "Yes"
+    x_no: "No"
+    choose_all_that_apply: "Choose all that apply"
   views:
     project:
       check_your_answers:

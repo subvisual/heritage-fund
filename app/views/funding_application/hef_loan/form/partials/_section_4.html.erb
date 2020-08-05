@@ -1,20 +1,25 @@
-<h2 class="govuk-heading-l">Your organisation's finances</h2>
+<h2 class="govuk-heading-l"> <%= t("form.organisation_finances.heading")%> </h2>
 
 <p class="govuk-body">
-  The questions in this section help us check there is a legal and financial basis for loan funding.
-  Your organisation's financial statements and governing documents will help you answer questions in
-  this section. The answers you give here should match the information shown in the financial
-  statements you provide to support your application.
+  <%= t("form.organisation_finances.sub_heading_1") %>
 </p>
 
 <p class="govuk-body">
-  Governing documents can also be called a constitution, memorandum of association or articles of
-  association.
+  <%= t("form.organisation_finances.sub_heading_2") %>
 </p>
 
 <p class="govuk-body">
-  If you are not sure how to answer the questions in this section, you can <a href="#">check
-  the guidance</a>.
+  <%= 
+      t(
+        "form.organisation_finances.sub_heading_3_html",
+        href: link_to(
+            t("form.organisation_finances.sub_heading_3_href"),
+            "#",
+            target: "_blank",
+            class: "govuk-link"
+        )
+      )
+    %>
 </p>
 
 <%= form_object.fields_for :gp_hef_loan, @funding_application.gp_hef_loan ? @funding_application.gp_hef_loan : @funding_application.build_gp_hef_loan do | loan | %>
@@ -26,7 +31,7 @@
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         
         <h3 class="govuk-fieldset__heading">
-          <%= I18n.t("hef_loan_form.questions.can_legally_take_on_debt") %>
+          <%= t("form.organisation_finances.legally_take_on_debt") %>
         </h3>
 
       </legend>
@@ -51,7 +56,7 @@
 
           <%=
             loan.label :can_legally_take_on_debt_true,
-                    "Yes",
+                    t("generic.x_yes"),
                     class: "govuk-label govuk-radios__label"
           %>
     
@@ -67,7 +72,7 @@
 
           <%=
             loan.label :can_legally_take_on_debt_false,
-                    "No",
+                    t("generic.x_no"),
                     class: "govuk-label govuk-radios__label"
           %>
   
@@ -85,7 +90,7 @@
           
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h3 class="govuk-fieldset__heading">
-          <%= I18n.t("hef_loan_form.questions.any_debt_restrictions") %>
+          <%= t("form.organisation_finances.size_or_debt_restictions") %>
         </h3>
       </legend>
 
@@ -98,7 +103,7 @@
       %>
 
       <span id="<%= :any_debt_restrictions %>-hint" class="govuk-hint">
-        <%= I18n.t("hef_loan_form.questions.any_debt_restrictions_hint") %>
+        <%= t("form.organisation_finances.size_or_debt_restictions_hint") %>
       </span>
     
       <div class="govuk-radios govuk-radios--inline">
@@ -107,13 +112,13 @@
 
           <%=
               loan.radio_button :any_debt_restrictions,
-              "true",
+               "true",
               class: "govuk-radios__input"
           %>
 
           <%=
               loan.label :any_debt_restrictions_true,
-              "Yes",
+               t("generic.x_yes"),
               class: "govuk-label govuk-radios__label"
           %>
         
@@ -129,7 +134,7 @@
 
           <%=
               loan.label :any_debt_restrictions_false,
-              "No",
+              t("generic.x_no"),
               class: "govuk-label govuk-radios__label"
           %>
       
@@ -146,7 +151,7 @@
 
   <%=
     loan.label :debt_description,
-            I18n.t("hef_loan_form.questions.debt_description"),
+            t("form.organisation_finances.restrictions_on_size_debt_type"),
             class: "govuk-label govuk-label--m"
   %>
 
@@ -175,7 +180,7 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.can_provide_security") %>
+        <%= t("form.organisation_finances.can_provide_security_for_loan") %>
       </h3>
 
     </legend>
@@ -187,6 +192,10 @@
                 input_field_id: :can_provide_security
             } if @funding_application.gp_hef_loan.errors[:can_provide_security].any?
     %>
+
+    <span id="<%= :can_provide_security %>-hint" class="govuk-hint">
+      <%= t("form.organisation_finances.can_provide_security_for_loan_hint") %>
+    </span>  
     
     <div class="govuk-radios govuk-radios--inline">
         
@@ -200,7 +209,7 @@
 
         <%=
             loan.label :can_provide_security_true,
-            "Yes",
+            t("generic.x_yes"),
             class: "govuk-label govuk-radios__label"
         %>
         
@@ -216,7 +225,7 @@
 
         <%=
             loan.label :can_provide_security_false,
-            "No",
+            t("generic.x_no"),
             class: "govuk-label govuk-radios__label"
         %>
       
@@ -236,7 +245,7 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         
         <h3 class="govuk-fieldset__heading">
-          <%= I18n.t("hef_loan_form.questions.security_restrictions") %>
+          <%= t("form.organisation_finances.has_restrictions_on_security_types") %>
         </h3>
 
     </legend>
@@ -261,7 +270,7 @@
 
         <%=
             loan.label :security_restrictions_true,
-            "Yes",
+            t("generic.x_yes"),
             class: "govuk-label govuk-radios__label"
         %>
     
@@ -277,7 +286,7 @@
 
         <%=
             loan.label :security_restrictions_false,
-            "No",
+            t("generic.x_no"),
             class: "govuk-label govuk-radios__label"
         %>
       
@@ -294,7 +303,7 @@
 
   <%=
     loan.label :security_description,
-            I18n.t("hef_loan_form.questions.security_description"),
+            t("form.organisation_finances.what_are_security_type_restrictions"),
             class: "govuk-label govuk-label--m"
   %>
 
@@ -323,13 +332,15 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.has_had_an_average_yearly_cash_surplus") %>
+        <%= t("form.organisation_finances.was_an_average_yearly_cash_surplus") %>
       </h3>
 
     </legend>
 
     <span id="has_had_an_average_yearly_cash_surplus-hint" class="govuk-hint">
-      <%= I18n.t("hef_loan_form.questions.has_had_an_average_yearly_cash_surplus_hint") %>
+      <%= t("form.organisation_finances.was_an_average_yearly_cash_surplus_hint_1") %>
+      <br /> <br />
+      <%= t("form.organisation_finances.was_an_average_yearly_cash_surplus_hint_2") %>
     </span>
 
     <%=
@@ -352,7 +363,7 @@
 
         <%=
             loan.label :has_had_an_average_yearly_cash_surplus_true,
-            "Yes",
+            t("generic.x_yes"),
             class: "govuk-label govuk-radios__label"
         %>
         
@@ -368,7 +379,7 @@
 
         <%=
             loan.label :has_had_an_average_yearly_cash_surplus_false,
-            "No",
+            t("generic.x_no"),
             class: "govuk-label govuk-radios__label"
         %>
       
@@ -385,7 +396,7 @@
 
   <h3 class="govuk-label-wrapper">
     <%= 
-      loan.label I18n.t("hef_loan_form.questions.average_yearly_cash_surplus"), 
+      loan.label t("form.organisation_finances.what_was_average_yearly_cash_surplus"), 
       class: 'govuk-label govuk-label--m' 
     %>
   </h3>
@@ -421,7 +432,7 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.has_had_a_surplus_in_last_reporting_year") %>
+        <%= t("form.organisation_finances.was_a_cash_surplus") %>
       </h3>
 
     </legend>
@@ -446,7 +457,7 @@
 
         <%=
             loan.label :has_had_a_surplus_in_last_reporting_year_true,
-            "Yes",
+            t("generic.x_yes"),
             class: "govuk-label govuk-radios__label"
         %>
         
@@ -462,7 +473,7 @@
 
         <%=
             loan.label :has_had_a_surplus_in_last_reporting_year_false,
-            "No",
+            t("generic.x_no"),
             class: "govuk-label govuk-radios__label"
         %>
 
@@ -478,7 +489,7 @@
 
   <h3 class="govuk-label-wrapper">
     <%= 
-      loan.label I18n.t("hef_loan_form.questions.cash_surplus_in_last_year"), 
+      loan.label t("form.organisation_finances.what_was_cash_surplus"), 
       class: 'govuk-label govuk-label--m' 
     %>
   </h3>
@@ -516,12 +527,12 @@
 
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
       <h1 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.org_income_type") %>
+        <%= t("form.organisation_finances.how_income_earned") %>
       </h1>
     </legend>
     
     <span id="org_income_types-hint" class="govuk-hint">
-      <%= I18n.t("hef_loan_form.questions.org_income_type_hint") %>
+      <%= t("generic.choose_all_that_apply") %>
     </span>
 
     <%=
@@ -570,7 +581,7 @@
 
           <%=
             org_income_type.label :government_contract,
-            "Government contract",
+            t("form.organisation_finances.income_type_list_1"),
             for: :government_contract,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -615,7 +626,7 @@
 
           <%=
             org_income_type.label :rental_income,
-            "Rental Income",
+            t("form.organisation_finances.income_type_list_2"),
             for: :rental_income,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -660,7 +671,7 @@
 
           <%=
             org_income_type.label :membership_fees,
-            "Membership fees",
+            t("form.organisation_finances.income_type_list_3"),
             for: :membership_fees,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -705,7 +716,7 @@
 
           <%=
             org_income_type.label :grants,
-            "Grants",
+            t("form.organisation_finances.income_type_list_4"),
             for: :grants,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -750,7 +761,7 @@
 
           <%=
             org_income_type.label :donations,
-            "Donations",
+            t("form.organisation_finances.income_type_list_5"),
             for: :donations,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -792,7 +803,7 @@
 
           <%=
             org_income_type.label :trading,
-            "Trading",
+            t("form.organisation_finances.income_type_list_6"),
             for: :trading,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -819,7 +830,7 @@
 
         <%=
           loan.label :has_custom_org_income_type,
-          "Other",
+          t("form.organisation_finances.income_type_list_8"),
           for: :other,
           class: "govuk-label govuk-checkboxes__label"
         %>
@@ -831,7 +842,7 @@
         <div class="govuk-form-group">
 
           <h3 class="govuk-label-wrapper">
-            <%= loan.label I18n.t("hef_loan_form.questions.custom_org_income_type"), class: 'govuk-label govuk-label--s' %>
+            <%= loan.label t("form.organisation_finances.other_income_types"), class: 'govuk-label govuk-label--s' %>
           </h3>
 
           <%=
@@ -858,10 +869,14 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.bankruptcy_or_administration") %>
+        <%= t("form.organisation_finances.impending_bankruptcy_administration_query") %>
       </h3>
 
     </legend>
+
+    <span id="org_income_types-hint" class="govuk-hint">
+      <%= t("form.organisation_finances.impending_bankruptcy_administration_query_hint") %>
+    </span>
 
     <%=
       render partial: "partials/form_input_errors",
@@ -883,7 +898,7 @@
 
           <%=
               loan.label :bankruptcy_or_administration_true,
-              I18n.t("hef_loan_form.answers.a_yes"),
+              t("generic.x_yes"),
               class: "govuk-label govuk-radios__label"
           %>
   
@@ -899,7 +914,7 @@
 
           <%=
               loan.label :bankruptcy_or_administration_false,
-              I18n.t("hef_loan_form.answers.a_no"),
+              t("generic.x_no"),
               class: "govuk-label govuk-radios__label"
           %>
 
@@ -916,7 +931,7 @@
 
     <%=
       loan.label :bankruptcy_or_administration_description,
-              "Tell us in detail about any impending bankruptcy or administration against your organisation.",
+              t("form.organisation_finances.impending_bankruptcy_administration_detail"),
               class: "govuk-label govuk-label--m"
     %>
 
@@ -945,10 +960,15 @@
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.considers_state_aid") %>
+        <%= t("form.organisation_finances.state_aid_not_breached") %>
       </h3>
 
     </legend>
+
+    <span id="org_income_types-hint" class="govuk-hint">
+      <%= t("form.organisation_finances.state_aid_not_breached_hint") %>
+    </span>
+
 
     <%=
       render partial: "partials/form_input_errors",
@@ -970,7 +990,7 @@
 
         <%=
             loan.label :considers_state_aid_true,
-            I18n.t("hef_loan_form.answers.a_yes"),
+            t("generic.x_yes"),
             class: "govuk-label govuk-radios__label"
         %>
   
@@ -986,7 +1006,7 @@
 
         <%=
             loan.label :considers_state_aid_false,
-            I18n.t("hef_loan_form.answers.a_no"),
+            t("generic.x_no"),
             class: "govuk-label govuk-radios__label"
         %>
 

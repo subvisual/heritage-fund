@@ -2,11 +2,10 @@
   @funding_application.people.first.errors.any? || 
     @funding_application.people.second.errors.any? %>">
 
-  <h2 class="govuk-heading-l">Contact details</h2>
+  <h2 class="govuk-heading-l"><%= t("form.contact_details.heading")%></h2>
 
   <p class="govuk-body govuk-!-margin-bottom-8">
-    Use this section to tell us the names and contact information for people at your 
-    organisation we can speak to about this loan application.
+    <%= t("form.contact_details.sub_heading")%>
   </p>
 
   <%= form_object.fields_for :people, @funding_application.people.sort_by(&:created_at) do | p | %>
@@ -18,7 +17,7 @@
             We are using p.index + 1 here to display '1' and '2'
             as :people is zero-indexed
           %>
-          Contact <%= p.index + 1 %>
+          <%= t("form.contact_details.contact_heading")%> <%= p.index + 1 %>
         </h3>
       </legend>
 
@@ -26,7 +25,7 @@
         @funding_application.people[p.index].errors[:name].any? %>">
 
         <%= 
-          p.label I18n.t("hef_loan_form.questions.contact_name"),
+          p.label t("form.contact_details.full_name"),
           class: 'govuk-label govuk-label--s'
         %>
 
@@ -50,7 +49,7 @@
         @funding_application.people[p.index].errors[:position].any? %>">
         
         <%= 
-          p.label I18n.t("hef_loan_form.questions.contact_position"),
+          p.label t("form.contact_details.position"),
           class: 'govuk-label govuk-label--s'
         %>
 
@@ -73,7 +72,7 @@
       <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.people[p.index].errors[:email].any? %>">
       
         <%= 
-          p.label I18n.t("hef_loan_form.questions.contact_email"), 
+          p.label t("form.contact_details.email_address"), 
           class: 'govuk-label govuk-label--s'
         %>
 
@@ -96,7 +95,7 @@
       <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.people[p.index].errors[:phone_number].any? %>">
       
         <%= 
-          p.label I18n.t("hef_loan_form.questions.contact_phone"), 
+          p.label t("form.contact_details.phone_number"), 
           class: 'govuk-label govuk-label--s'
         %>
 
@@ -114,7 +113,9 @@
                           @funding_application.people[p.index].errors[:phone_number].any? }"
         %>      
       </div>
+
     </fieldset>
+
   <% end %>
 
 </div>

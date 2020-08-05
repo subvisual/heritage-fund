@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-l">Your loan application</h2>
+<h2 class="govuk-heading-l"><%=t("form.your_loan_application.heading")%></h2>
 
 <%= form_object.fields_for :gp_hef_loan, @funding_application.gp_hef_loan ? @funding_application.gp_hef_loan : @funding_application.build_gp_hef_loan do | loan | %>
 
@@ -7,7 +7,7 @@
 
   <%=
     loan.label :efforts_to_reduce_borrowing,
-            I18n.t("hef_loan_form.questions.efforts_to_reduce_borrowing"),
+            t("form.your_loan_application.reducing_costs"),
             class: "govuk-label govuk-label--m"
   %>
 
@@ -34,25 +34,40 @@
 
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
       <h3 class="govuk-fieldset__heading">
-        <%= I18n.t("hef_loan_form.questions.plans_for_loans") %>
+        <%= t("form.your_loan_application.spending_plans") %>
       </h3>
     </legend>
     
     <span id="plans_for_loan-hint" class="govuk-hint">
 
-      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_1") %>
+      <%= t("form.your_loan_application.spending_plans_hint_1") %>
 
       <br /> <br />
 
-      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_2") %>
+      <%= t("form.your_loan_application.spending_plans_hint_2") %>
 
       <br /><br />
 
-      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_3") %>
+      <%= t("form.your_loan_application.spending_plans_hint_3") %>
 
       <br /><br />
 
-      <%= I18n.t("hef_loan_form.questions.plans_for_loans_hint_line_4") %>
+      <%= t("form.your_loan_application.spending_plans_hint_4") %>
+
+      <br /><br />
+
+      <%=
+        t(
+          "form.your_loan_application.spending_plans_hint_5_html",
+          href: link_to(
+              t("form.your_loan_application.spending_plans_hint_5_href"),
+              "#",
+              target: "_blank",
+              class: "govuk-link"
+          )
+        )
+      %>
+
 
     </span>
 
@@ -91,7 +106,7 @@
 
           <%=
             plans_for_loan.label :cashflow,
-            "Cashflow",
+            t("form.your_loan_application.spending_plans_list_1"),
             for: :cashflow,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -133,7 +148,7 @@
 
           <%=
             plans_for_loan.label :staff_salaries,
-            "Staff salaries",
+            t("form.your_loan_application.spending_plans_list_2"),
             for: :staff_salaries,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -175,7 +190,7 @@
 
           <%=
             plans_for_loan.label :working_capital,
-            "Working capital",
+            t("form.your_loan_application.spending_plans_list_3"),
             for: :working_capital,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -217,7 +232,7 @@
 
           <%=
             plans_for_loan.label :recovering_planning,
-            "Recovering planning",
+            t("form.your_loan_application.spending_plans_list_4"),
             for: :recovering_planning,
             class: "govuk-label govuk-checkboxes__label"
           %>
@@ -237,12 +252,24 @@
 
   <%=
     loan.label :plans_for_loan_description,
-            I18n.t("hef_loan_form.questions.plans_for_loan_description"),
+            t("form.your_loan_application.spending_plans_detail"),
             class: "govuk-label govuk-label--m"
   %>
 
   <span id="plans_for_loan_description-hint" class="govuk-hint">
-    <%= I18n.t("hef_loan_form.questions.plans_for_loan_description_hint") %>
+    <%= 
+
+      t(
+        "form.your_loan_application.spending_plans_detail_hint_html",
+        href: link_to(
+            t("form.your_loan_application.spending_plans_detail_hint_href"),
+            "#",
+            target: "_blank",
+            class: "govuk-link"
+        )
+      )
+
+    %>
   </span>
 
   <%=
@@ -268,13 +295,13 @@
 
   <h3 class="govuk-label-wrapper">
     <%= 
-      loan.label I18n.t("hef_loan_form.questions.loan_amount_requested"), 
+      loan.label t("form.your_loan_application.application_amount"), 
       class: 'govuk-label govuk-label--m' 
     %>
   </h3>
 
   <span id="loan_amount_requested-hint" class="govuk-hint">
-    <%= I18n.t("hef_loan_form.questions.loan_amount_requested_hint") %>
+    <%= t("form.your_loan_application.application_amount_hint") %>
   </span>
 
   <%=
@@ -307,13 +334,13 @@
   @funding_application.gp_hef_loan.errors[:time_to_repay_loan].any? %>">
 
   <%= 
-    loan.label I18n.t("hef_loan_form.questions.time_to_repay_loan"),
+    loan.label t("form.your_loan_application.time_needed_to_repay"),
     for: :time_to_repay_loan,
     class: 'govuk-label govuk-label--m' 
   %>
 
   <span id="time_to_repay_loan-hint" class="govuk-hint">
-    <%= I18n.t("hef_loan_form.questions.time_to_repay_loan_hint") %>
+    <%= t("form.your_loan_application.time_needed_to_repay_hint") %>
   </span>
 
   <%=
@@ -340,12 +367,12 @@
 
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
         <h1 class="govuk-fieldset__heading">
-          How often would you like to make repayments?
+          <%= t("form.your_loan_application.repayment_frequency") %>
         </h1>
       </legend>
     
       <span id="repayment_frequency-hint" class="govuk-hint">
-        You can select more than one option. Read the guidance for details on repayment options. 
+        <%= t("form.your_loan_application.repayment_frequency_hint") %>
       </span>
 
       <div class="govuk-checkboxes">
@@ -383,7 +410,7 @@
 
             <%=
               repayment_freq.label :monthly,
-              "Monthly",
+              t("form.your_loan_application.monthly"),
               for: :monthly,
               class: "govuk-label govuk-checkboxes__label"
             %>
@@ -425,7 +452,7 @@
 
             <%=
               repayment_freq.label :quarterly,
-              "Quarterly",
+              t("form.your_loan_application.quarterly"),
               for: :quarterly,
               class: "govuk-label govuk-checkboxes__label"
             %>
@@ -467,7 +494,7 @@
 
             <%=
               repayment_freq.label :yearly,
-              "Yearly",
+              t("form.your_loan_application.yearly"),
               for: :yearly,
               class: "govuk-label govuk-checkboxes__label"
             %>
@@ -489,19 +516,24 @@
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             
             <h3 class="govuk-fieldset__heading">
-              Do you understand the things your cashflow needs to demonstrate?
+              <%= t("form.your_loan_application.cashflow_understanding") %>
             </h3>
           
           </legend>
 
           <span id="cashflow_understanding-hint" class="govuk-hint">
-            As part of your application, after you have submitted your application form, we will contact you to request a cashflow forecast for your organisation.
+            <%= t("form.your_loan_application.cashflow_understanding_hint_1") %>
+            <br /> <br />
+            <%= t("form.your_loan_application.cashflow_understanding_hint_2") %>
+            <br /> <br />
+            <%= t("form.your_loan_application.cashflow_understanding_hint_3") %>
 
             Things we will look for:
 
             <ul>
-              <li>That your organisation has adjusted their cashflow forecast to deal with the new post-coronavirus world</li>
-              <li>Repayment option is viable and can withstand a degree of disruption, for example, an amount of sensitivity to a reduction in income or rise in expenditure.</li>
+              <li> <%= t("form.your_loan_application.cashflow_understanding_hint_list_1") %> </li>
+              <br />
+              <li> <%= t("form.your_loan_application.cashflow_understanding_hint_list_2") %> </li>
             </ul>
 
           </span>
@@ -533,7 +565,7 @@
 
             <%=
               loan.label :cashflow_understanding,
-              "Yes, I understand what the cashflow for the organisation applying for a loan needs to demonstrate.",
+              t("form.your_loan_application.cashflow_understanding_checkbox"),
               for: :cashflow_understanding,
               class: "govuk-label govuk-checkboxes__label"
             %>
