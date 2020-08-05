@@ -1,0 +1,14 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Metrics/MethodLength:
+  Severity: warning
+Metrics/AbcSize:
+  Severity: warning
+Metrics/PerceivedComplexity:
+  Severity: warning

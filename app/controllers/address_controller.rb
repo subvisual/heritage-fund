@@ -1,5 +1,9 @@
+# Controller class for address-related functionality. Provides the ability
+# to update address details for User, Project and Organisation model
+# objects.
 class AddressController < ApplicationController
-  include ObjectErrorsLogger, PostcodeLookup
+  include ObjectErrorsLogger
+  include PostcodeLookup
   before_action :authenticate_user!, :check_and_set_model_type
 
   def assign_address_attributes
@@ -9,8 +13,8 @@ class AddressController < ApplicationController
 
   end
 
-  # This method updates the address for a given model object, which could 
-  # be of types user, organisation or project. If of type user, then the 
+  # This method updates the address for a given model object, which could
+  # be of types user, organisation or project. If of type user, then the
   # address attributes are replicated to a separate address record which is
   # then associated with the user and it's associated person record
   def update
@@ -26,16 +30,14 @@ class AddressController < ApplicationController
       logger.info "Finished updating address for #{@type} ID: " \
                   "#{@model_object.id}"
 
-      if @type == "organisation"
+      if @type == 'organisation'
         redirect_to organisation_mission_path(params['id'])
-      elsif @type == "project"
+      elsif @type == 'project'
         redirect_to three_to_ten_k_project_description_path(params['id'])
-      elsif @type == "user"
+      elsif @type == 'user'
 
         # Caters to a situation where original applicants have no person assigned to the user.
-        if @model_object.person.present?
-          check_and_set_person_address(@model_object)
-        end
+        check_and_set_person_address(@model_object) if @model_object.person.present?
 
         redirect_to :authenticated_root
 
@@ -43,7 +45,7 @@ class AddressController < ApplicationController
 
     else
 
-      logger.info "Validation failed when attempting to update address for " \
+      logger.info 'Validation failed when attempting to update address for ' \
                   "#{@type} ID: #{@model_object.id}"
 
       log_errors(@model_object)
@@ -54,24 +56,21 @@ class AddressController < ApplicationController
 
   end
 
-
   private
 
   # Checks for a known type of model in the params.
   # If correct, then assign the model type to a @type instance variable.
   def check_and_set_model_type
-    if %w(user organisation project).include? params[:type]
+    if %w[user organisation project].include? params[:type]
       @type = params[:type]
       case @type
-      when "organisation"
+      when 'organisation'
         @model_object = Organisation.find(params[:id])
-      when "project"
+      when 'project'
         @model_object = Project.find(params[:id])
-      when "user"
+      when 'user'
         @model_object = User.find_by(organisation_id: params[:id])
-        unless @model_object.id == current_user.id
-          redirect_to :root
-        end
+        redirect_to :root unless @model_object.id == current_user.id
       end
     else
       redirect_to :root
@@ -103,7 +102,7 @@ class AddressController < ApplicationController
 
   end
 
-  # Creates and returns a new Address object based on the 
+  # Creates and returns a new Address object based on the
   # attributes stored against the User argument
   #
   # @param [uuid] id The unique identifier of an Address
@@ -123,7 +122,7 @@ class AddressController < ApplicationController
 
   end
 
-  # Creates and returns a PeopleAddress object based on the 
+  # Creates and returns a PeopleAddress object based on the
   # Address and User arguments passed
   #
   # @param [uuid] person_id The unique identifier of a Person
@@ -140,14 +139,14 @@ class AddressController < ApplicationController
 
     logger.debug "people_addresses record created with ID: #{person_address_association.id}"
 
-    return person_address_association
+    person_address_association
 
   end
 
   def model_params
     params.require(@type)
-        .permit(:name, :line1, :line2, :line3,
-                :townCity, :county, :postcode)
+          .permit(:name, :line1, :line2, :line3,
+                  :townCity, :county, :postcode)
   end
 
 end
