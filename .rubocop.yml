@@ -10,8 +10,5 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Severity: warning
 
-Naming/AccessorMethodName:
-  Severity: warning
-
 Style/FrozenStringLiteralComment:
   Enabled: false

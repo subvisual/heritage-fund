@@ -5,7 +5,7 @@ class HealthController < ApplicationController
   #
   # @return [JSON] a JSON object containing the application status
   #                and the current server timestamp
-  def get_status
+  def status
 
     render(
       json: {

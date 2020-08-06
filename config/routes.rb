@@ -222,7 +222,7 @@ Rails.application.routes.draw do
   end
 
   # Health check route for GOV.UK PaaS
-  get 'health' => 'health#get_status'
+  get 'health' => 'health#status'
 
   namespace :help do
     get 'cookies'
