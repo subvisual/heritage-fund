@@ -15,7 +15,3 @@ Naming/AccessorMethodName:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-Style/GuardClause:
-  Severity: warning
-Style/UnlessElse:
-  Severity: warning

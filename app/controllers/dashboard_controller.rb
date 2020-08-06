@@ -4,17 +4,17 @@ class DashboardController < ApplicationController
 
   def show
 
-    unless user_details_complete(current_user)
-
-      redirect_to(:user_details)
-
-    else
+    if user_details_complete(current_user)
 
       gon.push({ tracking_url_path: '/project-dashboard' })
 
       @projects = current_user.projects
 
       @funding_applications = current_user.organisation.funding_applications
+
+    else
+
+      redirect_to(:user_details)
 
     end
 
@@ -65,6 +65,7 @@ class DashboardController < ApplicationController
   # @param [User] user An instance of User
   def create_organisation_if_none_exists(user)
 
+    # rubocop:disable Style/GuardClause
     unless user.organisation
 
       logger.info "No organisation found for user ID: #{user.id}"
@@ -72,6 +73,7 @@ class DashboardController < ApplicationController
       create_organisation(user)
 
     end
+    # rubocop:enable Style/GuardClause
 
   end
 
