@@ -6,7 +6,7 @@ RSpec.describe HealthController do
 
     it "should return a successful response" do
 
-      get :get_status
+      get :status
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)["status"]).to eq("OK")
 
