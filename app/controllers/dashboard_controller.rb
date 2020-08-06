@@ -1,22 +1,29 @@
+# Controller for the service dashboard page
 class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def show
 
     unless user_details_complete(current_user)
+
       redirect_to(:user_details)
+
     else
-      gon.push({tracking_url_path: '/project-dashboard'})
+
+      gon.push({ tracking_url_path: '/project-dashboard' })
+
       @projects = current_user.projects
+
       @funding_applications = current_user.organisation.funding_applications
+
     end
 
   end
 
   # Early users of the service may not have an organisation linked to their
   # user account. Because of this, we need to check for an organisation and
-  # create one if none is present. We also check for the mandatory 
-  # organisation details to be complete before we can allow a user to 
+  # create one if none is present. We also check for the mandatory
+  # organisation details to be complete before we can allow a user to
   # create a new application.
   def orchestrate_dashboard_journey
 
@@ -40,19 +47,19 @@ class DashboardController < ApplicationController
     user_details_fields_presence.push(user.name.present?)
     user_details_fields_presence.push(user.date_of_birth.present?)
     user_details_fields_presence.push(
-        (
+      (
         user.line1.present? &&
-            user.townCity.present? &&
-            user.county.present? &&
-            user.postcode.present?
-        )
+        user.townCity.present? &&
+        user.county.present? &&
+        user.postcode.present?
+      )
     )
 
-    return user_details_fields_presence.all?
+    user_details_fields_presence.all?
 
   end
 
-  # Checks for the presence of an organisation associated to a user 
+  # Checks for the presence of an organisation associated to a user
   # and creates one if none exists
   #
   # @param [User] user An instance of User
@@ -67,7 +74,7 @@ class DashboardController < ApplicationController
     end
 
   end
-  
+
   # Creates an organisation and links this to the current_user
   #
   # @param [User] user An instance of User

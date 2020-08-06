@@ -1,3 +1,6 @@
+# Top-level ApplicationController class, which inherits directly
+# from ActionController::Base and is then inherited by all
+# other controllers
 class ApplicationController < ActionController::Base
   default_form_builder(NlhfFormBuilder)
   include LocaleHelper
