@@ -15,6 +15,16 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "jest": "^26.2.2",
     "webpack-dev-server": "^3.8.2"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript/error-handling"
+    ]
   }
 }

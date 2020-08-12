@@ -33,7 +33,7 @@ window.createSummaryErrorsSkeleton = function() {
 /*
   Function to create the GOV.UK-styled summary errors element
  */
-function addSummaryErrorsClassAndAttributes(summaryErrorsElement) {
+export function addSummaryErrorsClassAndAttributes(summaryErrorsElement) {
 
     // Only add the govuk-error-summary class if it does not already exist
     if (!summaryErrorsElement.classList.contains("govuk-error-summary")) {
@@ -50,7 +50,7 @@ function addSummaryErrorsClassAndAttributes(summaryErrorsElement) {
 /*
   Function to create the heading for the GOV.UK-styled summary errors element
  */
-function createSummaryErrorsHeading() {
+export function createSummaryErrorsHeading() {
 
     var summaryErrorsHeading = document.createElement("h2");
 
@@ -67,7 +67,7 @@ function createSummaryErrorsHeading() {
 /*
   Function to create the body for the GOV.UK-styled summary errors element
  */
-function createSummaryErrorsBody() {
+export function createSummaryErrorsBody() {
 
     var summaryErrorsBodyElement = document.createElement("div");
 
@@ -82,7 +82,7 @@ function createSummaryErrorsBody() {
 /*
   Function to create the list for the GOV.UK-styled summary errors element
  */
-function createSummaryErrorsList() {
+export function createSummaryErrorsList() {
 
     var summaryErrorsList = document.createElement("ul");
 
@@ -99,7 +99,7 @@ function createSummaryErrorsList() {
   Function to create a list item and append it to the existing list
   within the GOV.UK-styled summary errors element
  */
-function createAndAppendListItem(message, attribute, modelName) {
+export function createAndAppendListItem(message, attribute, modelName) {
 
     var summaryErrorsList = document.getElementById("summary-errors-list");
 
