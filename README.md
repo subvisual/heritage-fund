@@ -1,143 +1,118 @@
-# Funding frontend
+# funding-frontend
 
-## Steps to run locally
+## Running locally on macOS
 
-### Prerequisites
+### Install Homebrew
 
-* Install home brew
-`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+Check to see if [Homebrew](https://brew.sh) is installed by running `which brew` in a terminal. If already 
+installed you'll get output similar to `/usr/local/bin/brew`, otherwise the command will return `brew not found`.
 
-* Install rbenv `brew install rbenv`
+If Homebrew is already installed, update it by running `brew update`. 
 
-* Install postgres `brew install postgres`
+If Homebrew is not already installed, run 
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to install it.
 
-* Install Ruby version specified in [.ruby-version](.ruby-version). Recommended to do this through `rbenv` to manage Ruby versions on your machine
+### Install rbenv
 
-* `rbenv install X.X.X` (replace X.X.X with the version detailed in [.ruby-version](.ruby-version)) 
+Run `brew install rbenv` to install the latest version of [rbenv](https://github.com/rbenv/rbenv).
 
-* If you use rbenv ensure the following line is added to your bash_profile (`~/.bash_profile`): `eval "$(rbenv init -)"`
+### Install PostgreSQL
 
-* Install [Postgres.app](https://postgresapp.com/)
+Run `brew install postgres` to install the latest version of [PostgreSQL](https://www.postgresql.org).
 
-* Download credentials and save as `.env` in checkout directory (Ask a team member for location)
+### Install the recommended version of Ruby
 
-* Install the pg gem telling it the path of postgress, typically this is: 
-`gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config`
+We specify a recommended version of Ruby in the [`.ruby-version`](.ruby-version) file in funding-frontend. 
+To install this recommended version of Ruby, use rbenv by running `rbenv install x.y.z` inside the application 
+directory (where `x.y.z` is replaced with the version number specified in [`.ruby-version`](.ruby-version)).
 
-* `gem install bundler`
+Add `eval "$(rbenv init -)"` to your `~/.bash_profile`.
 
-* `bundle install`
+### Install the PostgreSQL app
 
-* Install yarn (https://yarnpkg.com/lang/en/docs/install/#mac-stable)
+Download and install [Postgres.app](https://postgresapp.com).
 
-* `yarn install`
+### Configure the necessary environment variables
 
-* `rails db:setup`
+Create an empty `.env` file in your application directory by running `touch .env` in a terminal.
 
-### Running the app
-#### Backend
-* `bundle exec rails s`
+The necessary environment variables in order to run the application are stored in the team's shared
+1Password vault. If you don't have access to the shared 1Password vault, contact @stuartmccoll or @ptrelease.
 
-* open: http://localhost:3000
+With access to the vault, copy the contents of `funding-frontend.env` into your own `.env` file.
 
-#### Frontend
-In a separate terminal tab run:
+### Install the PostgreSQL Gem
 
-`./bin/webpack --watch` (or `npm start` if you have node package manager installed)
-
-### Deploying the app
-
-#### Staging
-
-`master` branch is deployed automatically by GitHub Actions.
-
-#### Research
-
-From your local machine run `cf v3-push funding-frontend-research`.
-
-# Guides
-
-## How to create a new page
-
-You can use the `rails generate` command to create new pages in the application.
-
-Assuming that we want to create a new page within the 'projects' section of the
- application, the following command will create the necessary boilerplate:
+Install the PostgreSQL Gem, telling it the path of PostgreSQL. If PostgreSQL is installed in a default 
+location, the command will look like:
 
 ```bash
-rails generate controller Project::MyPage show
+gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
 ```
 
-This will output the following within the console:
+### Install Bundler
 
-```bash
-Running via Spring preloader in process 15958
-      create  app/controllers/project/my_page_controller.rb
-       route  namespace :project do
-  get 'my_page/show'
-end
-      invoke  erb
-      create    app/views/project/my_page
-      create    app/views/project/my_page/show.html.erb
-      invoke  rspec
-      create    spec/requests/project/my_page_request_spec.rb
-      create    spec/views/project/my_page
-      create    spec/views/project/my_page/show.html.erb_spec.rb
-      invoke  helper
-      create    app/helpers/project/my_page_helper.rb
-      invoke    rspec
-      create      spec/helpers/project/my_page_helper_spec.rb
-      invoke  assets
-      invoke    scss
-      create      app/assets/stylesheets/project/my_page.scss
-```
+Run `gem install bundler` to install [Bundler](https://bundler.io).
 
-The `app/views/project/my_page/show.html.erb` file contains the HTML markdown 
-that will be displayed when a user visits the page.
+### Install Yarn
 
-The final thing to do here is to amend the `config/routes.rb` file to ensure 
-that we have added a route to our generated controller and `show` method. 
-In this example, we need to add an additional route within the 'projects' 
-section of `config/routes.rb`. You can find this by looking for the following:
+Run `brew install` to install [Yarn]((https://yarnpkg.com/lang/en/docs/install/#mac-stable)).
 
-```bash
-scope "/3-10k", as: :three_to_ten_k do
-    namespace :project do    
-```
+### Install necessary application dependencies
 
-Inside this `namespace` block of code, add the following line:
+Run `bundle install` to install the Ruby dependencies necessary for the application to run. These are 
+specified in the application's `Gemfile`.
 
-```bash
-get 'my-page', to: 'my_page#show'
-```
+Run `yarn install` to install the Yarn dependencies necessary for the application to run. These are
+specified in the application's `package.json` and `yarn.lock` files.
 
-Where `'my-page'` is the URL you would like (in this example, the full URL would
-be `.../3-10k/project/<project_id>/my-page`), and where `'my_page#show'` is the 
-name you gave to the controller in the first command entered 
-(`rails generate controller Project::MyPage show` - Rails will automatically 
-underscore camel-cased names here, such as where we've used `MyPage`).
+### Initialise the database
 
-For more on the Ruby on Rails `generate` command, [see the documentation](
-https://guides.rubyonrails.org/command_line.html#rails-generate).
+Run `bundle exec rails db:setup` in your terminal.
+
+### Running the funding-frontend application
+
+Run `bundle exec rails server` (or `bundle exec rails s` for a shorter command) in your terminal. 
+The application will now be running locally and can be accessed by navigating to 
+`https://localhost:3000` in your browser.
+
+---
+
+## Running the automated test suite
+
+### RSpec
+
+Server-side code is tested using [RSpec](https://rspec.info).
+
+To run the RSpec test suite, run `bundle exec rspec` in your terminal.
+
+### Jest
+
+Client-side code is tested using [Jest](https://jestjs.io).
+
+To run the Jest test suite, run `yarn jest` in your terminal.
+
+---
 
 ## Caching
-Addresses are cached from the postcode lookup, so that they can be referred to later in the user journey.
-In order to see caching work in development - run this command in the terminal:
-```
-rails dev:cache
-``` 
 
-## Toggling the Flipper features
+Addresses are cached after searching by postcode so that they can be referred to later in the user journey. 
+By default, Ruby-on-Rails in development mode runs with caching disabled. In order to see caching work in 
+development, run `bundle exec rails dev:cache` in your terminal.
+
+---
+
+## Toggling feature flags
+
+Some elements of functionality are sat behind feature flags, which have been implemented using 
+[Flipper](https://github.com/jnunemaker/flipper).
 
 To toggle functionality, a Flipper needs to exist. Flipper rows exist within the `flipper_features` and 
-`flipper_gates` tables on the database. The `flipper_gates` are populated with a migration. The `flipper_features` 
-are populated at app runtime, provided rows exist in flipper.rb.
+`flipper_gates` tables on the database. The `flipper_gates` are populated with a database migration. 
+The `flipper_features` are populated at app runtime, provided rows exist in `flipper.rb`.
 
-This `flipper_gates` `value` should be `true` for it to work.
-
-Update the `flipper_gates` row with:
-
-`rails dbconsole`
+Update a `flipper_gates` row by running a SQL statement such as (after running 
+`psql funding_frontend_development` in your terminal to connect to the database):
 
 ```postgresql
 UPDATE flipper_gates SET value = true WHERE feature_key = '<key_name>';   
