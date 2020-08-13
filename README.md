@@ -32,6 +32,8 @@ Add `eval "$(rbenv init -)"` to your `~/.bash_profile`.
 
 Download and install [Postgres.app](https://postgresapp.com).
 
+Run the Postgres app.
+
 ### Configure the necessary environment variables
 
 Create an empty `.env` file in your application directory by running `touch .env` in a terminal.
