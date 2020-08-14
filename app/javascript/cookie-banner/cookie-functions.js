@@ -50,8 +50,10 @@ Usage:
   Cookie('hobnob', null)
 */
 
-function Cookie (name, value, options) {
+export function Cookie (name, value, options) {
     if (typeof value !== 'undefined') {
+        // If value is false or null, we are deleting the cookie, by expiry
+        // being set to a day in the past
         if (value === false || value === null) {
             return setCookie(name, '', { days: -1 })
         } else {
@@ -95,14 +97,18 @@ export function setConsentCookie (options) {
     }
 
     for (var cookieType in options) {
+
         cookieConsent[cookieType] = options[cookieType]
 
-        // Delete cookies of that type if consent being set to false
+        // Delete analytics cookies if options[cookieType] is set to false (meaning user hasn't agreed)
         if (!options[cookieType]) {
             for (var cookie in COOKIE_CATEGORIES) {
+                // if this cookie is in the analytics cookie category list.
                 if (COOKIE_CATEGORIES[cookie] === cookieType) {
+                    // This deletes the cookie
                     Cookie(cookie, null)
 
+                    // Get the cookie back
                     if (Cookie(cookie)) {
                         document.cookie = cookie + '=;expires=' + new Date() + ';domain=' + window.location.hostname.replace(/^www\./, '.') + ';path=/'
                     }
@@ -114,7 +120,7 @@ export function setConsentCookie (options) {
     setCookie('nlhf_cookies_policy', JSON.stringify(cookieConsent), { days: 365 })
 }
 
-function checkConsentCookieCategory (cookieName, cookieCategory) {
+export function checkConsentCookieCategory (cookieName, cookieCategory) {
     var currentConsentCookie = getConsentCookie()
 
     // If the consent cookie doesn't exist, but the cookie is in our known list, return true
@@ -123,6 +129,7 @@ function checkConsentCookieCategory (cookieName, cookieCategory) {
     }
 
     currentConsentCookie = getConsentCookie()
+    
 
     // Sometimes currentConsentCookie is malformed in some of the tests, so we need to handle these
     try {
@@ -133,7 +140,7 @@ function checkConsentCookieCategory (cookieName, cookieCategory) {
     }
 }
 
-function checkConsentCookie (cookieName, cookieValue) {
+export function checkConsentCookie (cookieName, cookieValue) {
     // If we're setting the consent cookie OR deleting a cookie, allow by default
     if (cookieName === 'nlhf_cookies_policy' || (cookieValue === null || cookieValue === false)) {
         return true
@@ -154,19 +161,25 @@ function checkConsentCookie (cookieName, cookieValue) {
 // Cookie('hobnob', 'tasty', { days: 30 })
 
 export function setCookie (name, value, options) {
+    
     if (checkConsentCookie(name, value)) {
+        
         if (typeof options === 'undefined') {
             options = {}
         }
         var cookieString = name + '=' + value + '; path=/'
+        
         if (options.days) {
             var date = new Date()
             date.setTime(date.getTime() + (options.days * 24 * 60 * 60 * 1000))
             cookieString = cookieString + '; expires=' + date.toGMTString()
         }
+
         if (document.location.protocol === 'https:') {
             cookieString = cookieString + '; Secure'
         }
+
         document.cookie = cookieString
+
     }
 }
