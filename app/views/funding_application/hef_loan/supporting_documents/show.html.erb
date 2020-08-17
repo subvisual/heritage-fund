@@ -64,7 +64,7 @@
           %>
 
           <div id="funding_application.gp_hef_loan.supporting_documents_files-errors"></div>
-          <div class="govuk-form-group">
+          <div class="govuk-form-group" id="funding_application.gp_hef_loan-supporting-documents-files-form-group" data-form-group="file">
             <%=
               loan.label :supporting_documents_files,
                       t("supporting_documents.add_your_supporting_documents_label"),
@@ -75,7 +75,12 @@
               loan.file_field :supporting_documents_files,
                            direct_upload: true,
                            multiple: true,
-                           class: "govuk-file-upload #{"govuk-file-upload--error" if @funding_application.gp_hef_loan.errors.any?}"
+                           class: "govuk-file-upload #{"govuk-file-upload--error" if 
+                            @funding_application.gp_hef_loan.errors.any?}",
+                           'data-input-identifier': 'file',
+                           'data-attribute': :supporting_documents_files,
+                           'data-model': :gp_hef_loan,
+                           'data-parent-model': :funding_application
             %>
 
             <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html
@@ -92,7 +97,6 @@
                 ))
           %>
         </div>
-
 
         <% unless @funding_application.gp_hef_loan.supporting_documents_files.attached? %>
 

@@ -130,6 +130,15 @@ export function createAndAppendListItem(message, attribute, modelName) {
             case "accounts_files":
                 linkElement.setAttribute("href", "#project_accounts_files");
                 break;
+            case "cash_contribution_evidence_files":
+                linkElement.setAttribute("href", "#project_cash_contributions_attributes_0_cash_contribution_evidence_files");
+                break;
+            case "evidence_of_support_files":
+                linkElement.setAttribute("href", "#project_evidence_of_support_attributes_0_evidence_of_support_files");
+                break;
+            case "supporting_documents_files":
+                linkElement.setAttribute("href", "#funding_application_gp_hef_loan_attributes_supporting_documents_files");
+                break;
             default:
                 linkElement.setAttribute("href", attribute === "capital_work" ?
                     "#project_capital_work_false" : "#project_capital_work_true");

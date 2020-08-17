@@ -196,7 +196,7 @@
       <div class="nlhf-add-item__row">
         <div id="file-upload-form-group">
           <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors['evidence_of_support.evidence_of_support_files'].any? %>"
-               id="evidence_of_support.evidence_of_support_files-form-group">
+               id="evidence_of_support.evidence_of_support_files-form-group" data-form-group="file">
 
             <%=
               render partial: "partials/form_input_errors",
@@ -207,6 +207,8 @@
             %>
 
             <div id="evidence_of_support.evidence_of_support_files-errors"></div>
+
+            <div id="form-group-errors"></div>
 
             <%=
               e.label :evidence_of_support_files,
@@ -219,7 +221,11 @@
                            multiple: false,
                            direct_upload: true,
                            class: "govuk-file-upload #{'govuk-file-upload--error' if
-                               @project.errors['evidence_of_support.evidence_of_support_files'].any?}"
+                               @project.errors['evidence_of_support.evidence_of_support_files'].any?}",
+                           'data-input-identifier': 'file',
+                           'data-attribute': :evidence_of_support_files,
+                           'data-model': :evidence_of_support,
+                           'data-parent-model': :project
             %>
 
           </div>

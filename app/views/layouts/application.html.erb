@@ -11,12 +11,7 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <% if @has_file_upload %>
-    <%= javascript_tag defer: 'defer' do %>
-      <%= render partial: 'partials/direct_file_upload_hooks',
-                 formats: [:js] %>
-    <% end %>
-  <% end %>
+  
 </head>
 <body class="govuk-template__body nlhf-template__body" data-turbolinks="false">
   <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
@@ -79,5 +74,6 @@
   </div>
 </footer>
   <%= javascript_pack_tag 'application', 'data-turbolinks-suppress-warning':'true', 'data-turbolinks-eval': "false", 'data-turbolinks-track': 'reload' %>
+  <%= javascript_tag("fileUploadHandlingHooks()") if @has_file_upload %>
 </body>
 </html><!-- Thanks Tom (@Steiny) & Sue (@SueBow94) -->

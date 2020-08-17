@@ -303,7 +303,7 @@
                   <div id="file-upload-form-group">
                     <div class="govuk-form-group <%= 'govuk-form-group--error' if
                                                          @project.errors['cash_contributions.cash_contribution_evidence_files'].any? %>"
-                         id="cash_contributions.cash_contribution_evidence_files-form-group">
+                         id="cash_contributions.cash_contribution_evidence_files-form-group" data-form-group="file">
 
                       <%=
                         render partial: "partials/form_input_errors",
@@ -314,6 +314,8 @@
                       %>
 
                       <div id="cash_contributions.cash_contribution_evidence_files-errors"></div>
+
+                      <div id="form-group-errors"></div>
 
                       <%=
                         cc.label :cash_contribution_evidence_files,
@@ -328,7 +330,11 @@
                                       class: "govuk-file-upload #{'govuk-file-upload--error' if
                                           @project.errors['cash_contributions.cash_contribution_evidence_files'].any?}",
                                       multiple: false,
-                                      direct_upload: true
+                                      direct_upload: true,
+                                      'data-input-identifier': 'file',
+                                      'data-attribute': :cash_contribution_evidence_files,
+                                      'data-model': 'cash_contributions',
+                                      'data-parent-model': :project
                       %>
 
                     </div>

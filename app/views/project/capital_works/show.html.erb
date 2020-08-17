@@ -25,9 +25,8 @@
             remote: no_js ? false : true do |f|
 %>
 
-  <div id="capital-works-form-group-main"
-       class="govuk-form-group <%= "govuk-form-group--error" if
-                                       @project.errors.any? %>">
+  <div class="govuk-form-group <%= "govuk-form-group--error" if 
+    @project.errors.any? %>">
 
     <fieldset class="govuk-fieldset">
 
@@ -102,34 +101,34 @@
             surveyor.
           </span>
 
-          <div id="capital-works.capital_work_files-errors"></div>
-          <div id="file-upload-form-group">
-              <div class="govuk-form-group" id="capital-works.capital_work_files-form-group">
+          <div class="govuk-form-group" id="capital-works-form-group-main" data-form-group="file">
 
-                <%=
-                  f.label :capital_work_file,
-                          "Upload a file",
-                          class: "govuk-label"
-                %>
+            <%=
+              f.label :capital_work_file,
+                      "Upload a file",
+                      class: "govuk-label"
+            %>
 
-                <%=
-                  f.file_field :capital_work_file,
-                               multiple: false,
-                               direct_upload: true,
-                               class: "govuk-file-upload"
-                %>
+            <%=
+              f.file_field :capital_work_file,
+                            multiple: false,
+                            direct_upload: true,
+                            class: "govuk-file-upload",
+                            'data-input-identifier': 'file',
+                            'data-attribute': :capital_work_file,
+                            'data-model': :project
+            %>
 
-                <%=
-                  render(
-                      ButtonComponent.new(
-                          type: "button",
-                          text: "Add condition survey",
-                          classes: "govuk-button--secondary"
-                      )
+            <%=
+              render(
+                  ButtonComponent.new(
+                      type: "button",
+                      text: "Add condition survey",
+                      classes: "govuk-button--secondary"
                   )
-                %>
+              )
+            %>
 
-              </div>
           </div>
 
           <% unless @project.capital_work_file.present? == true %>

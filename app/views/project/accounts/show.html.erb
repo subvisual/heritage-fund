@@ -59,14 +59,9 @@
           </strong>
         </div>
 
-      <div id="project.accounts_files-form-group"></div>
+      <div class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
 
-      <div id="accounts-form-group-main"
-           class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
-
-        <div class="govuk-form-group" id="file-upload-form-group">
-
-          <div id="form-group-errors"></div>
+        <div class="govuk-form-group" id="accounts-form-group-main" data-form-group="file">
 
           <%=
             render partial: "partials/form_group_errors",
@@ -75,7 +70,6 @@
                    } if @project.errors.any?
           %>
 
-          <div id="project.accounts_files-errors"></div>
           <div class="govuk-form-group">
             <%=
               f.label :accounts_files,
@@ -83,11 +77,16 @@
                       class: "govuk-heading-m nlhf-content-highlight__title"
             %>
 
+            <div id="form-group-errors"></div>
+
             <%=
               f.file_field :accounts_files,
                            multiple: true,
                            direct_upload: true,
-                           class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}"
+                           class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}",
+                           'data-input-identifier': 'file',
+                           'data-attribute': :accounts_files,
+                           'data-model': :project
             %>
 
             <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html

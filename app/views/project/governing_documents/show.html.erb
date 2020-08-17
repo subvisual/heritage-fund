@@ -85,14 +85,9 @@
           </strong>
         </div>
 
-        <div id="project.governing_document_file-form-group"></div>
+        <div class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
 
-        <div id="governing-documents-form-group-main"
-             class="govuk-form-group nlhf-highlight-content govuk-!-margin-bottom-6">
-
-            <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>" id="file-upload-form-group">
-
-              <div id="form-group-errors"></div>
+            <div class="govuk-form-group <%= "govuk-form-group--error" if @project.errors.any? %>" id="governing-documents-form-group-main" data-form-group="file">
 
               <%=
                 render partial: "partials/form_group_errors",
@@ -101,20 +96,25 @@
                        } if @project.errors.any?
               %>
 
-              <div id="project.governing_document_file-errors"></div>
-                <div class="govuk-form-group">
+              <div class="govuk-form-group">
                 <%=
                   f.label :governing_document_file,
                           "Add your governing document",
                           class: "govuk-heading-m nlhf-content-hightlight__title"
                 %>
 
+                <div id="form-group-errors"></div>
+
                 <%=
                   f.file_field :governing_document_file,
                               multiple: false,
                               direct_upload: true,
-                              class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}"
+                              class: "govuk-file-upload #{"govuk-file-upload--error" if @project.errors.any?}",
+                              'data-input-identifier': 'file',
+                              'data-attribute': :governing_document_file,
+                              'data-model': :project
                 %>
+
               </div>
               <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html
             for the reasoning behind this workaround %>
