@@ -25,7 +25,8 @@
     "moduleDirectories": [
       "node_modules",
       "app/javascript/error-handling",
-      "app/javascript/cookie-banner"
+      "app/javascript/cookie-banner",
+      "app/javascript/file-upload-handling"
     ]
   }
 }
