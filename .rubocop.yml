@@ -5,6 +5,8 @@ Layout/EmptyLinesAroundMethodBody:
 
 Metrics/AbcSize:
   Severity: warning
+Metrics/ClassLength:
+  Severity: warning
 Metrics/MethodLength:
   Severity: warning
 Metrics/PerceivedComplexity:
