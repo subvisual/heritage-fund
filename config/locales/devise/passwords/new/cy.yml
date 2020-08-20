@@ -1,0 +1,8 @@
+cy:
+  passwords:
+    new:
+      page_title: "Wedi anghofio eich cyfrinair?"
+      label_email: "Rhowch eich cyfeiriad e-bost"
+      label_email_hint: "Y cyfeiriad e-bost sy'n gysylltiedig â'ch cyfrif."
+      buttons: 
+        reset_password: "Ailosod fy nghyfrinair"

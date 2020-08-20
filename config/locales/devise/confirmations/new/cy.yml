@@ -1,0 +1,9 @@
+cy:
+  confirmations:
+    new:
+      page_title: "Ailanfon y cyfarwyddiadau cadarnhau"
+      page_heading: "Ailanfon y cyfarwyddiadau cadarnhau"
+      label_email: "Rhowch eich cyfeiriad e-bost"
+      label_email_hint: "Y cyfeiriad e-bost sy'n gysylltiedig â'ch cyfrif."
+      buttons:
+        resend: "Ailanfon y cyfarwyddiadau cadarnhau"

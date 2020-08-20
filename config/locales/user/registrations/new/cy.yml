@@ -1,0 +1,17 @@
+cy:
+  registrations:
+    new:
+      page_title: "Creu cyfrif"
+      page_heading: "Creu cyfrif"
+      label_email: "E-bost"
+      label_password: "Cyfrinair"
+      label_password_confirmation: "Cadarnhau cyfrinair"
+      problems_creating_account: "Problemau wrth greu cyfrif?"
+      no_confirmation_instructions: "Heb dderbyn cyfarwyddiadau cadarnhau?"
+      existing_account_pullout:
+        heading: "A oes gennych chi gyfrif eisoes?"
+        content_html: "Gallwch %{href}"
+        content_href: "mewngofnodi"
+      buttons:
+        create:
+          "Creu cyfrif"

@@ -1,0 +1,20 @@
+cy:
+  sessions:
+    new:
+      page_title: "Mewngofnodi"
+      page_heading: "Mewngofnodi"
+      problems_signing_in: "Cael trafferthion mewngofnodi?"
+      forgot_your_password: "Wedi anghofio’ch cyfrinair"
+      no_confirmation_instructions: "Heb dderbyn cyfarwyddiadau cadarnhau"
+      no_account_pullquote_html: "Ffurflen gais newydd yw hon. Os nad ydych wedi mewngofnodi yma o'r blaen, efallai na fydd gennych gyfrif gyda ni. Bydd angen i chi %{href} er mwyn ymgeisio."
+      no_account_pullquote_href: "creu cyfrif newydd"
+      prior_applications_html: "Os gwnaethoch chi gychwyn cais am grant o £3,000 i £10,000 cyn 3 Chwefror 2020, mewngofnodwch ar %{href}"
+      prior_applications_href: "ein porth ceisiadau"
+      label_email: "E-bost"
+      label_password: "Cyfrinair"
+      signup_panel:
+        heading: "Heb gyfrif eto?"
+        content: "Mae ein cyfrif ar-lein yn galluogi i chi lenwi eich ceisiadau cyllid yn gynt ac yn haws. Ac mae'n cymryd dim ond ychydig funudau i’w sefydlu."
+        create_an_account: "Creu cyfrif"
+      buttons:
+        sign_in: "Mewngofnodi"

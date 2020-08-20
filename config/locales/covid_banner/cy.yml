@@ -1,0 +1,6 @@
+cy:
+  covid_banner:
+    heading: "Cyhoeddiad pwysig"
+    content_1: "Defnyddiwch y ffurflen yma i greu cyfrif gyda Chronfa Dreftadaeth y Loteri Genedlaethol."
+    content_2_html: "Mae gennym lai o raglenni ariannu ar gael ar hyn o bryd i ganolbwyntio ar ymateb i argyfwng COVID-19, ac mae'r ffurflen yma ar gau yn y cyfamser. %{href}."
+    content_2_href: "Darganfyddwch fwy am ein rhaglenni ariannu"

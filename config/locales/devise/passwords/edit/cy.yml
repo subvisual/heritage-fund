@@ -1,0 +1,11 @@
+cy:
+  passwords:
+    edit:
+      page_title: "Newid cyfrinair"
+      page_heading: "Newid cyfrinair"
+      label_password: "Cyfrinair newydd"
+      label_password_hint_html: "Bydd yn rhaid i’r cyfrinair gynnwys o leiaf %{pw_length} llythrennau"
+      label_password_confirmation: "Cadarnhau cyfrinair newydd"
+      no_confirmation_instructions: "Heb dderbyn eich cyfarwyddiadau cadarnhau?"
+      buttons:
+        change: "Newid fy nghyfrinair"

@@ -1,0 +1,16 @@
+cy:
+  registrations:
+    edit:
+      page_title: "Eich cyfrif"
+      page_heading: "Eich cyfrif"
+      label_email: "E-bost"
+      label_email_hint: "Dyma'r cyfeiriad e-bost sy'n gysylltiedig â'ch cyfrif"
+      label_password: "Cyfrinair"
+      label_password_hint: "Gadewch yn wag os nad ydych am ei newid"
+      label_password_confirmation: "Cadarnhau cyfrinair"
+      label_current_password: "Cyfrinair cyfredol"
+      label_current_password_hint: "Mae angen eich cyfrinair cyfredol arnoch i gadarnhau eich newidiadau"
+      awaiting_confirmation: "Ar hyn o bryd yn aros am gadarnhad:"
+      buttons:
+        update: "Diweddaru cyfrif"
+        back: "Nôl"

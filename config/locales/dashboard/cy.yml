@@ -1,0 +1,12 @@
+cy:
+  dashboard:
+    page_title: "Dangosfwrdd ceisiadau"
+    page_heading: "Eich ceisiadau"
+    no_applications_sub_heading: "Dim ceisiadau"
+    no_applications_text: "Nid oes gan y cyfrif yma unrhyw geisiadau gweithredol ar hyn o bryd gyda Chronfa Dreftadaeth y Loteri Genedlaethol"
+    associated_applications_text: "Mae'r ceisiadau canlynol yn gysylltiedig â'ch cyfrif:"
+    submitted: "Cyflwynwyd"
+    reference: "Cyfeirnod"
+    you_can_also: "Gallwch hefyd:"
+    start_a_new_application_button: "Dechrau cais newydd"
+    applications: "ceisiadau"

@@ -1,0 +1,8 @@
+cy:
+  unlocks:
+    new:
+      page_title: "Ail-anfon cyfarwyddiadau datgloi"
+      page_heading: "Ail-anfon cyfarwyddiadau datgloi"
+      label_email: "E-bost"
+      buttons:
+        resend: "Ail-anfon cyfarwyddiadau datgloi"
