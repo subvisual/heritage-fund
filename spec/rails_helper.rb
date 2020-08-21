@@ -15,6 +15,10 @@ include Warden::Test::Helpers
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require "view_component/test_helpers"
+
+require 'axe/rspec'
+require 'capybara/rspec'
+require 'capybara/apparition'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -41,6 +45,16 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+
+  # Exclude running accessibility tests by default
+  config.filter_run_excluding :accessibility => true
+
+  # Set the Capybara driver when running accessibility tests using
+  # bundle exec rspec --tag accessibility
+  if config.filter_manager.inclusions.rules.include?(:accessibility)
+    Capybara.current_driver = :apparition
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
