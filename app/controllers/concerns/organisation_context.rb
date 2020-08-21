@@ -1,3 +1,5 @@
+# Controller concern used to set the @organisation
+# instance variable
 module OrganisationContext
   extend ActiveSupport::Concern
   included do
@@ -14,10 +16,10 @@ module OrganisationContext
   # dashboard
   def set_organisation
 
-    unless params[:organisation_id] == current_user.organisation&.id
-      redirect_to :authenticated_root
-    else
+    if params[:organisation_id] == current_user.organisation&.id
       @organisation = Organisation.find_by(id: current_user.organisation&.id)
+    else
+      redirect_to :authenticated_root
     end
 
   end

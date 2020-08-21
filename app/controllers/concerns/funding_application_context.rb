@@ -1,3 +1,5 @@
+# Controller concern used to set the @funding_application
+# instance variable
 module FundingApplicationContext
   extend ActiveSupport::Concern
   included do
@@ -13,13 +15,16 @@ module FundingApplicationContext
   # then the user is redirected to the applications dashboard.
   def set_funding_application
 
-    @funding_application = FundingApplication.find_by(id: params[:application_id], organisation_id: current_user.organisation.id)
+    @funding_application = FundingApplication.find_by(
+      id: params[:application_id],
+      organisation_id: current_user.organisation.id
+    )
 
-    if !@funding_application.present? || ( @funding_application.submitted_on.present? &&
-        !request.path.include?("/application-submitted"))
+    if !@funding_application.present? || (@funding_application.submitted_on.present? &&
+        !request.path.include?('/application-submitted'))
       redirect_to :authenticated_root
     end
 
   end
-  
+
 end

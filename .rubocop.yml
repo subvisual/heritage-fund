@@ -2,6 +2,10 @@ Layout/EmptyLinesAroundClassBody:
   Enabled: false
 Layout/EmptyLinesAroundMethodBody:
   Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/EmptyLinesAroundExceptionHandlingKeywords:
+  Enabled: false
 
 Metrics/AbcSize:
   Severity: warning
@@ -9,8 +13,12 @@ Metrics/ClassLength:
   Severity: warning
 Metrics/MethodLength:
   Severity: warning
+Metrics/ModuleLength:
+  Severity: warning
 Metrics/PerceivedComplexity:
   Severity: warning
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/RescueStandardError:
+  EnforcedStyle: implicit

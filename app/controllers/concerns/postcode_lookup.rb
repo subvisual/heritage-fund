@@ -1,9 +1,9 @@
 require 'ideal_postcodes'
 
-include PostcodeHelper
-
+# Controller concern to enable reusable postcode lookup methods
 module PostcodeLookup
   extend ActiveSupport::Concern
+  include PostcodeHelper
   included do
     before_action :set_api_key
   end
@@ -23,8 +23,8 @@ module PostcodeLookup
     # retrieve our address details from the cache here, then we call the
     # lookup_address method and assign it to the cache
     udprn = params[:address]
-    @address_response = Rails.cache.fetch("#{udprn}") do
-      logger.info "Address not found in cache, calling API using UDPRN: " \
+    @address_response = Rails.cache.fetch(udprn.to_s) do
+      logger.info 'Address not found in cache, calling API using UDPRN: ' \
                   "#{udprn}"
       lookup_address(udprn)
     end
@@ -70,27 +70,43 @@ module PostcodeLookup
   # :address_results is rendered.
   # @param [String] postcode : A string for a postcode
   def lookup_postcode_and_render_results(postcode)
+
     @response_array = lookup_postcode(postcode)
+
     if @response_array.empty?
+
       logger.info 'No results found when searching for postcode' \
             "#{postcode}"
+
       redirect_with_errors 'No results found for postcode ' \
             "#{postcode}"
+
     else
+
       render :address_results
+
     end
+
   end
 
+  # Sets the IdealPostcodes.api_key value
   def set_api_key
     IdealPostcodes.api_key = Rails.configuration.x.ideal_postcodes.api_key
   end
 
   # performs the redirect if a problem is found in postcode validation
   def redirect_with_errors(postcode_error_string)
-    redirect_to(:postcode, flash:
-        { errors: { postcode: postcode_error_string } })
-  end
 
+    redirect_to(
+      :postcode,
+      flash: {
+        errors: {
+          postcode: postcode_error_string
+        }
+      }
+    )
+
+  end
 
   # Looks up a postcode from the Ideal Postcodes API.
   # If the api returns an error, then log the HTTP response
@@ -98,20 +114,28 @@ module PostcodeLookup
   # @param [String] postcode : A string representing a postcode
   # @return [array] response_array: An unformatted array of address results
   def lookup_postcode(postcode)
-    begin
-      response_array = IdealPostcodes::Postcode.lookup postcode
-      cache_address_results(response_array)
-      response_array
-    rescue IdealPostcodes::IdealPostcodesError => e
-      logger.error "Error in Ideal Postcodes API.  Response body was: #{e.http_body} " \
-        "and HTTP code was:  #{e.http_code} and error code was: #{e.response_code}"
-      raise
-    rescue => e
-      logger.error e.to_s
-      raise IdealPostcodesGenericError.new("Unknown exception when calling " \
-        "IdealPostcodes API during lookup_postcode for #{@type} ID: " \
-        "#{@model_object.id}")
-    end
+
+    response_array = IdealPostcodes::Postcode.lookup postcode
+
+    cache_address_results(response_array)
+
+    response_array
+
+  rescue IdealPostcodes::IdealPostcodesError => e
+
+    logger.error "Error in Ideal Postcodes API.  Response body was: #{e.http_body} " \
+      "and HTTP code was:  #{e.http_code} and error code was: #{e.response_code}"
+
+    raise
+
+  rescue => e
+
+    logger.error e.to_s
+
+    raise(IdealPostcodesGenericError, 'Unknown exception when calling ' \
+      "IdealPostcodes API during lookup_postcode for #{@type} ID: " \
+      "#{@model_object.id}")
+
   end
 
   # Looks up an Address from the Ideal Postcodes API. If the API returns an
@@ -124,22 +148,25 @@ module PostcodeLookup
   # @param [string] udprn : A Unique Delivery Point Reference Number as a string
   # @return [hash] A hash representing a single address determined from the udprn.
   def lookup_address(udprn)
-    begin
-      IdealPostcodes::Address.lookup udprn
-    rescue IdealPostcodes::IdealPostcodesError => e
-      logger.error "Error in Ideal Postcodes API.  Response body was: #{e.http_body} " \
-        "and HTTP code was:  #{e.http_code} and error code was: #{e.response_code}"
-      raise
-    rescue => e
-      logger.error e.to_s
-      raise IdealPostcodesGenericError.new("Unknown exception when calling " \
-        "IdealPostcodes API during lookup_address for #{@type} ID: " \
-        "#{@model_object.id}")
-    end
+
+    IdealPostcodes::Address.lookup udprn
+
+  rescue IdealPostcodes::IdealPostcodesError => e
+
+    logger.error "Error in Ideal Postcodes API.  Response body was: #{e.http_body} " \
+      "and HTTP code was:  #{e.http_code} and error code was: #{e.response_code}"
+
+    raise
+
+  rescue => e
+
+    logger.error e.to_s
+
+    raise(IdealPostcodesGenericError, 'Unknown exception when calling ' \
+      "IdealPostcodes API during lookup_address for #{@type} ID: " \
+      "#{@model_object.id}")
 
   end
-
-  private
 
   # Puts each value from @response_array into a cache.  The UDPRN is the key and
   # the remaining address details the value.  This enables the cached addresses
@@ -148,15 +175,15 @@ module PostcodeLookup
   def cache_address_results(response_array)
     response_array.each do |result|
       # Cache the result fields under a key of the current UDPRN
-      Rails.cache.fetch("#{result[:udprn]}", expires_in: 5.minutes) do
+      Rails.cache.fetch(result[:udprn].to_s, expires_in: 5.minutes) do
         logger.debug "Writing to cache for result #{result[:udprn]}"
         {
-            line_1: result[:line_1],
-            line_2: result[:line_2],
-            line_3: result[:line_3],
-            post_town: result[:post_town],
-            county: result[:county],
-            postcode: result[:postcode]
+          line_1: result[:line_1],
+          line_2: result[:line_2],
+          line_3: result[:line_3],
+          post_town: result[:post_town],
+          county: result[:county],
+          postcode: result[:postcode]
         }
       end
     end

@@ -1,3 +1,4 @@
+# Controller concern used to log model errors
 module ObjectErrorsLogger
   extend ActiveSupport::Concern
 

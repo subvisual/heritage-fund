@@ -1,3 +1,5 @@
+# Controller concern used to set the @project
+# instance variable
 module ProjectContext
   extend ActiveSupport::Concern
   included do
@@ -15,8 +17,8 @@ module ProjectContext
 
     @project = Project.find_by(id: params[:project_id], user_id: current_user.id)
 
-    if !@project.present? || ( @project.submitted_on.present? &&
-        !request.path.include?("/application-submitted"))
+    if !@project.present? || (@project.submitted_on.present? &&
+        !request.path.include?('/application-submitted'))
       redirect_to :authenticated_root
     end
 
