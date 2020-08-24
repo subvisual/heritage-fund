@@ -10,7 +10,8 @@ class DashboardController < ApplicationController
 
       @projects = current_user.projects
 
-      @funding_applications = current_user.organisation.funding_applications
+      # A user may not have an associated organisation at this point
+      @funding_applications = current_user.organisation.funding_applications if current_user.organisation
 
     else
 
