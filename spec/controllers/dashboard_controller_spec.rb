@@ -16,6 +16,24 @@ RSpec.describe DashboardController do
       expect(response).to render_template(:show)
 
       expect(assigns(:projects)).to be_a ActiveRecord::Associations::CollectionProxy
+      expect(assigns(:funding_applications)).to be_a ActiveRecord::Associations::CollectionProxy
+
+    end
+
+    it 'should render the :show template but not set the @funding_applications instance variable ' \
+       'if the user does not have an organisation set' do
+
+      expect(subject.gon).to receive(:push)
+
+      subject.current_user.update(organisation: nil)
+
+      get :show
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:show)
+
+      expect(assigns(:projects)).to be_a ActiveRecord::Associations::CollectionProxy
+      expect(assigns(:funding_applications)).to eq(nil)
 
     end
 
