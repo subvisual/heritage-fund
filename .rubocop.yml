@@ -1,3 +1,5 @@
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 Layout/EmptyLinesAroundMethodBody:
@@ -11,6 +13,8 @@ Metrics/AbcSize:
   Severity: warning
 Metrics/ClassLength:
   Severity: warning
+Metrics/CyclomaticComplexity:
+  Severity: warning
 Metrics/MethodLength:
   Severity: warning
 Metrics/ModuleLength:
@@ -18,7 +22,17 @@ Metrics/ModuleLength:
 Metrics/PerceivedComplexity:
   Severity: warning
 
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MultilineTernaryOperator:
+  Enabled: false
+Style/Next:
   Enabled: false
 Style/RescueStandardError:
   EnforcedStyle: implicit
+Style/SymbolArray:
+  EnforcedStyle: brackets

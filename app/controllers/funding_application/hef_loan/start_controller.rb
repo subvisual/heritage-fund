@@ -1,3 +1,4 @@
+# Controller for the COVID-19 Recovery Loan 'Start' page
 class FundingApplication::HefLoan::StartController < ApplicationController
   before_action :authenticate_user!
 

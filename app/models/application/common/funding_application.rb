@@ -18,7 +18,7 @@ class FundingApplication < ApplicationRecord
 
   validates_associated :organisation, :gp_hef_loan
   validates_associated :people if :validate_people
-  validates_associated :declarations, if: :validate_declarations
+  validates_associated :declarations, if: :validate_declarations?
 
   def validate_people?
       validate_people == true
