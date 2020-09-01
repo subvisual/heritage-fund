@@ -1,3 +1,4 @@
+# Controller for the page that captures user details.
 class User::DetailsController < ApplicationController
   before_action :authenticate_user!
 
@@ -11,20 +12,19 @@ class User::DetailsController < ApplicationController
 
     if current_user.valid?
 
-      # As current_user is valid, we can now merge the individual date of 
-      # birth fields into an individual Date object and store this in the 
+      # As current_user is valid, we can now merge the individual date of
+      # birth fields into an individual Date object and store this in the
       # current_user's date_of_birth attribute
 
       current_user.date_of_birth = Date.new(
-          params[:user][:dob_year].to_i,
-          params[:user][:dob_month].to_i,
-          params[:user][:dob_day].to_i
+        params[:user][:dob_year].to_i,
+        params[:user][:dob_month].to_i,
+        params[:user][:dob_day].to_i
       )
 
       current_user.save
 
-      logger.debug "Finished updating user details for user ID: " \
-                   "#{current_user.id}"
+      logger.debug "Finished updating user details for user ID: #{current_user.id}"
 
       check_and_set_organisation(current_user)
 
@@ -34,8 +34,7 @@ class User::DetailsController < ApplicationController
 
     else
 
-      logger.debug "Validation failed when updating user details for user " \
-                   "ID: #{current_user.id}"
+      logger.debug "Validation failed when updating user details for user ID: #{current_user.id}"
 
       store_values_in_flash
 
@@ -56,8 +55,8 @@ class User::DetailsController < ApplicationController
   # model attributes that are persistent for the individual date
   # items.
   def store_values_in_flash
-    params[:user].each do | key, value |
-      flash[key] = value.empty? ? "" : value
+    params[:user].each do |key, value|
+      flash[key] = value.empty? ? '' : value
     end
   end
 
@@ -68,13 +67,13 @@ class User::DetailsController < ApplicationController
   #
   # @param [User] user An instance of User
   def check_and_set_organisation(user)
-    unless user.organisation_id.present?
-      organisation = Organisation.create
-      user.update(organisation_id: organisation.id)
-    end
+    return if user.organisation_id.present?
+
+    organisation = Organisation.create
+    user.update(organisation_id: organisation.id)
   end
 
-  # Replicates a subset of attributes from the passed in User object 
+  # Replicates a subset of attributes from the passed in User object
   # to the associated Person
   #
   # @param [User] user An instance of User
@@ -92,11 +91,11 @@ class User::DetailsController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-        :name,
-        :dob_day,
-        :dob_month,
-        :dob_year,
-        :phone_number
+      :name,
+      :dob_day,
+      :dob_month,
+      :dob_year,
+      :phone_number
     )
   end
 
