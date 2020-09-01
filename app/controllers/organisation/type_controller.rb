@@ -1,5 +1,7 @@
+# Controller for a page that asks for details on the type of organisation applying.
 class Organisation::TypeController < ApplicationController
-  include OrganisationContext, ObjectErrorsLogger
+  include OrganisationContext
+  include ObjectErrorsLogger
 
   # This method updates the org_type attribute of an organisation,
   # redirecting to :organisation_numbers if successful and re-rendering
@@ -31,13 +33,14 @@ class Organisation::TypeController < ApplicationController
   end
 
   private
+
   def organisation_params
 
     # When no radio button is selected on the page no org_type key/value is passed in the form,
     # meaning that the organisation hash is no longer passed through either. In this case, we
     # need to add it manually to avoid triggering a 'param is missing or value is empty'
     # exception
-    params.merge!(organisation: {org_type: ""}) unless params[:organisation].present?
+    params.merge!(organisation: { org_type: '' }) unless params[:organisation].present?
 
     params.require(:organisation).permit(:org_type)
 

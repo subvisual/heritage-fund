@@ -1,5 +1,7 @@
+# Controller for a page that asks for details of legal signatories.
 class Organisation::SignatoriesController < ApplicationController
-  include OrganisationContext, ObjectErrorsLogger
+  include OrganisationContext
+  include ObjectErrorsLogger
 
   def show
 
@@ -12,8 +14,7 @@ class Organisation::SignatoriesController < ApplicationController
 
   def update
 
-    logger.info "Updating legal signatories for organisation ID: " \
-                 "#{@organisation.id}"
+    logger.info "Updating legal signatories for organisation ID: #{@organisation.id}"
 
     @organisation.validate_legal_signatories = true
 
@@ -21,15 +22,13 @@ class Organisation::SignatoriesController < ApplicationController
 
     if @organisation.valid?
 
-      logger.info "Finished updating legal signatories for organisation ID: " \
-                   "#{@organisation.id}"
+      logger.info "Finished updating legal signatories for organisation ID: #{@organisation.id}"
 
       redirect_to :organisation_summary
 
     else
 
-      logger.info "Validation failed for one or more legal signatory " \
-                   "updates for organisation ID: #{@organisation.id}"
+      logger.info "Validation failed for one or more legal signatory updates for organisation ID: #{@organisation.id}"
 
       log_errors(@organisation)
 
@@ -40,14 +39,15 @@ class Organisation::SignatoriesController < ApplicationController
   end
 
   private
+
   def organisation_params
     params.require(:organisation).permit(
-        legal_signatories_attributes: [
-            :id,
-            :name,
-            :email_address,
-            :phone_number
-        ]
+      legal_signatories_attributes: [
+        :id,
+        :name,
+        :email_address,
+        :phone_number
+      ]
     )
   end
 

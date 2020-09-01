@@ -1,5 +1,7 @@
+# Controller for a page that asks for company or charity numbers.
 class Organisation::NumbersController < ApplicationController
-  include OrganisationContext, ObjectErrorsLogger
+  include OrganisationContext
+  include ObjectErrorsLogger
 
   # This method updates the company_number and/or charity_number attributes
   # of an organisation redirecting to :organisation_about if successful and
@@ -18,7 +20,7 @@ class Organisation::NumbersController < ApplicationController
 
     else
 
-      logger.info "Validation failed when attempting to update company_number/charity_number " \
+      logger.info 'Validation failed when attempting to update company_number/charity_number ' \
                     "for organisation ID: #{@organisation.id}"
 
       log_errors(@organisation)
@@ -30,6 +32,7 @@ class Organisation::NumbersController < ApplicationController
   end
 
   private
+
   def organisation_params
     params.require(:organisation).permit(:company_number, :charity_number)
   end
