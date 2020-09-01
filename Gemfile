@@ -25,7 +25,7 @@ gem 'silencer', '~> 1.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'uk_postcode', '~> 2.1.5'
-gem 'view_component', '~> 2.5'
+gem 'view_component', '~> 2.18.1'
 gem 'webpacker', '~> 4.0'
 
 group :development, :test do
