@@ -114,15 +114,3 @@ jobs:
           cf v3-cancel-zdt-push ${CF_APP} || true
           cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
           cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
-
-      - name: Deploy to production
-        if: github.ref == 'refs/heads/master'
-        env:
-          CF_APP: funding-frontend
-          CF_SPACE: production
-          CF_MANIFEST: production
-        run: |
-          cf target -s ${CF_SPACE}
-          cf v3-cancel-zdt-push ${CF_APP} || true
-          cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
-          cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
