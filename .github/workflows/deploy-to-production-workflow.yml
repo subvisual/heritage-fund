@@ -1,0 +1,32 @@
+name: Deploy to Production
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy_to_production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install the CF CLI
+        run: |
+          wget https://s3-us-west-1.amazonaws.com/cf-cli-releases/releases/v6.48.0/cf-cli-installer_6.48.0_x86-64.deb
+          sudo dpkg -i cf-cli-installer_6.48.0_x86-64.deb
+      - name: Authenticate with CloudFoundry
+        env:
+          CF_USERNAME: ${{ secrets.CF_USERNAME }}
+          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        run: |
+          cf api https://api.london.cloud.service.gov.uk
+          cf auth
+          cf target -o national-lottery-heritage-fund
+      - name: Deploy to Production
+        env:
+          CF_APP: funding-frontend
+          CF_SPACE: production
+          CF_MANIFEST: production
+        run: |
+          cf target -s ${CF_SPACE}
+          cf v3-cancel-zdt-push ${CF_APP} || true
+          cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
+          cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
