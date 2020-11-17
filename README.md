@@ -16,6 +16,10 @@ If Homebrew is not already installed, run
 
 Run `brew install rbenv` to install the latest version of [rbenv](https://github.com/rbenv/rbenv).
 
+Run `rbenv init`, which will run some commands to allow `rbenv` to work with `zsh`, like updating the path.
+
+Add `eval "$(rbenv init -)"` to your `~/.zshrc` profile.
+
 ### Install PostgreSQL
 
 Run `brew install postgres` to install the latest version of [PostgreSQL](https://www.postgresql.org).
@@ -26,7 +30,8 @@ We specify a recommended version of Ruby in the [`.ruby-version`](.ruby-version)
 To install this recommended version of Ruby, use rbenv by running `rbenv install x.y.z` inside the application 
 directory (where `x.y.z` is replaced with the version number specified in [`.ruby-version`](.ruby-version)).
 
-Add `eval "$(rbenv init -)"` to your `~/.bash_profile`.
+
+You may need to run `rbenv global x.y.z` to switch your terminal to use the new version.
 
 ### Install the PostgreSQL app
 
@@ -58,7 +63,7 @@ Run `gem install bundler` to install [Bundler](https://bundler.io).
 
 ### Install Yarn
 
-Run `brew install` to install [Yarn]((https://yarnpkg.com/lang/en/docs/install/#mac-stable)).
+Run `brew install yarn` to install [Yarn]((https://yarnpkg.com/lang/en/docs/install/#mac-stable)).
 
 ### Install necessary application dependencies
 
@@ -70,7 +75,8 @@ specified in the application's `package.json` and `yarn.lock` files.
 
 ### Initialise the database
 
-Run `bundle exec rails db:setup` in your terminal.
+Run `bundle exec rails db:setup` in your terminal.  If the database needs creating, run
+`psql` then `create database funding_frontend_development;`.
 
 ### Running the funding-frontend application
 
