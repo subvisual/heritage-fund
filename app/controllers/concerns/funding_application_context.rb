@@ -17,7 +17,7 @@ module FundingApplicationContext
 
     @funding_application = FundingApplication.find_by(
       id: params[:application_id],
-      organisation_id: current_user.organisation.id
+      organisation_id: current_user.organisations.first&.id
     )
 
     if !@funding_application.present? || (@funding_application.submitted_on.present? &&

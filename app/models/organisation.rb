@@ -1,11 +1,13 @@
 class Organisation < ApplicationRecord
   self.implicit_order_column = "created_at"
 
-  has_many :users
   has_many :legal_signatories
   has_many :funding_applications
   has_many :organisations_org_types, inverse_of: :organisation
   has_many :org_types, through: :organisations_org_types
+
+  has_many :users_organisations, inverse_of: :organisation
+  has_many :users, through: :users_organisations
 
   accepts_nested_attributes_for :legal_signatories
   accepts_nested_attributes_for :organisations_org_types, allow_destroy: true

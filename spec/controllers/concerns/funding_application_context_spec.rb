@@ -57,10 +57,9 @@ RSpec.describe FundingApplicationContext do
       )
     }
 
-    let(:organisation) {
-      create(
-        :organisation,
-        id: '1',
+    before do
+
+      subject.current_user.organisations.first.update(
         name: 'Test Organisation',
         line1: '10 Downing Street',
         line2: 'Westminster',
@@ -69,13 +68,8 @@ RSpec.describe FundingApplicationContext do
         postcode: 'SW1A 2AA',
         org_type: 1
       )
-    }
 
-    before do
-
-      subject.current_user.update(organisation: organisation)
-
-      subject.current_user.organisation.legal_signatories.append(legal_signatory)
+      subject.current_user.organisations.first.legal_signatories.append(legal_signatory)
       
     end
 
@@ -83,7 +77,7 @@ RSpec.describe FundingApplicationContext do
       create(
         :funding_application,
         id: "id",
-        organisation_id: subject.current_user.organisation.id,
+        organisation_id: subject.current_user.organisations.first.id,
         submitted_on: Date.new
       )
     }
@@ -118,10 +112,9 @@ RSpec.describe FundingApplicationContext do
       )
     }
 
-    let(:organisation) {
-      create(
-        :organisation,
-        id: '1',
+    before do
+
+      subject.current_user.organisations.first.update(
         name: 'Test Organisation',
         line1: '10 Downing Street',
         line2: 'Westminster',
@@ -130,13 +123,8 @@ RSpec.describe FundingApplicationContext do
         postcode: 'SW1A 2AA',
         org_type: 1
       )
-    }
 
-    before do
-
-      subject.current_user.update(organisation: organisation)
-
-      subject.current_user.organisation.legal_signatories.append(legal_signatory)
+      subject.current_user.organisations.first.legal_signatories.append(legal_signatory)
       
     end
 
@@ -144,7 +132,7 @@ RSpec.describe FundingApplicationContext do
       create(
         :funding_application,
         id: "id",
-        organisation_id: subject.current_user.organisation.id,
+        organisation_id: subject.current_user.organisations.first.id,
         submitted_on: Date.new
       )
     }

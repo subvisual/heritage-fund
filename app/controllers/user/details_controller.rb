@@ -30,7 +30,7 @@ class User::DetailsController < ApplicationController
 
       replicate_user_attributes_to_associated_person(current_user) if current_user.person_id
 
-      redirect_to postcode_path 'user', current_user.organisation_id
+      redirect_to postcode_path 'user', current_user.organisations.first.id
 
     else
 
@@ -67,14 +67,15 @@ class User::DetailsController < ApplicationController
   #
   # @param [User] user An instance of User
   def check_and_set_organisation(user)
-    return if user.organisation_id.present?
 
-    organisation = Organisation.create
-    user.update(organisation_id: organisation.id)
+    return if user.organisations.any?
+
+    user.organisations.create
+
   end
 
   # Replicates a subset of attributes from the passed in User object
-  # to the associated Person
+  # to the User's associated Person record
   #
   # @param [User] user An instance of User
   def replicate_user_attributes_to_associated_person(user)

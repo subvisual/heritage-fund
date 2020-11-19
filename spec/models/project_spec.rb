@@ -48,7 +48,7 @@ RSpec.describe Project, type: :model do
           postcode: "SW1A 2AA"
       )
 
-      @project.user.update(organisation_id: organisation.id)
+      @project.user.organisations.append(organisation)
 
       legal_signatory_one = build(
           :legal_signatory,
@@ -68,8 +68,6 @@ RSpec.describe Project, type: :model do
           legal_signatory_one,
           legal_signatory_two
       )
-
-      @project.organisation = organisation
 
       project_salesforce_json = JSON.parse(@project.to_salesforce_json)
 

@@ -69,8 +69,9 @@ class AddressController < ApplicationController
       when 'project'
         @model_object = Project.find(params[:id])
       when 'user'
-        @model_object = User.find_by(organisation_id: params[:id])
-        redirect_to :root unless @model_object.id == current_user.id
+        users_organisation = UsersOrganisation.find_by(organisation_id: params[:id])
+        @model_object = current_user
+        redirect_to :root unless users_organisation.user_id == current_user.id
       end
     else
       redirect_to :root

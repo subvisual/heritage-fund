@@ -21,7 +21,7 @@ RSpec.describe FundingApplication::HefLoan::StartController do
 
     it 'should create a new FundingApplication object and redirect to the form page' do
 
-      subject.current_user.update(organisation: organisation)
+      subject.current_user.organisations.append(organisation)
 
       put :update
 

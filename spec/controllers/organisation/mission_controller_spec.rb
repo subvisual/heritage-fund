@@ -7,7 +7,7 @@ RSpec.describe Organisation::MissionController do
 
     it "should render the page successfully for a valid organisation" do
       get :show,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
       expect(assigns(:organisation).errors.empty?).to eq(true)
@@ -25,7 +25,7 @@ RSpec.describe Organisation::MissionController do
 
     it "should successfully redirect to signatories if no params are passed" do
       put :update,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(:organisation_signatories)
     end
@@ -33,10 +33,10 @@ RSpec.describe Organisation::MissionController do
     it "should re-render the page if a single invalid param is passed" do
 
       expect(subject).to \
-        receive(:log_errors).with(subject.current_user.organisation)
+        receive(:log_errors).with(subject.current_user.organisations.first)
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               mission: ["invalid_value"]
           }
@@ -56,10 +56,10 @@ RSpec.describe Organisation::MissionController do
        "valid params are passed" do
 
       expect(subject).to \
-        receive(:log_errors).with(subject.current_user.organisation)
+        receive(:log_errors).with(subject.current_user.organisations.first)
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               mission: ["invalid_value", "female_led"]
           }
@@ -78,7 +78,7 @@ RSpec.describe Organisation::MissionController do
     it "should successfully update if a single valid param is passed" do
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               mission: ["female_led"]
           }
@@ -95,7 +95,7 @@ RSpec.describe Organisation::MissionController do
     it "should successfully update if multiple valid params are passed" do
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               mission: ["female_led", "lgbt_plus_led"]
           }

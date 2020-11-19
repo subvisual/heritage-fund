@@ -8,7 +8,8 @@ class User < ApplicationRecord
          :validatable,
          :confirmable
 
-  belongs_to :organisation, optional: true
+  has_many :users_organisations, inverse_of: :user
+  has_many :organisations, through: :users_organisations
 
   has_many :projects
 

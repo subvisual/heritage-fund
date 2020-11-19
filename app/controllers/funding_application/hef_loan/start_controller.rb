@@ -7,7 +7,7 @@ class FundingApplication::HefLoan::StartController < ApplicationController
   def update
 
     @application = FundingApplication.create(
-      organisation_id: current_user.organisation.id
+      organisation_id: current_user.organisations.first.id
     )
 
     GpHefLoan.create(funding_application_id: @application.id)

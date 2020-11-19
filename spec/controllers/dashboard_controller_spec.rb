@@ -25,7 +25,7 @@ RSpec.describe DashboardController do
 
       expect(subject.gon).to receive(:push)
 
-      subject.current_user.update(organisation: nil)
+      subject.current_user.organisations.delete_all
 
       get :show
 
@@ -56,14 +56,14 @@ RSpec.describe DashboardController do
     it 'should create an empty organisation and redirect to :organisation_type ' \
        'when the current_user has no organisation' do
 
-      subject.current_user.update(organisation: nil)
+      subject.current_user.organisations.delete_all
 
       get :orchestrate_dashboard_journey
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
         organisation_type_path(
-          organisation_id: subject.current_user.organisation.id
+          organisation_id: subject.current_user.organisations.first.id
         )
       )
 
@@ -74,14 +74,18 @@ RSpec.describe DashboardController do
 
       expect(subject).not_to receive(:create_organisation)
 
-      subject.current_user.update(organisation: Organisation.new)
+      subject.current_user.organisations.append(
+        build(
+          :organisation
+        )
+      )
 
       get :orchestrate_dashboard_journey
 
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
         organisation_type_path(
-          organisation_id: subject.current_user.organisation.id
+          organisation_id: subject.current_user.organisations.first.id
         )
       )
 
@@ -97,9 +101,7 @@ RSpec.describe DashboardController do
         phone_number: '07000000000'
       )
 
-      organisation = create(
-        :organisation,
-        id: '1',
+      subject.current_user.organisations.first.update(
         name: 'Test Organisation',
         line1: '10 Downing Street',
         line2: 'Westminster',
@@ -109,9 +111,7 @@ RSpec.describe DashboardController do
         org_type: 1
       )
 
-      subject.current_user.update(organisation: organisation)
-
-      subject.current_user.organisation.legal_signatories.append(legal_signatory)
+      subject.current_user.organisations.first.legal_signatories.append(legal_signatory)
 
       expect(subject).not_to receive(:create_organisation)
 

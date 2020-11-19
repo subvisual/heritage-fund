@@ -54,7 +54,7 @@ class Project::LocationController < ApplicationController
 
     logger.debug "Setting project address fields for project ID: #{@project.id}"
 
-    @organisation = Organisation.find(current_user.organisation.id)
+    @organisation = current_user.organisations.first
 
     @project.line1 = @organisation.line1
     @project.line2 = @organisation.line2

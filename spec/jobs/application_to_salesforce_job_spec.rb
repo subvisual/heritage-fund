@@ -10,18 +10,19 @@ RSpec.describe ApplicationToSalesforceJob, type: :job do
         )
 
     user = build(:user)
+    user.organisations.append(
+        build(:organisation)
+    )
     @project = build(:project)
-    organisation = build(:organisation)
-    user.update(organisation_id: organisation.id)
 
     legal_signatory = build(:legal_signatory)
     legal_signatory.name = "Joe Bloggs"
     legal_signatory.email_address = "joe@bloggs.com"
     legal_signatory.phone_number = "07123456789"
 
-    organisation.legal_signatories.append(legal_signatory)
+    user.organisations.first.legal_signatories.append(legal_signatory)
 
-    @project.organisation = organisation
+    @project.user = user
 
   end
 
@@ -66,7 +67,7 @@ RSpec.describe ApplicationToSalesforceJob, type: :job do
 
     expect(@project.project_reference_number).to eq("NS-19-01498")
     expect(@project.salesforce_case_id).to eq("5002500000BFRUiAAP")
-    expect(@project.organisation.salesforce_account_id)
+    expect(@project.user.organisations.first.salesforce_account_id)
         .to eq("0012500001I6ImfAAF")
     expect(@project.salesforce_case_number).to eq("00001498")
 

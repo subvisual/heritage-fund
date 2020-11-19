@@ -16,7 +16,7 @@ RSpec.feature 'Project', type: :feature do
 
       user = create(:user)
 
-      user.organisation.update(
+      user.organisations.first.update(
           name: "Test Organisation",
           org_type: "church_organisation",
           line1: "10 Downing Street",
@@ -31,7 +31,7 @@ RSpec.feature 'Project', type: :feature do
       legal_signatory.email_address = "joe@bloggs.com"
       legal_signatory.phone_number = "07123456789"
 
-      user.organisation.legal_signatories.append(legal_signatory)
+      user.organisations.first.legal_signatories.append(legal_signatory)
 
       login_as(user, scope: :user)
 

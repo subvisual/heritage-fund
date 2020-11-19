@@ -16,8 +16,8 @@ module OrganisationContext
   # dashboard
   def set_organisation
 
-    if params[:organisation_id] == current_user.organisation&.id
-      @organisation = Organisation.find_by(id: current_user.organisation&.id)
+    if params[:organisation_id] == current_user.organisations.first&.id
+      @organisation = current_user.organisations.first
     else
       redirect_to :authenticated_root
     end

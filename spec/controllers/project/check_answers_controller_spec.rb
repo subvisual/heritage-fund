@@ -49,7 +49,7 @@ RSpec.describe Project::CheckAnswersController do
     it "should redirect if mandatory project attributes are populated, and " \
        "the org_type is 'registered_company'" do
 
-      subject.current_user.organisation.update(
+      subject.current_user.organisations.first.update(
           org_type: "registered_company"
       )
 
@@ -82,7 +82,7 @@ RSpec.describe Project::CheckAnswersController do
     it "should redirect if mandatory project attributes are populated, and " \
        "the org_type is 'individual_private_owner_of_heritage'" do
 
-      subject.current_user.organisation.update(
+      subject.current_user.organisations.first.update(
           org_type: "individual_private_owner_of_heritage"
       )
 
@@ -116,7 +116,7 @@ RSpec.describe Project::CheckAnswersController do
        "the org_type is not 'registered_company' or " \
        "'individual_private_owner_of_heritage'" do
 
-      subject.current_user.organisation.update(
+      subject.current_user.organisations.first.update(
           org_type: "registered_charity"
       )
 

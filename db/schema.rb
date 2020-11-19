@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_071129) do
+ActiveRecord::Schema.define(version: 2020_11_18_085253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -370,7 +370,6 @@ ActiveRecord::Schema.define(version: 2020_07_28_071129) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "organisation_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -392,9 +391,17 @@ ActiveRecord::Schema.define(version: 2020_07_28_071129) do
     t.uuid "person_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["organisation_id"], name: "index_users_on_organisation_id"
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_organisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.uuid "organisation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organisation_id"], name: "index_users_organisations_on_organisation_id"
+    t.index ["user_id"], name: "index_users_organisations_on_user_id"
   end
 
   create_table "volunteers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -430,7 +437,8 @@ ActiveRecord::Schema.define(version: 2020_07_28_071129) do
   add_foreign_key "people_addresses", "people"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "users"
-  add_foreign_key "users", "organisations"
   add_foreign_key "users", "people"
+  add_foreign_key "users_organisations", "organisations"
+  add_foreign_key "users_organisations", "users"
   add_foreign_key "volunteers", "projects"
 end

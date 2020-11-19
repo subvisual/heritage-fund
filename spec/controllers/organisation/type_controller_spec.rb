@@ -7,7 +7,7 @@ RSpec.describe Organisation::TypeController do
 
     it "should render the page successfully for a valid organisation" do
       get :show,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
       expect(assigns(:organisation).errors.empty?).to eq(true)
@@ -26,10 +26,10 @@ RSpec.describe Organisation::TypeController do
     it "should re-render the page if no params are passed" do
 
       expect(subject).to \
-        receive(:log_errors).with(subject.current_user.organisation)
+        receive(:log_errors).with(subject.current_user.organisations.first)
 
       put :update,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
@@ -45,10 +45,10 @@ RSpec.describe Organisation::TypeController do
     it "should re-render the page if an empty org_type param is passed" do
 
       expect(subject).to \
-        receive(:log_errors).with(subject.current_user.organisation)
+        receive(:log_errors).with(subject.current_user.organisations.first)
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               org_type: ""
           }
@@ -69,7 +69,7 @@ RSpec.describe Organisation::TypeController do
 
       expect {
         put :update, params: {
-            organisation_id: subject.current_user.organisation.id,
+            organisation_id: subject.current_user.organisations.first.id,
             organisation: {
                 org_type: "invalid"
             }
@@ -81,7 +81,7 @@ RSpec.describe Organisation::TypeController do
     it "should successfully update if a valid param is passed" do
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               org_type: "local_authority"
           }

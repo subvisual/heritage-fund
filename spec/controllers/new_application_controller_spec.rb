@@ -7,7 +7,7 @@ RSpec.describe NewApplicationController do
 
         it 'should redirect if the user does not have an organisation' do
 
-            subject.current_user.update(organisation: nil)
+            subject.current_user.organisations.delete_all
             
             get :show
 
@@ -17,8 +17,9 @@ RSpec.describe NewApplicationController do
         end
 
         it 'should redirect if the user\'s organisation details are incomplete' do
-            
-            subject.current_user.update(organisation: Organisation.new)
+
+            subject.current_user.organisations.delete_all  
+            subject.current_user.organisations.new
 
             get :show
 
@@ -38,9 +39,7 @@ RSpec.describe NewApplicationController do
               phone_number: '07000000000'
             )
 
-            organisation = create(
-              :organisation,
-              id: '1',
+            subject.current_user.organisations.first.update(
               name: 'Test Organisation',
               line1: '10 Downing Street',
               line2: 'Westminster',
@@ -50,9 +49,7 @@ RSpec.describe NewApplicationController do
               org_type: 1
             )
 
-            subject.current_user.update(organisation: organisation)
-
-            subject.current_user.organisation.legal_signatories.append(legal_signatory)
+            subject.current_user.organisations.first.legal_signatories.append(legal_signatory)
 
             get :show
 

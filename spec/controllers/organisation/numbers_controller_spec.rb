@@ -7,7 +7,7 @@ RSpec.describe Organisation::NumbersController do
 
     it "should render the page successfully for a valid organisation" do
       get :show,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
       expect(assigns(:organisation).errors.empty?).to eq(true)
@@ -27,7 +27,7 @@ RSpec.describe Organisation::NumbersController do
        "params are passed" do
       expect {
         put :update,
-            params: { organisation_id: subject.current_user.organisation.id }
+            params: { organisation_id: subject.current_user.organisations.first.id }
         expect(response).to have_http_status(:redirect)
         expect(response).to redirect_to(:organisation_signatories)
       }.to raise_error(
@@ -41,7 +41,7 @@ RSpec.describe Organisation::NumbersController do
       expect {
         put :update,
             params: {
-                organisation_id: subject.current_user.organisation.id,
+                organisation_id: subject.current_user.organisations.first.id,
                 organisation: {}
             }
         expect(response).to have_http_status(:redirect)
@@ -56,7 +56,7 @@ RSpec.describe Organisation::NumbersController do
        "and company_number params are passed" do
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               charity_number: "",
               company_number: ""
@@ -66,7 +66,7 @@ RSpec.describe Organisation::NumbersController do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
                               postcode_path 'organisation',
-                                            subject.current_user.organisation.id
+                                            subject.current_user.organisations.first.id
                           )
       expect(assigns(:organisation).errors.empty?).to eq(true)
 
@@ -76,7 +76,7 @@ RSpec.describe Organisation::NumbersController do
        "and company_number params are passed" do
 
       put :update, params: {
-          organisation_id: subject.current_user.organisation.id,
+          organisation_id: subject.current_user.organisations.first.id,
           organisation: {
               charity_number: "CHNO12345",
               company_number: "CONO54321"
@@ -86,7 +86,7 @@ RSpec.describe Organisation::NumbersController do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(
                               postcode_path 'organisation',
-                                            subject.current_user.organisation.id
+                                            subject.current_user.organisations.first.id
                           )
       expect(assigns(:organisation).errors.empty?).to eq(true)
       expect(assigns(:organisation).charity_number).to eq("CHNO12345")

@@ -28,7 +28,7 @@ class ApplicationToSalesforceJob < ApplicationJob
           salesforce_case_id: @response_body_obj.dig('caseId'),
           project_reference_number: @response_body_obj.dig('projectRefNumber')
       )
-      project.organisation.update(
+        project.user.organisations.first.update(
           salesforce_account_id: @response_body_obj.dig('accountId')
       )
 

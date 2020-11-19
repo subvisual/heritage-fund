@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Project::LocationController do
   login_user
   let(:organisation) { create(:organisation, line1: 'line1', line2: 'line2', line3: 'line3', townCity: 'townCity', county: 'county', postcode: 'postcode') }
-  let(:project) { create(:project, id: "id", user_id: subject.current_user.id, organisation: organisation) }
+  let(:project) { create(:project, id: "id", user_id: subject.current_user.id) }
 
   describe "GET #show" do
     it "should render the page successfully for a valid project" do
@@ -45,7 +45,7 @@ RSpec.describe Project::LocationController do
     end
 
     it "updates project address to match organisation address if same location selected" do
-      subject.current_user.update(organisation: organisation)
+      subject.current_user.organisations.replace([organisation])
       put :update,
           params: {project_id: project.id, project: {same_location: 'yes'}}
       expect(response).to have_http_status(:redirect)

@@ -53,8 +53,8 @@
 
           <%
             if
-             current_user.organisation.org_type == "faith_based_organisation" ||
-                 current_user.organisation.org_type == "church_organisation"
+             current_user.organisations.first.org_type == "faith_based_organisation" ||
+                 current_user.organisations.first.org_type == "church_organisation"
           %>
             <li>
               <%= I18n.t("governing_document.one_of_the_following") %>

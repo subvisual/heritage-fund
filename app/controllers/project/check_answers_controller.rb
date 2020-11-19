@@ -17,9 +17,9 @@ class Project::CheckAnswersController < ApplicationController
       logger.info "All mandatory fields completed for project ID: " \
                   "#{@project.id}"
 
-      if current_user.organisation.org_type == "registered_company" ||
-          current_user.organisation.org_type ==
-              "individual_private_owner_of_heritage"
+      if current_user.organisations.first.org_type == "registered_company" ||
+        current_user.organisations.first.org_type ==
+            "individual_private_owner_of_heritage"
 
         logger.info "Organisation is either a registered company or an " \
                     "individual private owner of heritage, redirecting to " \

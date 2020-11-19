@@ -7,7 +7,7 @@ RSpec.describe Organisation::SignatoriesController do
 
     it "should render the page successfully for a valid organisation" do
       get :show,
-          params: { organisation_id: subject.current_user.organisation.id }
+          params: { organisation_id: subject.current_user.organisations.first.id }
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:show)
       expect(assigns(:organisation).errors.empty?).to eq(true)
@@ -27,7 +27,7 @@ RSpec.describe Organisation::SignatoriesController do
         "params are passed" do
       expect {
         put :update,
-            params: { organisation_id: subject.current_user.organisation.id }
+            params: { organisation_id: subject.current_user.organisations.first.id }
       }.to raise_error(
                ActionController::ParameterMissing,
                "param is missing or the value is empty: organisation"
@@ -39,7 +39,7 @@ RSpec.describe Organisation::SignatoriesController do
       expect {
         put :update,
             params: {
-                organisation_id: subject.current_user.organisation.id,
+                organisation_id: subject.current_user.organisations.first.id,
                 organisation: {}
             }
       }.to raise_error(
@@ -53,7 +53,7 @@ RSpec.describe Organisation::SignatoriesController do
 
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {
@@ -112,7 +112,7 @@ RSpec.describe Organisation::SignatoriesController do
 
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {
@@ -176,7 +176,7 @@ RSpec.describe Organisation::SignatoriesController do
 
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {
@@ -229,7 +229,7 @@ RSpec.describe Organisation::SignatoriesController do
 
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {
@@ -265,7 +265,7 @@ RSpec.describe Organisation::SignatoriesController do
 
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {
@@ -306,7 +306,7 @@ RSpec.describe Organisation::SignatoriesController do
     it "should not allow first signatory email to match second signatory email" do
       put :update,
           params: {
-              organisation_id: subject.current_user.organisation.id,
+              organisation_id: subject.current_user.organisations.first.id,
               organisation: {
                   legal_signatories_attributes: {
                       "0": {

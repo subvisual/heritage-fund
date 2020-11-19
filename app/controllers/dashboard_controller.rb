@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
       @projects = current_user.projects
 
       # A user may not have an associated organisation at this point
-      @funding_applications = current_user.organisation.funding_applications if current_user.organisation
+      @funding_applications = current_user.organisations.first.funding_applications if current_user.organisations.any?
 
     else
 
@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
 
     create_organisation_if_none_exists(current_user)
 
-    redirect_based_on_organisation_completeness(current_user.organisation)
+    redirect_based_on_organisation_completeness(current_user.organisations.first)
 
   end
 
@@ -67,7 +67,7 @@ class DashboardController < ApplicationController
   def create_organisation_if_none_exists(user)
 
     # rubocop:disable Style/GuardClause
-    unless user.organisation
+    unless user.organisations.any?
 
       logger.info "No organisation found for user ID: #{user.id}"
 
@@ -83,15 +83,9 @@ class DashboardController < ApplicationController
   # @param [User] user An instance of User
   def create_organisation(user)
 
-    organisation = Organisation.new
+    user.organisations.create
 
-    logger.info "Successfully created organisation ID: #{organisation.id}"
-
-    user.organisation = organisation
-
-    logger.info "Setting organisation_id of '#{organisation.id}' for user ID: #{user.id}"
-
-    user.save
+    logger.info "Successfully created organisation ID: #{user.organisations.first.id}"
 
   end
 

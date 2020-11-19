@@ -70,8 +70,8 @@ class NewApplicationController < ApplicationController
   # @param [User] user An instance of User
   def redirect_based_on_organisation_presence_and_completeness(user)
 
-    unless user.organisation &&
-           helpers.complete_organisation_details?(user.organisation)
+    unless user.organisations.any? &&
+           helpers.complete_organisation_details?(user.organisations.first)
       redirect_to :orchestrate_dashboard_journey
     end
 

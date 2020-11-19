@@ -418,19 +418,19 @@ class Project < ApplicationRecord
                         json.secured cash_contribution.secured&.dasherize
                         json.id cash_contribution.id
                 end
-                json.set!('organisationId', self.organisation.id)
-                json.set!('organisationName', self.organisation.name)
+                json.set!('organisationId', self.user.organisations.first.id)
+                json.set!('organisationName', self.user.organisations.first.name)
                 json.set!('organisationMission',
-                          self.organisation.mission.map!(&:dasherize).map { |m| m == 'lgbt-plus-led' ? 'lgbt+-led' : m })
+                          self.user.organisations.first.mission.map!(&:dasherize).map { |m| m == 'lgbt-plus-led' ? 'lgbt+-led' : m })
                 json.set!('organisationType',
                           get_organisation_type_for_salesforce_json)
-                json.set!('companyNumber', self.organisation.company_number)
-                json.set!('charityNumber', self.organisation.charity_number)
+                json.set!('companyNumber', self.user.organisations.first.company_number)
+                json.set!('charityNumber', self.user.organisations.first.charity_number)
                 json.organisationAddress do
-                    json.line1 setAddressLines.call(self.organisation.line1, self.organisation.line2, self.organisation.line3)
-                    json.county self.organisation.county
-                    json.townCity self.organisation.townCity
-                    json.postcode self.organisation.postcode
+                    json.line1 setAddressLines.call(self.user.organisations.first.line1, self.user.organisations.first.line2, self.user.organisations.first.line3)
+                    json.county self.user.organisations.first.county
+                    json.townCity self.user.organisations.first.townCity
+                    json.postcode self.user.organisations.first.postcode
                 end
                 set_legal_signatory_fields = ->(ls) {
                     json.set!("name", ls.name)
@@ -440,11 +440,11 @@ class Project < ApplicationRecord
                     json.set!("isAlsoApplicant", self.user.email == ls.email_address)
                     json.set!("role", "")
                 }
-                @ls_one = self.organisation.legal_signatories.first
+                @ls_one = self.user.organisations.first.legal_signatories.first
                 json.authorisedSignatoryOneDetails do
                     set_legal_signatory_fields.call(@ls_one)
                 end
-                @ls_two = self.organisation.legal_signatories.second
+                @ls_two = self.user.organisations.first.legal_signatories.second
                 if @ls_two.present?
                     json.authorisedSignatoryTwoDetails do
                         set_legal_signatory_fields.call(@ls_two)
@@ -457,7 +457,7 @@ class Project < ApplicationRecord
     private
     def get_organisation_type_for_salesforce_json
 
-        formatted_org_type_value = case self.organisation.org_type
+        formatted_org_type_value = case self.user.organisations.first.org_type
         when 'registered_company', 'community_interest_company'
             'registered-company-or-community-interest-company'
         when 'faith_based_organisation', 'church_organisation'
@@ -469,7 +469,7 @@ class Project < ApplicationRecord
         when 'other'
             'other-public-sector-organisation'
         else
-            self.organisation.org_type&.dasherize
+            self.user.organisations.first.org_type&.dasherize
         end
 
         formatted_org_type_value

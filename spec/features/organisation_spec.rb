@@ -70,7 +70,7 @@ RSpec.feature 'Organisation', type: :feature do
       expect(page).to have_text('Female led')
       expect(page).to have_text('Jane Doe')
 
-      organisation = User.find(user.id).organisation
+      organisation = User.find(user.id).organisations.first
       expect(organisation.org_type).to eq('registered_charity')
       expect(organisation.charity_number).to eq('123')
       expect(organisation.name).to eq('test')

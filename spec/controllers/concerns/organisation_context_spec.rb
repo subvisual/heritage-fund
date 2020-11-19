@@ -51,7 +51,7 @@ RSpec.describe OrganisationContext do
 
       get :fake_action,
           params: {
-              organisation_id: subject.current_user.organisation.id
+              organisation_id: subject.current_user.organisations.first.id
           }
 
     }
@@ -61,7 +61,7 @@ RSpec.describe OrganisationContext do
 
       create(:organisation)
 
-      expect(assigns(:organisation)).to eq(subject.current_user.organisation)
+      expect(assigns(:organisation)).to eq(subject.current_user.organisations.first)
 
     end
 
