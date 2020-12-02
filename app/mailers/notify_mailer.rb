@@ -60,7 +60,7 @@ class NotifyMailer < Mail::Notify::Mailer
                   to: project.user.email,
                   reply_to_id: @reply_to_id,
                   personalisation: {
-                      project_reference_number: project.project_reference_number
+                      project_reference_number: project.funding_application.project_reference_number
                   }
     )
   end
