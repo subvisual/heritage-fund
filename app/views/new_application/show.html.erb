@@ -92,34 +92,6 @@
 
       <% end %>
 
-      <% if Flipper[:grant_programme_hef_loan].enabled? %>
-
-        <div class="govuk-radios govuk-radios" data-module="govuk-radios">
-
-          <div class="govuk-radios__item">
-
-            <%=
-              f.radio_button :application_type,
-              "hef_loan",
-              class: "govuk-radios__input"
-            %>
-
-            <%= 
-              f.label :hef_loan,
-              t('new_application.types.covid_19_response_loan.name'),
-              class: "govuk-label govuk-radios__label govuk-label--s" 
-            %>
-
-            <span id="application_type_hef_loan-hint" class="govuk-hint govuk-radios__hint">
-              <%= t('new_application.types.covid_19_response_loan.info') %>
-            </span>
-
-          </div>
-
-        </div>
-
-      <% end %>
-
     </fieldset>
 
   </div>

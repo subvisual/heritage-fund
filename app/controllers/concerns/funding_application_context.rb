@@ -20,9 +20,13 @@ module FundingApplicationContext
       organisation_id: current_user.organisations.first&.id
     )
 
-    if !@funding_application.present? || (@funding_application.submitted_on.present? &&
+    if !@funding_application.present? || !@funding_application.project.present? || (@funding_application.submitted_on.present? &&
         !request.path.include?('/application-submitted'))
+
+        logger.error("User redirected to root, error in funding_application_context.rb")
+
       redirect_to :authenticated_root
+
     end
 
   end

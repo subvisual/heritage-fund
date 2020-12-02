@@ -4,8 +4,8 @@ FactoryBot.define do
       association :organisation,
                   factory: :organisation,
                   strategy: :build
-      association :gp_hef_loan,
-                  factory: :gp_hef_loan,
+      association :project,
+                  factory: :project,
                   strategy: :build
     end
   

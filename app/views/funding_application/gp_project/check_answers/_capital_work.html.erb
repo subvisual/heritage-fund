@@ -1,0 +1,29 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    <%= t('views.funding_application.gp_project.captital_work') %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+
+    <%= @funding_application.project.capital_work? ? "Yes" : "No" %>
+
+    <% if @funding_application.project.capital_work_file.present? %>
+      <br />
+      <p class="govuk-body">
+        Uploaded file: <%= link_to(@funding_application.project.capital_work_file.blob.filename,
+                                   rails_blob_path(@funding_application.project.capital_work_file,
+                                                   disposition: "attachment"))
+      %>
+      </p>
+
+    <% end %>
+
+  </dd>
+
+  <%= render partial: 'funding_application/gp_project/check_answers/change_link',
+             locals: {
+                 link_url: funding_application_gp_project_capital_works_path,
+                 link_hidden_label: t('views.funding_application.gp_project.capital_work')
+             }
+  %>
+
+</div>

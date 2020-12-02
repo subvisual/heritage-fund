@@ -1,0 +1,53 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application.project,
+             page_title: "Check your answers"
+         }
+%>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @funding_application.project,
+             first_form_element: :organisation_org_type_registered_charity
+         } if @funding_application.project.errors.any?
+%>
+
+<span class="govuk-caption-xl">About your project</span>
+<h1 class="govuk-heading-xl"><%= t('views.funding_application.gp_project.check_your_answers.page_title') %></h1>
+
+<dl class="govuk-summary-list">
+  <%= render 'funding_application/gp_project/check_answers/title' %>
+  <%= render 'funding_application/gp_project/check_answers/start_date' %>
+  <%= render 'funding_application/gp_project/check_answers/end_date' %>
+  <%= render 'funding_application/gp_project/check_answers/location' %>
+  <%= render 'funding_application/gp_project/check_answers/description' %>
+  <%= render 'funding_application/gp_project/check_answers/capital_work' %>
+  <%= render 'funding_application/gp_project/check_answers/permission' %>
+  <%= render 'funding_application/gp_project/check_answers/difference' %>
+  <%= render 'funding_application/gp_project/check_answers/community_matters' %>
+  <%= render 'funding_application/gp_project/check_answers/heritage' %>
+  <%= render 'funding_application/gp_project/check_answers/best_placed' %>
+  <%= render 'funding_application/gp_project/check_answers/involvement' %>
+  <%= render 'funding_application/gp_project/check_answers/other_outcomes' %>
+  <%= render 'funding_application/gp_project/check_answers/costs' %>
+  <%= render 'funding_application/gp_project/check_answers/cash_contributions' %>
+  <%= render 'funding_application/gp_project/check_answers/non_cash_contributions' %>
+  <%= render 'funding_application/gp_project/check_answers/volunteers' %>
+  <%= render 'funding_application/gp_project/check_answers/evidence_of_support' %>
+
+</dl>
+
+<%=
+  form_with model: @funding_application.project,
+            url: :funding_application_gp_project_check_your_answers,
+            method: :put,
+            local: true do |f|
+%>
+
+  <%=
+    f.save_and_continue
+  %>
+
+<% end %>

@@ -2,7 +2,6 @@
 en-GB:
   funding_programmes:
     open_small_three_to_ten_k: "£3-10k"
-    covid_19_recovery_loan: "COVID-19 Recovery Loan"
   account_created_continue_link: "/organisation/type"
   application_guidance_link: "#"
   fair_processing_email: fair.processing@heritagefund.org.uk
@@ -17,38 +16,39 @@ en-GB:
     x_no: "No"
     choose_all_that_apply: "Choose all that apply"
   views:
-    project:
-      check_your_answers:
-        not_answered: " Not Answered "
-        page_title: "Check your answers"
-        project_title: "Project title"
-        project_start_date: "Project start date"
-        project_end_date: "Project completion date"
-        where_is_your_project_taking_place: "Where is your project taking place?"
-        description: "Describe your idea"
-        captital_work: "Will capital work be part of your project?"
-        permission: "Do you need permission from anyone else to do your project?"
-        more_info_about_permission: "More information about permission"
-        difference: "What difference will your project make?"
-        community_matters: "How does your project matter to you and your community?"
-        heritage: "The heritage of your project: how do you plan to make it available once the project is over?"
-        best_placed: "Why is your organisation best placed to deliver this project?"
-        involvement: "How will your project involve a wider range of people?"
-        other_outcomes: "Will your project achieve any of our other outcomes?"
-        other_outcomes_how: "How will you achieve this outcome?"
-        achieve_outcome: "How will you achieve this outcome?"
-        project_cost: "How much will your project cost?"
-        cash_contributions: "Are you getting any cash contributions towards your project?"
-        possible_outcomes:
-          outcome_2: "Heritage will be in a better condition"
-          outcome_3: "Heritage will be identified and better explained"
-          outcome_4: "People will have developed skills"
-          outcome_5: "People will have learned about heritage, leading to change in ideas and actions"
-          outcome_6: "People will have a greater wellbeing"
-          outcome_7: "The funded organisation will be more resilient"
-          outcome_8: "The local area will be a better place to live, work or visit"
-          outcome_9: "The local economy will be boosted"
-        evidence_of_support: "Evidence of support"
+    funding_application:
+      gp_project:
+        check_your_answers:
+          not_answered: " Not Answered "
+          page_title: "Check your answers"
+          project_title: "Project title"
+          project_start_date: "Project start date"
+          project_end_date: "Project completion date"
+          where_is_your_project_taking_place: "Where is your project taking place?"
+          description: "Describe your idea"
+          captital_work: "Will capital work be part of your project?"
+          permission: "Do you need permission from anyone else to do your project?"
+          more_info_about_permission: "More information about permission"
+          difference: "What difference will your project make?"
+          community_matters: "How does your project matter to you and your community?"
+          heritage: "The heritage of your project: how do you plan to make it available once the project is over?"
+          best_placed: "Why is your organisation best placed to deliver this project?"
+          involvement: "How will your project involve a wider range of people?"
+          other_outcomes: "Will your project achieve any of our other outcomes?"
+          other_outcomes_how: "How will you achieve this outcome?"
+          achieve_outcome: "How will you achieve this outcome?"
+          project_cost: "How much will your project cost?"
+          cash_contributions: "Are you getting any cash contributions towards your project?"
+          possible_outcomes:
+            outcome_2: "Heritage will be in a better condition"
+            outcome_3: "Heritage will be identified and better explained"
+            outcome_4: "People will have developed skills"
+            outcome_5: "People will have learned about heritage, leading to change in ideas and actions"
+            outcome_6: "People will have a greater wellbeing"
+            outcome_7: "The funded organisation will be more resilient"
+            outcome_8: "The local area will be a better place to live, work or visit"
+            outcome_9: "The local economy will be boosted"
+          evidence_of_support: "Evidence of support"
   activestorage:
     errors:
       file_upload_error_message: "The upload of this file has failed"
@@ -81,61 +81,6 @@ en-GB:
               blank: "Enter the person's email address"
             phone_number:
               blank: "Enter the person's phone number"
-        gp_hef_loan:
-          attributes:
-            previous_project_reference:
-              blank: "Enter your most recent National Lottery Heritage Fund project reference number"
-            can_legally_take_on_debt:
-              inclusion: "Select yes if your organisation can legally take on debt"
-            any_debt_restrictions:
-              inclusion: "Select yes if your organisation has any debt restrictions"
-            debt_description:
-              blank: "Enter the restrictions on the size or type of debt your organisation can take on"
-            can_provide_security:
-              inclusion: "Select yes if your organisation can legally provide security for a loan"
-            security_restrictions:
-              inclusion: "Select yes if your organisation has any restrictions on the type of security it can provide"
-            security_description:
-              blank: "Enter the restrictions on the type of security your organisation can provide"
-            has_had_an_average_yearly_cash_surplus:
-              inclusion: "Select yes if your organisation has had an average yearly cash surplus in the last 3 reporting years"
-            average_yearly_cash_surplus:
-              not_a_number: "Amount must be a number, like 500"
-              not_an_integer: "Amount must not contain decimal points"
-              greater_than: "Enter an amount greater than 0"
-            has_had_a_surplus_in_last_reporting_year:
-              inclusion: "Select yes if your organisation has had a cash surplus in the last reporting year"
-            cash_surplus_in_last_year:
-              not_a_number: "Amount must be a number, like 500"
-              not_an_integer: "Amount must not contain decimal points"
-              greater_than: "Enter an amount greater than 0"
-            custom_org_income_type:
-              blank: "Specify other ways your organisation earns income"
-            bankruptcy_or_administration:
-              inclusion: "Select yes if you are aware of any impending bankruptcy or administration against your organisation"
-            bankruptcy_or_administration_description:
-              blank: "Enter details about any impending bankruptcy or administration against your organisation"
-            considers_state_aid:
-              inclusion: "Select yes if you are satisfied that this loan request would not breach state aid rules"
-            has_applied_for_grant_or_loan:
-              inclusion: "Select whether your organisation has applied for a grant, loan or other type of funding during the coronavirus (COVID-19) crisis"
-            other_funding_details:
-              blank: "Enter details about the outcome of any grant or loan applications"
-            efforts_to_reduce_borrowing:
-              blank: "Enter details about the efforts your organisation has made to reduce borrowing"
-            plans_for_loan_description:
-              blank: "Enter details about how you plan to spend the money"
-            loan_amount_requested:
-              not_a_number: "Loan amount being requested must be a number, like 500"
-              not_an_integer: "Loan amount being requested must not contain decimal points"
-              inclusion: "Loan amount being requested must be between 50000 and 250000"
-            time_to_repay_loan:
-              inclusion: "Choose a value between 1 and 72"
-              not_an_integer: "Please enter a number value in whole months"
-            cashflow_understanding:
-              inclusion: "You must state that you understand what the cashflow for the organisation applying for a loan needs to demonstrate"
-            supporting_documents_files:
-              inclusion: "Add a supporting document"
         user:
           attributes:
             name:

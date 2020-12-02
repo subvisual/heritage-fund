@@ -4,6 +4,8 @@ class Project < ApplicationRecord
 
     belongs_to :user
 
+    belongs_to :funding_application, optional: true
+
     has_one :organisation, through: :user
 
     has_many :released_forms

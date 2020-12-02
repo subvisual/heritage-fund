@@ -1,0 +1,144 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application.project,
+             page_title: "Confirm declaration"
+         }
+%>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @funding_application.project,
+             first_form_element: :project_confirm_declaration
+         } if @funding_application.project.errors.any?
+%>
+
+<%=
+  form_for @funding_application.project,
+           url: :funding_application_gp_project_confirm_declaration,
+           method: :put do |f|
+%>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if
+                                       @funding_application.project.errors.any? %>">
+
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
+      <span class="govuk-caption-xl">About your project</span>
+      Confirm declaration
+    </h1>
+
+    <% if Flipper.enabled?(:covid_banner_enabled) %>
+      <div class="nlhf-banner">
+
+        <svg class="nlhf-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8
+        C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z" /></svg>
+
+        <div class="nlhf-banner__message">
+
+          <h2 class="govuk-heading-m">
+            <%= t('covid_banner.heading') %>
+          </h2>
+
+          <p class="govuk-body govuk-!-margin-bottom-3">
+            <%= 
+              t(
+                'covid_banner.content_2_html',
+                href:
+                  link_to(
+                    t('covid_banner.content_2_href'),
+                    'https://www.heritagefund.org.uk/news/coronavirus-update',
+                  )
+              )
+            %>
+          </p>
+
+        </div>
+
+      </div>
+    <% end %>
+
+    <%=
+      render partial: "partials/form_group_errors",
+             locals: {
+                 form_object: @funding_application.project
+             } if @funding_application.project.errors.any?
+    %>
+
+    <p class="govuk-body-l">
+      Now that you're happy with your application, you are ready to apply
+      for funding.
+    </p>
+
+    <div class="govuk-checkboxes">
+
+      <p class="govuk-body">
+        We run qualitative user research to help us to develop our products and
+        services. This could be from a 20 minute survey to a 2 hour interview.
+      </p>
+
+      <div class="govuk-checkboxes__item">
+
+        <%=
+          f.check_box :user_research_declaration,
+                      {
+                          id: :project_user_research_declaration,
+                          class: "govuk-checkboxes__input"
+                      },
+                      'true', 'false'
+        %>
+
+        <%=
+          f.label :user_research_declaration,
+                  "Tick this box if you would like to be involved in our " \
+                  "research, or find out more.",
+                  class: "govuk-label govuk-checkboxes__label"
+        %>
+
+      </div>
+
+      <div class="govuk-checkboxes__item">
+
+        <%=
+          f.check_box :confirm_declaration,
+                      {
+                          id: :project_confirm_declaration,
+                          class: "govuk-checkboxes__input"
+                      },
+                      "true",
+                      nil
+        %>
+
+        <%=
+          f.label :confirm_declaration,
+                    "I have read and agreed with the #{link_to 'declaration', :funding_application_gp_project_declaration}".html_safe,
+                    class: "govuk-label govuk-checkboxes__label"
+        %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <%=
+    render(
+        ButtonComponent.new(
+            element: "input",
+            text: "Submit application",
+            attributes: [
+                {
+                    attribute: "aria-label",
+                    value: "Submit application button"
+                },
+                {
+                    attribute: ("disabled" unless Flipper.enabled?(:grant_programme_sff_small)),
+                    value: ("disabled" unless Flipper.enabled?(:grant_programme_sff_small))
+                }
+            ]
+        )
+    )
+  %>
+
+<% end %>

@@ -7,7 +7,7 @@ class ApplicationToSalesforceJob < ApplicationJob
   # @param [Project] project
   def perform(project)
     logger.info("Submitting Project ID: #{project.id} to Salesforce")
-    project.update(submitted_on: DateTime.now)
+    project.funding_application.update(submitted_on: DateTime.now)
     client = Restforce.new(
         username: Rails.configuration.x.salesforce.username,
         password: Rails.configuration.x.salesforce.password,
@@ -23,7 +23,7 @@ class ApplicationToSalesforceJob < ApplicationJob
     @response_body_obj = JSON.parse(@response&.body)
     is_successful = @response_body_obj&.dig('status') == 'Success'
     if(is_successful)
-      project.update(
+      project.funding_application.update(
           salesforce_case_number: @response_body_obj.dig('caseNumber'),
           salesforce_case_id: @response_body_obj.dig('caseId'),
           project_reference_number: @response_body_obj.dig('projectRefNumber')
@@ -33,7 +33,7 @@ class ApplicationToSalesforceJob < ApplicationJob
       )
 
       NotifyMailer.project_submission_confirmation(project).deliver_later
-      salesforce_case_id = project.salesforce_case_id
+      salesforce_case_id = project.funding_application.salesforce_case_id
 
       ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project, :capital_work_file, "capital work attachment") if project.capital_work_file.attached?
       ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, project, :governing_document_file, "governing document attachment") if project.governing_document_file.attached?

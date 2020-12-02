@@ -13,7 +13,12 @@ RSpec.describe ApplicationToSalesforceJob, type: :job do
     user.organisations.append(
         build(:organisation)
     )
-    @project = build(:project)
+    funding_application = create(
+        :funding_application,
+        organisation: user.organisations.first
+    )
+
+    @project = funding_application.project
 
     legal_signatory = build(:legal_signatory)
     legal_signatory.name = "Joe Bloggs"
@@ -65,11 +70,11 @@ RSpec.describe ApplicationToSalesforceJob, type: :job do
 
     ApplicationToSalesforceJob.perform_now(@project)
 
-    expect(@project.project_reference_number).to eq("NS-19-01498")
-    expect(@project.salesforce_case_id).to eq("5002500000BFRUiAAP")
+    expect(@project.funding_application.project_reference_number).to eq("NS-19-01498")
+    expect(@project.funding_application.salesforce_case_id).to eq("5002500000BFRUiAAP")
     expect(@project.user.organisations.first.salesforce_account_id)
         .to eq("0012500001I6ImfAAF")
-    expect(@project.salesforce_case_number).to eq("00001498")
+    expect(@project.funding_application.salesforce_case_number).to eq("00001498")
 
   end
 

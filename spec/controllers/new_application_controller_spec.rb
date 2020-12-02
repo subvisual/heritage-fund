@@ -132,7 +132,7 @@ RSpec.describe NewApplicationController do
 
       end
 
-      it 'should redirect to three_to_ten_k_project_start if the application_type is sff_small' do 
+      it 'should redirect to funding_application_gp_project_start if the application_type is sff_small' do 
 
         put :update,
           params: { 
@@ -142,21 +142,7 @@ RSpec.describe NewApplicationController do
           }
 
         expect(response).to have_http_status(:redirect)
-        expect(response).to redirect_to(:three_to_ten_k_project_start)
-
-      end
-
-      it 'should redirect to funding_application_hef_loan_start if the application_type is hef_loan' do
-
-        put :update,
-          params: {
-            new_application: {
-              application_type: "hef_loan"
-            }
-          }
-
-        expect(response).to have_http_status(:redirect)
-        expect(response).to redirect_to(:funding_application_hef_loan_start)
+        expect(response).to redirect_to(:funding_application_gp_project_start)
 
       end
     

@@ -45,7 +45,7 @@
   <%= I18n.t("dashboard.page_heading") %>
 </h1>
 
-<% unless @projects.present? || @funding_applications.present? %>
+<% unless @funding_applications.present? %>
 
   <div class="nlhf-panel nlhf-alert nlhf-alert--slim govuk-!-margin-bottom-8">
 
@@ -65,59 +65,37 @@
     <%= I18n.t("dashboard.associated_applications_text") %>
   </p>
 
-  <% if @projects.present? %>
+  <% if @funding_applications.present? %>
 
     <h3 class="govuk-heading-m">
       <%= "#{I18n.t("funding_programmes.open_small_three_to_ten_k")} #{I18n.t("dashboard.applications")}" %>
     </h3>
 
-  <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links
-   govuk-!-margin-bottom-8">
-
-    <% @projects.each do| project | %>
-
-      <li class="nlhf-list__item">
-
-        <%= link_to_unless(project.submitted_on.present?, project.project_title.present? ? project.project_title : "Untitled application", three_to_ten_k_project_title_path(project_id: project.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
-          "#{name} - #{I18n.t("dashboard.submitted")}#{' - ' + I18n.t("dashboard.reference") + ': '  + project.project_reference_number if project.project_reference_number.present?}"
-        end
-        %>
-
-      </li>
-
-    <% end %>
-  </ul>
-
-  <% end %>
-
-  <% if @funding_applications.present? %>
-
-    <h3 class="govuk-heading-m">
-      <%= "#{I18n.t("funding_programmes.covid_19_recovery_loan")} #{I18n.t("dashboard.applications")}" %>
-    </h3>
-
-    <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links
-      govuk-!-margin-bottom-8">
+    <ul class="govuk-list govuk-list--number nlhf-list nlhf-list--links govuk-!-margin-bottom-8">
 
       <% @funding_applications.each do| funding_application | %>
 
         <li class="nlhf-list__item">
 
-          <%= link_to_unless(funding_application.submitted_on.present?, "COVID-19 Recovery Loan for #{current_user.organisation.name}", funding_application_hef_loan_application_form_path(application_id: funding_application.id), class: 'govuk-link govuk-link--no-visited-state') %>
+          <%= link_to_unless(funding_application.submitted_on.present?, funding_application.project&.project_title.present? ? funding_application.project&.project_title : "Untitled application", funding_application_gp_project_title_path(application_id: funding_application.id), class: 'govuk-link govuk-link--no-visited-state') do |name|
+            "#{name} - #{I18n.t("dashboard.submitted")}#{' - ' + I18n.t("dashboard.reference") + ': '  + funding_application.project_reference_number if funding_application.project_reference_number.present?}"
+          end
+          %>
 
         </li>
 
       <% end %>
+
     </ul>
 
   <% end %>
 
-  <% if  Flipper.enabled?(:new_applications_enabled) %>
-    <p class="govuk-body">
-        <%= I18n.t("dashboard.you_can_also") %>
-    </p>
-  <% end %>
+<% end %>
 
+<% if  Flipper.enabled?(:new_applications_enabled) %>
+  <p class="govuk-body">
+    <%= I18n.t("dashboard.you_can_also") %>
+  </p>
 <% end %>
 
 <%=

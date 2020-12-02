@@ -85,17 +85,11 @@ class NewApplicationController < ApplicationController
 
     case application.application_type
 
-    when 'hef_loan'
-
-      logger.info "Redirecting to HEF Loan form for user ID: #{current_user.id}"
-
-      redirect_to :funding_application_hef_loan_start
-
     when 'sff_small'
 
       logger.info "Redirecting to SFF Small form for user ID: #{current_user.id}"
 
-      redirect_to :three_to_ten_k_project_start
+      redirect_to :funding_application_gp_project_start
 
     else
       logger.info 'Method redirect_to_application_start_page called with ' \

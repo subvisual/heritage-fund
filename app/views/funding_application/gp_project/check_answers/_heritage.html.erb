@@ -1,0 +1,16 @@
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    <%= t('views.funding_application.gp_project.check_your_answers.heritage') %>
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <%= @funding_application.project.heritage_description.present? ? @funding_application.project.heritage_description : t('views.funding_application.gp_project.check_your_answers.not_answered')%>
+  </dd>
+
+  <%= render partial: 'funding_application/gp_project/check_answers/change_link',
+             locals: {
+                 link_url: funding_application_gp_project_your_project_heritage_path,
+                 link_hidden_label: t('views.funding_application.gp_project.check_your_answers.heritage')
+             }
+  %>
+
+</div>

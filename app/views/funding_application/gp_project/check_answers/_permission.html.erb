@@ -1,0 +1,57 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.funding_application.gp_project.check_your_answers.permission') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+    <% if @funding_application.project.permission_type.present? %>
+
+      <% if @funding_application.project.permission_type == "no" || @funding_application.project.permission_type == "yes" %>
+
+        <%= @funding_application.project.permission_type.humanize %>
+
+      <% else %>
+
+        Not sure
+
+      <% end %>
+
+    <% else %>
+
+      <%= t('views.funding_application.gp_project.check_your_answers.not_answered') %>
+
+    <% end %>
+  </dd>
+
+  <%= render partial: 'funding_application/gp_project/check_answers/change_link',
+             locals: {
+                 link_url: funding_application_gp_project_do_you_need_permission_path,
+                 link_hidden_label: t('views.funding_application.gp_project.check_your_answers.permission')
+             }
+  %>
+
+</div>
+
+<% if @funding_application.project.permission_type == "yes" || @funding_application.project.permission_type == "x_not_sure" %>
+
+  <div class="govuk-summary-list__row">
+
+    <dt class="govuk-summary-list__key">
+      <%= t('views.funding_application.gp_project.check_your_answers.more_info_about_permission') %>
+    </dt>
+
+    <dd class="govuk-summary-list__value">
+      <%= @funding_application.project.permission_description.nil? ? t('views.funding_application.gp_project.check_your_answers.not_answered') : @funding_application.project.permission_description %>
+    </dd>
+
+    <%= render partial: 'funding_application/gp_project/check_answers/change_link',
+               locals: {
+                   link_url: funding_application_gp_project_do_you_need_permission_path,
+                   link_hidden_label: t('views.funding_application.gp_project.check_your_answers.permission')
+               }
+    %>
+
+  </div>
+
+<% end %>

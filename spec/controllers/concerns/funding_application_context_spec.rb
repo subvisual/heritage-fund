@@ -44,6 +44,36 @@ RSpec.describe FundingApplicationContext do
 
   end
 
+  describe 'set_funding_application failure scenario - no project' do
+
+    login_user
+
+    let(:funding_application) {
+      create(
+        :funding_application,
+        id: 'id',
+        organisation_id: subject.current_user.organisations.first.id,
+        project: nil
+      )
+    }
+
+    before {
+      get :fake_action,
+          params: {
+              application_id: funding_application.id
+          }
+    }
+
+    it "should redirect to root if the funding application belonging to the current user " \
+       "does not have an associated project" do
+
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(:root)
+
+    end
+
+  end
+
   describe "set_funding_application failure scenario - submitted funding application" do
     login_user
 

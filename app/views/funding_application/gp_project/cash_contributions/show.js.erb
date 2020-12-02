@@ -1,0 +1,38 @@
+<% if @funding_application.project.errors.any? %>
+
+  document.title = "Error: Cash contributions";
+
+  createSummaryErrorsSkeleton();
+
+  var errorKeys = [];
+
+  <% @funding_application.project.errors.each do |attr, msg| %>
+
+    errorKeys.push("<%= attr.to_s %>");
+
+    addSummaryError(
+      false,
+      "<%= attr %>",
+      "<%= msg %>",
+      "project",
+      "cash_contributions"
+    );
+
+    addFormGroupError(
+      "<%= attr %>-form-group",
+      "<%= attr %>-errors",
+      "<%= attr %>",
+      "<%= msg %>",
+      "cash_contributions",
+      "project"
+    );
+
+  <% end %>
+
+  removeFormGroupErrors(
+      "cash_contributions",
+      ["description", "secured", "amount", "cash_contribution_evidence_files"],
+      errorKeys
+  );
+
+<% end %>

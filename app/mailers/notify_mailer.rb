@@ -87,14 +87,4 @@ class NotifyMailer < Mail::Notify::Mailer
                   })
   end
 
-  # Linked to 'Loan application submission confirmation' in GOV.UK Notify
-  #
-  # @param [FundingApplication] funding_application An instance of FundingApplication
-  def loan_application_submission_confirmation(funding_application)
-    template_mail(
-      '6783aa3e-8e0c-4813-a623-7cf21b57746f',
-      to: funding_application.people.first.email
-    )
-  end
-
 end

@@ -16,7 +16,11 @@ RSpec.feature 'Project', type: :feature do
 
       user = create(:user)
 
-      user.organisations.first.update(
+      funding_application = create(:funding_application)
+
+      funding_application.organisation = user.organisations.first
+
+      funding_application.organisation.update(
           name: "Test Organisation",
           org_type: "church_organisation",
           line1: "10 Downing Street",
@@ -49,9 +53,9 @@ RSpec.feature 'Project', type: :feature do
 
       click_link_or_button "Start a new application"
 
-      expect(page).to have_text 'Start Now'
+      expect(page).to have_text 'Start now'
 
-      click_link_or_button 'Start Now'
+      click_link_or_button 'Start now'
 
       expect(page)
           .to have_text 'Give your project a title or name that we can refer ' \

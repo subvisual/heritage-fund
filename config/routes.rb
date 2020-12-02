@@ -92,59 +92,30 @@ Rails.application.routes.draw do
 
   # Application section of the service
   scope '/application', module: 'funding_application', as: :funding_application do
-    scope 'hef-loan', module: 'hef_loan', as: :hef_loan do
+ 
+    scope 'gp-project', module: 'gp_project', as: :gp_project do
 
-      # Not scoped under /application_id, as the application does not yet exist
-      get 'start', to: 'start#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-      get 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-
-      post 'start', to: 'start#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-      post 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
+      get 'start', to: 'start#show', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+      get 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+      post 'start', to: 'start#update', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+      post 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
 
       scope '/:application_id' do
-        get 'application-form', to: 'form#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'application-form', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'application-form', to: 'form#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'application-form', to: redirect('/', status: 302), constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'supporting-documents', to: 'supporting_documents#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'supporting-documents', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'supporting-documents', to: 'supporting_documents#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'supporting-documents', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'declaration', to: 'declaration#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'declaration', to: 'declaration#update', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        put 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'application-submitted', to: 'application_submitted#show', constraints: lambda { Flipper.enabled?(:grant_programme_hef_loan) }
-        get 'application-submitted', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:grant_programme_hef_loan) }
-      end
 
-    end
-  end
-
-  # Project section of the service (for small grants)
-  scope "/3-10k", as: :three_to_ten_k do
-    namespace :project do
-
-      get 'start', to: 'start#show'
-
-      # Not scoped under /:project_id, as the project does not yet exist
-      get 'create-new-project', to: 'new_project#create_new_project', as: :create
-
-      scope '/:project_id' do
         get 'title', to: 'title#show'
         put 'title', to: 'title#update'
         get 'key-dates', to: 'dates#show'
         put 'key-dates', to: 'dates#update'
         get 'location', to: 'location#show'
         put 'location', to: 'location#update'
-        get 'description', to: 'description#show'
-        put 'description', to: 'description#update'
+        get 'description', to: 'description#show'  
+        put 'description', to: 'description#update'  
         get 'capital-works', to: 'capital_works#show'
         put 'capital-works', to: 'capital_works#update'
         get 'do-you-need-permission', to: 'permission#show'
         put 'do-you-need-permission', to: 'permission#update'
-        get 'difference', to: 'difference#show'
-        put 'difference', to: 'difference#update'
+        get 'project-difference', to: 'difference#show'
+        put 'project-difference', to: 'difference#update'
         get 'how-does-your-project-matter', to: 'matter#show'
         put 'how-does-your-project-matter', to: 'matter#update'
         get 'your-project-heritage', to: 'heritage#show'
@@ -196,11 +167,14 @@ Rails.application.routes.draw do
         get 'confirm-declaration', to: 'declaration#show_confirm_declaration'
         put 'confirm-declaration', to: 'declaration#update_confirm_declaration'
         get 'declaration', to: 'declaration#show_declaration'
-        put 'declaration', to: 'declaration#update_declaration'
+        put 'declaration', to: 'declaration#update_declaration', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
+        put 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
         get 'application-submitted', to: 'application_submitted#show'
+
       end
 
     end
+
   end
 
   # Static pages within the service

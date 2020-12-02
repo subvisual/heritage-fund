@@ -1,0 +1,38 @@
+<div class="govuk-summary-list__row">
+
+  <dt class="govuk-summary-list__key">
+    <%= t('views.funding_application.gp_project.check_your_answers.other_outcomes') %>
+  </dt>
+
+  <dd class="govuk-summary-list__value">
+
+    <% (2 .. 9).each do |n| %>
+
+      <% if @funding_application.project["outcome_#{n}"].present? %>
+
+        <h4 class="govuk-heading-s">
+          <%= t("views.funding_application.gp_project.check_your_answers.possible_outcomes.outcome_#{n}") %>
+        </h4>
+
+        <% if @funding_application.project["outcome_#{n}_description"].present? %>
+
+          <p class="govuk-body">
+            <%= @funding_application.project["outcome_#{n}_description"] %>
+          </p>
+
+        <% end %>
+
+      <% end %>
+
+    <% end %>
+
+  </dd>
+
+  <%= render partial: 'funding_application/gp_project/check_answers/change_link',
+             locals: {
+                 link_url: funding_application_gp_project_our_other_outcomes_path,
+                 link_hidden_label: t('views.funding_application.gp_project.check_your_answers.other_outcomes')
+             }
+  %>
+
+</div>

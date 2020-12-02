@@ -33,7 +33,7 @@ class AddressController < ApplicationController
       if @type == 'organisation'
         redirect_to organisation_mission_path(params['id'])
       elsif @type == 'project'
-        redirect_to three_to_ten_k_project_description_path(params['id'])
+        redirect_to funding_application_gp_project_description_path(@model_object.funding_application.id)
       elsif @type == 'user'
 
         # Caters to a situation where original applicants have no person assigned to the user.
