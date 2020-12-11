@@ -13,7 +13,7 @@
 -%>
 <%- if @element == 'a' -%>
 <a <%= @common_attributes.html_safe %> href="<%= @href %>"
-       role="button" draggable="false">
+       role="button" <%= "data-method=#{@data_method}" if @data_method.present? %> draggable="false">
     <%- if html -%>
         <%=- html -%>
     <%- else -%>

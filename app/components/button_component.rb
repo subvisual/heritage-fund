@@ -27,7 +27,7 @@ class ButtonComponent < ViewComponent::Base
 
   def initialize (
       text: nil, element: nil, href: nil, classes: nil, attributes: nil,
-      type: nil, name: nil, value: nil, disabled: false, is_start_button: false
+      type: nil, name: nil, value: nil, data_method: nil, disabled: false, is_start_button: false
   )
 
     # If a text parameter has been passed into the initialiser, then use
@@ -58,6 +58,8 @@ class ButtonComponent < ViewComponent::Base
     # attribute unless it has also been passed into the component
     # initialiser
     @href = href.present? ? href : "#" if @element == "a"
+
+    @data_method = data_method.present? ? data_method : nil
 
     # Create the class string based on parameters passed into the component
     # initialiser

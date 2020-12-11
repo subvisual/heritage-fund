@@ -1,0 +1,117 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application.payment_details,
+             page_title: t('payment_details.page_title')
+         }
+%>
+
+<%=
+  render partial: "partials/summary_errors",
+         locals: {
+             form_object: @funding_application.payment_details,
+             first_form_element: @funding_application.payment_details.errors.size == 1 ? "payment_details_#{@funding_application.payment_details.errors.first[0]}" : nil,
+             form_object_name: 'payment_details'
+         } if @funding_application.payment_details.errors.any?
+%>
+
+<%= 
+  form_with model: @funding_application.payment_details,
+  url: :funding_application_gp_project_payment_details,
+  method: :put,
+  local: true do |f|
+%>
+
+  <div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 class="govuk-fieldset__heading">
+          <%= t('payment_details.page_heading') %>
+        </h1>
+      </legend>
+
+      <span class="govuk-hint">
+        <%= t('payment_details.account_paid_into') %>
+      </span>
+
+      <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:account_name].present? %>">
+
+        <%= f.label :account_name, "Name on the account", class: "govuk-heading-m" %>
+
+        <%=
+          render partial: "partials/form_input_errors",
+             locals: {
+                 form_object: @funding_application.payment_details,
+                 input_field_id: :account_name
+             } if @funding_application.payment_details.errors[:account_name].any?
+        %>
+
+        <%=
+          f.text_field :account_name,
+                        class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @funding_application.payment_details.errors[:account_name].present?}",
+                          value: @funding_application.payment_details.decrypt_account_name, "autocomplete" => "off"
+        %>
+
+      </div>
+
+      <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:sort_code].present? %>">
+
+        <%= f.label :sort_code, "Sort code", class: "govuk-heading-m" %>
+
+        <span class="govuk-hint">
+          <%= t('payment_details.sort_code_hint') %>
+        </span>
+
+        <%=
+          render partial: "partials/form_input_errors",
+             locals: {
+                 form_object: @funding_application.payment_details,
+                 input_field_id: :sort_code
+             } if @funding_application.payment_details.errors[:sort_code].any?
+        %>
+
+        <%=
+          f.text_field :sort_code,
+                        class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @funding_application.payment_details.errors[:sort_code].present?}",
+                          value: @funding_application.payment_details.decrypt_sort_code, "autocomplete" => "off", "spellcheck" => "false"
+        %>
+
+      </div>
+
+      <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:account_number].present? %>">
+
+        <%= f.label :account_number, "Account number", class: "govuk-heading-m" %>
+
+        <span class="govuk-hint">
+          <%= t('payment_details.account_number_hint') %>
+        </span>
+
+        <%=
+          render partial: "partials/form_input_errors",
+             locals: {
+                 form_object: @funding_application.payment_details,
+                 input_field_id: :account_number
+             } if @funding_application.payment_details.errors[:account_number].any?
+        %>
+
+        <%=
+          f.text_field :account_number,
+                        class: "govuk-input govuk-input--width-20 #{'govuk-input--error' if @funding_application.payment_details.errors[:account_number].present?}",
+                          value: @funding_application.payment_details.decrypt_account_number, "autocomplete" => "off", "spellcheck" => "false"
+        %>
+
+      </div>
+
+      <div class="govuk-form-group">
+
+        <%= render(ButtonComponent.new(element: "input", text: t('payment_details.button.text'))) %>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+<% end %>

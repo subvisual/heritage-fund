@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_120623) do
+ActiveRecord::Schema.define(version: 2020_12_04_110011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -211,6 +211,16 @@ ActiveRecord::Schema.define(version: 2020_11_30_120623) do
     t.index ["organisation_id"], name: "index_organisations_org_types_on_organisation_id"
   end
 
+  create_table "payment_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "account_name"
+    t.text "account_number"
+    t.text "sort_code"
+    t.uuid "funding_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["funding_application_id"], name: "index_payment_details_on_funding_application_id"
+  end
+
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.date "date_of_birth"
@@ -262,9 +272,6 @@ ActiveRecord::Schema.define(version: 2020_11_30_120623) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
-    t.text "declaration_reasons_description"
-    t.boolean "user_research_declaration", default: false
-    t.boolean "keep_informed_declaration", default: false
     t.boolean "outcome_2"
     t.boolean "outcome_3"
     t.boolean "outcome_4"
@@ -283,6 +290,9 @@ ActiveRecord::Schema.define(version: 2020_11_30_120623) do
     t.text "outcome_9_description"
     t.boolean "is_partnership", default: false
     t.text "partnership_details"
+    t.boolean "keep_informed_declaration"
+    t.boolean "user_research_declaration"
+    t.text "declaration_reasons_description"
     t.uuid "funding_application_id"
     t.index ["funding_application_id"], name: "index_projects_on_funding_application_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -356,6 +366,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_120623) do
   add_foreign_key "non_cash_contributions", "projects"
   add_foreign_key "organisations_org_types", "org_types"
   add_foreign_key "organisations_org_types", "organisations"
+  add_foreign_key "payment_details", "funding_applications"
   add_foreign_key "people_addresses", "addresses"
   add_foreign_key "people_addresses", "people"
   add_foreign_key "project_costs", "projects"

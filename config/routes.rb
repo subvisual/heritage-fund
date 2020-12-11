@@ -171,6 +171,23 @@ Rails.application.routes.draw do
         put 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
         get 'application-submitted', to: 'application_submitted#show'
 
+        scope '/payment', as: 'payment' do
+
+          get 'details', to: 'payment_details#show'
+          put 'details', to: 'payment_details#update'
+
+          get 'confirm-details', to: 'payment_confirm_details#show'
+          put 'confirm-details', to: 'payment_confirm_details#update'
+          put 'confirm-details-submitted', to: 'payment_confirm_details#save_and_continue'
+
+          get 'how-is-your-project-progressing', to: 'progress#show'
+          get 'tell-us-what-you-have-spent', to: 'current_spend#show'
+          get 'review-your-spending', to: 'review_spend#show'
+
+          get 'submitted', to: 'payment_details_submitted#show'
+
+        end
+
       end
 
     end

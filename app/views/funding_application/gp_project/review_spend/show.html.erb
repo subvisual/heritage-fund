@@ -1,0 +1,63 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application,
+             page_title: t('review_spend.page_title')
+         }
+%>
+
+<h1 class="govuk-heading-l">
+  <%= t('review_spend.page_heading') %>
+</h1>
+
+<%# TODO: Remove additional buttons and replace with a single 'Save and continue' button %>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: "#{funding_application_gp_project_payment_submitted_url}&scenario=1",
+        text: 'Save and continue - below £10k, 100% grant upfront'
+    )
+  )
+%>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: "#{funding_application_gp_project_payment_submitted_url}&scenario=2",
+        text: 'Save and continue - first payment / payment schedule'
+    )
+  )
+%>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: "#{funding_application_gp_project_payment_submitted_url}&scenario=3",
+        text: 'Save and continue - second payment / payment schedule, or in arrears, or custom payment schedule'
+    )
+  )
+%>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: "#{funding_application_gp_project_payment_submitted_url}&scenario=4",
+        text: 'Save and continue - third payment / payment schedule, final payment in arrears, and, final payment custom payment schedule'
+    )
+  )
+%>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: "#{funding_application_gp_project_payment_submitted_url}&scenario=5",
+        text: 'Save and continue - custom payment schedule - first payment schedule upfront'
+    )
+  )
+%>

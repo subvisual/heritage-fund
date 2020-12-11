@@ -1,0 +1,155 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application,
+             page_title: t('payment_details_submitted.page_title')
+         }
+%>
+
+<%
+
+  # TODO: Remove once dynamic data is available
+  # Scenario 1
+  @payment_amount = 9000 if params[:scenario] == "1"
+  @percentage_of_total_grant = 100 if params[:scenario] == "1"
+
+%>
+
+<%
+
+  # TODO: Remove once dynamic data is available
+  # Scenario 1
+  @payment_amount = 9000 if params[:scenario] == "2"
+  @percentage_of_total_grant = 50 if params[:scenario] == "2"
+
+%>
+
+<%
+
+  # TODO: Remove once dynamic data is available
+  # Scenario 1
+  @payment_amount = 90000 if params[:scenario] == "3"
+  @percentage_of_total_grant = 40 if params[:scenario] == "3"
+
+%>
+
+<%
+
+  # TODO: Remove once dynamic data is available
+  # Scenario 1
+  @payment_amount = 10000 if params[:scenario] == "4"
+  @percentage_of_total_grant = 10 if params[:scenario] == "4"
+
+%>
+
+<%
+
+  # TODO: Remove once dynamic data is available
+  # Scenario 1
+  @payment_amount = 9000 if params[:scenario] == "5"
+  @percentage_of_total_grant = 30 if params[:scenario] == "5"
+
+%>
+
+<div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-9">
+  <h1 class="govuk-panel__title">
+    <%= t('payment_details_submitted.page_heading') %>
+  </h1>
+</div>
+
+<p class="govuk-body">
+  <%= t('payment_details_submitted.thank_you_for_confirming') %>
+</p>
+
+<p class="govuk-body">
+
+  <%= t('payment_details_submitted.check_and_aim') if params[:scenario] == "1" || params[:scenario] == "2" || params[:scenario] == "5" %>
+  <%= t('payment_details_submitted.check_and_look_at') if params[:scenario] == "3" %>
+  <%= t('payment_details_submitted.look_at_list.heading') if params[:scenario] == "4" %>
+
+</p>
+
+<% if params[:scenario] == "4" %>
+
+  <ul class="govuk-list govuk-list--bullet">
+
+    <li>
+      <%= t('payment_details_submitted.look_at_list.item_1') %>
+    </li>
+  
+    <li>
+      <%= t('payment_details_submitted.look_at_list.item_2') %>
+    </li>
+  
+    <li>
+      <%= t('payment_details_submitted.look_at_list.item_3') %>
+    </li>
+  
+  </ul>
+
+  <p class="govuk-body">
+    <%= t('payment_details_submitted.aim_to_pay') %>
+  </p>
+
+<% end %>
+
+<ul class="govuk-list govuk-list--bullet">
+
+  <li>
+    <%= 
+      t(
+        params[:scenario] == '4' ? 'payment_details_submitted.will_be_paid_final_html' : 'payment_details_submitted.will_be_paid_html',
+        payment_amount: number_to_currency(
+                          @payment_amount,
+                          strip_insignificant_zeros: true
+                        ),
+        percentage_of_total_grant: @percentage_of_total_grant
+      ) 
+    %>
+  </li>
+
+</ul>
+
+<% unless params[:scenario] == "1" %>
+
+  <p class="govuk-body">
+
+    <%= t(
+        params[:scenario] == '4' ? "payment_details_submitted.payment_schedule_have_received_html" : "payment_details_submitted.payment_schedule_will_receive_html",
+        href: link_to(
+            t("payment_details_submitted.view_your_payment_schedule"),
+            "#",
+            target: "_blank",
+            class: "govuk-link govuk-link--state-no-visited"
+        )
+      )
+    %>
+
+  </p>
+
+<% end %>
+
+<h2 class="govuk-heading-m">
+  <%= t('payment_details_submitted.page_sub_heading') %>
+</h2>
+
+<p class="govuk-body">
+
+  <% if params[:scenario] == "1" || params[:scenario] == "2" || params[:scenario] == "5" %>
+    <%= t('payment_details_submitted.email_to_confirm_plus') %>
+  <% else %>
+    <%= t('payment_details_submitted.email_to_confirm') %>
+  <% end %>
+
+</p>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: destroy_user_session_path,
+        text: 'Sign out',
+        data_method: 'delete'
+    )
+  )
+%>

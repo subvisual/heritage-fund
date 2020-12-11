@@ -241,3 +241,15 @@ en-GB:
             description:
               blank: "Enter a description of your evidence of support"
               too_long: "Description of your evidence of support must be 50 words or fewer"
+        payment_details:
+          attributes:
+            account_name:
+              blank: "Enter the name of the account holder"
+            account_number:
+              blank: "Enter the account number"
+              invalid_format: "Enter a valid bank account number like 12345678"
+            sort_code:
+              blank: "Enter the sort code"
+              invalid_format: "Enter a valid sort code like 309430"
+            evidence_file:
+              inclusion: "Add evidence of bank account details"

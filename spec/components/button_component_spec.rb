@@ -32,6 +32,17 @@ RSpec.describe ButtonComponent, type: :component do
 
   end
 
+  it "should render an anchor element with custom data-method when called with an " \
+     "element param of 'a' and a data_method param of 'custom'" do
+
+    expect(render_inline(ButtonComponent.new(element: "a", data_method: "custom"))
+               .to_html)
+        .to eq("<a class=\"govuk-button\" data-module=\"govuk-button\" " \
+               "href=\"#\" role=\"button\" data-method=\"custom\" draggable=\"false\">\n        " \
+               "#{I18n.t("buttons.labels.default")}    \n</a>\n")
+
+  end
+
   it "should render an anchor element with a custom link when called with " \
      "an element param of 'a' and a href param of 'custom'" do
 

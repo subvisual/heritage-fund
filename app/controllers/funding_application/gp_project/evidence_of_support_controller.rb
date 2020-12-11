@@ -12,7 +12,6 @@ class FundingApplication::GpProject::EvidenceOfSupportController < ApplicationCo
   # :funding_application_gp_project_evidence_of_support if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Adding evidence of support for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_evidence_of_support = true

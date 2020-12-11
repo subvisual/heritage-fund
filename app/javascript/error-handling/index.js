@@ -136,6 +136,9 @@ export function createAndAppendListItem(message, attribute, modelName) {
             case "evidence_of_support_files":
                 linkElement.setAttribute("href", "#project_evidence_of_support_attributes_0_evidence_of_support_files");
                 break;
+            case "evidence_file":
+                linkElement.setAttribute("href", "#payment_details_evidence_file");
+                break;
             default:
                 linkElement.setAttribute("href", attribute === "capital_work" ?
                     "#project_capital_work_false" : "#project_capital_work_true");

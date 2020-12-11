@@ -1,0 +1,21 @@
+en-GB:
+  payment_details_submitted:
+    page_title: "Awaiting payment"
+    page_heading: "Awaiting payment"
+    thank_you_for_confirming: "Thank you for confirming your bank details."
+    check_and_aim: "We will check your details and aim to pay you within 10 working days."
+    check_and_look_at: "We will check your bank details and look at what you've spent so far. If we have any questions about your spending, we will be in touch. After we've done our checks, we'll aim to pay you within 10 working days."
+    aim_to_pay: "Then we'll aim to pay you within 10 working days."
+    will_be_paid_final_html: "You will be paid <strong>%{payment_amount}</strong>, which is the final <strong>%{percentage_of_total_grant}%</strong> of your total grant awarded"
+    will_be_paid_html: "You will be paid <strong>%{payment_amount}</strong>, which is <strong>%{percentage_of_total_grant}%</strong> of your total grant awarded"
+    look_at_list:
+      heading: "We will look at your:"
+      item_1: "project evaluation report"
+      item_2: "completion report"
+      item_3: "what you have spent for your project"
+    payment_schedule_will_receive_html: "%{href} to see your total grant amount, how many payments you will receive and the amount of each payment."
+    payment_schedule_have_received_html: "%{href} to see your total grant amount, how many payments you have received and the amount of each payment."
+    view_your_payment_schedule: "View your payment schedule"
+    page_sub_heading: "What happens next"
+    email_to_confirm: "We will send you an email to confirm when we have sent the money."
+    email_to_confirm_plus: "We will send you an email to confirm when we have sent the money, along with details of when you can start work on your project."

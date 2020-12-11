@@ -1,0 +1,20 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @funding_application,
+             page_title: t('progress.page_title')
+         }
+%>
+
+<h1 class="govuk-heading-l">
+  <%= t('progress.page_heading') %>
+</h1>
+
+<%=
+  render(
+    ButtonComponent.new(
+        element: "a",
+        href: funding_application_gp_project_payment_tell_us_what_you_have_spent_url
+    )
+  )
+%>
