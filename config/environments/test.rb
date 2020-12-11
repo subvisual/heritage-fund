@@ -53,14 +53,8 @@ Rails.application.configure do
   config.x.salesforce.client_id = "test"
   config.x.salesforce.client_secret = "test"
 
-  config.x.sharepoint.app_reg_client_id = "app_reg_client_id"
-  config.x.sharepoint.app_reg_client_secret = "app_reg_client_secret"
-  config.x.sharepoint.target_host = "test.sharepoint.com"
-  config.x.sharepoint.principal = "principal"
-  config.x.sharepoint.realm = "realm"
-  config.x.sharepoint.site_name = "site_name"
-  config.x.sharepoint.list_id = "list_id"
-  config.x.sharepoint.list_item_entity_type = "list_item_entity_type"
+  config.x.payment_encryption_key = "test"
+  config.x.payment_encryption_salt = "test"
 
   config.x.support_email_address = "test@test.com"
   config.x.ideal_postcodes.api_key = "test"

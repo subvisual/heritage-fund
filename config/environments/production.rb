@@ -139,14 +139,8 @@ Rails.application.configure do
   config.lograge.enabled = true
   config.assets.quiet = true
 
-  config.x.sharepoint.app_reg_client_id = ENV.fetch("SHAREPOINT_APP_REG_CLIENT_ID")
-  config.x.sharepoint.app_reg_client_secret = ENV.fetch("SHAREPOINT_APP_REG_CLIENT_SECRET")
-  config.x.sharepoint.target_host = ENV.fetch("SHAREPOINT_TARGET_HOST")
-  config.x.sharepoint.principal = ENV.fetch("SHAREPOINT_PRINCIPAL")
-  config.x.sharepoint.realm = ENV.fetch("SHAREPOINT_REALM")
-  config.x.sharepoint.site_name = ENV.fetch("ALTERNATIVE_FINANCE_SHAREPOINT_SITE_NAME")
-  config.x.sharepoint.list_id = ENV.fetch("ALTERNATIVE_FINANCE_SHAREPOINT_LIST_ID")
-  config.x.sharepoint.list_item_entity_type = ENV.fetch("ALTERNATIVE_FINANCE_LIST_ITEM_ENTITY_TYPE")
+  config.x.payment_encryption_key = ENV.fetch("PAYMENT_ENCRYPTION_KEY")
+  config.x.payment_encryption_salt = ENV.fetch("PAYMENT_ENCRYPTION_SALT")
 
   config.x.support_email_address = ENV.fetch("SUPPORT_EMAIL_ADDRESS")
   config.x.delayed_job_web.username = ENV.fetch("DELAYED_JOB_WEB_USERNAME")

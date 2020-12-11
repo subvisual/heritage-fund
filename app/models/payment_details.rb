@@ -23,9 +23,9 @@ class PaymentDetails < ApplicationRecord
 
   # Runs when the payment details model is lazy loaded in.
   KEY = ActiveSupport::KeyGenerator.new(
-    ENV.fetch("PAYMENT_ENCRYPTION_KEY")
+    Rails.configuration.x.payment_encryption_key
   ).generate_key(
-    ENV.fetch("PAYMENT_ENCRYPTION_SALT"),
+    Rails.configuration.x.payment_encryption_salt,
     ActiveSupport::MessageEncryptor.key_len
   ).freeze
 
