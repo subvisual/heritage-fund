@@ -12,7 +12,7 @@
       <% form_object.errors.each do |attr, msg| %>
         <li>
           <a href='#<%= form_object.errors.size == 1 ? first_form_element :
-                            "#{form_object_name.present? ? form_object_name : form_object.class.name.downcase}_#{attr.to_s}" %>'>
+                            "#{defined?(form_object_name) && form_object_name.size ? form_object_name : form_object.class.name.downcase}_#{attr.to_s}" %>'>
             <%= msg %>
           </a>
         </li>
