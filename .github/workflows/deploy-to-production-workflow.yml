@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@master
       - name: Install the CF CLI
         run: |
-          wget https://s3-us-west-1.amazonaws.com/cf-cli-releases/releases/v6.48.0/cf-cli-installer_6.48.0_x86-64.deb
-          sudo dpkg -i cf-cli-installer_6.48.0_x86-64.deb
+          wget https://s3-us-west-1.amazonaws.com/v7-cf-cli-releases/releases/v7.2.0/cf7-cli-installer_7.2.0_x86-64.deb
+          sudo dpkg -i cf7-cli-installer_7.2.0_x86-64.deb
       - name: Authenticate with CloudFoundry
         env:
           CF_USERNAME: ${{ secrets.CF_USERNAME }}
@@ -27,6 +27,4 @@ jobs:
           CF_MANIFEST: production
         run: |
           cf target -s ${CF_SPACE}
-          cf v3-cancel-zdt-push ${CF_APP} || true
-          cf v3-apply-manifest -f manifest-${CF_MANIFEST}.yml
-          cf v3-zdt-push ${CF_APP}  --wait-for-deploy-complete
+          cf push ${CF_APP} -f manifest-${CF_MANIFEST}.yml --strategy rolling
