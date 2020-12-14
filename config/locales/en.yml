@@ -17,6 +17,8 @@ en-GB:
     choose_all_that_apply: "Choose all that apply"
   views:
     funding_application:
+      common:
+        about_your_project: "About your project"
       gp_project:
         check_your_answers:
           not_answered: " Not Answered "
