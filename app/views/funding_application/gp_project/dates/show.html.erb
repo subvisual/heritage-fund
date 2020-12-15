@@ -2,7 +2,7 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @funding_application.project,
-             page_title: "When will your project happen?"
+             page_title: t('dates.page_title')
          }
 %>
 
@@ -24,8 +24,13 @@
                                        @funding_application.project.errors.any? %>">
 
     <h1 class="govuk-heading-xl">
-      <span class="govuk-caption-xl">About your project</span>
-      When will your project happen?
+
+      <span class="govuk-caption-xl">
+        <%= t('views.funding_application.common.about_your_project') %>
+      </span>
+
+      <%= t('dates.page_heading') %>
+
     </h1>
 
     <% if flash[:date_warning] %>
@@ -33,7 +38,9 @@
       <div class="govuk-warning-text">
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text-assistive">Warning</span>
+          <span class="govuk-warning-text__assistive">
+            <%= t('generic.warning') %>
+          </span>
           <%= flash[:date_warning] %>
         </strong>
       </div>
@@ -47,11 +54,11 @@
 
         <legend id="project_start_date"
                 class="govuk-fieldset__legend govuk-fieldset__legend--m">
-          Project start date
+          <%= t('dates.start_date.label') %>
         </legend>
 
         <span id="project-start-hint" class="govuk-hint">
-          For example, 27 3 2020
+          <%= t('dates.start_date.hint') %>
         </span>
 
         <% @funding_application.project.errors.each do |attr, msg| %>
@@ -59,7 +66,9 @@
           <% if attr.to_s.include? "start" %>
 
             <span id="project[<%= attr %>]-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> <%= msg %>
+              <span class="govuk-visually-hidden">
+                <%= t('generic.error') %>:
+              </span> <%= msg %>
             </span>
 
           <% end %>
@@ -74,7 +83,7 @@
 
               <%=
                 f.label :start_date_day,
-                        "Day",
+                        t('dates.day'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -100,7 +109,7 @@
 
               <%=
                 f.label :start_date_month,
-                        "Month",
+                        t('dates.month'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -126,7 +135,7 @@
 
               <%=
                 f.label :start_date_year,
-                        "Year",
+                        t('dates.year'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -158,11 +167,11 @@
 
         <legend id="project_end_date"
                 class="govuk-fieldset__legend govuk-fieldset__legend--m">
-          Project end date
+          <%= t('dates.end_date.label') %>
         </legend>
 
         <span id="project-end-hint" class="govuk-hint">
-          For example, 29 4 2020
+          <%= t('dates.end_date.hint') %>
         </span>
 
         <% @funding_application.project.errors.each do |attr, msg| %>
@@ -170,7 +179,9 @@
           <% if attr.to_s.include? "end" %>
 
             <span id="project[<%= attr %>]-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> <%= msg %>
+              <span class="govuk-visually-hidden">
+                <%= t('generic.error') %>:
+              </span> <%= msg %>
             </span>
 
           <% end %>
@@ -185,7 +196,7 @@
 
               <%=
                 f.label :end_date_day,
-                        "Day",
+                        t('dates.day'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -210,7 +221,7 @@
 
               <%=
                 f.label :end_date_month,
-                        "Month",
+                        t('dates.month'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -236,7 +247,7 @@
 
               <%=
                 f.label :end_date_year,
-                        "Year",
+                        t('dates.year'),
                         class: "govuk-label govuk-date-input__label"
               %>
 
@@ -269,5 +280,5 @@
 <% end %>
 
 <div class="govuk-inset-text">
-  We don't expect projects at this grant level to last for more than one year
+  <%= t('dates.small_length_info') %>
 </div>

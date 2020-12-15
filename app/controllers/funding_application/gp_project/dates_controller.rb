@@ -33,7 +33,7 @@ class FundingApplication::GpProject::DatesController < ApplicationController
         logger.debug "Displaying project length warning for project ID: " \
                      "#{@funding_application.project.id}"
 
-        flash[:date_warning] = I18n.t("project.dates.flash_warning")
+        flash[:date_warning] = I18n.t("dates.small_length_warning")
 
         render :show
 

@@ -1,0 +1,15 @@
+en-GB:
+  dates:
+    page_title: "When will your project happen?"
+    page_heading: "When will your project happen?"
+    start_date:
+      label: "Project start date"
+      hint: "For example, 27 3 2022"
+    end_date:
+      label: "Project end date"
+      hint: "For example, 29 4 2022"
+    day: "Day"
+    month: "Month"
+    year: "Year"
+    small_length_info: "We don't expect projects at this grant level to last for more than one year"
+    small_length_warning: "You can still submit your application if the start and end dates are over one year but this can affect assessment."

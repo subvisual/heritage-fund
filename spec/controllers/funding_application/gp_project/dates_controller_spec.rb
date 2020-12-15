@@ -231,7 +231,7 @@ RSpec.describe FundingApplication::GpProject::DatesController do
       expect(assigns(:funding_application).project.errors.empty?).to eq(true)
 
       expect(subject.request.flash[:date_warning])
-          .to eq(I18n.t("project.dates.flash_warning"))
+          .to eq(I18n.t("dates.small_length_warning"))
 
     end
 

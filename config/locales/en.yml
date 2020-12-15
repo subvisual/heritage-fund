@@ -15,6 +15,8 @@ en-GB:
     x_yes: "Yes"
     x_no: "No"
     choose_all_that_apply: "Choose all that apply"
+    warning: "Warning"
+    error: "Error"
   views:
     funding_application:
       common:
