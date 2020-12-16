@@ -1,0 +1,6 @@
+en-GB:
+  location:
+    page_title: "Where is your project taking place?"
+    page_heading: "Is the project taking place at the same location as your organisation's address?"
+    label_yes: "Yes, the project is taking place at the same location as my organisation's address"
+    label_no: "No, the project is not taking place at the same location as my organisation's address"
