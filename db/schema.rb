@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_110011) do
+ActiveRecord::Schema.define(version: 2020_12_16_140507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -152,6 +152,12 @@ ActiveRecord::Schema.define(version: 2020_12_04_110011) do
     t.index ["person_id"], name: "index_funding_applications_people_on_person_id"
   end
 
+  create_table "heard_about_types", id: :serial, force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "legal_signatories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email_address"
@@ -211,6 +217,38 @@ ActiveRecord::Schema.define(version: 2020_12_04_110011) do
     t.index ["organisation_id"], name: "index_organisations_org_types_on_organisation_id"
   end
 
+  create_table "pa_expressions_of_interest", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pre_application_id", null: false
+    t.text "heritage_focus"
+    t.text "what_project_does"
+    t.text "programme_outcomes"
+    t.text "project_reasons"
+    t.text "feasability_or_options_work"
+    t.text "project_timescales"
+    t.text "overall_cost"
+    t.integer "potential_funding_amount"
+    t.text "likely_submission_description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pre_application_id"], name: "index_pa_expressions_of_interest_on_pre_application_id"
+  end
+
+  create_table "pa_project_enquiries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pre_application_id", null: false
+    t.text "previous_contact_name"
+    t.text "heritage_focus"
+    t.text "what_project_does"
+    t.text "programme_outcomes"
+    t.text "project_reasons"
+    t.text "project_participants"
+    t.text "project_timescales"
+    t.text "project_likely_cost"
+    t.integer "potential_funding_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pre_application_id"], name: "index_pa_project_enquiries_on_pre_application_id"
+  end
+
   create_table "payment_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "account_name"
     t.text "account_number"
@@ -238,6 +276,40 @@ ActiveRecord::Schema.define(version: 2020_12_04_110011) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_people_addresses_on_address_id"
     t.index ["person_id"], name: "index_people_addresses_on_person_id"
+  end
+
+  create_table "pre_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organisation_id", null: false
+    t.integer "heard_about_types_id", null: false
+    t.text "project_reference_number"
+    t.text "salesforce_case_id"
+    t.text "salesforce_case_number"
+    t.text "submitted_on"
+    t.text "heard_about_ff"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["heard_about_types_id"], name: "index_pre_applications_on_heard_about_types_id"
+    t.index ["organisation_id"], name: "index_pre_applications_on_organisation_id"
+  end
+
+  create_table "pre_applications_dclrtns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "declaration_id", null: false
+    t.uuid "pre_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["declaration_id"], name: "index_pre_applications_dclrtns_on_declaration_id"
+    t.index ["pre_application_id"], name: "index_pre_applications_dclrtns_on_pre_application_id"
+  end
+
+  create_table "pre_applications_people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.uuid "pre_application_id", null: false
+    t.integer "relationship_types_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_pre_applications_people_on_person_id"
+    t.index ["pre_application_id"], name: "index_pre_applications_people_on_pre_application_id"
+    t.index ["relationship_types_id"], name: "index_pre_applications_people_on_relationship_types_id"
   end
 
   create_table "project_costs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -296,6 +368,12 @@ ActiveRecord::Schema.define(version: 2020_12_04_110011) do
     t.uuid "funding_application_id"
     t.index ["funding_application_id"], name: "index_projects_on_funding_application_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "relationship_types", id: :serial, force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "released_forms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -366,9 +444,18 @@ ActiveRecord::Schema.define(version: 2020_12_04_110011) do
   add_foreign_key "non_cash_contributions", "projects"
   add_foreign_key "organisations_org_types", "org_types"
   add_foreign_key "organisations_org_types", "organisations"
+  add_foreign_key "pa_expressions_of_interest", "pre_applications"
+  add_foreign_key "pa_project_enquiries", "pre_applications"
   add_foreign_key "payment_details", "funding_applications"
   add_foreign_key "people_addresses", "addresses"
   add_foreign_key "people_addresses", "people"
+  add_foreign_key "pre_applications", "heard_about_types", column: "heard_about_types_id"
+  add_foreign_key "pre_applications", "organisations"
+  add_foreign_key "pre_applications_dclrtns", "declarations"
+  add_foreign_key "pre_applications_dclrtns", "pre_applications"
+  add_foreign_key "pre_applications_people", "people"
+  add_foreign_key "pre_applications_people", "pre_applications"
+  add_foreign_key "pre_applications_people", "relationship_types", column: "relationship_types_id"
   add_foreign_key "project_costs", "projects"
   add_foreign_key "projects", "funding_applications"
   add_foreign_key "projects", "users"

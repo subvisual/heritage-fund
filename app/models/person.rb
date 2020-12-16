@@ -5,6 +5,9 @@ class Person < ApplicationRecord
   has_many :funding_applications_people, inverse_of: :person
   has_many :funding_applications, through: :funding_applications_people
 
+  has_many :pre_applications_people, inverse_of: :person
+  has_many :pre_applications, through: :pre_applications_people
+
   attr_accessor :validate_name
   attr_accessor :validate_position
   attr_accessor :validate_email
