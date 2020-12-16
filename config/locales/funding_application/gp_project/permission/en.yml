@@ -1,0 +1,16 @@
+en-GB:
+  permission:
+    page_title: "Do you need permission?"
+    page_heading: "Do you need permission from anyone else to do your project?"
+    no_permission: "No, I do not need permission"
+    yes_permission: "Yes, I do need permission"
+    yes_permission_expanded_label: "Please provide more information about who you need permission from to do your project"
+    not_sure_permission: "Not sure if I need permission"
+    not_sure_permission_expanded_label: "Please provide more information about who you might need permission from to do your project"
+    examples: "Examples of what might need permission"
+    examples_list:
+      item_1: "agreement from the owner of a heritage asset"
+      item_2: "access rights from a landowner"
+      item_3: "planning permission from the council"
+      item_4: "consent to record audio or take photographs of individuals"
+    dont_know_helper: "If you don’t know if you need permission, choose the 'Not sure' option and provide details."

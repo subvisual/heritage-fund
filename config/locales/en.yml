@@ -19,6 +19,7 @@ en-GB:
     error: "Error"
     word_count: "You can enter up to %{max_words} words"
     upload_a_file: "Upload a file"
+    select_one_option: "Select one option"
   views:
     funding_application:
       common:

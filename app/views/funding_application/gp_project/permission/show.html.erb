@@ -2,7 +2,7 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @funding_application.project,
-             page_title: "Do you need permission?"
+             page_title: t('permission.page_title')
          }
 %>
 
@@ -26,9 +26,15 @@
     <fieldset class="govuk-fieldset">
 
       <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+
         <h1 class="govuk-fieldset__heading">
-          <span class="govuk-caption-xl">About your project</span>
-          Do you need permission from anyone else to do your project?
+
+          <span class="govuk-caption-xl">
+            <%= t('views.funding_application.common.about_your_project') %>
+          </span>
+
+          <%= t('permission.page_heading') %>
+
         </h1>
       </legend>
 
@@ -40,7 +46,7 @@
       %>
 
       <span id="permission-required-conditional-hint" class="govuk-hint">
-        Select one option.
+        <%= t('generic.select_one_option') %>
       </span>
 
       <div class="govuk-radios govuk-radios--conditional"
@@ -55,7 +61,7 @@
           %>
 
           <%= f.label :permission_type_no,
-                      "No, I do not need permission",
+                      t('permission.no_permission'),
                       class: "govuk-label govuk-radios__label"
           %>
 
@@ -72,7 +78,7 @@
 
           <%=
             f.label :permission_type_yes,
-                    "Yes, I need permission",
+                    t('permission.yes_permission'),
                     class: "govuk-label govuk-radios__label"
           %>
 
@@ -88,8 +94,7 @@
 
               <%=
                 f.label :permission_description_yes,
-                        "Please provide more information about who you need " \
-                        "permission from to do your project",
+                        t('permission.yes_permission_expanded_label'),
                         class: "govuk-label"
               %>
 
@@ -106,7 +111,7 @@
               <span id="project_permission_description_yes-info"
                     class="govuk-hint govuk-character-count__message"
                     aria-live="polite">
-                You can enter up to 300 words
+                <%= t('generic.word_count', max_words: 300) %>
               </span>
 
             </div>
@@ -126,7 +131,7 @@
 
           <%=
             f.label :permission_type_x_not_sure,
-                    "Not sure if I need permission",
+                    t('permission.not_sure_permission'),
                     class: "govuk-label govuk-radios__label"
           %>
 
@@ -142,8 +147,7 @@
 
               <%=
                 f.label :permission_description_x_not_sure,
-                        "Please provide more information about who you might " \
-                        "need permission from to do your project",
+                        t('permission.not_sure_permission_expanded_label'),
                         class: "govuk-label"
               %>
 
@@ -159,7 +163,7 @@
               <span id="project_permission_description_x_not_sure-info"
                     class="govuk-hint govuk-character-count__message"
                     aria-live="polite">
-                You can enter up to 300 words
+                <%= t('generic.word_count', max_words: 300) %>
               </span>
 
             </div>
@@ -183,7 +187,7 @@
   <summary class="govuk-details__summary">
 
     <span class="govuk-details__summary-text">
-      Examples of what might need permission
+      <%= t('permission.examples') %>
     </span>
 
   </summary>
@@ -191,17 +195,29 @@
   <div class="govuk-details__text">
 
     <ul class="govuk-list govuk-list--bullet">
-      <li>agreement from the owner of a heritage asset</li>
-      <li>access rights from a landowner</li>
-      <li>planning permission from the council</li>
-      <li>consent to record audio or take photographs of individuals</li>
+
+      <li>
+        <%= t('permission.examples_list.item_1') %>
+      </li>
+
+      <li>
+        <%= t('permission.examples_list.item_2') %>
+      </li>
+
+      <li>
+        <%= t('permission.examples_list.item_3') %>
+      </li>
+
+      <li>
+        <%= t('permission.examples_list.item_4') %>
+      </li>
+
     </ul>
 
     <p class="govuk-body">
-      If you don’t know if you need permission, choose the ‘Not sure’ option
-      and provide details.
+      <%= t('permission.dont_know_helper') %>
     </p>
 
-    </div>
+  </div>
 
 </details>
