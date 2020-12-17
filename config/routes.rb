@@ -90,6 +90,18 @@ Rails.application.routes.draw do
     end
   end
 
+  # Pre-application section of the service
+  scope '/pre-application', module: 'pre_application', as: :pre_application do
+    
+    scope 'project-enquiry', module: 'pa_project_enquiry', as: :pa_project_enquiry do
+      
+      get 'start', to: 'start#show'
+      post 'start', to: 'start#update'
+
+    end
+
+  end
+
   # Application section of the service
   scope '/application', module: 'funding_application', as: :funding_application do
  
