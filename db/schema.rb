@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
     t.text "what_project_does"
     t.text "programme_outcomes"
     t.text "project_reasons"
-    t.text "feasability_or_options_work"
+    t.text "feasibility_or_options_work"
     t.text "project_timescales"
     t.text "overall_cost"
     t.integer "potential_funding_amount"
@@ -280,7 +280,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
 
   create_table "pre_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organisation_id", null: false
-    t.integer "heard_about_types_id", null: false
+    t.integer "heard_about_types_id"
     t.text "project_reference_number"
     t.text "salesforce_case_id"
     t.text "salesforce_case_number"
@@ -344,6 +344,9 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
+    t.text "declaration_reasons_description"
+    t.boolean "user_research_declaration", default: false
+    t.boolean "keep_informed_declaration", default: false
     t.boolean "outcome_2"
     t.boolean "outcome_3"
     t.boolean "outcome_4"
@@ -362,9 +365,6 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
     t.text "outcome_9_description"
     t.boolean "is_partnership", default: false
     t.text "partnership_details"
-    t.boolean "keep_informed_declaration"
-    t.boolean "user_research_declaration"
-    t.text "declaration_reasons_description"
     t.uuid "funding_application_id"
     t.index ["funding_application_id"], name: "index_projects_on_funding_application_id"
     t.index ["user_id"], name: "index_projects_on_user_id"

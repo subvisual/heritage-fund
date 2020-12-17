@@ -93,10 +93,64 @@ Rails.application.routes.draw do
   # Pre-application section of the service
   scope '/pre-application', module: 'pre_application', as: :pre_application do
     
-    scope 'project-enquiry', module: 'pa_project_enquiry', as: :pa_project_enquiry do
-      
+    scope 'project-enquiry', module: 'project_enquiry', as: :project_enquiry do
+    
       get 'start', to: 'start#show'
       post 'start', to: 'start#update'
+
+      scope '/:pre_application_id' do
+
+        get 'previous-contact', to: 'previous_contact_name#show'
+        put 'previous-contact', to: 'previous_contact_name#update'
+        get 'heritage-focus', to: 'heritage_focus#show'
+        put 'heritage-focus', to: 'heritage_focus#update'
+        get 'what-will-the-project-do', to: 'what_project_does#show'
+        put 'what-will-the-project-do', to: 'what_project_does#update'
+        get 'programme-outcomes', to: 'programme_outcomes#show'
+        put 'programme-outcomes', to: 'programme_outcomes#update'
+        get 'why-you-want-to-do-this-project', to: 'project_reasons#show'
+        put 'why-you-want-to-do-this-project', to: 'project_reasons#update'
+        get 'who-will-be-involved', to: 'project_participants#show'
+        put 'who-will-be-involved', to: 'project_participants#update'
+        get 'timescales', to: 'project_timescales#show'
+        put 'timescales', to: 'project_timescales#update'
+        get 'likely-cost', to: 'project_likely_cost#show'
+        put 'likely-cost', to: 'project_likely_cost#update'
+        get 'likely-ask', to: 'potential_funding_amount#show'
+        put 'likely-ask', to: 'potential_funding_amount#update'
+        get 'submitted', to: 'submitted#show'
+
+      end
+
+    end
+
+    scope 'expression-of-interest', module: 'expression_of_interest', as: :expression_of_interest do
+
+      get 'start', to: 'start#show'
+      post 'start', to: 'start#update'
+
+      scope '/:pre_application_id' do
+        
+        get 'heritage-focus', to: 'heritage_focus#show'
+        put 'heritage-focus', to: 'heritage_focus#update'
+        get 'what-will-the-project-do', to: 'what_project_does#show'
+        put 'what-will-the-project-do', to: 'what_project_does#update'
+        get 'programme-outcomes', to: 'programme_outcomes#show'
+        put 'programme-outcomes', to: 'programme_outcomes#update'
+        get 'why-you-want-to-do-this-project', to: 'project_reasons#show'
+        put 'why-you-want-to-do-this-project', to: 'project_reasons#update'
+        get 'feasibility-or-options-work', to: 'feasibility_or_options_work#show'
+        put 'feasibility-or-options-work', to: 'feasibility_or_options_work#update'
+        get 'timescales', to: 'project_timescales#show'
+        put 'timescales', to: 'project_timescales#update'
+        get 'overall_cost', to: 'overall_cost#show'
+        put 'overall_cost', to: 'overall_cost#update'
+        get 'likely-ask', to: 'potential_funding_amount#show'
+        put 'likely-ask', to: 'potential_funding_amount#update'
+        get 'likely-submission-description', to: 'likely_submission_description#show'
+        put 'likely-submission-description', to: 'likely_submission_description#update'
+        get 'submitted', to: 'submitted#show'
+      end
 
     end
 

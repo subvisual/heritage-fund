@@ -1,0 +1,58 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @pre_application.pa_project_enquiry,
+      page_title: t('heritage_focus.page_title')
+         }
+%>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @pre_application.pa_project_enquiry,
+    first_form_element: :pa_project_enquiry_heritage_focus
+} if @pre_application.pa_project_enquiry.errors.any? %>
+
+<%=
+  form_for @pre_application.pa_project_enquiry,
+  url: :pre_application_project_enquiry_heritage_focus,
+  method: :put do |f| 
+%>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if
+    @pre_application.pa_project_enquiry.errors[:heritage_focus].any? %>">
+
+    <h1 class="govuk-label-wrapper">
+
+      <%= 
+        f.label :heritage_focus,
+        t('heritage_focus.page_heading'),
+        class: "govuk-label govuk-label--xl govuk-!-margin-bottom-4"
+      %>
+
+    </h1>
+
+    <%=
+      render partial: "partials/form_input_errors",
+               locals: {form_object: @pre_application.pa_project_enquiry,
+                        input_field_id: :heritage_focus} if 
+                          @pre_application.pa_project_enquiry.errors[:heritage_focus].any?
+    %>
+
+    <%=
+      f.text_area :heritage_focus,
+                  rows: 10,
+                  class: "govuk-textarea " \
+                          "#{'govuk-textarea--error' if
+                      @pre_application.pa_project_enquiry.errors[:heritage_focus].any?}"
+    %>
+
+  </div>
+
+  <%= 
+    render(
+      ButtonComponent.new(
+        element: "button"
+      )
+    ) 
+  %>
+
+<% end %>

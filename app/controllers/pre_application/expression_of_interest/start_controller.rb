@@ -1,0 +1,24 @@
+# Controller for the Pre-application 'Start' page
+class PreApplication::ExpressionOfInterest::StartController < ApplicationController
+  before_action :authenticate_user!
+
+  # Method used to create new PreApplication and PaExpressionOfInterest objects
+  # before redirecting the user to 
+  # :pre_application_pa_expression_of_interest_heritage_focus_path
+  def update
+  
+    @pre_application = PreApplication.create(
+      organisation_id: current_user.organisations.first.id
+    )
+  
+    PaExpressionOfInterest.create(pre_application_id: @pre_application.id)
+  
+    redirect_to(
+      pre_application_expression_of_interest_heritage_focus_path(
+        @pre_application.id
+      )
+    )
+  
+  end
+
+end

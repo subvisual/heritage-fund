@@ -6,7 +6,7 @@ class CreatePaExpressionsOfInterest < ActiveRecord::Migration[6.0]
       t.text :what_project_does
       t.text :programme_outcomes
       t.text :project_reasons
-      t.text :feasability_or_options_work
+      t.text :feasibility_or_options_work
       t.text :project_timescales
       t.text :overall_cost
       t.integer :potential_funding_amount

@@ -1,0 +1,58 @@
+<%=
+  render partial: "partials/page_title",
+         locals: {
+             model_object: @pre_application.pa_expression_of_interest,
+      page_title: t('programme_outcomes.page_title')
+         }
+%>
+
+<%= render partial: "partials/summary_errors", locals: {
+    form_object: @pre_application.pa_expression_of_interest,
+    first_form_element: :pa_expression_of_interest_programme_outcomes
+} if @pre_application.pa_expression_of_interest.errors.any? %>
+
+<%=
+  form_for @pre_application.pa_expression_of_interest,
+  url: :pre_application_expression_of_interest_programme_outcomes,
+  method: :put do |f| 
+%>
+
+  <div class="govuk-form-group <%= "govuk-form-group--error" if
+    @pre_application.pa_expression_of_interest.errors[:programme_outcomes].any? %>">
+
+    <h1 class="govuk-label-wrapper">
+
+      <%= 
+        f.label :programme_outcomes,
+        t('programme_outcomes.page_heading'),
+        class: "govuk-label govuk-label--xl govuk-!-margin-bottom-4"
+      %>
+
+    </h1>
+
+    <%=
+      render partial: "partials/form_input_errors",
+               locals: {form_object: @pre_application.pa_expression_of_interest,
+                        input_field_id: :programme_outcomes} if 
+                          @pre_application.pa_expression_of_interest.errors[:programme_outcomes].any?
+    %>
+
+    <%=
+      f.text_area :programme_outcomes,
+                  rows: 10,
+                  class: "govuk-textarea " \
+                          "#{'govuk-textarea--error' if
+                      @pre_application.pa_expression_of_interest.errors[:programme_outcomes].any?}"
+    %>
+
+  </div>
+
+  <%= 
+    render(
+      ButtonComponent.new(
+        element: "button"
+      )
+    ) 
+  %>
+
+<% end %>

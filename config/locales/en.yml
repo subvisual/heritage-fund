@@ -260,3 +260,43 @@ en-GB:
               invalid_format: "Enter a valid sort code like 309430"
             evidence_file:
               inclusion: "Add evidence of bank account details"
+        pa_project_enquiry:
+          attributes:
+            heritage_focus:
+              blank: "Enter the focus of your heritage"
+            what_project_does:
+              blank: "Enter what the project does"
+            programme_outcomes:
+              blank: "Enter the programme outcomes you are hoping to achieve"
+            project_reasons:
+              blank: "Enter the reasons you want to do your project"
+            project_participants:
+              blank: "Enter the people who will be involved in your project"
+            project_timescales:
+              blank: "Enter the timescales for your project"
+            project_likely_cost:
+              blank: "Enter how much your project is likely to cost"
+            potential_funding_amount:
+              not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+        pa_expression_of_interest:
+          attributes:
+            heritage_focus:
+              blank: "Enter the focus of your heritage"
+            what_project_does:
+              blank: "Enter what the project does"
+            programme_outcomes:
+              blank: "Enter the programme outcomes you are hoping to achieve"
+            project_reasons:
+              blank: "Enter the reasons you want to do your project"
+            feasibility_or_options_work:
+              blank: "Enter the feasibility or options work"
+            project_timescales:
+              blank: "Enter the timescales for your project"
+            overall_cost:
+              blank: "Enter your overall cost"
+            potential_funding_amount:
+              not_a_number: "Amount must be a number, like 500"
+              greater_than: "Enter an amount greater than 0"
+            likely_submission_description:
+              blank: "Enter a likely submission description"
