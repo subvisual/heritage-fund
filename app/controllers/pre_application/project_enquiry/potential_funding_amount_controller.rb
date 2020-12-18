@@ -18,6 +18,12 @@ class PreApplication::ProjectEnquiry::PotentialFundingAmountController < Applica
 
       logger.info 'Finished updating potential_funding_amount for pa_project_enquiry ID: ' \
                   "#{@pre_application.pa_project_enquiry.id}"
+      
+      the_json = @pre_application.to_salesforce_json
+
+      byebug
+
+      logger.info(the_json)
 
       redirect_to(pre_application_project_enquiry_submitted_path)
 

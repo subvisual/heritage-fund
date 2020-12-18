@@ -18,6 +18,10 @@ class PreApplication::ExpressionOfInterest::LikelySubmissionDescriptionControlle
 
       logger.info 'Finished updating likely_submission_description for pa_expression_of_interest ID: ' \
                   "#{@pre_application.pa_expression_of_interest.id}"
+      
+      the_json = @pre_application.to_salesforce_json
+
+      logger.info(the_json)
 
       redirect_to(:pre_application_project_enquiry_submitted)
 

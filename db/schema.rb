@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
   create_table "pre_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organisation_id", null: false
     t.integer "heard_about_types_id"
+    t.integer "user_id", null: false
     t.text "project_reference_number"
     t.text "salesforce_case_id"
     t.text "salesforce_case_number"
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["heard_about_types_id"], name: "index_pre_applications_on_heard_about_types_id"
     t.index ["organisation_id"], name: "index_pre_applications_on_organisation_id"
+    t.index ["user_id"], name: "index_pre_applications_on_user_id"
   end
 
   create_table "pre_applications_dclrtns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -451,6 +453,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_140507) do
   add_foreign_key "people_addresses", "people"
   add_foreign_key "pre_applications", "heard_about_types", column: "heard_about_types_id"
   add_foreign_key "pre_applications", "organisations"
+  add_foreign_key "pre_applications", "users"
   add_foreign_key "pre_applications_dclrtns", "declarations"
   add_foreign_key "pre_applications_dclrtns", "pre_applications"
   add_foreign_key "pre_applications_people", "people"

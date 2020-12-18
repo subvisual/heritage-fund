@@ -8,7 +8,8 @@ class PreApplication::ProjectEnquiry::StartController < ApplicationController
   def update
   
     @pre_application = PreApplication.create(
-      organisation_id: current_user.organisations.first.id
+      organisation_id: current_user.organisations.first.id,
+      user_id: current_user.id
     )
   
     PaProjectEnquiry.create(pre_application_id: @pre_application.id)
