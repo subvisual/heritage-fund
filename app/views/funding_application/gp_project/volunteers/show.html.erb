@@ -2,7 +2,7 @@
   render partial: "partials/page_title",
          locals: {
              model_object: @funding_application.project,
-             page_title: "Volunteers"
+             page_title: t('volunteers.page_title')
          }
 %>
 
@@ -11,7 +11,7 @@
        role="alert" tabindex="-1" data-module="govuk-error-summary">
 
     <h2 class="govuk-error-summary__title" id="error-summary-title">
-      There is a problem
+      <%= t('generic.there_is_a_problem') %>
     </h2>
 
     <div class="govuk-error-summary__body">
@@ -35,18 +35,24 @@
   </div>
 <% end %>
 
-<span class="govuk-caption-xl">Support for your project</span>
+<span class="govuk-caption-xl">
+  <%= t('volunteers.page_hint')%>
+</span>
 
-<h1 class="govuk-heading-xl govuk-!-margin-bottom-2">Volunteers</h1>
+<h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+  <%= t('volunteers.page_heading')%>
+</h1>
 
 <p class="govuk-body-l govuk-!-margin-bottom-9">
-  Tell us what you already have in place to help with your project.
+  <%= t('volunteers.tell_us')%>
 </p>
 
 <section class="nlhf-summary govuk-!-margin-bottom-9">
 
   <header class="nlhf-summary__header">
-    <h2 class="govuk-heading-m">Your project volunteers</h2>
+    <h2 class="govuk-heading-m">
+      <%= t('volunteers.your_project_volunteers') %>
+    </h2>
   </header>
 
   <div class="nlhf-summary__body">
@@ -54,7 +60,7 @@
     <% unless @funding_application.project.volunteers.first&.id.present? %>
 
       <h3 class="govuk-heading-m govuk-!-margin-bottom-0">
-        You have not added any volunteers
+        <%= t('volunteers.not_added_volunteers')%>
       </h3>
 
     <% else %>
@@ -64,10 +70,12 @@
         <thead class="govuk-table__head">
 
           <tr class="govuk-table__row">
-            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">
+              <%= t('volunteers.description_heading')%>
+            </th>
             <th scope="col"
                 class="govuk-table__header govuk-table__header--numeric">
-              Hours
+              <%= t('volunteers.hours_column_heading')%>
             </th>
             <th scope="col" class="govuk-table__header"></th>
           </tr>
@@ -102,7 +110,7 @@
                         ButtonComponent.new(
                             element: "input",
                             classes: "govuk-button--warning",
-                            text: "Delete",
+                            text: t('generic.delete'),
                             attributes: [
                                 {
                                     attribute: "aria-label",
@@ -130,7 +138,7 @@
         <h3 class="nlhf-summary__total__title">
 
           <span class="nlhf-summary__total__title-text">
-            Total hours
+            <%= t('volunteers.total_hours_title')%>
           </span>
 
           <span class="nlhf-summary__total__title-val">
@@ -160,14 +168,15 @@
     <div class="nlhf-add-item govuk-!-margin-bottom-9">
 
       <header class="nlhf-add-item__header">
-        <h2 class="govuk-heading-l">Add a volunteer</h2>
+        <h2 class="govuk-heading-l">
+          <%= t('volunteers.add_volunteer_heading')%>
+        </h2>
       </header>
 
       <div class="nlhf-add-item__body">
 
         <p class="govuk-body govuk-!-margin-bottom-6">
-          Volunteers are people who give up their time for free to help
-          deliver your project.
+          <%=t('volunteers.add_volunteer_hint')%>
         </p>
 
         <div class="nlhf-add-item__row">
@@ -202,7 +211,7 @@
                 id="<%= v.object_name.gsub(/[\[\]]+/, '_').chop + '_description-info' %>"
                 class="govuk-hint govuk-character-count__message"
                 aria-live="polite">
-                You have 50 words remaining
+                <%= t('volunteers.words_remaining') %>
               </span>
 
             </div>
@@ -244,7 +253,7 @@
             render(
                 ButtonComponent.new(
                     element: "input",
-                    text: "Add this volunteer",
+                    text: t('volunteers.btn_add_volunteer'),
                     classes: "govuk-button--secondary"
                 )
             )
@@ -261,6 +270,6 @@
 
 <form action="<%= funding_application_gp_project_evidence_of_support_path %>"
       method="get">
-  <p class="govuk-body">If you have finished adding volunteers</p>
+  <p class="govuk-body"> <%= t('volunteers.input_btn_hint') %> </p>
   <%= render(ButtonComponent.new(element: "input")) %>
 </form>

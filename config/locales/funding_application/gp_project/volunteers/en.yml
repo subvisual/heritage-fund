@@ -1,0 +1,15 @@
+en-GB:
+  volunteers:
+    page_title: "Volunteers"
+    page_heading: "Volunteers"
+    page_hint: "Support for your project"
+    tell_us: "Tell us what you already have in place to help with your project."
+    your_project_volunteers: "Your project volunteers"
+    not_added_volunteers: "You have not added any volunteers"
+    description_heading: "Description"
+    hours_column_heading: "hours"
+    total_hours_title: "Total hours"
+    add_volunteer_heading: "Add a volunteer"
+    add_volunteer_hint: "Volunteers are people who give up their time for free to help deliver your project."
+    btn_add_volunteer: "Add this volunteer"
+    input_btn_hint: "If you have finished adding volunteers"
