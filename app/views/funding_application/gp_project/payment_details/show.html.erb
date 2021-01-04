@@ -38,7 +38,7 @@
 
       <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:account_name].present? %>">
 
-        <%= f.label :account_name, "Name on the account", class: "govuk-heading-m" %>
+        <%= f.label :account_name, t('payment_details.name_on_account_label'), class: "govuk-heading-m" %>
 
         <%=
           render partial: "partials/form_input_errors",
@@ -58,7 +58,7 @@
 
       <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:sort_code].present? %>">
 
-        <%= f.label :sort_code, "Sort code", class: "govuk-heading-m" %>
+        <%= f.label :sort_code, t('payment_details.sort_code_label'), class: "govuk-heading-m" %>
 
         <span class="govuk-hint">
           <%= t('payment_details.sort_code_hint') %>
@@ -82,7 +82,7 @@
 
       <div class="govuk-form-group <%= 'govuk-form-group--error' if @funding_application.payment_details.errors[:account_number].present? %>">
 
-        <%= f.label :account_number, "Account number", class: "govuk-heading-m" %>
+        <%= f.label :account_number, t('payment_details.account_number_label'), class: "govuk-heading-m" %>
 
         <span class="govuk-hint">
           <%= t('payment_details.account_number_hint') %>
