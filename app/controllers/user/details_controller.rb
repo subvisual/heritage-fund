@@ -3,7 +3,6 @@ class User::DetailsController < ApplicationController
   before_action :authenticate_user!
 
   def update
-
     logger.debug "Updating user details for user ID: #{current_user.id}"
 
     current_user.validate_details = true
@@ -30,7 +29,7 @@ class User::DetailsController < ApplicationController
 
       replicate_user_attributes_to_associated_person(current_user) if current_user.person_id
 
-      redirect_to postcode_path 'user', current_user.organisations.first.id
+      redirect_to postcode_path "user", current_user.organisations.first.id
 
     else
 
@@ -45,7 +44,6 @@ class User::DetailsController < ApplicationController
       flash.discard
 
     end
-
   end
 
   private
@@ -56,7 +54,7 @@ class User::DetailsController < ApplicationController
   # items.
   def store_values_in_flash
     params[:user].each do |key, value|
-      flash[key] = value.empty? ? '' : value
+      flash[key] = value.empty? ? "" : value
     end
   end
 
@@ -67,11 +65,9 @@ class User::DetailsController < ApplicationController
   #
   # @param [User] user An instance of User
   def check_and_set_organisation(user)
-
     return if user.organisations.any?
 
     user.organisations.create
-
   end
 
   # Replicates a subset of attributes from the passed in User object
@@ -79,7 +75,6 @@ class User::DetailsController < ApplicationController
   #
   # @param [User] user An instance of User
   def replicate_user_attributes_to_associated_person(user)
-
     person = Person.find(user.person_id)
 
     person.update(
@@ -87,7 +82,6 @@ class User::DetailsController < ApplicationController
       date_of_birth: user.date_of_birth,
       phone_number: user.phone_number
     )
-
   end
 
   def user_params
@@ -99,5 +93,4 @@ class User::DetailsController < ApplicationController
       :phone_number
     )
   end
-
 end

@@ -1,11 +1,11 @@
 class FundingApplication::GpProject::DifferenceController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method updates the difference attribute of a project, redirecting to
   # :three_to_ten_k_project_how_does_your_project_matter if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating difference for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_difference = true
@@ -28,19 +28,15 @@ class FundingApplication::GpProject::DifferenceController < ApplicationControlle
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({project: {difference: ""}})
+      params[:project] = {difference: ""}
     end
 
     params.require(:project).permit(:difference)
-
   end
-
 end

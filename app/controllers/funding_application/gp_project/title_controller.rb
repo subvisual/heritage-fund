@@ -7,7 +7,6 @@ class FundingApplication::GpProject::TitleController < ApplicationController
   # redirecting to :three_to_ten_k_project_key_dates if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating project_title for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_title = true
@@ -16,14 +15,14 @@ class FundingApplication::GpProject::TitleController < ApplicationController
 
     if @funding_application.project.valid?
 
-      logger.info 'Finished updating project_title for project ID: ' \
+      logger.info "Finished updating project_title for project ID: " \
                   "#{@funding_application.project.id}"
 
       redirect_to :funding_application_gp_project_key_dates
 
     else
 
-      logger.info 'Validation failed when attempting to update project_title ' \
+      logger.info "Validation failed when attempting to update project_title " \
                   " for project ID: #{@funding_application.project.id}"
 
       log_errors(@funding_application.project)
@@ -31,7 +30,6 @@ class FundingApplication::GpProject::TitleController < ApplicationController
       render :show
 
     end
-
   end
 
   private
@@ -39,5 +37,4 @@ class FundingApplication::GpProject::TitleController < ApplicationController
   def project_params
     params.require(:project).permit(:project_title)
   end
-
 end

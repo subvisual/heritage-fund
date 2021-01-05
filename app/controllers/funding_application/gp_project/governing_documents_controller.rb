@@ -1,5 +1,6 @@
 class FundingApplication::GpProject::GoverningDocumentsController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method is used to set the @has_file_upload instance variable before
   # rendering the :show template. This is used within the
@@ -9,7 +10,6 @@ class FundingApplication::GpProject::GoverningDocumentsController < ApplicationC
   end
 
   def update
-
     logger.info "Updating governing_document_file for project ID: " \
                 "#{@funding_application.project.id}"
 
@@ -34,19 +34,15 @@ class FundingApplication::GpProject::GoverningDocumentsController < ApplicationC
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({ project: { governing_document_file: nil }})
+      params[:project] = {governing_document_file: nil}
     end
 
     params.require(:project).permit(:governing_document_file)
-
   end
-
 end

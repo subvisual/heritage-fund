@@ -3,8 +3,9 @@ class NonCashContribution < ApplicationRecord
   belongs_to :project
 
   validates :description, presence: true
-  validates :amount, numericality: {
+  validates :amount,
+    numericality: {
       only_integer: true,
       greater_than: 0
-  }
+    }
 end

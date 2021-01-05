@@ -1,5 +1,4 @@
 class ButtonComponent < ViewComponent::Base
-
   # See examples of this component at:
   # /rails/components/button_component/
 
@@ -12,7 +11,7 @@ class ButtonComponent < ViewComponent::Base
   #
   # @param [String] text The button text, for example, "Start"
   # @param [String] element The HTML element will default to 'button'
-  # @param [String] href the contents of the HREF attribute, this being present 
+  # @param [String] href the contents of the HREF attribute, this being present
   #                      will override the element and set it to be an
   #                      anchor 'a'
   # @param [String] classes HTML class attribute contents
@@ -25,9 +24,9 @@ class ButtonComponent < ViewComponent::Base
   # @param [Boolean] is_start_button Use to configure as call to action 'start'
   #                                  button
 
-  def initialize (
-      text: nil, element: nil, href: nil, classes: nil, attributes: nil,
-      type: nil, name: nil, value: nil, data_method: nil, disabled: false, is_start_button: false
+  def initialize(
+    text: nil, element: nil, href: nil, classes: nil, attributes: nil,
+    type: nil, name: nil, value: nil, data_method: nil, disabled: false, is_start_button: false
   )
 
     # If a text parameter has been passed into the initialiser, then use
@@ -41,17 +40,17 @@ class ButtonComponent < ViewComponent::Base
 
     # If an element parameter has been passed in, then use this
     # to determine which element to render
-    unless element.nil?
-      @element = element
-
-    # Otherwise, determine which element to render based on the attributes
-    # which have been passed into the component initialiser
-    else
+    @element = if element.nil?
 
       # If an href attribute is present, then render an anchor element,
       # otherwise default to rendering a button element
-      @element = href.present? ? "a" : "button"
+                 href.present? ? "a" : "button"
 
+    else
+      element
+
+      # Otherwise, determine which element to render based on the attributes
+      # which have been passed into the component initialiser
     end
 
     # If the element is an anchor element, then default it's href
@@ -67,7 +66,7 @@ class ButtonComponent < ViewComponent::Base
     disabled_button_class = disabled ? " govuk-button--disabled" : ""
     start_button_class = is_start_button ? " govuk-button--start" : ""
     class_names = %(govuk-button#{additional_classes}#{disabled_button_class}#{start_button_class})
-      
+
     @name = name
     @value = value
     @attributes = attributes
@@ -80,7 +79,7 @@ class ButtonComponent < ViewComponent::Base
     # If an attributes array of objects has been passed into the component
     # initialiser, then add this to the common_attributes string
     if attributes.present?
-      attributes.each do | attribute |
+      attributes.each do |attribute|
         @common_attributes += %( #{attribute[:attribute]}="#{attribute[:value]}")
       end
     end
@@ -92,10 +91,8 @@ class ButtonComponent < ViewComponent::Base
 
     @button_attributes += %(disabled="disabled" aria-disabled="disabled") if
         disabled
-
   end
 
   # This becomes available in the calling block
   attr_reader :text
-
 end

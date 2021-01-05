@@ -14,21 +14,18 @@ module FundingApplicationContext
   # If no FundingApplication object matching the parameters is found,
   # then the user is redirected to the applications dashboard.
   def set_funding_application
-
     @funding_application = FundingApplication.find_by(
       id: params[:application_id],
       organisation_id: current_user.organisations.first&.id
     )
 
     if !@funding_application.present? || !@funding_application.project.present? || (@funding_application.submitted_on.present? &&
-        !request.path.include?('/application-submitted'))
+        !request.path.include?("/application-submitted"))
 
-        logger.error("User redirected to root, error in funding_application_context.rb")
+      logger.error("User redirected to root, error in funding_application_context.rb")
 
       redirect_to :authenticated_root
 
     end
-
   end
-
 end

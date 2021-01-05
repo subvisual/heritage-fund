@@ -1,4 +1,4 @@
-require 'restforce'
+require "restforce"
 
 class ApplicationToSalesforceJob < ApplicationJob
   class SalesforceApexError < StandardError; end
@@ -9,27 +9,27 @@ class ApplicationToSalesforceJob < ApplicationJob
     logger.info("Submitting Project ID: #{project.id} to Salesforce")
     project.funding_application.update(submitted_on: DateTime.now)
     client = Restforce.new(
-        username: Rails.configuration.x.salesforce.username,
-        password: Rails.configuration.x.salesforce.password,
-        security_token: Rails.configuration.x.salesforce.security_token,
-        client_id: Rails.configuration.x.salesforce.client_id,
-        client_secret: Rails.configuration.x.salesforce.client_secret,
-        host: Rails.configuration.x.salesforce.host,
-        api_version: '47.0'
+      username: Rails.configuration.x.salesforce.username,
+      password: Rails.configuration.x.salesforce.password,
+      security_token: Rails.configuration.x.salesforce.security_token,
+      client_id: Rails.configuration.x.salesforce.client_id,
+      client_secret: Rails.configuration.x.salesforce.client_secret,
+      host: Rails.configuration.x.salesforce.host,
+      api_version: "47.0"
     )
     @json = project.to_salesforce_json
     logger.info "Payload JSON to be sent to Salesforce is: #{@json}"
-    @response = client.post('/services/apexrest/PortalData', @json,  {'Content-Type'=>'application/json'})
+    @response = client.post("/services/apexrest/PortalData", @json, {"Content-Type" => "application/json"})
     @response_body_obj = JSON.parse(@response&.body)
-    is_successful = @response_body_obj&.dig('status') == 'Success'
-    if(is_successful)
+    is_successful = @response_body_obj&.dig("status") == "Success"
+    if is_successful
       project.funding_application.update(
-          salesforce_case_number: @response_body_obj.dig('caseNumber'),
-          salesforce_case_id: @response_body_obj.dig('caseId'),
-          project_reference_number: @response_body_obj.dig('projectRefNumber')
+        salesforce_case_number: @response_body_obj.dig("caseNumber"),
+        salesforce_case_id: @response_body_obj.dig("caseId"),
+        project_reference_number: @response_body_obj.dig("projectRefNumber")
       )
-        project.user.organisations.first.update(
-          salesforce_account_id: @response_body_obj.dig('accountId')
+      project.user.organisations.first.update(
+        salesforce_account_id: @response_body_obj.dig("accountId")
       )
 
       NotifyMailer.project_submission_confirmation(project).deliver_later
@@ -45,7 +45,7 @@ class ApplicationToSalesforceJob < ApplicationJob
       project.evidence_of_support.each do |eos|
         ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, eos, :evidence_of_support_files, eos.description)
       end
-      project.cash_contributions.filter{|cc| cc.cash_contribution_evidence_files.attached?}.each do |cc|
+      project.cash_contributions.filter { |cc| cc.cash_contribution_evidence_files.attached? }.each do |cc|
         ApplicationAttachmentsToSalesforceJob.perform_later(salesforce_case_id, cc, :cash_contribution_evidence_files, cc.description)
       end
     else

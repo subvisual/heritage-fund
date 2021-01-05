@@ -2,11 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable,
-         :confirmable
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :validatable,
+    :confirmable
 
   has_many :users_organisations, inverse_of: :user
   has_many :organisations, through: :users_organisations
@@ -44,16 +44,16 @@ class User < ApplicationRecord
   end
 
   def date_of_birth_is_date_and_in_past?
-    unless Date.valid_date?(self.dob_year.to_i, self.dob_month.to_i, self.dob_day.to_i)
-      errors.add(:date_of_birth, 'Date of birth must be a valid date')
-    else
-      unless Date.new(self.dob_year.to_i, self.dob_month.to_i, self.dob_day.to_i).past?
-        errors.add(:date_of_birth, 'Date of birth must be in the past')
+    if Date.valid_date?(dob_year.to_i, dob_month.to_i, dob_day.to_i)
+      unless Date.new(dob_year.to_i, dob_month.to_i, dob_day.to_i).past?
+        errors.add(:date_of_birth, "Date of birth must be in the past")
       end
+    else
+      errors.add(:date_of_birth, "Date of birth must be a valid date")
     end
   end
 
-    def self.current_user(user_id)
-        @user = User.find_by(uid: user_id)
-    end
+  def self.current_user(user_id)
+    @user = User.find_by(uid: user_id)
+  end
 end

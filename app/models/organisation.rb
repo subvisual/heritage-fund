@@ -22,7 +22,7 @@ class Organisation < ApplicationRecord
   attr_accessor :validate_legal_signatories
 
   validates_associated :legal_signatories,
-                       if: :validate_legal_signatories?
+    if: :validate_legal_signatories?
 
   validates :org_type, presence: true, if: :validate_org_type?
   validates :custom_org_type, presence: true, if: :validate_custom_org_type?
@@ -63,11 +63,11 @@ class Organisation < ApplicationRecord
   def validate_mission_array
     if mission.present?
       mission.each do |m|
-        if !["black_or_minority_ethnic_led",
-             "disability_led",
-             "lgbt_plus_led",
-             "female_led",
-             "young_people_led"].include? m
+        unless ["black_or_minority_ethnic_led",
+          "disability_led",
+          "lgbt_plus_led",
+          "female_led",
+          "young_people_led"].include? m
           errors.add(:mission, m + " is not a valid selection")
         end
       end
@@ -75,17 +75,16 @@ class Organisation < ApplicationRecord
   end
 
   enum org_type: {
-      registered_charity: 0,
-      local_authority: 1,
-      registered_company: 2,
-      community_interest_company: 3,
-      faith_based_organisation: 4,
-      church_organisation: 5,
-      community_group: 6,
-      voluntary_group: 7,
-      individual_private_owner_of_heritage: 8,
-      other: 9,
-      other_public_sector_organisation: 10
+    registered_charity: 0,
+    local_authority: 1,
+    registered_company: 2,
+    community_interest_company: 3,
+    faith_based_organisation: 4,
+    church_organisation: 5,
+    community_group: 6,
+    voluntary_group: 7,
+    individual_private_owner_of_heritage: 8,
+    other: 9,
+    other_public_sector_organisation: 10
   }
-
 end

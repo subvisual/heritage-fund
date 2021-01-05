@@ -15,24 +15,25 @@ class LegalSignatory < ApplicationRecord
   attr_accessor :validate_phone_number
 
   after_validation do
-    self.delete if ignore_validation_for_empty_second_signatory?(self)
+    delete if ignore_validation_for_empty_second_signatory?(self)
   end
 
-  validates :name, presence: true,
-            unless: lambda {
-                |record| ignore_validation_for_empty_second_signatory?(record)
+  validates :name,
+    presence: true,
+    unless: lambda { |record|
+              ignore_validation_for_empty_second_signatory?(record)
             }
   validates :email_address,
-            format: { with: URI::MailTo::EMAIL_REGEXP },
-            does_not_match_other_signatory: true,
-            unless: lambda {
-                |record| ignore_validation_for_empty_second_signatory?(record)
-            }
+    format: {with: URI::MailTo::EMAIL_REGEXP},
+    does_not_match_other_signatory: true,
+    unless: lambda { |record|
+      ignore_validation_for_empty_second_signatory?(record)
+    }
   validates :phone_number,
-            presence: true,
-            unless: lambda {
-                |record| ignore_validation_for_empty_second_signatory?(record)
-            }
+    presence: true,
+    unless: lambda { |record|
+      ignore_validation_for_empty_second_signatory?(record)
+    }
 
   # Method used to determine whether a legal signatory should not
   # be validated. We check for this as the first legal signatory is mandatory,
@@ -40,9 +41,9 @@ class LegalSignatory < ApplicationRecord
   # attributes have been populated
   def ignore_validation_for_empty_second_signatory?(record)
     record.name.blank? &&
-        record.email_address.blank? &&
-        record.phone_number.blank? &&
-        record == organisation.legal_signatories.second
+      record.email_address.blank? &&
+      record.phone_number.blank? &&
+      record == organisation.legal_signatories.second
   end
 
   def validate_name?
@@ -56,5 +57,4 @@ class LegalSignatory < ApplicationRecord
   def validate_phone_number?
     validate_phone_number == true
   end
-
 end

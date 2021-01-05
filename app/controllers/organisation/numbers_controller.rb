@@ -7,7 +7,6 @@ class Organisation::NumbersController < ApplicationController
   # of an organisation redirecting to :organisation_about if successful and
   # re-rendering the :show method if unsuccessful
   def update
-
     logger.info "Updating company_number/charity_number for organisation ID: #{@organisation.id}"
 
     @organisation.update(organisation_params)
@@ -16,11 +15,11 @@ class Organisation::NumbersController < ApplicationController
 
       logger.info "Finished updating company_number/charity_number for organisation ID: #{@organisation.id}"
 
-      redirect_to postcode_path 'organisation', @organisation.id
+      redirect_to postcode_path "organisation", @organisation.id
 
     else
 
-      logger.info 'Validation failed when attempting to update company_number/charity_number ' \
+      logger.info "Validation failed when attempting to update company_number/charity_number " \
                     "for organisation ID: #{@organisation.id}"
 
       log_errors(@organisation)
@@ -28,7 +27,6 @@ class Organisation::NumbersController < ApplicationController
       render :show
 
     end
-
   end
 
   private
@@ -36,5 +34,4 @@ class Organisation::NumbersController < ApplicationController
   def organisation_params
     params.require(:organisation).permit(:company_number, :charity_number)
   end
-
 end

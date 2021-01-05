@@ -1,12 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Helps", type: :request do
-
   describe "GET /cookies" do
     it "returns http success" do
       get "/help/cookies"
       expect(response).to have_http_status(:success)
     end
   end
-
 end

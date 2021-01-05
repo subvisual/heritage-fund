@@ -11,7 +11,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
@@ -20,7 +20,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -48,21 +48,23 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
-  config.cache_store = :redis_cache_store, {
-      url: CF::App::Credentials.find_by_service_label('redis')['uri'],
-      connect_timeout:    30,
-      read_timeout:       0.2,
-      write_timeout:      0.2,
+  config.cache_store = :redis_cache_store,
+    {
+      url: CF::App::Credentials.find_by_service_label("redis")["uri"],
+      connect_timeout: 30,
+      read_timeout: 0.2,
+      write_timeout: 0.2,
       reconnect_attempts: 1,
-      error_handler: -> (method:, returning:, exception:) {
-        # Report errors to Sentry as warnings
-        Raven.capture_exception exception, level: 'warning',
-                                tags: { method: method, returning: returning }
-      }
-  }
+      error_handler: ->(method:, returning:, exception:) {
+                       # Report errors to Sentry as warnings
+                       Raven.capture_exception exception,
+                         level: "warning",
+                         tags: {method: method, returning: returning}
+                     }
+    }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :delayed_job
@@ -89,9 +91,9 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.
@@ -119,10 +121,10 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   # Send emails via notify
-  config.action_mailer.default_url_options = { host: "https://#{JSON.parse(ENV['VCAP_APPLICATION'])['application_uris'][0]}" }
+  config.action_mailer.default_url_options = {host: "https://#{JSON.parse(ENV["VCAP_APPLICATION"])["application_uris"][0]}"}
   config.action_mailer.delivery_method = :notify
   config.action_mailer.notify_settings = {
-      api_key: ENV.fetch("NOTIFY_API_KEY")
+    api_key: ENV.fetch("NOTIFY_API_KEY")
   }
 
   config.x.ideal_postcodes.api_key = ENV.fetch("IDEAL_POSTCODES_API_KEY")
@@ -140,5 +142,4 @@ Rails.application.configure do
   config.assets.quiet = true
   config.x.consumer.username = ENV.fetch("CONSUMER_USERNAME")
   config.x.consumer.password = ENV.fetch("CONSUMER_PASSWORD")
-
 end

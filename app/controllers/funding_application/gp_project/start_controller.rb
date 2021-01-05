@@ -5,7 +5,6 @@ class FundingApplication::GpProject::StartController < ApplicationController
   # Method used to create new FundingApplication and Project objects
   # before redirecting the user to :funding_application_project_application_form
   def update
-
     @application = FundingApplication.create(
       organisation_id: current_user.organisations.first.id
     )
@@ -17,7 +16,5 @@ class FundingApplication::GpProject::StartController < ApplicationController
         @application.id
       )
     )
-
   end
-
 end

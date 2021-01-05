@@ -12,5 +12,4 @@ class ReleasedFormController < ApplicationController
   def receive
     ReleaseFormJob.perform_later(request.params, request.raw_post)
   end
-
 end

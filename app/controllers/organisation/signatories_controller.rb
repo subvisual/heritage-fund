@@ -4,16 +4,13 @@ class Organisation::SignatoriesController < ApplicationController
   include ObjectErrorsLogger
 
   def show
-
     @organisation.legal_signatories.build unless
         @organisation.legal_signatories.first.present?
     @organisation.legal_signatories.build unless
         @organisation.legal_signatories.second.present?
-
   end
 
   def update
-
     logger.info "Updating legal signatories for organisation ID: #{@organisation.id}"
 
     @organisation.validate_legal_signatories = true
@@ -35,7 +32,6 @@ class Organisation::SignatoriesController < ApplicationController
       render :show
 
     end
-
   end
 
   private
@@ -50,5 +46,4 @@ class Organisation::SignatoriesController < ApplicationController
       ]
     )
   end
-
 end

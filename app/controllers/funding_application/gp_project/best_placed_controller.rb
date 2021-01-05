@@ -1,11 +1,11 @@
 class FundingApplication::GpProject::BestPlacedController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method updates the best_placed_description attribute of a project,
   # redirecting to :three_to_ten_k_project_how_will_your_project_involve_people
   # if successful and re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating best_placed_description for project ID: " \
                  "#{@funding_application.project.id}"
 
@@ -30,19 +30,15 @@ class FundingApplication::GpProject::BestPlacedController < ApplicationControlle
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({project: {best_placed_description: ""}})
+      params[:project] = {best_placed_description: ""}
     end
 
     params.require(:project).permit(:best_placed_description)
-
   end
-  
 end

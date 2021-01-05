@@ -1,5 +1,4 @@
 class FundingApplication < ApplicationRecord
-
   has_many :addresses, through: :funding_application_addresses
 
   has_one :project
@@ -18,68 +17,62 @@ class FundingApplication < ApplicationRecord
   attr_accessor :validate_declarations
 
   validates_associated :organisation
-  validates_associated :people if :validate_people
+  validates_associated :people, if: :validate_people?
   validates_associated :declarations, if: :validate_declarations?
 
   def validate_people?
-      validate_people == true
+    validate_people == true
   end
 
   def validate_declarations?
-      validate_declarations == true
+    validate_declarations == true
   end
 
   private
 
-  # Method to build an array of specified values from an 
+  # Method to build an array of specified values from an
   # ActiveRecord::Collection.
   #
   # @param [ActiveRecord::Collection] active_record_collection An instance of
   #                                                            ActiveRecord::Collection
   # @param [String]                   item_key                 A reference to an item key
   def active_record_collection_to_array(active_record_collection, item_key)
-      temp_array = []
+    temp_array = []
 
-      active_record_collection.each do |active_record_item|
-          temp_array.append(active_record_item[item_key])
-      end
+    active_record_collection.each do |active_record_item|
+      temp_array.append(active_record_item[item_key])
+    end
 
-      return {results: temp_array}
+    {results: temp_array}
   end
 
-  # Method to initialise instance variables containing the response to each 
+  # Method to initialise instance variables containing the response to each
   # declaration question. question_response will be the applicants response.
   #
   # @param [ActiveRecord::Collection] active_record_collection An instance of
   #                                                            ActiveRecord::Collection
   def get_declarations(active_record_collection)
-
     active_record_collection.each do |active_record_item|
-
-      question_response = active_record_item.json['question_response']
+      question_response = active_record_item.json["question_response"]
 
       case active_record_item.declaration_type
-        when 'agreed_to_terms'
-          @declaration_agreed_to_terms = question_response ? 
+        when "agreed_to_terms"
+          @declaration_agreed_to_terms = question_response ?
             {results: [question_response]} : {results: [""]}
-        when 'data_protection_and_research'
-          @declaration_data_protection_and_research = question_response ? 
+        when "data_protection_and_research"
+          @declaration_data_protection_and_research = question_response ?
             {results: [question_response]} : {results: [""]}
-        when 'contact'
-          @declaration_contact = question_response ? 
+        when "contact"
+          @declaration_contact = question_response ?
             {results: [question_response]} : {results: [""]}
-        when 'confirmation'
-          @declaration_confirmation = question_response ? 
+        when "confirmation"
+          @declaration_confirmation = question_response ?
             {results: [question_response]} : {results: [""]}
-        when 'form_feedback'
+        when "form_feedback"
           @declaration_form_feedback = question_response
-        when 'data_and_foi'
+        when "data_and_foi"
           @declaration_data_and_foi = question_response
       end
-
     end
-
   end
-
 end
-

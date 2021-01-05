@@ -7,11 +7,9 @@ class NewApplicationController < ApplicationController
   # does not contain all mandatory details, then redirect to the dashboard
   # orchestration path. Otherwise, proceed to create a NewApplication object
   def show
-
     redirect_based_on_organisation_presence_and_completeness(current_user)
 
     @application = NewApplication.new
-
   end
 
   # This method creates a new NewApplication object and then uses this to
@@ -19,7 +17,6 @@ class NewApplicationController < ApplicationController
   # then the user is redirected to the application start page relevant to
   # the application_type selected. Otherwise, :show is re-rendered
   def update
-
     logger.info "Updating application_type for user ID: #{current_user.id}"
 
     @application = NewApplication.new
@@ -36,7 +33,7 @@ class NewApplicationController < ApplicationController
 
     else
 
-      logger.info 'Validation failed when attempting to select application_type ' \
+      logger.info "Validation failed when attempting to select application_type " \
                     "for user ID: #{current_user.id}"
 
       log_errors(@application)
@@ -44,23 +41,20 @@ class NewApplicationController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def new_application_params
-
     # When no radio button is selected on the page no application_type
     # key/value is passed in the form, meaning that the new_application hash
     # is no longer passed through either. In this case, we need to add it
     # manually to avoid triggering a 'param is missing or value is empty'
     # exception
-    params.merge!(new_application: { application_type: '' }) unless
+    params[:new_application] = {application_type: ""} unless
         params[:new_application].present?
 
     params.require(:new_application).permit(:application_type)
-
   end
 
   # Redirects the user based on the presence of and completeness of their
@@ -69,12 +63,10 @@ class NewApplicationController < ApplicationController
   #
   # @param [User] user An instance of User
   def redirect_based_on_organisation_presence_and_completeness(user)
-
     unless user.organisations.any? &&
-           helpers.complete_organisation_details?(user.organisations.first)
+        helpers.complete_organisation_details?(user.organisations.first)
       redirect_to :orchestrate_dashboard_journey
     end
-
   end
 
   # This method will redirect the user to the correct application start page
@@ -82,18 +74,17 @@ class NewApplicationController < ApplicationController
   #
   # @param [NewApplication] application An instance of NewApplication
   def redirect_to_application_start_page(application)
-
     case application.application_type
 
-    when 'sff_small'
+    when "sff_small"
 
       logger.info "Redirecting to SFF Small form for user ID: #{current_user.id}"
 
       redirect_to :funding_application_gp_project_start
 
     else
-      logger.info 'Method redirect_to_application_start_page called with ' \
-                  'an application object containing an ' \
+      logger.info "Method redirect_to_application_start_page called with " \
+                  "an application object containing an " \
                   "application_type of #{application.application_type}"
 
       # If the user has managed to hit this route with an invalid
@@ -101,7 +92,5 @@ class NewApplicationController < ApplicationController
       redirect_to :authenticated_root
 
     end
-
   end
-
 end

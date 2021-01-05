@@ -3,10 +3,9 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def show
-
     if user_details_complete(current_user)
 
-      gon.push({ tracking_url_path: '/project-dashboard' })
+      gon.push({tracking_url_path: "/project-dashboard"})
 
       @projects = current_user.projects
 
@@ -18,7 +17,6 @@ class DashboardController < ApplicationController
       redirect_to(:user_details)
 
     end
-
   end
 
   # Early users of the service may not have an organisation linked to their
@@ -27,11 +25,9 @@ class DashboardController < ApplicationController
   # organisation details to be complete before we can allow a user to
   # create a new application.
   def orchestrate_dashboard_journey
-
     create_organisation_if_none_exists(current_user)
 
     redirect_based_on_organisation_completeness(current_user.organisations.first)
-
   end
 
   private
@@ -42,7 +38,6 @@ class DashboardController < ApplicationController
   #
   # @param [User] user An instance of User
   def user_details_complete(user)
-
     user_details_fields_presence = []
 
     user_details_fields_presence.push(user.name.present?)
@@ -57,7 +52,6 @@ class DashboardController < ApplicationController
     )
 
     user_details_fields_presence.all?
-
   end
 
   # Checks for the presence of an organisation associated to a user
@@ -65,7 +59,6 @@ class DashboardController < ApplicationController
   #
   # @param [User] user An instance of User
   def create_organisation_if_none_exists(user)
-
     # rubocop:disable Style/GuardClause
     unless user.organisations.any?
 
@@ -75,18 +68,15 @@ class DashboardController < ApplicationController
 
     end
     # rubocop:enable Style/GuardClause
-
   end
 
   # Creates an organisation and links this to the current_user
   #
   # @param [User] user An instance of User
   def create_organisation(user)
-
     user.organisations.create
 
     logger.info "Successfully created organisation ID: #{user.organisations.first.id}"
-
   end
 
   # Redirects the user based on the completeness of their associated organisation
@@ -96,7 +86,6 @@ class DashboardController < ApplicationController
   #
   # @param [Organisation] organisation An instance of Organisation
   def redirect_based_on_organisation_completeness(organisation)
-
     if helpers.complete_organisation_details?(organisation)
 
       logger.info "Organisation details complete for #{organisation.id}"
@@ -110,7 +99,5 @@ class DashboardController < ApplicationController
       redirect_to organisation_type_path(organisation.id)
 
     end
-
   end
-
 end

@@ -1,12 +1,12 @@
 class FundingApplication::GpProject::CheckAnswersController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method redirects a user based on whether or not the mandatory project
   # fields have been populated, redirecting where necessary based on the
   # organisation type if successful, or re-rendering :show method if
   # unsuccessful
   def update
-
     logger.info "Determining state of application before proceeding to " \
                 "declaration route for project ID: #{@funding_application.project.id}"
 
@@ -18,8 +18,8 @@ class FundingApplication::GpProject::CheckAnswersController < ApplicationControl
                   "#{@funding_application.project.id}"
 
       if current_user.organisations.first.org_type == "registered_company" ||
-        current_user.organisations.first.org_type ==
-            "individual_private_owner_of_heritage"
+          current_user.organisations.first.org_type ==
+              "individual_private_owner_of_heritage"
 
         logger.info "Organisation is either a registered company or an " \
                     "individual private owner of heritage, redirecting to " \
@@ -45,7 +45,5 @@ class FundingApplication::GpProject::CheckAnswersController < ApplicationControl
       render :show
 
     end
-
   end
-
 end

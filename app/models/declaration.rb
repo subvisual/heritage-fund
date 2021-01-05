@@ -1,5 +1,4 @@
 class Declaration < ApplicationRecord
-
   self.implicit_order_column = "created_at"
 
   has_many :funding_applications_dclrtns, inverse_of: :declaration
@@ -11,5 +10,4 @@ class Declaration < ApplicationRecord
   validates :json, presence: true
   validates :version, presence: true
   validates :grant_programme, presence: true
-
 end

@@ -1,8 +1,8 @@
 class FundingApplication::GpProject::MatterController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   def update
-
     logger.info "Updating matter for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_matter = true
@@ -25,19 +25,15 @@ class FundingApplication::GpProject::MatterController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({project: {matter: ""}})
+      params[:project] = {matter: ""}
     end
 
     params.require(:project).permit(:matter)
-
   end
-
 end

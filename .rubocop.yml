@@ -1,13 +1,8 @@
-Layout/EmptyLinesAroundBlockBody:
-  Enabled: false
-Layout/EmptyLinesAroundClassBody:
-  Enabled: false
-Layout/EmptyLinesAroundMethodBody:
-  Enabled: false
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
-Layout/EmptyLinesAroundExceptionHandlingKeywords:
-  Enabled: false
+AllCops:
+  DisabledByDefault: true
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
 
 Metrics/AbcSize:
   Severity: warning
@@ -24,8 +19,6 @@ Metrics/PerceivedComplexity:
 
 Style/BlockDelimiters:
   EnforcedStyle: semantic
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/MultilineTernaryOperator:
@@ -36,3 +29,70 @@ Style/RescueStandardError:
   EnforcedStyle: implicit
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+Layout/ArgumentAlignment:
+  Enabled: true
+  AutoCorrect: true
+  EnforcedStyle: with_fixed_indentation
+
+Layout/BlockAlignment:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/BlockEndNewline:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/FirstArgumentIndentation:
+  Enabled: true
+  AutoCorrect: true
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/FirstHashElementIndentation:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/FirstParameterIndentation:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/HashAlignment:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/IndentationWidth:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/MultilineBlockLayout:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/MultilineHashBraceLayout:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+  AutoCorrect: true
+
+Layout/ParameterAlignment:
+  Enabled: true
+  AutoCorrect: true
+  EnforcedStyle: with_fixed_indentation

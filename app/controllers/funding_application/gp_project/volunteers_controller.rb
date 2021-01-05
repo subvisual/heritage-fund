@@ -1,11 +1,11 @@
 class FundingApplication::GpProject::VolunteersController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method adds a volunteer to a project, redirecting back to
   # :funding_application_gp_project_volunteers if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     # Empty flash values to ensure that we don't redisplay them unnecessarily
     flash[:description] = ""
     flash[:hours] = ""
@@ -31,19 +31,17 @@ class FundingApplication::GpProject::VolunteersController < ApplicationControlle
 
       # Store flash values to display them again when re-rendering the page
       flash[:description] =
-          params['project']['volunteers_attributes']['0']['description']
-      flash[:hours] = params['project']['volunteers_attributes']['0']['hours']
+        params["project"]["volunteers_attributes"]["0"]["description"]
+      flash[:hours] = params["project"]["volunteers_attributes"]["0"]["hours"]
 
       render :show
 
     end
-
   end
 
   # This method deletes a project volunteer, redirecting back to
   # :funding_application_gp_project_volunteers once completed
   def delete
-
     logger.info "User has selected to delete volunteer ID: " \
                 "#{params[:volunteer_id]} from project ID: #{@funding_application.project.id}"
 
@@ -56,14 +54,13 @@ class FundingApplication::GpProject::VolunteersController < ApplicationControlle
     logger.info "Finished deleting volunteer ID: #{volunteer.id}"
 
     redirect_to :funding_application_gp_project_volunteers
-
   end
 
   private
+
   def project_params
     params.require(:project).permit(
-        volunteers_attributes: [:description, :hours]
+      volunteers_attributes: [:description, :hours]
     )
   end
-
 end

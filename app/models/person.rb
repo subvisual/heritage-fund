@@ -1,5 +1,4 @@
 class Person < ApplicationRecord
-
   self.implicit_order_column = "created_at"
 
   has_many :funding_applications_people, inverse_of: :person
@@ -12,7 +11,7 @@ class Person < ApplicationRecord
 
   validates :name, presence: true, if: :validate_name?
   validates :position, presence: true, if: :validate_position?
-  validates :email, presence: true, if: :validate_email? 
+  validates :email, presence: true, if: :validate_email?
   validates :phone_number, presence: true, if: :validate_phone_number?
 
   def validate_name?
@@ -30,5 +29,4 @@ class Person < ApplicationRecord
   def validate_phone_number?
     validate_phone_number == true
   end
-
 end

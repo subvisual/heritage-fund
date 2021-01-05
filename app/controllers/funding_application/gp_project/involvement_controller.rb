@@ -1,11 +1,11 @@
 class FundingApplication::GpProject::InvolvementController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method updates the involvement_description attribute of a project,
   # redirecting to :three_to_ten_k_project_other_outcomes if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating involvement_description for project " \
                 "ID: #{@funding_application.project.id}"
 
@@ -30,19 +30,15 @@ class FundingApplication::GpProject::InvolvementController < ApplicationControll
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({project: {involvement_description: ""}})
+      params[:project] = {involvement_description: ""}
     end
 
     params.require(:project).permit(:involvement_description)
-
   end
-
 end

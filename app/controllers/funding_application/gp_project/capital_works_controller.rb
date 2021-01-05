@@ -1,5 +1,6 @@
 class FundingApplication::GpProject::CapitalWorksController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method is used to set the @has_file_upload instance variable before
   # rendering the :show template. This is used within the
@@ -26,7 +27,7 @@ class FundingApplication::GpProject::CapitalWorksController < ApplicationControl
       # Redirect the user back to the same page if they were uploading a
       # capital work file - this is so that we can display the file back to
       # the user so they can check that they have uploaded the correct file
-      
+
       if params[:project][:capital_work_file].present?
         redirect_to :funding_application_gp_project_capital_works
       else
@@ -43,19 +44,15 @@ class FundingApplication::GpProject::CapitalWorksController < ApplicationControl
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({ project: { capital_work: "" } })
+      params[:project] = {capital_work: ""}
     end
 
     params.require(:project).permit(:capital_work, :capital_work_file)
-
   end
-
 end

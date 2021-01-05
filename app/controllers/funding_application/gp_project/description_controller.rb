@@ -1,11 +1,11 @@
 class FundingApplication::GpProject::DescriptionController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method updates the description attribute of a project,
   # redirecting to :three_to_ten_k_project_capital_works if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating project description for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_description = true
@@ -28,7 +28,6 @@ class FundingApplication::GpProject::DescriptionController < ApplicationControll
       render :show
 
     end
-
   end
 
   private
@@ -36,5 +35,4 @@ class FundingApplication::GpProject::DescriptionController < ApplicationControll
   def project_params
     params.require(:project).permit(:description)
   end
-
 end

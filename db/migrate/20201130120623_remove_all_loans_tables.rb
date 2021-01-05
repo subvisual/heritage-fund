@@ -1,5 +1,4 @@
 class RemoveAllLoansTables < ActiveRecord::Migration[6.0]
-
   def up
     drop_table :gp_hef_loans_org_income_types
     drop_table :gp_hef_loans_repayment_freqs
@@ -18,5 +17,4 @@ class RemoveAllLoansTables < ActiveRecord::Migration[6.0]
     create_table :gp_hef_loans_repayment_freqs
     create_table :gp_hef_loans_org_income_types
   end
-
 end

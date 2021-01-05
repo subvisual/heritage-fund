@@ -1,24 +1,23 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
-require 'support/factory_bot'
-require_relative 'support/controller_macros'
-require_relative 'support/fake_objects'
-require 'webmock/rspec'
-require_relative './features/helpers'
+require "spec_helper"
+require "support/factory_bot"
+require_relative "support/controller_macros"
+require_relative "support/fake_objects"
+require "webmock/rspec"
+require_relative "./features/helpers"
 WebMock.disable_net_connect!(allow_localhost: true)
-ENV['RAILS_ENV'] ||= 'test'
+ENV["RAILS_ENV"] ||= "test"
 
-require File.expand_path('../config/environment', __dir__)
-include Warden::Test::Helpers
+require File.expand_path("../config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 require "view_component/test_helpers"
 
-require 'axe/rspec'
-require 'capybara/rspec'
-require 'capybara/apparition'
+require "axe/rspec"
+require "capybara/rspec"
+require "capybara/apparition"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -45,9 +44,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-
   # Exclude running accessibility tests by default
-  config.filter_run_excluding :accessibility => true
+  config.filter_run_excluding accessibility: true
 
   # Set the Capybara driver when running accessibility tests using
   # bundle exec rspec --tag accessibility
@@ -101,4 +99,5 @@ RSpec.configure do |config|
 
   config.include Helpers
   config.include ViewComponent::TestHelpers, type: :component
+  config.include Warden::Test::Helpers
 end

@@ -1,8 +1,8 @@
 class FundingApplication::GpProject::OutcomesController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   def update
-
     logger.info "Updating outcome attributes for project ID: #{@funding_application.project.id}"
 
     remove_outcome_descriptions
@@ -28,32 +28,29 @@ class FundingApplication::GpProject::OutcomesController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     params.require(:project).permit(
-        :outcome_2,
-        :outcome_3,
-        :outcome_4,
-        :outcome_5,
-        :outcome_6,
-        :outcome_7,
-        :outcome_8,
-        :outcome_9,
-        :outcome_2_description,
-        :outcome_3_description,
-        :outcome_4_description,
-        :outcome_5_description,
-        :outcome_6_description,
-        :outcome_7_description,
-        :outcome_8_description,
-        :outcome_9_description
+      :outcome_2,
+      :outcome_3,
+      :outcome_4,
+      :outcome_5,
+      :outcome_6,
+      :outcome_7,
+      :outcome_8,
+      :outcome_9,
+      :outcome_2_description,
+      :outcome_3_description,
+      :outcome_4_description,
+      :outcome_5_description,
+      :outcome_6_description,
+      :outcome_7_description,
+      :outcome_8_description,
+      :outcome_9_description
     )
-
   end
 
   # This method sets outcome description parameters to an empty string
@@ -63,12 +60,11 @@ class FundingApplication::GpProject::OutcomesController < ApplicationController
   # gets passed in the params.
   def remove_outcome_descriptions
     if params[:project].present?
-      for i in 2..9
+      (2..9).each do |i|
         if params[:project]["outcome_#{i}"] == "false"
           params[:project]["outcome_#{i}_description"] = ""
         end
       end
     end
   end
-
 end

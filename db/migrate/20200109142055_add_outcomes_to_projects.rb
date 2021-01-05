@@ -1,6 +1,5 @@
 class AddOutcomesToProjects < ActiveRecord::Migration[6.0]
   def change
-
     add_column :projects, :outcome_2, :boolean
     add_column :projects, :outcome_3, :boolean
     add_column :projects, :outcome_4, :boolean
@@ -18,6 +17,5 @@ class AddOutcomesToProjects < ActiveRecord::Migration[6.0]
     add_column :projects, :outcome_7_description, :text
     add_column :projects, :outcome_8_description, :text
     add_column :projects, :outcome_9_description, :text
-
   end
 end

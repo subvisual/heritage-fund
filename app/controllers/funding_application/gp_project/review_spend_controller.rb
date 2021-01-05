@@ -1,3 +1,4 @@
 class FundingApplication::GpProject::ReviewSpendController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 end

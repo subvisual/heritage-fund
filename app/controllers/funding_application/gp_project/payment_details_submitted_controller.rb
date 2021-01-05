@@ -1,4 +1,4 @@
 class FundingApplication::GpProject::PaymentDetailsSubmittedController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 end
-  

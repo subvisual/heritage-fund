@@ -1,8 +1,8 @@
 class FundingApplication::GpProject::DatesController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   def update
-
     logger.info "Updating start_date and end_date for project ID: " \
                 "#{@funding_application.project.id}"
 
@@ -13,12 +13,12 @@ class FundingApplication::GpProject::DatesController < ApplicationController
     if @funding_application.project.valid?
 
       start_date = Date.new(params[:project][:start_date_year].to_i,
-                            params[:project][:start_date_month].to_i,
-                            params[:project][:start_date_day].to_i)
+        params[:project][:start_date_month].to_i,
+        params[:project][:start_date_day].to_i)
 
       end_date = Date.new(params[:project][:end_date_year].to_i,
-                          params[:project][:end_date_month].to_i,
-                          params[:project][:end_date_day].to_i)
+        params[:project][:end_date_month].to_i,
+        params[:project][:end_date_day].to_i)
 
       @funding_application.project.start_date = start_date
       @funding_application.project.end_date = end_date
@@ -64,26 +64,24 @@ class FundingApplication::GpProject::DatesController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def project_params
     params.require(:project).permit(
-        :start_date_day,
-        :start_date_month,
-        :start_date_year,
-        :end_date_day,
-        :end_date_month,
-        :end_date_year
+      :start_date_day,
+      :start_date_month,
+      :start_date_year,
+      :end_date_day,
+      :end_date_month,
+      :end_date_year
     )
   end
 
   # This method checks to determine whether or not the project length
   # is greater than one year
   def is_project_length_greater_than_one_year(first_date, second_date)
-
     logger.debug "Calculating length of project in days for project ID: #{@funding_application.project.id}"
 
     length_in_days = (second_date - first_date).to_i
@@ -91,7 +89,6 @@ class FundingApplication::GpProject::DatesController < ApplicationController
     logger.debug "Project length in days of #{length_in_days} for project ID: #{@funding_application.project.id}"
 
     length_in_days > 365
-
   end
 
   # Temporarily stores values in FlashHash to redisplay if there
@@ -99,11 +96,8 @@ class FundingApplication::GpProject::DatesController < ApplicationController
   # model attributes that are persistent for the individual date
   # items.
   def store_values_in_flash
-
-    params[:project].each do | key, value |
+    params[:project].each do |key, value|
       flash[key] = value.empty? ? "" : value
     end
-
   end
-
 end

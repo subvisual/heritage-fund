@@ -7,10 +7,8 @@ class AddressController < ApplicationController
   before_action :authenticate_user!, :check_and_set_model_type
 
   def assign_address_attributes
-
     assign_attributes(@model_object)
     render :show
-
   end
 
   # This method updates the address for a given model object, which could
@@ -18,7 +16,6 @@ class AddressController < ApplicationController
   # address attributes are replicated to a separate address record which is
   # then associated with the user and it's associated person record
   def update
-
     logger.info "Updating address for #{@type} ID: #{@model_object.id}"
 
     @model_object.validate_address = true
@@ -30,11 +27,11 @@ class AddressController < ApplicationController
       logger.info "Finished updating address for #{@type} ID: " \
                   "#{@model_object.id}"
 
-      if @type == 'organisation'
-        redirect_to organisation_mission_path(params['id'])
-      elsif @type == 'project'
+      if @type == "organisation"
+        redirect_to organisation_mission_path(params["id"])
+      elsif @type == "project"
         redirect_to funding_application_gp_project_description_path(@model_object.funding_application.id)
-      elsif @type == 'user'
+      elsif @type == "user"
 
         # Caters to a situation where original applicants have no person assigned to the user.
         check_and_set_person_address(@model_object) if @model_object.person.present?
@@ -45,7 +42,7 @@ class AddressController < ApplicationController
 
     else
 
-      logger.info 'Validation failed when attempting to update address for ' \
+      logger.info "Validation failed when attempting to update address for " \
                   "#{@type} ID: #{@model_object.id}"
 
       log_errors(@model_object)
@@ -53,7 +50,6 @@ class AddressController < ApplicationController
       render :show
 
     end
-
   end
 
   private
@@ -64,11 +60,11 @@ class AddressController < ApplicationController
     if %w[user organisation project].include? params[:type]
       @type = params[:type]
       case @type
-      when 'organisation'
+      when "organisation"
         @model_object = Organisation.find(params[:id])
-      when 'project'
+      when "project"
         @model_object = Project.find(params[:id])
-      when 'user'
+      when "user"
         users_organisation = UsersOrganisation.find_by(organisation_id: params[:id])
         @model_object = current_user
         redirect_to :root unless users_organisation.user_id == current_user.id
@@ -84,7 +80,6 @@ class AddressController < ApplicationController
   #
   # @param [User] user An instance of User
   def check_and_set_person_address(user)
-
     person_address_association = PeopleAddress.find_by(person_id: user.person_id)
 
     unless person_address_association
@@ -100,7 +95,6 @@ class AddressController < ApplicationController
     end
 
     replicate_address_from_current_user_details(person_address_association.address_id, user)
-
   end
 
   # Creates and returns a new Address object based on the
@@ -109,7 +103,6 @@ class AddressController < ApplicationController
   # @param [uuid] id The unique identifier of an Address
   # @param [User] user An instance of User
   def replicate_address_from_current_user_details(id, user)
-
     address = Address.find(id)
 
     address.update(
@@ -120,7 +113,6 @@ class AddressController < ApplicationController
       county: user.county,
       postcode: user.postcode
     )
-
   end
 
   # Creates and returns a PeopleAddress object based on the
@@ -129,7 +121,6 @@ class AddressController < ApplicationController
   # @param [uuid] person_id The unique identifier of a Person
   # @param [uuid] address_id The unique identifier of an Address
   def create_person_address_association(person_id, address_id)
-
     logger.debug "Creating people_addresses record for person ID: #{person_id} " \
       "and address ID: #{address_id}"
 
@@ -141,13 +132,16 @@ class AddressController < ApplicationController
     logger.debug "people_addresses record created with ID: #{person_address_association.id}"
 
     person_address_association
-
   end
 
   def model_params
     params.require(@type)
-          .permit(:name, :line1, :line2, :line3,
-                  :townCity, :county, :postcode)
+      .permit(:name,
+        :line1,
+        :line2,
+        :line3,
+        :townCity,
+        :county,
+        :postcode)
   end
-
 end

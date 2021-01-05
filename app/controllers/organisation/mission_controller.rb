@@ -7,7 +7,6 @@ class Organisation::MissionController < ApplicationController
   # redirecting to :organisation_signatories if successful and re-rendering
   # :show method if unsuccessful
   def update
-
     logger.info "Updating mission for organisation ID: #{@organisation.id}"
 
     @organisation.validate_mission = true
@@ -29,22 +28,18 @@ class Organisation::MissionController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def organisation_params
-
     # When no checkbox is selected on the page no mission key/value is passed
     # in the form, meaning that the organisation hash is no longer passed
     # through either. In this case, we need to add it manually to avoid
     # triggering a 'param is missing or value is empty' exception
 
-    params.merge!({ organisation: { mission: '' } }) unless params[:organisation].present?
+    params[:organisation] = {mission: ""} unless params[:organisation].present?
 
     params.require(:organisation).permit(:mission, mission: [])
-
   end
-
 end

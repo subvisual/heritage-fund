@@ -1,8 +1,8 @@
 class FundingApplication::GpProject::PermissionController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   def update
-
     logger.info "Updating project permission attributes for project ID: " \
                 "#{@funding_application.project.id}"
 
@@ -15,8 +15,8 @@ class FundingApplication::GpProject::PermissionController < ApplicationControlle
         if params[:project][:permission_type] == "yes"
 
           @funding_application.project.permission_description =
-              params[:project][:permission_description_yes].present? ?
-                  params[:project][:permission_description_yes] : nil
+            params[:project][:permission_description_yes].present? ?
+                params[:project][:permission_description_yes] : nil
 
           @funding_application.project.validate_permission_description_yes = true
 
@@ -25,8 +25,8 @@ class FundingApplication::GpProject::PermissionController < ApplicationControlle
         if params[:project][:permission_type] == "x_not_sure"
 
           @funding_application.project.permission_description =
-              params[:project][:permission_description_x_not_sure].present? ?
-                  params[:project][:permission_description_x_not_sure] : nil
+            params[:project][:permission_description_x_not_sure].present? ?
+                params[:project][:permission_description_x_not_sure] : nil
 
           @funding_application.project.validate_permission_description_x_not_sure = true
 
@@ -57,19 +57,15 @@ class FundingApplication::GpProject::PermissionController < ApplicationControlle
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     params.require(:project).permit(
-        :permission_type,
-        :permission_description_yes,
-        :permission_description_x_not_sure
+      :permission_type,
+      :permission_description_yes,
+      :permission_description_x_not_sure
     )
-
   end
-
 end

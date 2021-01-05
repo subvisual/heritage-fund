@@ -2,7 +2,6 @@ class FundingApplication::GpProject::LocationController < ApplicationController
   include FundingApplicationContext
 
   def update
-
     @funding_application.project.validate_same_location = true
 
     @funding_application.project.update(project_params)
@@ -25,7 +24,7 @@ class FundingApplication::GpProject::LocationController < ApplicationController
 
         logger.debug "Different location to organisation selected for project ID: #{@funding_application.project.id}"
 
-        redirect_to postcode_path 'project', @funding_application.project.id
+        redirect_to postcode_path "project", @funding_application.project.id
 
       end
 
@@ -34,24 +33,21 @@ class FundingApplication::GpProject::LocationController < ApplicationController
       render :show
 
     end
-
   end
 
   private
 
   def project_params
-
     unless params[:project].present?
-      params.merge!({project: {same_location: ""}})
+      params[:project] = {same_location: ""}
     end
 
-    params.require(:project).permit(:same_location, :line1, :line2, :line3, :townCity, :county, :postcode) 
+    params.require(:project).permit(:same_location, :line1, :line2, :line3, :townCity, :county, :postcode)
   end
 
   # Replicates address data from the organisation model linked to the current user
   # into the project model address fields
   def add_project_address_fields
-
     logger.debug "Setting project address fields for project ID: #{@funding_application.project.id}"
 
     @organisation = current_user.organisations.first
@@ -64,7 +60,5 @@ class FundingApplication::GpProject::LocationController < ApplicationController
     @funding_application.project.postcode = @organisation.postcode
 
     logger.debug "Finished setting project address fields for project ID: #{@funding_application.project.id}"
-
   end
-
 end

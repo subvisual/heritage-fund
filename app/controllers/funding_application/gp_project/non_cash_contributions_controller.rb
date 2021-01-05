@@ -1,12 +1,12 @@
 class FundingApplication::GpProject::NonCashContributionsController < ApplicationController
-  include FundingApplicationContext, ObjectErrorsLogger
+  include ObjectErrorsLogger
+  include FundingApplicationContext
 
   # This method is used to control navigational flow after a user
   # has submitted the 'Are you getting any non-cash contributions?' form,
   # redirecting based on @funding_application.project.non_cash_contributions_question value, and
   # re-rendering :question if unsuccessful
   def question_update
-
     logger.info "Updating non-cash contributions question for project ID: " \
                 "#{@funding_application.project.id}"
 
@@ -39,14 +39,12 @@ class FundingApplication::GpProject::NonCashContributionsController < Applicatio
       render :question
 
     end
-
   end
 
   # This method adds a non-cash contribution to a project, redirecting back to
   # :funding_application_gp_project_non_cash_contributions if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     # Empty flash values to ensure that we don't redisplay them unnecessarily
     flash[:description] = ""
     flash[:amount] = ""
@@ -73,14 +71,13 @@ class FundingApplication::GpProject::NonCashContributionsController < Applicatio
 
       # Store flash values to display them again when re-rendering the page
       flash[:description] =
-          params['project']['non_cash_contributions_attributes']['0']['description']
+        params["project"]["non_cash_contributions_attributes"]["0"]["description"]
       flash[:amount] =
-          params['project']['non_cash_contributions_attributes']['0']['amount']
+        params["project"]["non_cash_contributions_attributes"]["0"]["amount"]
 
       render :show
 
     end
-
   end
 
   # This method deletes a project non-cash contribution, redirecting back to
@@ -88,13 +85,12 @@ class FundingApplication::GpProject::NonCashContributionsController < Applicatio
   # If no non-cash contribution is found, then an ActiveRecord::RecordNotFound
   # exception is raised
   def delete
-
     logger.info "User has selected to delete non-cash contribution ID: " \
                  "#{params[:non_cash_contribution_id]} from project ID: " \
                  "#{@funding_application.project.id}"
 
     non_cash_contribution =
-        @funding_application.project.non_cash_contributions.find(params[:non_cash_contribution_id])
+      @funding_application.project.non_cash_contributions.find(params[:non_cash_contribution_id])
 
     logger.info "Deleting non-cash contribution ID: #{non_cash_contribution.id}"
 
@@ -104,28 +100,24 @@ class FundingApplication::GpProject::NonCashContributionsController < Applicatio
                  "#{non_cash_contribution.id}"
 
     redirect_to :funding_application_gp_project_non_cash_contributions
-
   end
 
   private
 
   def question_params
-
     unless params[:project].present?
-      params.merge!({project: {non_cash_contributions_question: ""}})
+      params[:project] = {non_cash_contributions_question: ""}
     end
 
     params.require(:project).permit(:non_cash_contributions_question)
-
   end
 
   def project_params
     params.require(:project).permit(
-        non_cash_contributions_attributes: [
-            :description,
-            :amount
-        ]
+      non_cash_contributions_attributes: [
+        :description,
+        :amount
+      ]
     )
   end
-
 end

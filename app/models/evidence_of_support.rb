@@ -12,19 +12,15 @@ class EvidenceOfSupport < ApplicationRecord
   validates :description, presence: true
 
   validate do
-
     validate_file_attached(
-        :evidence_of_support_files,
-        "Add an evidence of support file"
+      :evidence_of_support_files,
+      "Add an evidence of support file"
     )
 
     validate_length(
-        :description,
-        50,
-        I18n.t("activerecord.errors.models.evidence_of_support.attributes.description.too_long")
+      :description,
+      50,
+      I18n.t("activerecord.errors.models.evidence_of_support.attributes.description.too_long")
     )
-
   end
-
 end
-

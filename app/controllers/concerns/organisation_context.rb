@@ -15,13 +15,10 @@ module OrganisationContext
   # do not match, then the user is redirected to the projects
   # dashboard
   def set_organisation
-
     if params[:organisation_id] == current_user.organisations.first&.id
       @organisation = current_user.organisations.first
     else
       redirect_to :authenticated_root
     end
-
   end
-
 end
