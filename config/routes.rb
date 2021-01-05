@@ -77,15 +77,11 @@ Rails.application.routes.draw do
   # Organisation section of the service
   namespace :organisation do
     scope '/:organisation_id' do
-      get '/type', to: 'type#show'
-      put '/type', to: 'type#update'
-      get '/numbers', to: 'numbers#show'
-      put '/numbers', to: 'numbers#update'
-      get '/mission', to: 'mission#show'
-      put '/mission', to: 'mission#update'
-      get '/signatories', to: 'signatories#show'
-      put '/signatories', to: 'signatories#update'
-      get '/summary', to: 'summary#show'
+      resource :type, only: [:show, :update]
+      resource :numbers, only: [:show, :update]
+      resource :mission, only: [:show, :update]
+      resource :signatories, only: [:show, :update]
+      resource :summary, only: [:show]
     end
   end
 
@@ -98,20 +94,15 @@ Rails.application.routes.draw do
       post 'start', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
 
       scope '/:application_id' do
-        get 'title', to: 'title#show'
-        put 'title', to: 'title#update'
-        get 'key-dates', to: 'dates#show'
-        put 'key-dates', to: 'dates#update'
-        get 'location', to: 'location#show'
-        put 'location', to: 'location#update'
-        get 'description', to: 'description#show'
-        put 'description', to: 'description#update'
-        get 'capital-works', to: 'capital_works#show'
-        put 'capital-works', to: 'capital_works#update'
-        get 'do-you-need-permission', to: 'permission#show'
-        put 'do-you-need-permission', to: 'permission#update'
-        get 'project-difference', to: 'difference#show'
-        put 'project-difference', to: 'difference#update'
+        resource :title, only: [:show, :update]
+        resource :key_dates, path: '/key-dates', only: [:show, :update]
+        resource :location, only: [:show, :update]
+        resource :description, only: [:show, :update]
+        resource :capital_works, only: [:show, :update]
+        resource 'permission', path: '/do-you-need-permission', only: [:show, :update]
+        resource 'difference', path: '/project-difference', only: [:show, :update]
+
+        # todo refactor the routes below as resources (similar to the ones above)
         get 'how-does-your-project-matter', to: 'matter#show'
         put 'how-does-your-project-matter', to: 'matter#update'
         get 'your-project-heritage', to: 'heritage#show'

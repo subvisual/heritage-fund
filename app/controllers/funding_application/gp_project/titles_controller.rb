@@ -1,5 +1,5 @@
 # Controller for the project title page of the funding application journey
-class FundingApplication::GpProject::TitleController < ApplicationController
+class FundingApplication::GpProject::TitlesController < ApplicationController
   include FundingApplicationContext
   include ObjectErrorsLogger
 
@@ -7,7 +7,6 @@ class FundingApplication::GpProject::TitleController < ApplicationController
   # redirecting to :three_to_ten_k_project_key_dates if successful and
   # re-rendering :show method if unsuccessful
   def update
-
     logger.info "Updating project_title for project ID: #{@funding_application.project.id}"
 
     @funding_application.project.validate_title = true
@@ -31,7 +30,6 @@ class FundingApplication::GpProject::TitleController < ApplicationController
       render :show
 
     end
-
   end
 
   private
@@ -39,5 +37,4 @@ class FundingApplication::GpProject::TitleController < ApplicationController
   def project_params
     params.require(:project).permit(:project_title)
   end
-
 end
