@@ -468,8 +468,10 @@ class Project < ApplicationRecord
             'community-or-voluntary-group'
         when 'individual_private_owner_of_heritage'
             'private-owner-of-heritage'
-        when 'other'
+        when 'other_public_sector_organisation'
             'other-public-sector-organisation'
+        when 'other'
+            'other-org-type'
         else
             self.user.organisations.first.org_type&.dasherize
         end

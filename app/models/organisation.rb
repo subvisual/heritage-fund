@@ -84,7 +84,8 @@ class Organisation < ApplicationRecord
       community_group: 6,
       voluntary_group: 7,
       individual_private_owner_of_heritage: 8,
-      other: 9
+      other: 9,
+      other_public_sector_organisation: 10
   }
 
 end

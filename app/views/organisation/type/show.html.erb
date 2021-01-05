@@ -42,6 +42,11 @@
         </div>
 
         <div class="govuk-radios__item">
+          <%= f.radio_button :org_type, "other_public_sector_organisation", class: "govuk-radios__input" %>
+          <%= f.label :org_type_other_public_sector_organisation, "Other public sector organisation", class: "govuk-label govuk-radios__label" %>
+        </div>
+
+        <div class="govuk-radios__item">
           <%= f.radio_button :org_type, "registered_company", class: "govuk-radios__input" %>
           <%= f.label :org_type_registered_company, "Registered company", class: "govuk-label govuk-radios__label" %>
         </div>
