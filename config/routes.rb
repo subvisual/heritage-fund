@@ -1,33 +1,32 @@
 Rails.application.routes.draw do
-
   # Lambdas are used in this file where we conditionally want to redirect routes
-  # based on Flipper configuration settings. The use of lambdas is so that the 
-  # corresponding Flipper.enabled check happens dynamically when the route is 
+  # based on Flipper configuration settings. The use of lambdas is so that the
+  # corresponding Flipper.enabled check happens dynamically when the route is
   # accessed, rather than when the routes are first initialised at runtime.
 
   # Devise root scope - used to determine the authenticated
   # and unauthenticated root pages
   devise_scope :user do
     unauthenticated do
-      root to: "user/sessions#new"
+      root to: 'user/sessions#new'
     end
     authenticated :user do
-      root to: "dashboard#show", as: :authenticated_root
+      root to: 'dashboard#show', as: :authenticated_root
     end
   end
 
-  constraints lambda { !Flipper.enabled?(:registration_enabled) } do
+  constraints -> { !Flipper.enabled?(:registration_enabled) } do
     devise_scope :user do
-      get "/users/sign_up",  :to => "devise/sessions#new"
+      get '/users/sign_up', to: 'devise/sessions#new'
     end
   end
 
   # Override the Devise registration controller, which allows us
   # to create an organisation when a user is created
   devise_for :users,
-             :controllers  => {
-                 registrations: 'user/registrations',
-                 sessions: 'user/sessions'
+             controllers: {
+               registrations: 'user/registrations',
+               sessions: 'user/sessions'
              }
 
   # Account section of the service
@@ -43,15 +42,15 @@ Rails.application.routes.draw do
   end
 
   # Dashboard section of the service
-  get '/orchestrate-dashboard-journey', to: 'dashboard#orchestrate_dashboard_journey', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-  get '/orchestrate-dashboard-journey', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+  get '/orchestrate-dashboard-journey', to: 'dashboard#orchestrate_dashboard_journey', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+  get '/orchestrate-dashboard-journey', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
 
   # Start an Application section of the service
-  get 'start-an-application', to: 'new_application#show', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-  get 'start-an-application', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+  get 'start-an-application', to: 'new_application#show', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+  get 'start-an-application', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
 
-  put 'start-an-application', to: 'new_application#update', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-  put 'start-an-application', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+  put 'start-an-application', to: 'new_application#update', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+  put 'start-an-application', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
 
   # Modular address section of the service
   # Used in /user, /organisation and /3-10k/project
@@ -92,24 +91,21 @@ Rails.application.routes.draw do
 
   # Application section of the service
   scope '/application', module: 'funding_application', as: :funding_application do
- 
     scope 'gp-project', module: 'gp_project', as: :gp_project do
-
-      get 'start', to: 'start#show', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-      get 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
-      post 'start', to: 'start#update', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-      post 'start', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+      get 'start', to: 'start#show', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+      get 'start', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
+      post 'start', to: 'start#update', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+      post 'start', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
 
       scope '/:application_id' do
-
         get 'title', to: 'title#show'
         put 'title', to: 'title#update'
         get 'key-dates', to: 'dates#show'
         put 'key-dates', to: 'dates#update'
         get 'location', to: 'location#show'
         put 'location', to: 'location#update'
-        get 'description', to: 'description#show'  
-        put 'description', to: 'description#update'  
+        get 'description', to: 'description#show'
+        put 'description', to: 'description#update'
         get 'capital-works', to: 'capital_works#show'
         put 'capital-works', to: 'capital_works#update'
         get 'do-you-need-permission', to: 'permission#show'
@@ -152,7 +148,7 @@ Rails.application.routes.draw do
         get 'volunteers', to: 'volunteers#show'
         put 'volunteers', to: 'volunteers#update'
         delete 'volunteers/:volunteer_id', to: 'volunteers#delete',
-               as: :volunteer_delete
+                                           as: :volunteer_delete
         get 'evidence-of-support', to: 'evidence_of_support#show'
         put 'evidence-of-support', to: 'evidence_of_support#update'
         delete 'evidence-of-support/:supporting_evidence_id',
@@ -167,12 +163,11 @@ Rails.application.routes.draw do
         get 'confirm-declaration', to: 'declaration#show_confirm_declaration'
         put 'confirm-declaration', to: 'declaration#update_confirm_declaration'
         get 'declaration', to: 'declaration#show_declaration'
-        put 'declaration', to: 'declaration#update_declaration', constraints: lambda { Flipper.enabled?(:new_applications_enabled) }
-        put 'declaration', to: redirect('/', status: 302), constraints: lambda { !Flipper.enabled?(:new_applications_enabled) }
+        put 'declaration', to: 'declaration#update_declaration', constraints: -> { Flipper.enabled?(:new_applications_enabled) }
+        put 'declaration', to: redirect('/', status: 302), constraints: -> { !Flipper.enabled?(:new_applications_enabled) }
         get 'application-submitted', to: 'application_submitted#show'
 
         scope '/payment', as: 'payment' do
-
           get 'details', to: 'payment_details#show'
           put 'details', to: 'payment_details#update'
 
@@ -185,13 +180,9 @@ Rails.application.routes.draw do
           get 'review-your-spending', to: 'review_spend#show'
 
           get 'submitted', to: 'payment_details_submitted#show'
-
         end
-
       end
-
     end
-
   end
 
   # Static pages within the service
@@ -209,7 +200,7 @@ Rails.application.routes.draw do
   end
   # Endpoint for released forms webhook
   post 'consumer' => 'released_form#receive' do
-    header "Content-Type", "application/json"
+    header 'Content-Type', 'application/json'
   end
 
   # Health check route for GOV.UK PaaS
@@ -221,6 +212,5 @@ Rails.application.routes.draw do
   end
 
   # DelayedJob dashboard
-  match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
-
+  match '/delayed_job' => DelayedJobWeb, :anchor => false, :via => [:get, :post]
 end
