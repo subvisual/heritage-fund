@@ -65,6 +65,28 @@ class NotifyMailer < Mail::Notify::Mailer
     )
   end
 
+  #  @param [PreApplication] pre_application
+  def project_enquiry_submission_confirmation(pre_application)
+    template_mail('34ec207b-e8d1-46be-87ee-2eca4b665cbc',
+                  to: pre_application.user.email,
+                  reply_to_id: @reply_to_id,
+                  personalisation: {
+                      project_reference_number: pre_application.project_reference_number
+                  }
+    )
+  end
+
+  #  @param [PreApplication] pre_application
+  def expression_of_interest_submission_confirmation(pre_application)
+    template_mail('76cba30c-e91b-4fae-bffc-78ee13179b9c',
+                  to: pre_application.user.email,
+                  reply_to_id: @reply_to_id,
+                  personalisation: {
+                      project_reference_number: pre_application.project_reference_number
+                  }
+    )
+  end
+
   def report_a_problem(message, name, email)
     template_mail("4d789cc6-bd6a-499f-bae2-502b633c098b",
                   to: Rails.configuration.x.support_email_address,
