@@ -1,5 +1,5 @@
 class Organisation < ApplicationRecord
-  self.implicit_order_column = "created_at"
+  self.implicit_order_column = 'created_at'
 
   has_many :legal_signatories
   has_many :funding_applications
@@ -12,14 +12,7 @@ class Organisation < ApplicationRecord
   accepts_nested_attributes_for :legal_signatories
   accepts_nested_attributes_for :organisations_org_types, allow_destroy: true
 
-  attr_accessor :has_custom_org_type
-
-  attr_accessor :validate_name
-  attr_accessor :validate_org_type
-  attr_accessor :validate_custom_org_type
-  attr_accessor :validate_address
-  attr_accessor :validate_mission
-  attr_accessor :validate_legal_signatories
+  attr_accessor :has_custom_org_type, :validate_name, :validate_org_type, :validate_custom_org_type, :validate_mission, :validate_legal_signatories
 
   validates_associated :legal_signatories,
                        if: :validate_legal_signatories?
@@ -28,11 +21,11 @@ class Organisation < ApplicationRecord
   validates :custom_org_type, presence: true, if: :validate_custom_org_type?
   validate :validate_mission_array, if: :validate_mission?
   validates :name, presence: true, if: :validate_name?
-  validates :name, presence: true, if: :validate_address?
-  validates :line1, presence: true, if: :validate_address?
-  validates :townCity, presence: true, if: :validate_address?
-  validates :county, presence: true, if: :validate_address?
-  validates :postcode, presence: true, if: :validate_address?
+  validates :name, presence: true, if: :validate_name?
+  validates :line1, presence: true, on: :update_address
+  validates :townCity, presence: true, on: :update_address
+  validates :county, presence: true, on: :update_address
+  validates :postcode, presence: true, on: :update_address
 
   def validate_name?
     validate_name == true
@@ -44,10 +37,6 @@ class Organisation < ApplicationRecord
 
   def validate_custom_org_type?
     validate_custom_org_type == true
-  end
-
-  def validate_address?
-    validate_address == true
   end
 
   def validate_mission?
@@ -63,29 +52,28 @@ class Organisation < ApplicationRecord
   def validate_mission_array
     if mission.present?
       mission.each do |m|
-        if !["black_or_minority_ethnic_led",
-             "disability_led",
-             "lgbt_plus_led",
-             "female_led",
-             "young_people_led"].include? m
-          errors.add(:mission, m + " is not a valid selection")
+        unless %w[black_or_minority_ethnic_led
+                  disability_led
+                  lgbt_plus_led
+                  female_led
+                  young_people_led].include? m
+          errors.add(:mission, m + ' is not a valid selection')
         end
       end
     end
   end
 
   enum org_type: {
-      registered_charity: 0,
-      local_authority: 1,
-      registered_company: 2,
-      community_interest_company: 3,
-      faith_based_organisation: 4,
-      church_organisation: 5,
-      community_group: 6,
-      voluntary_group: 7,
-      individual_private_owner_of_heritage: 8,
-      other: 9,
-      other_public_sector_organisation: 10
+    registered_charity: 0,
+    local_authority: 1,
+    registered_company: 2,
+    community_interest_company: 3,
+    faith_based_organisation: 4,
+    church_organisation: 5,
+    community_group: 6,
+    voluntary_group: 7,
+    individual_private_owner_of_heritage: 8,
+    other: 9,
+    other_public_sector_organisation: 10
   }
-
 end
