@@ -11,3 +11,4 @@ applications:
   - funding-frontend-research
   - log-drain
   - funding-frontend-staging-uploads
+  - funding-frontend-redis-cache
