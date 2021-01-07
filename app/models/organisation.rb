@@ -2,7 +2,9 @@ class Organisation < ApplicationRecord
   self.implicit_order_column = "created_at"
 
   has_many :legal_signatories
+  has_many :pre_applications
   has_many :funding_applications
+
   has_many :organisations_org_types, inverse_of: :organisation
   has_many :org_types, through: :organisations_org_types
 

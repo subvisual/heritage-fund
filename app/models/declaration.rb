@@ -5,6 +5,9 @@ class Declaration < ApplicationRecord
   has_many :funding_applications_dclrtns, inverse_of: :declaration
   has_many :funding_applications, through: :funding_applications_dclrtns
 
+  has_many :pre_applications_dclrtns, inverse_of: :declaration
+  has_many :pre_applications, through: :pre_applications_dclrtns
+
   attr_accessor :applicants_response
 
   validates :declaration_type, presence: true

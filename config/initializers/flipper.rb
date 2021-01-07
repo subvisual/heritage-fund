@@ -14,5 +14,7 @@ if ActiveRecord::Base.connection.table_exists? :flipper_features
     Flipper[:registration_enabled].add
     Flipper[:new_applications_enabled].add
     Flipper[:grant_programme_sff_small].add
+    Flipper[:project_enquiries_enabled].add
+    Flipper[:expressions_of_interest_enabled].add
   end
 end
