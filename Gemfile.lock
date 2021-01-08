@@ -383,6 +383,9 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
+    valid_email2 (3.5.0)
+      activemodel (>= 3.2)
+      mail (~> 2.5)
     view_component (2.18.1)
       activesupport (>= 5.0.0, < 7.0)
     virtus (1.0.5)
@@ -465,6 +468,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uk_postcode (~> 2.1.5)
+  valid_email2
   view_component (~> 2.18.1)
   web-console (>= 3.3.0)
   webdrivers
@@ -475,4 +479,4 @@ RUBY VERSION
    ruby 2.6.5p114
 
 BUNDLED WITH
-   2.1.4
+   2.2.4
