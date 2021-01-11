@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :townCity, presence: true, if: :validate_address?
   validates :county, presence: true, if: :validate_address?
   validates :postcode, presence: true, if: :validate_address?
+  validates_date :date_of_birth, before: :today, if: :validate_details?
 
   validate :date_of_birth_is_in_past, if: :validate_details?
 
@@ -34,7 +35,7 @@ class User < ApplicationRecord
   end
 
   def date_of_birth_is_in_past
-    return if date_of_birth.past?
+    return if date_of_birth&.past?
 
     errors.add(:date_of_birth, 'Date of birth must be in the past')
   end

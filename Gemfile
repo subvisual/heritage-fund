@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) do |repo| "https://github.com/#{repo}.git" end
 
 ruby '~> 2.6.0'
 
@@ -25,6 +25,7 @@ gem 'silencer', '~> 1.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'uk_postcode', '~> 2.1.5'
+gem 'validates_timeliness', '~> 5.0.0.beta1'
 gem 'view_component', '~> 2.18.1'
 gem 'webpacker', '~> 4.0'
 
@@ -37,8 +38,8 @@ group :development, :test do
   gem 'rails-controller-testing', '~> 1.0.4'
   gem 'rspec-rails', '~> 4.0.0.beta3' # Pinned to beta version due to https://github.com/rspec/rspec-rails/issues/2086
   gem 'rubocop', '~> 0.88.0'
-  gem 'rubocop-rspec', '~> 1.42.0'
   gem 'rubocop-rails', '~> 2.7.1'
+  gem 'rubocop-rspec', '~> 1.42.0'
   gem 'ruby-debug-ide', '~> 0.7.2' # Allows for debugging in Visual Studio Code
 end
 

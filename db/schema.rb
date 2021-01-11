@@ -325,9 +325,6 @@ ActiveRecord::Schema.define(version: 2021_01_06_084939) do
     t.integer "permission_type"
     t.text "permission_description"
     t.boolean "capital_work"
-    t.text "declaration_reasons_description"
-    t.boolean "user_research_declaration", default: false
-    t.boolean "keep_informed_declaration", default: false
     t.boolean "outcome_2"
     t.boolean "outcome_3"
     t.boolean "outcome_4"
@@ -346,6 +343,9 @@ ActiveRecord::Schema.define(version: 2021_01_06_084939) do
     t.text "outcome_9_description"
     t.boolean "is_partnership", default: false
     t.text "partnership_details"
+    t.boolean "keep_informed_declaration"
+    t.boolean "user_research_declaration"
+    t.text "declaration_reasons_description"
     t.uuid "funding_application_id"
     t.index ["funding_application_id"], name: "index_projects_on_funding_application_id"
     t.index ["user_id"], name: "index_projects_on_user_id"

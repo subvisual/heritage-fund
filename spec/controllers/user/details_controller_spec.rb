@@ -26,7 +26,21 @@ RSpec.describe User::DetailsController do
   it 'displays an error when given an invalid date' do
     user_params = {
       :name => 'Name',
-      'date_of_birth(3i)' => '32',
+      'date_of_birth(3i)' => '31',
+      'date_of_birth(2i)' => '2',
+      'date_of_birth(1i)' => '1990',
+      :phone_number => '123123123'
+    }
+
+    put :update, params: { user: user_params }
+
+    expect(response.body).to include 'is not a valid date'
+  end
+
+  it 'displays an error when given an empty date' do
+    user_params = {
+      :name => 'Name',
+      'date_of_birth(3i)' => '',
       'date_of_birth(2i)' => '14',
       'date_of_birth(1i)' => '1990',
       :phone_number => '123123123'
@@ -34,6 +48,6 @@ RSpec.describe User::DetailsController do
 
     put :update, params: { user: user_params }
 
-    expect(response.body).to include 'Enter a valid date of birth'
+    expect(response.body).to include 'is not a valid date'
   end
 end
