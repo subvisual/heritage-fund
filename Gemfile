@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) do |repo| "https://github.com/#{repo}.git" end
 
 ruby '~> 2.6.0'
 
@@ -37,8 +37,8 @@ group :development, :test do
   gem 'rails-controller-testing', '~> 1.0.4'
   gem 'rspec-rails', '~> 4.0.0.beta3' # Pinned to beta version due to https://github.com/rspec/rspec-rails/issues/2086
   gem 'rubocop', '~> 0.88.0'
-  gem 'rubocop-rspec', '~> 1.42.0'
   gem 'rubocop-rails', '~> 2.7.1'
+  gem 'rubocop-rspec', '~> 1.42.0'
   gem 'ruby-debug-ide', '~> 0.7.2' # Allows for debugging in Visual Studio Code
 end
 
