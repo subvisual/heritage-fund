@@ -122,7 +122,8 @@
                       class: "govuk-file-upload #{"govuk-file-upload--error" if @funding_application.payment_details.errors.any?}",
                       'data-input-identifier': 'file',
                       'data-attribute': :evidence_file,
-                      'data-model': :funding_application
+                      'data-model': :funding_application,
+                      'autocomplete' => 'off'
         %>
 
       </div>

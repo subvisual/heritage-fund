@@ -86,7 +86,8 @@
                            class: "govuk-file-upload #{"govuk-file-upload--error" if @funding_application.project.errors.any?}",
                            'data-input-identifier': 'file',
                            'data-attribute': :accounts_files,
-                           'data-model': :project
+                           'data-model': :project,
+                           'autocomplete' => 'off'
             %>
 
             <%# See https://blog.yorkxin.org/2014/02/06/ajax-with-formdata-is-broken-on-ie10-ie11.html

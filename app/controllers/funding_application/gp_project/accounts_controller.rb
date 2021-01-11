@@ -12,9 +12,9 @@ class FundingApplication::GpProject::AccountsController < ApplicationController
 
     logger.info "Updating accounts_files for project ID: #{@funding_application.project.id}"
 
-    @funding_application.project.update(project_params)
-
     @funding_application.project.validate_accounts_files = true
+
+    @funding_application.project.update(project_params)
 
     if @funding_application.project.valid?
 
