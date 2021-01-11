@@ -101,6 +101,8 @@ en-GB:
               blank: "Enter the month in which you were born"
             dob_year:
               blank: "Enter the year in which you were born"
+            date_of_birth:
+              invalid: "Enter a valid date of birth"
             line1:
               blank: "Enter the first line of your address"
             townCity:

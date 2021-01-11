@@ -126,7 +126,7 @@
             <div class="govuk-form-group">
 
               <%= 
-                f.label :dob_day,
+                f.label 'date_of_birth(3i)',
                 t('details.label_day'),
                 class: "govuk-label govuk-date-input__label" 
               %>
@@ -135,7 +135,7 @@
                   form_object: current_user,
                   form_for_object: f,
                   model_attribute: :date_of_birth,
-                  input_name: :dob_day,
+                  input_name: 'date_of_birth(3i)',
                   input_width: 2,
                   date_type: "day"
               } %>
@@ -149,7 +149,7 @@
             <div class="govuk-form-group">
 
               <%= 
-                f.label :dob_month,
+                f.label 'date_of_birth(2i)',
                 t('details.label_month'),
                 class: "govuk-label govuk-date-input__label" 
               %>
@@ -158,7 +158,7 @@
                   form_object: current_user,
                   form_for_object: f,
                   model_attribute: :date_of_birth,
-                  input_name: :dob_month,
+                  input_name: 'date_of_birth(2i)',
                   input_width: 2,
                   date_type: "month"
               } %>
@@ -172,7 +172,7 @@
             <div class="govuk-form-group">
 
               <%= 
-                f.label :dob_year,
+                f.label 'date_of_birth(1i)',
                 t('details.label_year'),
                 class: "govuk-label govuk-date-input__label" 
               %>
@@ -181,7 +181,7 @@
                   form_object: current_user,
                   form_for_object: f,
                   model_attribute: :date_of_birth,
-                  input_name: :dob_year,
+                  input_name: 'date_of_birth(1i)',
                   input_width: 4,
                   date_type: "year"
               } %>

@@ -10,10 +10,10 @@ RSpec.feature 'Application', type: :feature do
 
   scenario 'About you page' do
     user = FactoryBot.create(
-        :user,
-        name: nil,
-        date_of_birth: nil,
-        phone_number: nil
+      :user,
+      name: nil,
+      date_of_birth: nil,
+      phone_number: nil
     )
     login_as(user, scope: :user)
     visit('/')
@@ -25,7 +25,6 @@ RSpec.feature 'Application', type: :feature do
     fill_in 'Year', with: '1970'
     click_button 'Save and continue'
     expect(page)
-        .to have_current_path("/user/#{user.organisations.first.id}/address/postcode?locale=en-GB")
+      .to have_current_path("/user/#{user.organisations.first.id}/address/postcode?locale=en-GB")
   end
-
 end
