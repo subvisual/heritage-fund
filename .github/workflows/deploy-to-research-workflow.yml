@@ -3,7 +3,7 @@ name: Deploy to Research
 on: [workflow_dispatch]
 
 jobs:
-  deploy_to_production:
+  deploy_to_research:
     name: Deploy to Research
     runs-on: ubuntu-latest
     steps:
