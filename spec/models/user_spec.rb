@@ -16,13 +16,16 @@ RSpec.describe Project, type: :model do
 
     it 'fails to assign an invalid date' do
       user = User.new
-      expect {
-        user.assign_attributes({
-                                 'date_of_birth(3i)' => '32',
-                                 'date_of_birth(2i)' => '14',
-                                 'date_of_birth(1i)' => '1990'
-                               })
-      }.to raise_error ActiveRecord::MultiparameterAssignmentErrors
+
+      user.assign_attributes({
+                               'date_of_birth(3i)' => '32',
+                               'date_of_birth(2i)' => '14',
+                               'date_of_birth(1i)' => '1990'
+                             })
+
+      user.validate_details = true
+
+      expect(user).not_to be_valid
     end
   end
 end
