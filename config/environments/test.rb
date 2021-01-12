@@ -5,7 +5,7 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  
+
   config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application
@@ -20,7 +20,7 @@ Rails.application.configure do
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
@@ -46,18 +46,21 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
   config.active_storage.service = :test
-  config.x.salesforce.host = "test.salesforce.com"
-  config.x.salesforce.username = "test"
-  config.x.salesforce.password = "test"
-  config.x.salesforce.security_token = "test"
-  config.x.salesforce.client_id = "test"
-  config.x.salesforce.client_secret = "test"
+  config.x.salesforce.host = 'test.salesforce.com'
+  config.x.salesforce.username = 'test'
+  config.x.salesforce.password = 'test'
+  config.x.salesforce.security_token = 'test'
+  config.x.salesforce.client_id = 'test'
+  config.x.salesforce.client_secret = 'test'
 
-  config.x.payment_encryption_key = "test"
-  config.x.payment_encryption_salt = "test"
+  config.x.payment_encryption_key = 'test'
+  config.x.payment_encryption_salt = 'test'
 
-  config.x.support_email_address = "test@test.com"
-  config.x.ideal_postcodes.api_key = "test"
+  config.x.support_email_address = 'test@test.com'
+  config.x.ideal_postcodes.api_key = 'test'
   config.x.consumer.username = 'test'
   config.x.consumer.password = 'test'
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.x.support_email_address = 'test@example.com'
 end
